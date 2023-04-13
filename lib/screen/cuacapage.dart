@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:mobileagroapps/model/cuaca_model.dart';
 import 'package:mobileagroapps/provider/cuaca_service.dart';
+import 'package:mobileagroapps/widget/cuaca/cuacatemp_widget.dart';
 import 'package:provider/provider.dart';
 
 
@@ -21,9 +23,29 @@ class _CuacaPageState extends State<CuacaPage> {
   }
   @override
   Widget build(BuildContext context) {
+    final formater = DateFormat.Hm();
+    final formaterdate = DateFormat.yMMMd();
     return Scaffold(
       appBar: AppBar(
         title: Text("cuaca"),
+
+      ),
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            DrawerHeader(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("images/farm_02.jpg"),
+                fit: BoxFit.cover,
+              ),
+            ),
+              child: Text("Menu",style: TextStyle(fontSize: 35,fontWeight: FontWeight.bold,),)),
+            ListTile(
+              title: Text("Calculator"),
+            )
+          ],
+        ),
       ),
       body: Center(
         child: Consumer<CuacaProvider>(builder: (context,cuacaProvider,_)  {
@@ -33,10 +55,15 @@ class _CuacaPageState extends State<CuacaPage> {
             final cuacaData = cuacaProvider.cuacadata!;
             return Column(
               children: [
-                Text("kondisi cuaca"),
                 SizedBox(height: 20,),
-                Text('main: ${cuacaData.cuacanya.first.main}'),
-                TextField(),
+                Text("Jember"),
+                Text('${formaterdate.format(DateTime.now())}'),
+                SizedBox(height: 20,),
+                Text("${(cuacaData.main.temp - 273.15).toStringAsFixed(0)}°ᶜ",style: TextStyle(fontSize: 80,fontWeight: FontWeight.bold,color: Color.fromARGB(255, 102, 102, 102)),),
+                SizedBox(height: 20,),
+                CuacaTempWidget(main: cuacaData.cuacanya.first.main, description: cuacaData.cuacanya.first.description),
+
+              
               ],
             );
           }
