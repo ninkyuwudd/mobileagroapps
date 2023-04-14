@@ -4,6 +4,7 @@ import 'package:mobileagroapps/model/cuaca_model.dart';
 import 'package:mobileagroapps/provider/cuaca_service.dart';
 import 'package:mobileagroapps/widget/cuaca/cuacatemp_widget.dart';
 import 'package:mobileagroapps/widget/cuaca/forecuacapage.dart';
+import 'package:mobileagroapps/widget/cuaca/saran.dart';
 import 'package:provider/provider.dart';
 
 class CuacaPage extends StatefulWidget {
@@ -67,6 +68,7 @@ class _CuacaPageState extends State<CuacaPage> {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    
                     Container(
                       margin: EdgeInsets.only(bottom: 20),
                       padding: EdgeInsets.all(20),
@@ -79,7 +81,8 @@ class _CuacaPageState extends State<CuacaPage> {
                       ),
                       child: Row(
                         children: [
-                          ForecastCuacaPage(),
+                          Padding(padding: EdgeInsets.only(top:10)),
+                          
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -125,60 +128,17 @@ class _CuacaPageState extends State<CuacaPage> {
                       endIndent: 30,
                       color: Color.fromARGB(174, 82, 82, 82),
                     ),
+                    SizedBox(height: 10,),
+                    ForecastCuacaPage(),
                     CuacaTempWidget(
                         main: cuacaData.cuacanya.first.main,
                         description: cuacaData.cuacanya.first.description),
                     SizedBox(height: 20,),
                     Text("Saran",style: TextStyle(fontWeight:FontWeight.bold,fontSize: 20,color: Color.fromARGB(255, 43, 101, 45) ),),
                     SizedBox(height: 20,),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Container(
-                            padding: EdgeInsets.all(15),
-                            decoration: BoxDecoration(
-                              color: Color.fromARGB(30, 76, 175, 79),
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Peternakan",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
-                                Divider(
-                                  thickness: 1,
-                                  color: Colors.white,
-                                ),
-                                Text("Jenis Pakan"),
-                                SizedBox(height: 10,),
-                                Text("Rumput",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15),)
-                              ],
-                            ),
-                          ),
-                        ),
-                        SizedBox(width: 10,),
-                                              Expanded(
-                          child: Container(
-                            padding: EdgeInsets.all(15),
-                            decoration: BoxDecoration(
-                              color: Color.fromARGB(30, 76, 175, 79),
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Perkebunan",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
-                                Divider(
-                                  thickness: 1,
-                                  color: Colors.white,
-                                ),
-                                Text("Jenis Pupuk"),
-                                SizedBox(height: 10,),
-                                Text("Pupuk Cair",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15),)
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
+                    
+                    Container(
+                      child:SaranTernakKebun(), 
                     )
                   ],
                 );

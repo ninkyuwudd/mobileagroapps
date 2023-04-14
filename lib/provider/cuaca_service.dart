@@ -42,7 +42,7 @@ class CuacaProvider extends ChangeNotifier {
   }
 
   Future<void> getForecastCuaca() async {
-    const url ="https://api.openweathermap.org/data/2.5/forecast?q=jember&appid=013006034e81b3f0cb0023ebff1c5634";
+    const url ="https://api.openweathermap.org/data/2.5/forecast?q=jember&lang=id&appid=013006034e81b3f0cb0023ebff1c5634";
     final uri = Uri.parse(url);
     final response = await http.get(uri);
     if (response.statusCode == 200) {
@@ -56,6 +56,7 @@ class CuacaProvider extends ChangeNotifier {
       },);
 
       _datacuacabesok = loadedcuaca;
+       print(jsonData["list"]);
       notifyListeners();
     } else {
       throw Exception("failed to load weather data");
