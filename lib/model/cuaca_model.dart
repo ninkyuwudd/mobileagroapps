@@ -2,8 +2,16 @@ class cuacaData {
   final List<KondisiCuaca> cuacanya;
   final MainData main;
   final Namakota kotanya;
+ 
 
   cuacaData({required this.cuacanya, required this.main,required this.kotanya});
+}
+
+class cuacaForecastData{
+   final List<ForecastData> cuacabesok;
+   cuacaForecastData({
+    required this.cuacabesok
+   });
 }
 
 class KondisiCuaca {
@@ -34,6 +42,41 @@ class MainData {
       required this.humidity,
       required this.seaLevel,
       required this.grndLevel});
+}
+
+
+class ForecastData {
+  final String temp;
+  final String feelsLike;
+  final String tempMin;
+  final String tempMax;
+  final int pressure;
+  final int humidity;
+  final int seaLevel;
+  final int grndLevel;
+
+  ForecastData(
+      {required this.temp,
+      required this.feelsLike,
+      required this.tempMin,
+      required this.tempMax,
+      required this.pressure,
+      required this.humidity,
+      required this.seaLevel,
+      required this.grndLevel}
+      );
+factory ForecastData.fromJson(Map<String, dynamic> json){
+  return ForecastData(
+      temp: json['main']['temp'].toString(),
+            feelsLike: json['main']['feels_like'].toString(),
+            tempMin: json['main']['temp_min'].toString(),
+            tempMax: json['main']['temp_max'].toString(),
+            pressure: json['main']['pressure'],
+            humidity: json['main']['humidity'],
+            seaLevel: json['main']['sea_level'],
+            grndLevel: json['main']['grnd_level'],  
+    );
+}
 }
 
 class Namakota{

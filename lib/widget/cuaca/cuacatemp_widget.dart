@@ -27,6 +27,7 @@ class _CuacaTempWidgetState extends State<CuacaTempWidget> {
     return Container(
       child: Consumer<CuacaProvider>(builder: (context,cuacaProvider,_){
         final cuacaData = cuacaProvider.cuacadata!;
+        
         return Column(
           children: [
                   // Image(image: AssetImage("images/berawan.png",)),
@@ -42,6 +43,7 @@ class _CuacaTempWidgetState extends State<CuacaTempWidget> {
                     child: 
                     Column(
                       children: [
+                        
                         CardSpacer(title: "Temperatur min", data:"${((cuacaData.main.tempMin - 273.15).toStringAsFixed(0))}°ᶜ"),
                         Divider(
                           thickness: 1,

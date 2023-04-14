@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:mobileagroapps/model/cuaca_model.dart';
 import 'package:mobileagroapps/provider/cuaca_service.dart';
 import 'package:mobileagroapps/widget/cuaca/cuacatemp_widget.dart';
+import 'package:mobileagroapps/widget/cuaca/forecuacapage.dart';
 import 'package:provider/provider.dart';
 
 class CuacaPage extends StatefulWidget {
@@ -78,6 +79,7 @@ class _CuacaPageState extends State<CuacaPage> {
                       ),
                       child: Row(
                         children: [
+                          ForecastCuacaPage(),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
