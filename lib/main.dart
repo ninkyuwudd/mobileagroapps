@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobileagroapps/navigationbar.dart';
 import 'package:mobileagroapps/provider/cuaca_service.dart';
 import 'package:mobileagroapps/screen/cuacapage.dart';
 import 'package:provider/provider.dart';
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
     
           primarySwatch: Colors.green,
         ),
-        home: CuacaPage(),
+        home: BottomNavbar(),
       ),
     );
   }

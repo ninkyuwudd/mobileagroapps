@@ -39,11 +39,15 @@ dependencies:
   http: ^0.13.5
   flutter_spinkit: ^5.1.0
   intl: ^0.18.0
+  flutter_native_splash: ^2.2.19
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
+flutter_native_splash:
+  color: "#f5cb42"
+  image: images/logo.png
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
