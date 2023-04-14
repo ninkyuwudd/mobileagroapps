@@ -7,7 +7,7 @@ class CuacaProvider extends ChangeNotifier{
   cuacaData? _cuacadata;
   cuacaData? get cuacadata => _cuacadata;
   Future<void> getCuacaAll() async{
-    const url = "https://api.openweathermap.org/data/2.5/weather?q=jember&appid=013006034e81b3f0cb0023ebff1c5634";
+    const url = "https://api.openweathermap.org/data/2.5/weather?q=jember&lang=id&appid=013006034e81b3f0cb0023ebff1c5634";
     final uri = Uri.parse(url);
     final response = await http.get(uri);
     if(response.statusCode == 200){
@@ -28,7 +28,11 @@ class CuacaProvider extends ChangeNotifier{
           humidity: jsonData['main']['humidity'],
           seaLevel: jsonData['main']['sea_level'],
           grndLevel: jsonData['main']['grnd_level'],
-        ),);
+        ),
+        kotanya: Namakota(
+          Kota: jsonData["name"]
+          )
+        );
         notifyListeners();
     }else{
       throw Exception("failed to load weather data");

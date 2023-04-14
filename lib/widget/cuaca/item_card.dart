@@ -11,7 +11,7 @@ class CardSpacer extends StatelessWidget {
       margin: EdgeInsets.only(bottom: 10),
       child: Row(
         children: [
-          Text(title,style: TextStyle(color: Color.fromARGB(255, 51, 51, 51)),),
+          Text(title,style: TextStyle(color: Color.fromARGB(255, 51, 51, 51),fontWeight: FontWeight.bold),),
           Spacer(),
           Text(data),
         ],

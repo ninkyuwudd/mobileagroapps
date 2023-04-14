@@ -1,8 +1,9 @@
 class cuacaData {
   final List<KondisiCuaca> cuacanya;
   final MainData main;
+  final Namakota kotanya;
 
-  cuacaData({required this.cuacanya, required this.main});
+  cuacaData({required this.cuacanya, required this.main,required this.kotanya});
 }
 
 class KondisiCuaca {
@@ -33,13 +34,12 @@ class MainData {
       required this.humidity,
       required this.seaLevel,
       required this.grndLevel});
+}
 
-  // CuacaModel.fromJson(Map<String,dynamic> json){
-  //   namakota = json["name"];
-  //   temperatur = json["main"]["temp"];
-  //   wind = json["wind"]["speed"];
-  //   pressure = json["main"]["pressure"];
-  //   humidity = json["main"]["humidity"];
-  //   feelslike = json["main"]["feels_like"];
-  // }
+class Namakota{
+  final String Kota;
+
+  Namakota({
+    required this.Kota,
+  });
 }

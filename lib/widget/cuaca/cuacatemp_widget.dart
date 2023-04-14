@@ -29,24 +29,35 @@ class _CuacaTempWidgetState extends State<CuacaTempWidget> {
         final cuacaData = cuacaProvider.cuacadata!;
         return Column(
           children: [
-                  Image(image: AssetImage("images/berawan.png",)),
-                  Text("Hari ini ${widget.main}"),
-                  Text(widget.description),
+                  // Image(image: AssetImage("images/berawan.png",)),
+
                   SizedBox(height: 20,),
                   Container(
-                    margin: EdgeInsets.all(15),
+          
                     padding: EdgeInsets.all(20),
                     decoration: BoxDecoration(
-                      color: Color.fromARGB(86, 76, 175, 79),
+                      color: Color.fromARGB(30, 76, 175, 79),
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: 
                     Column(
                       children: [
                         CardSpacer(title: "Temperatur min", data:"${((cuacaData.main.tempMin - 273.15).toStringAsFixed(0))}°ᶜ"),
+                        Divider(
+                          thickness: 1,
+                          color: Colors.white,
+                        ),
                         CardSpacer(title: "Temperatur max", data:"${((cuacaData.main.tempMax - 273.15).toStringAsFixed(0))}°ᶜ"),
-                        CardSpacer(title: "Tekanan", data:"${cuacaData.main.pressure}"),
-                        CardSpacer(title: "Kelembapan", data:"${cuacaData.main.humidity}"),
+                                                Divider(
+                          thickness: 1,
+                          color: Colors.white,
+                        ),
+                        CardSpacer(title: "Tekanan", data:"${cuacaData.main.pressure} hPs"),
+                                                Divider(
+                          thickness: 1,
+                          color: Colors.white,
+                        ),
+                        CardSpacer(title: "Kelembapan", data:"${cuacaData.main.humidity}%"),
                       ],
                     ),
                   )
