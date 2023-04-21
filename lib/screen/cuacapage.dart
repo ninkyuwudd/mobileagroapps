@@ -7,6 +7,8 @@ import 'package:mobileagroapps/widget/cuaca/forecuacapage.dart';
 import 'package:mobileagroapps/widget/cuaca/saran.dart';
 import 'package:provider/provider.dart';
 
+import '../provider/lokasi_provider.dart';
+
 class CuacaPage extends StatefulWidget {
   const CuacaPage({super.key});
 
@@ -22,8 +24,13 @@ class _CuacaPageState extends State<CuacaPage> {
     Provider.of<CuacaProvider>(context, listen: false).getCuacaAll();
   }
 
+  void _reloadCuaca() {
+    Provider.of<CuacaProvider>(context, listen: false).getCuacaAll();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final weatherProvider = Provider.of<CuacaProvider>(context, listen: false);
     final formater = DateFormat.Hm();
     final formaterdate = DateFormat.yMMMd();
     return SafeArea(
@@ -32,8 +39,27 @@ class _CuacaPageState extends State<CuacaPage> {
         appBar: AppBar(
           actions: [
             IconButton(onPressed: (){
-
-            }, icon: Icon(Icons.add,color:Colors.black54,))
+              showDialog(context: context, builder: (ctx) => AlertDialog(
+                contentPadding: EdgeInsets.all(20),
+                actionsPadding: EdgeInsets.all(20),
+                title: Text("Ubah Lokasi"),
+                content: Text("Masukkan Lokasi yang ingin dituju"),
+                actions: [
+                  TextField(
+                    onChanged: (value){
+                      weatherProvider.updateLocation(value);
+                    },
+                    decoration: InputDecoration(
+                      hintText: "masukkan lokasi ..."
+                    ),
+                    
+                  ),
+                  SizedBox(height: 10,),
+                  ElevatedButton(onPressed:_reloadCuaca, child:Text("Ubah"))
+                ],
+              ));
+            }, icon: Icon(Icons.add,color:Colors.black54,),),
+            SizedBox(width: 10,)
           ],
           backgroundColor: Colors.transparent,
           elevation: 0,

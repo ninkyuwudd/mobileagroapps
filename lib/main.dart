@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobileagroapps/navigationbar.dart';
 import 'package:mobileagroapps/provider/cuaca_service.dart';
+import 'package:mobileagroapps/provider/lokasi_provider.dart';
 import 'package:mobileagroapps/screen/cuacapage.dart';
 import 'package:mobileagroapps/screen/login_page.dart';
 import 'package:mobileagroapps/screen/register_page.dart';
@@ -23,7 +24,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => CuacaProvider())
+        ChangeNotifierProvider(create: (_) => CuacaProvider()),
+        
+        // ChangeNotifierProxyProvider<LokasiProvider,c>(create: create, update: update)
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

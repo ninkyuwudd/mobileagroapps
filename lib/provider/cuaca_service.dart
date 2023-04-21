@@ -2,6 +2,11 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:mobileagroapps/model/cuaca_model.dart';
+import 'package:provider/provider.dart';
+import 'lokasi_provider.dart';
+
+
+
 
 class CuacaProvider extends ChangeNotifier {
   cuacaData? _cuacadata;
@@ -9,9 +14,17 @@ class CuacaProvider extends ChangeNotifier {
 
   List<ForecastData>? _datacuacabesok = [];
   List<ForecastData>? get cuacafrData => _datacuacabesok;
+
+  String _location = 'Jember';
+
+  void updateLocation(String location) {
+    _location = location;
+    notifyListeners();
+  }
+  
   Future<void> getCuacaAll() async {
-    const url =
-        "https://api.openweathermap.org/data/2.5/weather?q=blitar&lang=id&appid=013006034e81b3f0cb0023ebff1c5634";
+    final url =
+        "https://api.openweathermap.org/data/2.5/weather?q=$_location&lang=id&appid=013006034e81b3f0cb0023ebff1c5634";
     final uri = Uri.parse(url);
     final response = await http.get(uri);
     if (response.statusCode == 200) {
@@ -42,7 +55,7 @@ class CuacaProvider extends ChangeNotifier {
   }
 
   Future<void> getForecastCuaca() async {
-    const url ="https://api.openweathermap.org/data/2.5/forecast?q=blitar&lang=id&appid=013006034e81b3f0cb0023ebff1c5634";
+    final url ="https://api.openweathermap.org/data/2.5/forecast?q=$_location&lang=id&appid=013006034e81b3f0cb0023ebff1c5634";
     final uri = Uri.parse(url);
     final response = await http.get(uri);
     if (response.statusCode == 200) {

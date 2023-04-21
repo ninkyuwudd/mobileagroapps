@@ -20,6 +20,7 @@ class _CuacaTempWidgetState extends State<CuacaTempWidget> {
     // TODO: implement initState
     super.initState();
     Provider.of<CuacaProvider>(context,listen: false).getCuacaAll();
+
   }
   @override
   Widget build(BuildContext context) {
