@@ -7,7 +7,8 @@ import 'package:mobileagroapps/screen/shoppage.dart';
 
 
 class BottomNavbar extends StatefulWidget {
-  const BottomNavbar({super.key});
+  // const BottomNavbar({super.key});
+  static const routename = "/navigatorbar";
 
   @override
   State<BottomNavbar> createState() => _BottomNavbarState();

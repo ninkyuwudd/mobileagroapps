@@ -13,7 +13,11 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Text("Profile Page"),
+      body: Center(
+        child: ElevatedButton(onPressed: (){
+          Navigator.pop(context);
+        }, child:Text("Log out")),
+      ),
     );
   }
 }

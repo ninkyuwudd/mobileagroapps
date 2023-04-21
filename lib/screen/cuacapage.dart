@@ -30,6 +30,11 @@ class _CuacaPageState extends State<CuacaPage> {
       child: Scaffold(
         backgroundColor: Color.fromARGB(255, 250, 250, 231),
         appBar: AppBar(
+          actions: [
+            IconButton(onPressed: (){
+
+            }, icon: Icon(Icons.add,color:Colors.black54,))
+          ],
           backgroundColor: Colors.transparent,
           elevation: 0,
           leading: Container(
@@ -81,42 +86,49 @@ class _CuacaPageState extends State<CuacaPage> {
                       ),
                       child: Row(
                         children: [
-                          Padding(padding: EdgeInsets.only(top:10)),
+                          // Padding(padding: EdgeInsets.only(top:10)),
                           
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "${(cuacaData.main.temp - 273.15).toStringAsFixed(0)}°ᶜ",
-                                style: TextStyle(
-                                    fontSize: 80,
-                                    fontWeight: FontWeight.bold,
-                                    color: Color.fromARGB(255, 255, 255, 255)),
-                              ),
-                              Text(
-                                '${formaterdate.format(DateTime.now())}',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                              Text(
-                                cuacaData.kotanya.Kota,
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ],
+                          Expanded(
+
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "${(cuacaData.main.temp - 273.15).toStringAsFixed(0)}°ᶜ",
+                                  style: TextStyle(
+                                      fontSize: 70,
+                                      fontWeight: FontWeight.bold,
+                                      color: Color.fromARGB(255, 255, 255, 255)),
+                                ),
+                                Text(
+                                  '${formaterdate.format(DateTime.now())}',
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                                Text(
+                                  cuacaData.kotanya.Kota,
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ],
+                            ),
                           ),
-                          Spacer(),
-                          Column(
-                            children: [
-                              Image.network(
-                                  "http://openweathermap.org/img/w/${cuacaData.cuacanya.first.icon}.png"),
-                              Text(
-                                "Hari ini ${cuacaData.cuacanya.first.main}",
-                                style: TextStyle(color: Colors.white),
-                              ),
-                              Text(
-                                cuacaData.cuacanya.first.description,
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ],
+                          // Spacer(),
+                          Expanded(
+                            child: Column(
+                              
+                              children: [
+                                Image.network(
+                                    "http://openweathermap.org/img/w/${cuacaData.cuacanya.first.icon}.png"),
+                               SizedBox(height: MediaQuery.of(context).size.height / 30 -10,),
+                                Text(
+                                  "Hari ini ${cuacaData.cuacanya.first.main}",
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                                Text(
+                                  cuacaData.cuacanya.first.description,
+                                  style: TextStyle(color: Colors.white),overflow: TextOverflow.ellipsis,maxLines: 2,
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),
@@ -135,8 +147,7 @@ class _CuacaPageState extends State<CuacaPage> {
                         description: cuacaData.cuacanya.first.description),
                     SizedBox(height: 20,),
                     Text("Saran",style: TextStyle(fontWeight:FontWeight.bold,fontSize: 20,color: Color.fromARGB(255, 43, 101, 45) ),),
-                    SizedBox(height: 20,),
-                    
+                    SizedBox(height: 20,), 
                     Container(
                       child:SaranTernakKebun(), 
                     )
