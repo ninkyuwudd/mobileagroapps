@@ -4,6 +4,7 @@ import 'package:mobileagroapps/model/cuaca_model.dart';
 import 'package:mobileagroapps/provider/cuaca_service.dart';
 import 'package:mobileagroapps/widget/cuaca/cuacatemp_widget.dart';
 import 'package:mobileagroapps/widget/cuaca/forecuacapage.dart';
+import 'package:mobileagroapps/widget/cuaca/horizontal.dart';
 import 'package:mobileagroapps/widget/cuaca/saran.dart';
 import 'package:provider/provider.dart';
 
@@ -22,10 +23,12 @@ class _CuacaPageState extends State<CuacaPage> {
     // TODO: implement initState
     super.initState();
     Provider.of<CuacaProvider>(context, listen: false).getCuacaAll();
+    Provider.of<CuacaProvider>(context, listen: false).getForecastCuaca();
   }
 
   void _reloadCuaca() {
     Provider.of<CuacaProvider>(context, listen: false).getCuacaAll();
+    Provider.of<CuacaProvider>(context, listen: false).getForecastCuaca();
   }
 
   @override
@@ -55,7 +58,10 @@ class _CuacaPageState extends State<CuacaPage> {
                     
                   ),
                   SizedBox(height: 10,),
-                  ElevatedButton(onPressed:_reloadCuaca, child:Text("Ubah"))
+                  ElevatedButton(onPressed:(){
+                    _reloadCuaca();
+                    Navigator.of(context).pop();
+                  }, child:Text("Ubah"))
                 ],
               ));
             }, icon: Icon(Icons.add,color:Colors.black54,),),

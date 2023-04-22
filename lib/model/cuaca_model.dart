@@ -32,8 +32,8 @@ class MainData {
   final double tempMax;
   final int pressure;
   final int humidity;
-  final int seaLevel;
-  final int grndLevel;
+  // final int seaLevel;
+  // final int grndLevel;
 
   MainData(
       {required this.temp,
@@ -42,8 +42,9 @@ class MainData {
       required this.tempMax,
       required this.pressure,
       required this.humidity,
-      required this.seaLevel,
-      required this.grndLevel});
+      // required this.seaLevel,
+      // required this.grndLevel
+      });
 }
 
 class ForecastData {

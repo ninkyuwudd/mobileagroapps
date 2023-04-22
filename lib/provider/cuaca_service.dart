@@ -44,8 +44,8 @@ class CuacaProvider extends ChangeNotifier {
             tempMax: jsonData['main']['temp_max'],
             pressure: jsonData['main']['pressure'],
             humidity: jsonData['main']['humidity'],
-            seaLevel: jsonData['main']['sea_level'],
-            grndLevel: jsonData['main']['grnd_level'],
+            // seaLevel: jsonData['main']['sea_level'],
+            // grndLevel: jsonData['main']['grnd_level'],
           ),
           kotanya: Namakota(Kota: jsonData["name"]));
       notifyListeners();
