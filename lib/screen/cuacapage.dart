@@ -64,7 +64,7 @@ class _CuacaPageState extends State<CuacaPage> {
                   }, child:Text("Ubah"))
                 ],
               ));
-            }, icon: Icon(Icons.add,color:Colors.black54,),),
+            }, icon: Icon(Icons.search,color:Colors.black54,),),
             SizedBox(width: 10,)
           ],
           backgroundColor: Colors.transparent,
@@ -77,23 +77,7 @@ class _CuacaPageState extends State<CuacaPage> {
             style: TextStyle(color: Color.fromARGB(210, 0, 0, 0)),
           ),
         ),
-        // drawer: Drawer(
-        //   child: ListView(
-        //     children: [
-        //       DrawerHeader(
-        //       decoration: BoxDecoration(
-        //         image: DecorationImage(
-        //           image: AssetImage("images/farm_02.jpg"),
-        //           fit: BoxFit.cover,
-        //         ),
-        //       ),
-        //         child: Text("Menu",style: TextStyle(fontSize: 35,fontWeight: FontWeight.bold,),)),
-        //       ListTile(
-        //         title: Text("Calculator"),
-        //       )
-        //     ],
-        //   ),
-        // ),
+
         body: SingleChildScrollView(
           child: Container(
             margin: EdgeInsets.only(bottom: 20, left: 20, right: 20, top: 30),
@@ -125,17 +109,23 @@ class _CuacaPageState extends State<CuacaPage> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  "${(cuacaData.main.temp - 273.15).toStringAsFixed(0)}°ᶜ",
-                                  style: TextStyle(
-                                      fontSize: 70,
-                                      fontWeight: FontWeight.bold,
-                                      color: Color.fromARGB(255, 255, 255, 255)),
+                                FittedBox(
+                                  child: Text(
+                                    "${(cuacaData.main.temp - 273.15).toStringAsFixed(0)}°ᶜ",
+                                    // overflow:TextOverflow.fade,
+                                    // maxLines: 1,
+                                    style: TextStyle(
+                                        
+                                        fontSize: 70,
+                                        fontWeight: FontWeight.bold,
+                                        color: Color.fromARGB(255, 255, 255, 255)),
+                                  ),
                                 ),
                                 Text(
                                   '${formaterdate.format(DateTime.now())}',
                                   style: TextStyle(color: Colors.white),
                                 ),
+                                SizedBox(height: 10,),
                                 Text(
                                   cuacaData.kotanya.Kota,
                                   style: TextStyle(color: Colors.white),
@@ -148,9 +138,12 @@ class _CuacaPageState extends State<CuacaPage> {
                             child: Column(
                               
                               children: [
-                                Image.network(
-                                    "http://openweathermap.org/img/w/${cuacaData.cuacanya.first.icon}.png"),
-                               SizedBox(height: MediaQuery.of(context).size.height / 30 -10,),
+                                Container(
+                                  width: 90,
+                                  child: Image.network(
+                                      "http://openweathermap.org/img/w/${cuacaData.cuacanya.first.icon}.png", fit: BoxFit.cover,),
+                                ),
+                         
                                 Text(
                                   "Hari ini ${cuacaData.cuacanya.first.main}",
                                   style: TextStyle(color: Colors.white),

@@ -41,7 +41,8 @@ class _LoginPageState extends State<LoginPage> {
             email: item['email'],
             gender: item["gender"],
             phone: item["phone"],
-            password: item["password"]))
+            password: item["password"]
+            ))
         .toList();
     setState(() {
       usersitem = _list;
@@ -65,7 +66,7 @@ class _LoginPageState extends State<LoginPage> {
         ),
         body: SingleChildScrollView(
           child: Container(
-            margin: EdgeInsets.only(bottom: 20, left: 20, right: 20, top: 40),
+            margin: EdgeInsets.only(bottom: 20, left: 10, right: 10, top: 40),
             child: Column(
               children: [
                 Image(
@@ -77,110 +78,123 @@ class _LoginPageState extends State<LoginPage> {
                 SizedBox(
                   height: 20,
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    RoundeFieldWhite(
-                        valuenya: username,
-                        title: "Username",
-                        hover: "masukkan username..",
-                        check:usercheck ,
-                        ),
-                    TextFormField(
-                      controller: password,
-                      obscureText: _obscuretext,
-                      decoration: InputDecoration(
-                          fillColor: Colors.white,
-                          filled: true,
-                          suffixIcon: IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  _obscuretext = !_obscuretext;
-                                });
-                              },
-                              icon: const Icon(Icons.remove_red_eye)),
-                          contentPadding: const EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 10),
-                          border: const OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20))),
-                          hintText: 'Masukkan password ...',
-                          errorText:
-                              passcheck ? "Username Can't be empty!" : null),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 10,),
-                Visibility(
-                  child: Text(
-                    "Username atau Password Salah !",
-                    style: TextStyle(color: Colors.red),
+                Container(
+                  padding: EdgeInsets.all(15),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: Colors.white
                   ),
-                  visible: notallowedalert,
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        minimumSize: Size.fromHeight(50)),
-                    onPressed: () {
-                      if (username.text.isEmpty) {
-                        setState(() {
-                          usercheck = true;
-                        });
-                      } else {
-                        setState(() {
-                          usercheck = false;
-                        });
-                      }
-
-                      if (password.text.isEmpty) {
-                        setState(() {
-                          passcheck = true;
-                        });
-                      } else {
-                        passcheck = false;
-                      }
-                      
-                      if (password.text.isNotEmpty & username.text.isNotEmpty) {
-                        for (var i = 0; i < usersitem.length; i++) {
-                          print(usersitem[i].username);
-                          if (username.text == usersitem[i].username &&
-                              password.text == usersitem[i].password) {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => BottomNavbar()));
-                                notallowedalert = false;
-                          }else{
-                            notallowedalert = true;
-                          }
-                        }
-                      }else{
-                        print("salah");
-                      }
-                    },
-                    child: Text(
-                      "Login",
-                      style: TextStyle(color: Colors.white),
-                    )),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  children: [
-                    Text("don't have account?"),
-                    Spacer(),
-                    TextButton(
-                        onPressed: () {
-                          Navigator.of(context).pushNamed('/register');
-                        },
+                  child: Column(
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          RoundeFieldWhite(
+                              valuenya: username,
+                              title: "Username",
+                              hover: "masukkan username..",
+                              check: usercheck ,
+                              ),
+                                            Text("Password",style: TextStyle(color: Color.fromARGB(255, 65, 65, 65),fontWeight: FontWeight.bold,fontSize: 18),),
+                  SizedBox(height: 10,),
+                          TextFormField(
+                            controller: password,
+                            obscureText: _obscuretext,
+                            decoration: InputDecoration(
+                                fillColor: Colors.white,
+                                filled: true,
+                                suffixIcon: IconButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        _obscuretext = !_obscuretext;
+                                      });
+                                    },
+                                    icon: const Icon(Icons.remove_red_eye)),
+                                contentPadding: const EdgeInsets.symmetric(
+                                    vertical: 10, horizontal: 10),
+                                border: const OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(20))),
+                                hintText: 'Masukkan password ...',
+                                errorText:
+                                    passcheck ? "Username Can't be empty!" : null),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 10,),
+                      Visibility(
                         child: Text(
-                          "Register",
-                          style: TextStyle(color: Colors.white),
-                        )),
-                  ],
+                          "Username atau Password Salah !",
+                          style: TextStyle(color: Colors.red),
+                        ),
+                        visible: notallowedalert,
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              minimumSize: Size.fromHeight(50)),
+                          onPressed: () {
+                            if (username.text.isEmpty) {
+                              setState(() {
+                                usercheck = true;
+                              });
+                            } else {
+                              setState(() {
+                                usercheck = false;
+                              });
+                            }
+                
+                            if (password.text.isEmpty) {
+                              setState(() {
+                                passcheck = true;
+                              });
+                            } else {
+                              passcheck = false;
+                            }
+                            
+                            if (password.text.isNotEmpty & username.text.isNotEmpty) {
+                              for (var i = 0; i < usersitem.length; i++) {
+                                print(usersitem[i].username);
+                                if (username.text == usersitem[i].username &&
+                                    password.text == usersitem[i].password) {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => BottomNavbar(idx: i,)));
+                                      notallowedalert = false;
+                                }else{
+                                  notallowedalert = true;
+                                }
+                              }
+                            }else{
+                              print("salah");
+                            }
+                          },
+                          child: Text(
+                            "Login",
+                            style: TextStyle(color: Colors.white),
+                          )),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        children: [
+                          Text("don't have account?"),
+                          Spacer(),
+                          TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pushNamed('/register');
+                              },
+                              child: Text(
+                                "Register",
+                                style: TextStyle(color: Colors.green,fontWeight: FontWeight.bold)
+                              )),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),

@@ -22,6 +22,24 @@ class _SaranTernakKebunState extends State<SaranTernakKebun> {
   Widget build(BuildContext context) {
     return Consumer<CuacaProvider>(builder: (context, cuacaProvider, _) {
       final cuacabesok = cuacaProvider.cuacafrData!;
+      avgcuacaharian(int awal, int akhir) {
+        int count = 0;
+        for (int i = awal; i <= akhir; i++) {
+          String current = cuacabesok[i].weather[0]['description'];
+          if(current.contains("hujan rintik-rintik")){
+            break;
+          }else if(current.contains("hujan")){
+            count ++;
+          }
+        }
+        if(count > 1){
+          print("hari ini akan terjadi hujan deras");
+        }else{
+          print("hari ini tidak terjadi hujan");
+        };
+        
+      }
+
       if (cuacabesok == null || cuacabesok.isEmpty) {
         return Text("Loading Saran....");
       }
@@ -32,7 +50,6 @@ class _SaranTernakKebunState extends State<SaranTernakKebun> {
       final String kondisi5 = cuacabesok[31].weather[0]['description'];
       String pupuk = "";
       String pakan = "";
-
       if (kondisi.contains("hujan") &&
           kondisi2.contains("hujan") &&
           kondisi3.contains("hujan") &&
@@ -43,9 +60,8 @@ class _SaranTernakKebunState extends State<SaranTernakKebun> {
         pakan = "Rumput";
       } else {
         print("pupuk kandang");
-          pakan = "Fermentasi";
-          pupuk = "pupuk kandang";
-      
+        pakan = "Fermentasi";
+        pupuk = "pupuk kandang";
       }
       return Row(
         children: [
@@ -96,6 +112,9 @@ class _SaranTernakKebunState extends State<SaranTernakKebun> {
                     "Perkebunan",
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                   ),
+                  TextButton(onPressed: (){
+                    avgcuacaharian(0, 6);
+                  }, child: Text("cek saran")),
                   Divider(
                     thickness: 1,
                     color: Colors.white,

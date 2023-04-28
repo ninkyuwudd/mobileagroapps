@@ -46,6 +46,7 @@ dependencies:
   firebase_database: ^10.1.1
   cloud_firestore: ^4.5.2
   flutter_launcher_icons: "^0.13.0"
+  email_validator: ^2.1.17
 
 dev_dependencies:
   flutter_test:

@@ -27,7 +27,7 @@ class KondisiCuaca {
 
 class MainData {
   final double temp;
-  final double feelsLike;
+  final void feelsLike;
   final double tempMin;
   final double tempMax;
   final int pressure;
@@ -70,7 +70,9 @@ class ForecastData {
       required this.pressure,
       required this.humidity,
       required this.seaLevel,
-      required this.grndLevel});
+      required this.grndLevel,
+  
+      });
   factory ForecastData.fromJson(Map<String, dynamic> json) {
     return ForecastData(
       weather: json['weather'],
@@ -83,6 +85,7 @@ class ForecastData {
       humidity: json['main']['humidity'],
       seaLevel: json['main']['sea_level'],
       grndLevel: json['main']['grnd_level'],
+    
     );
   }
 }

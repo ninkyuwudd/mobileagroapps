@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 
 
-class RoundeFieldWhite extends StatelessWidget {
+class RoundeValueFieldWhite extends StatelessWidget {
   final String title;
   final String hover;
-  final TextEditingController valuenya;
+  final String valuenya;
   final bool check;
-  RoundeFieldWhite({
+  RoundeValueFieldWhite({
     required this.valuenya,
     required this.title,
     required this.hover,
@@ -20,10 +20,10 @@ class RoundeFieldWhite extends StatelessWidget {
       child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(title,style: TextStyle(color: Color.fromARGB(255, 65, 65, 65),fontWeight: FontWeight.bold,fontSize: 18),),
+                  Text(title,style: TextStyle(color: Color.fromARGB(255, 83, 83, 83),fontWeight: FontWeight.bold,fontSize: 18),),
                   SizedBox(height: 10,),
-                  TextField(
-                    controller: valuenya,
+                  TextFormField(
+                    initialValue: valuenya,
                     decoration: InputDecoration(
                                                 contentPadding: const EdgeInsets.symmetric(
                               vertical: 10, horizontal: 10),
@@ -33,6 +33,7 @@ class RoundeFieldWhite extends StatelessWidget {
                       hintText: hover,
                       fillColor: Colors.white,
                       filled: true,
+              
                       errorText:
                               check ? "$title Can't be empty!" : null),
                     ),

@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:mobileagroapps/screen/calculatorpage.dart';
 import 'package:mobileagroapps/screen/cuacapage.dart';
+import 'package:mobileagroapps/screen/profile_page.dart';
 import 'package:mobileagroapps/screen/profilepage.dart';
 import 'package:mobileagroapps/screen/shoppage.dart';
 
 
 
 class BottomNavbar extends StatefulWidget {
-  // const BottomNavbar({super.key});
+  final int idx;
+  BottomNavbar({required this.idx});
   static const routename = "/navigatorbar";
 
   @override
@@ -15,6 +17,7 @@ class BottomNavbar extends StatefulWidget {
 }
 
 class _BottomNavbarState extends State<BottomNavbar> {
+  
   int currentpage = 0;
   @override
   Widget build(BuildContext context) {
@@ -22,7 +25,7 @@ class _BottomNavbarState extends State<BottomNavbar> {
       CuacaPage(),
       CalculatorPage(),
       ShopPage(),
-      ProfilePage()
+      ProfileUserPage(idx: widget.idx,)
     ];
     return Scaffold(
       body: _pageOption[currentpage],

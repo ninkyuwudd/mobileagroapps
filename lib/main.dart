@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mobileagroapps/navigationbar.dart';
 import 'package:mobileagroapps/provider/cuaca_service.dart';
 import 'package:mobileagroapps/provider/lokasi_provider.dart';
+import 'package:mobileagroapps/provider/user_repo.dart';
+import 'package:mobileagroapps/screen/change_user_data.dart';
 import 'package:mobileagroapps/screen/cuacapage.dart';
 import 'package:mobileagroapps/screen/login_page.dart';
 import 'package:mobileagroapps/screen/register_page.dart';
@@ -25,6 +27,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => CuacaProvider()),
+        ChangeNotifierProvider(create: (_) => UserProvider())
         
         // ChangeNotifierProxyProvider<LokasiProvider,c>(create: create, update: update)
       ],
@@ -38,7 +41,8 @@ class MyApp extends StatelessWidget {
         routes: {
           LoginPage.routename :(context) => LoginPage(),
           RegisterPage.routename :(context) => RegisterPage(),
-          BottomNavbar.routename :(context) => BottomAppBar()
+          BottomNavbar.routename :(context) => BottomAppBar(),
+          ProfileUserDataEditPage.routename :(context) => ProfileUserDataEditPage()
         },
       ),
     );
