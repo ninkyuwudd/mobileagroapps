@@ -67,7 +67,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '835504164094',
     projectId: 'agroapps-22bbb',
     storageBucket: 'agroapps-22bbb.appspot.com',
-    iosClientId: '835504164094-nsc6pfq0mq0el9cu0d8vaam47msu26be.apps.googleusercontent.com',
+    iosClientId:
+        '835504164094-nsc6pfq0mq0el9cu0d8vaam47msu26be.apps.googleusercontent.com',
     iosBundleId: 'com.example.mobileagroapps',
   );
 
@@ -77,7 +78,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '835504164094',
     projectId: 'agroapps-22bbb',
     storageBucket: 'agroapps-22bbb.appspot.com',
-    iosClientId: '835504164094-nsc6pfq0mq0el9cu0d8vaam47msu26be.apps.googleusercontent.com',
+    iosClientId:
+        '835504164094-nsc6pfq0mq0el9cu0d8vaam47msu26be.apps.googleusercontent.com',
     iosBundleId: 'com.example.mobileagroapps',
   );
 }

@@ -1,61 +1,22 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:mobileagroapps/widget/profile_data.dart';
 import 'package:provider/provider.dart';
-
-import '../model/user_model.dart';
-import '../provider/cuaca_service.dart';
 import '../provider/user_repo.dart';
 
 class ProfileUserPage extends StatefulWidget {
   final int idx;
   ProfileUserPage({required this.idx});
 
-
   @override
   State<ProfileUserPage> createState() => _ProfileUserPageState();
 }
 
 class _ProfileUserPageState extends State<ProfileUserPage> {
-
-  
-  //  List<UsersAkun> usersitem = [];
-  // @override
-  // void initState() {
-  //   fetchRecord();
-  //   super.initState();
-  // }
-
-  // fetchRecord() async {
-  //   var records = await FirebaseFirestore.instance.collection('users').get();
-  //   maprecord(records);
-  // }
-
-  // maprecord(QuerySnapshot<Map<String, dynamic>> records) {
-  //   var _list = records.docs
-  //       .map((item) => UsersAkun(
-  //           // id: item["id"],
-  //           nama: item['nama'],
-  //           username: item['username'],
-  //           email: item['email'],
-  //           gender: item["gender"],
-  //           phone: item["phone"],
-  //           password: item["password"]))
-  //       .toList();
-  //   setState(() {
-  //     usersitem = _list;
-  //   });
-  // }
   @override
   Widget build(BuildContext context) {
-    final usrprov = Provider.of<UserProvider>(context);
-    usrprov.fethcdatauser();
-    final akunnya = usrprov.akun;
-    return Consumer<CuacaProvider>(builder: (context, cuacaProvider, _) {
-      final cuacabesok = cuacaProvider.cuacafrData!;
-      if (cuacabesok == null || cuacabesok.isEmpty || akunnya == null) {
-        return Text("load data...");
-      }
+    try {
+      final usrprov = Provider.of<UserProvider>(context);
+      usrprov.fethcdatauser();
+      final akunnya = usrprov.akun;
       return SafeArea(
         child: Scaffold(
           body: Column(
@@ -109,7 +70,9 @@ class _ProfileUserPageState extends State<ProfileUserPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(Icons.email),
-                  SizedBox(width: 10,),
+                  SizedBox(
+                    width: 10,
+                  ),
                   Text(akunnya[widget.idx].email.toString()),
                 ],
               ),
@@ -117,33 +80,35 @@ class _ProfileUserPageState extends State<ProfileUserPage> {
                 height: 20,
               ),
               // Expanded(child: ProfileData(idx: widget.idx,)),
-              Container(
-                margin: EdgeInsets.only(top: 10, right: 25, left: 25),
-                padding:
-                    EdgeInsets.only(top: 10, bottom: 10, right: 20, left: 20),
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20)),
-                child: Row(
-                  children: [
-                    Icon(Icons.person),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Text("My Profile"),
-                    const Spacer(),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.pushNamed(context, '/myprofileedit',arguments: widget.idx);
-                      },
-                      child: const Image(
+              GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, '/myprofileedit',
+                      arguments: widget.idx);
+                },
+                child: Container(
+                  margin: EdgeInsets.only(top: 10, right: 25, left: 25,bottom: 10),
+                  padding:
+                      EdgeInsets.only(top: 10, bottom: 10, right: 20, left: 20),
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20)),
+                  child: Row(
+                    children: [
+                      Icon(Icons.person),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Text("My Profile"),
+                      const Spacer(),
+                      const Image(
                           image: AssetImage("images/right_row_icon.png")),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
+            
               Container(
-                margin: EdgeInsets.only(top: 10, right: 25, left: 25),
+                margin: EdgeInsets.only(top: 10, right: 25, left: 25,bottom: 10),
                 padding:
                     EdgeInsets.only(top: 10, bottom: 10, right: 20, left: 20),
                 decoration: BoxDecoration(
@@ -198,6 +163,11 @@ class _ProfileUserPageState extends State<ProfileUserPage> {
           ),
         ),
       );
-    });
+    } catch (e) {
+      print(e);
+      return Center(
+        child: CircularProgressIndicator(),
+      );
+    }
   }
 }

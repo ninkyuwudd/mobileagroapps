@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:mobileagroapps/model/cuaca_model.dart';
 import 'package:mobileagroapps/provider/cuaca_service.dart';
 import 'package:mobileagroapps/widget/cuaca/cuacatemp_widget.dart';
 import 'package:mobileagroapps/widget/cuaca/forecuacapage.dart';
-import 'package:mobileagroapps/widget/cuaca/horizontal.dart';
 import 'package:mobileagroapps/widget/cuaca/saran.dart';
 import 'package:provider/provider.dart';
-
-import '../provider/lokasi_provider.dart';
 
 class CuacaPage extends StatefulWidget {
   const CuacaPage({super.key});
@@ -41,31 +37,43 @@ class _CuacaPageState extends State<CuacaPage> {
         backgroundColor: Color.fromARGB(255, 250, 250, 231),
         appBar: AppBar(
           actions: [
-            IconButton(onPressed: (){
-              showDialog(context: context, builder: (ctx) => AlertDialog(
-                contentPadding: EdgeInsets.all(20),
-                actionsPadding: EdgeInsets.all(20),
-                title: Text("Ubah Lokasi"),
-                content: Text("Masukkan Lokasi yang ingin dituju"),
-                actions: [
-                  TextField(
-                    onChanged: (value){
-                      weatherProvider.updateLocation(value);
-                    },
-                    decoration: InputDecoration(
-                      hintText: "masukkan lokasi ..."
-                    ),
-                    
-                  ),
-                  SizedBox(height: 10,),
-                  ElevatedButton(onPressed:(){
-                    _reloadCuaca();
-                    Navigator.of(context).pop();
-                  }, child:Text("Ubah"))
-                ],
-              ));
-            }, icon: Icon(Icons.search,color:Colors.black54,),),
-            SizedBox(width: 10,)
+            IconButton(
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (ctx) => AlertDialog(
+                          contentPadding: EdgeInsets.all(20),
+                          actionsPadding: EdgeInsets.all(20),
+                          title: Text("Ubah Lokasi"),
+                          content: Text("Masukkan Lokasi yang ingin dituju"),
+                          actions: [
+                            TextField(
+                              onChanged: (value) {
+                                weatherProvider.updateLocation(value);
+                              },
+                              decoration: InputDecoration(
+                                  hintText: "masukkan lokasi ..."),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            ElevatedButton(
+                                onPressed: () {
+                                  _reloadCuaca();
+                                  Navigator.of(context).pop();
+                                },
+                                child: Text("Ubah"))
+                          ],
+                        ));
+              },
+              icon: Icon(
+                Icons.search,
+                color: Colors.black54,
+              ),
+            ),
+            SizedBox(
+              width: 10,
+            )
           ],
           backgroundColor: Colors.transparent,
           elevation: 0,
@@ -77,11 +85,11 @@ class _CuacaPageState extends State<CuacaPage> {
             style: TextStyle(color: Color.fromARGB(210, 0, 0, 0)),
           ),
         ),
-
         body: SingleChildScrollView(
           child: Container(
             margin: EdgeInsets.only(bottom: 20, left: 20, right: 20, top: 30),
-            child: Consumer<CuacaProvider>(builder: (context, cuacaProvider, _) {
+            child:
+                Consumer<CuacaProvider>(builder: (context, cuacaProvider, _) {
               if (cuacaProvider.cuacadata == null) {
                 return CircularProgressIndicator();
               } else {
@@ -89,11 +97,21 @@ class _CuacaPageState extends State<CuacaPage> {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    
                     Container(
                       margin: EdgeInsets.only(bottom: 20),
                       padding: EdgeInsets.all(20),
                       decoration: BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color.fromARGB(76, 100, 100, 100),
+                            offset: const Offset(
+                              5.0,
+                              5.0,
+                            ),
+                            blurRadius: 7.0,
+                            spreadRadius: 1.0,
+                          ), //BoxShadow
+                        ],
                         borderRadius: BorderRadius.circular(10),
                         image: DecorationImage(
                           image: AssetImage("images/gr_gradient2.png"),
@@ -103,9 +121,8 @@ class _CuacaPageState extends State<CuacaPage> {
                       child: Row(
                         children: [
                           // Padding(padding: EdgeInsets.only(top:10)),
-                          
-                          Expanded(
 
+                          Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -115,17 +132,19 @@ class _CuacaPageState extends State<CuacaPage> {
                                     // overflow:TextOverflow.fade,
                                     // maxLines: 1,
                                     style: TextStyle(
-                                        
                                         fontSize: 70,
                                         fontWeight: FontWeight.bold,
-                                        color: Color.fromARGB(255, 255, 255, 255)),
+                                        color:
+                                            Color.fromARGB(255, 255, 255, 255)),
                                   ),
                                 ),
                                 Text(
                                   '${formaterdate.format(DateTime.now())}',
                                   style: TextStyle(color: Colors.white),
                                 ),
-                                SizedBox(height: 10,),
+                                SizedBox(
+                                  height: 10,
+                                ),
                                 Text(
                                   cuacaData.kotanya.Kota,
                                   style: TextStyle(color: Colors.white),
@@ -136,21 +155,23 @@ class _CuacaPageState extends State<CuacaPage> {
                           // Spacer(),
                           Expanded(
                             child: Column(
-                              
                               children: [
                                 Container(
                                   width: 90,
                                   child: Image.network(
-                                      "http://openweathermap.org/img/w/${cuacaData.cuacanya.first.icon}.png", fit: BoxFit.cover,),
+                                    "http://openweathermap.org/img/w/${cuacaData.cuacanya.first.icon}.png",
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
-                         
                                 Text(
                                   "Hari ini ${cuacaData.cuacanya.first.main}",
                                   style: TextStyle(color: Colors.white),
                                 ),
                                 Text(
                                   cuacaData.cuacanya.first.description,
-                                  style: TextStyle(color: Colors.white),overflow: TextOverflow.ellipsis,maxLines: 2,
+                                  style: TextStyle(color: Colors.white),
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 2,
                                 ),
                               ],
                             ),
@@ -165,16 +186,28 @@ class _CuacaPageState extends State<CuacaPage> {
                       endIndent: 30,
                       color: Color.fromARGB(174, 82, 82, 82),
                     ),
-                    SizedBox(height: 10,),
+                    SizedBox(
+                      height: 10,
+                    ),
                     ForecastCuacaPage(),
                     CuacaTempWidget(
                         main: cuacaData.cuacanya.first.main,
                         description: cuacaData.cuacanya.first.description),
-                    SizedBox(height: 20,),
-                    Text("Saran",style: TextStyle(fontWeight:FontWeight.bold,fontSize: 20,color: Color.fromARGB(255, 43, 101, 45) ),),
-                    SizedBox(height: 20,), 
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text(
+                      "Saran",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: Color.fromARGB(255, 43, 101, 45)),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
                     Container(
-                      child:SaranTernakKebun(), 
+                      child: SaranTernakKebun(),
                     )
                   ],
                 );

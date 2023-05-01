@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mobileagroapps/model/user_model.dart';
 import 'package:mobileagroapps/provider/user_repo.dart';
 import 'package:provider/provider.dart';
 

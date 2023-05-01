@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mobileagroapps/screen/calculatorpage.dart';
 import 'package:mobileagroapps/screen/cuacapage.dart';
 import 'package:mobileagroapps/screen/profile_page.dart';
-import 'package:mobileagroapps/screen/profilepage.dart';
 import 'package:mobileagroapps/screen/shoppage.dart';
 
 
@@ -27,21 +26,23 @@ class _BottomNavbarState extends State<BottomNavbar> {
       ShopPage(),
       ProfileUserPage(idx: widget.idx,)
     ];
-    return Scaffold(
-      body: _pageOption[currentpage],
-      bottomNavigationBar: NavigationBar(
-        destinations: [
-          NavigationDestination(icon: Icon(Icons.home), label: "Cuaca"),
-          NavigationDestination(icon: Icon(Icons.nature), label: "Calculator"),
-          NavigationDestination(icon: Icon(Icons.shop), label: "Toko"),
-          NavigationDestination(icon: Icon(Icons.person), label: "Profile")
-        ],
-        onDestinationSelected: (int index){
-          setState(() {
-            currentpage = index;
-          });
-        },
-        selectedIndex: currentpage,
+    return SafeArea(
+      child: Scaffold(
+        body: _pageOption[currentpage],
+        bottomNavigationBar: NavigationBar(
+          destinations: [
+            NavigationDestination(icon: Icon(Icons.home), label: "Cuaca"),
+            NavigationDestination(icon: Icon(Icons.nature), label: "Calculator"),
+            NavigationDestination(icon: Icon(Icons.shop), label: "Toko"),
+            NavigationDestination(icon: Icon(Icons.person), label: "Profile")
+          ],
+          onDestinationSelected: (int index){
+            setState(() {
+              currentpage = index;
+            });
+          },
+          selectedIndex: currentpage,
+        ),
       ),
     );
   }

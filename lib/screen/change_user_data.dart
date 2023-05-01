@@ -1,11 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:mobileagroapps/widget/login/rounded_field_white.dart';
-import 'package:mobileagroapps/widget/profile_data.dart';
 import 'package:mobileagroapps/widget/rounded_value_field.dart';
 import 'package:provider/provider.dart';
-
-import '../model/user_model.dart';
 import '../provider/cuaca_service.dart';
 import '../provider/user_repo.dart';
 
@@ -81,7 +76,7 @@ class _ProfileUserDataEditPageState extends State<ProfileUserDataEditPage> {
                           ),
                           // SizedBox(width: 20,),
                           Text(
-                            'Profile',
+                            'Edit Profile',
                             style: TextStyle(
                                 fontSize: 24,
                                 color: Colors.white,
@@ -104,9 +99,25 @@ class _ProfileUserDataEditPageState extends State<ProfileUserDataEditPage> {
                   ],
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 10,
                 ),
                 Container(
+                  padding: EdgeInsets.all(15),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.white,
+                    boxShadow: [
+                          BoxShadow(
+                            color: Color.fromARGB(76, 100, 100, 100),
+                            offset: const Offset(
+                              5.0,
+                              5.0,
+                            ),
+                            blurRadius: 7.0,
+                            spreadRadius: 1.0,
+                          ), //BoxShadow
+                        ],
+                  ),
                   margin: EdgeInsets.all(20),
                   child: Column(
                     children: [

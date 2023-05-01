@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mobileagroapps/navigationbar.dart';
 import 'package:mobileagroapps/provider/cuaca_service.dart';
-import 'package:mobileagroapps/provider/lokasi_provider.dart';
 import 'package:mobileagroapps/provider/user_repo.dart';
 import 'package:mobileagroapps/screen/change_user_data.dart';
-import 'package:mobileagroapps/screen/cuacapage.dart';
 import 'package:mobileagroapps/screen/login_page.dart';
 import 'package:mobileagroapps/screen/register_page.dart';
 import 'package:provider/provider.dart';
@@ -28,14 +26,17 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => CuacaProvider()),
         ChangeNotifierProvider(create: (_) => UserProvider())
-        
-        // ChangeNotifierProxyProvider<LokasiProvider,c>(create: create, update: update)
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(
           primarySwatch: Colors.green,
+          
+          textTheme: TextTheme(
+            headline1: TextStyle(color: Colors.green),
+            
+          )
         ),
         home: LoginPage(),
         routes: {

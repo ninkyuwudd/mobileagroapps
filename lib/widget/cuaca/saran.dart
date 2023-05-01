@@ -20,24 +20,47 @@ class _SaranTernakKebunState extends State<SaranTernakKebun> {
 
   @override
   Widget build(BuildContext context) {
+    String pupuk = "";
+    String pakan = "";
     return Consumer<CuacaProvider>(builder: (context, cuacaProvider, _) {
       final cuacabesok = cuacaProvider.cuacafrData!;
       avgcuacaharian(int awal, int akhir) {
         int count = 0;
         for (int i = awal; i <= akhir; i++) {
           String current = cuacabesok[i].weather[0]['description'];
-          if(current.contains("hujan rintik-rintik")){
-            break;
-          }else if(current.contains("hujan")){
-            count ++;
+
+          if (current.contains("hujan rintik-rintik")) {
+            print("$current pada $i");
+          } else if (current.contains("hujan")) {
+            print("$current pada $i");
+            count++;
           }
         }
-        if(count > 1){
-          print("hari ini akan terjadi hujan deras");
-        }else{
+        if (count >= 1) {
+          print("hari ini akan terjadi hujan deras/sedang");
+        } else {
           print("hari ini tidak terjadi hujan");
-        };
-        
+        }
+        ;
+        return count;
+      }
+
+      int total = 0;
+      total += avgcuacaharian(0, 6);
+      total += avgcuacaharian(7, 14);
+      total += avgcuacaharian(15, 21);
+      total += avgcuacaharian(22, 29);
+      total += avgcuacaharian(30, 36);
+      print(total);
+
+      if (total >= 1) {
+        print("sepertinya pake pupuk semprot dulu gan");
+        pupuk = "pupuk semprot";
+        pakan = "Rumput";
+      } else {
+        print("cuaca cerah lur, pupuk kandang cocok iki");
+        pakan = "Fermentasi";
+        pupuk = "pupuk kandang";
       }
 
       if (cuacabesok == null || cuacabesok.isEmpty) {
@@ -48,20 +71,15 @@ class _SaranTernakKebunState extends State<SaranTernakKebun> {
       final String kondisi3 = cuacabesok[15].weather[0]['description'];
       final String kondisi4 = cuacabesok[23].weather[0]['description'];
       final String kondisi5 = cuacabesok[31].weather[0]['description'];
-      String pupuk = "";
-      String pakan = "";
+
       if (kondisi.contains("hujan") &&
           kondisi2.contains("hujan") &&
           kondisi3.contains("hujan") &&
           kondisi4.contains("hujan") &&
           kondisi5.contains("hujan")) {
         print("pupuk semprot");
-        pupuk = "pupuk semprot";
-        pakan = "Rumput";
       } else {
         print("pupuk kandang");
-        pakan = "Fermentasi";
-        pupuk = "pupuk kandang";
       }
       return Row(
         children: [
@@ -112,9 +130,9 @@ class _SaranTernakKebunState extends State<SaranTernakKebun> {
                     "Perkebunan",
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                   ),
-                  TextButton(onPressed: (){
-                    avgcuacaharian(0, 6);
-                  }, child: Text("cek saran")),
+                  // TextButton(onPressed: (){
+
+                  // }, child: Text("cek saran")),
                   Divider(
                     thickness: 1,
                     color: Colors.white,

@@ -164,6 +164,7 @@ class _LoginPageState extends State<LoginPage> {
                                       MaterialPageRoute(
                                           builder: (context) => BottomNavbar(idx: i,)));
                                       notallowedalert = false;
+                                      break;
                                 }else{
                                   notallowedalert = true;
                                 }
