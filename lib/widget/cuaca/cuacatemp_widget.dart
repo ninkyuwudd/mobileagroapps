@@ -70,14 +70,3 @@ class _CuacaTempWidgetState extends State<CuacaTempWidget> {
     );
   }
 }
-//cara manggil yg list
-                // Text('Hari ini ${cuacaData.cuacanya.first.main}'),
-                // Text('${cuacaData.cuacanya.first.description}'),
-                // Text('Temperature: ${weatherData.main.temp}'),
-                //   Text('Feels Like: ${weatherData.main.feelsLike}'),
-                //   Text('Minimum Temperature: ${weatherData.main.tempMin}'),
-                //   Text('Maximum Temperature: ${weatherData.main.tempMax}'),
-                //   Text('Pressure: ${weatherData.main.pressure}'),
-                //   Text('Humidity: ${weatherData.main.humidity}'),
-                //   Text('Sea Level: ${weatherData.main.seaLevel}'),
-                //   Text('Ground Level: ${weatherData.main.grndLevel}'),

@@ -3,6 +3,7 @@ import 'package:mobileagroapps/screen/calculatorpage.dart';
 import 'package:mobileagroapps/screen/cuacapage.dart';
 import 'package:mobileagroapps/screen/profile_page.dart';
 import 'package:mobileagroapps/screen/shoppage.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
 
 
@@ -28,8 +29,11 @@ class _BottomNavbarState extends State<BottomNavbar> {
     ];
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.transparent,
         body: _pageOption[currentpage],
         bottomNavigationBar: NavigationBar(
+          backgroundColor: Colors.white,
+          
           destinations: [
             NavigationDestination(icon: Icon(Icons.home), label: "Cuaca"),
             NavigationDestination(icon: Icon(Icons.nature), label: "Calculator"),

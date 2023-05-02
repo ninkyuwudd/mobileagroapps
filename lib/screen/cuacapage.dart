@@ -34,7 +34,7 @@ class _CuacaPageState extends State<CuacaPage> {
     final formaterdate = DateFormat.yMMMd();
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Color.fromARGB(255, 250, 250, 231),
+        extendBody: true,
         appBar: AppBar(
           actions: [
             IconButton(
