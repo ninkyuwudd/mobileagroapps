@@ -8,8 +8,7 @@ class UserProvider extends ChangeNotifier {
   List<UsersAkun> get akun => _usrakun;
 
   void fethcdatauser() async {
-    QuerySnapshot<Map<String, dynamic>> usrdataloc =
-        await FirebaseFirestore.instance.collection('users').get();
+    QuerySnapshot<Map<String, dynamic>> usrdataloc = await FirebaseFirestore.instance.collection('users').get();
         
     _usrakun = usrdataloc.docs
         .map((doc) => UsersAkun(
@@ -24,11 +23,5 @@ class UserProvider extends ChangeNotifier {
             ))
         .toList();
         notifyListeners();
-  }
-
-  void updatedatauser() async {
-    QuerySnapshot<Map<String,dynamic>> usrdataloc = await FirebaseFirestore.instance.collection('users').get();
-
-    
   }
 }

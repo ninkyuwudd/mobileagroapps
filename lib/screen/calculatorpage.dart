@@ -15,8 +15,11 @@ class CalculatorPage extends StatefulWidget {
 
 class _CalculatorPageState extends State<CalculatorPage> {
   int urutan = 0;  
+
+
   @override
   Widget build(BuildContext context) {
+      try{
     final usrprov = Provider.of<UserProvider>(context);
     usrprov.fethcdatauser();
     final akunnya = usrprov.akun;
@@ -59,33 +62,10 @@ class _CalculatorPageState extends State<CalculatorPage> {
         ])
       ),
     );
+  }catch(e){
+    return CircularProgressIndicator();
+  }
+    
   }
 }
 
-
-
-// SingleChildScrollView(
-//           child: Column(
-//             children: [
-//               Center(
-//                 child: Row(
-//                   mainAxisAlignment: MainAxisAlignment.center,
-//                   children: [
-//                     ElevatedButton(onPressed: (){
-//                       setState(() {
-//                         urutan = 1;
-//                       });
-//                     }, child: Text("Pupuk")),
-//                     SizedBox(width: 15,),
-//                     ElevatedButton(onPressed: (){
-//                       setState(() {
-//                         urutan = 2;
-//                       });
-//                     }, child: Text("Pakan")),
-//                   ],
-//                 ),
-//               ),
-//               urutan == 1? KalkulatorPupuk() : urutan == 2 ? KalkulatorPakan(): urutan == 3 ? TipsPage() : Container()
-//             ],
-//           ),
-//         )

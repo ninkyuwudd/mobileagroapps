@@ -66,21 +66,21 @@ class _SaranTernakKebunState extends State<SaranTernakKebun> {
       if (cuacabesok == null || cuacabesok.isEmpty) {
         return Text("Loading Saran....");
       }
-      final String kondisi = cuacabesok[0].weather[0]['description'];
-      final String kondisi2 = cuacabesok[7].weather[0]['description'];
-      final String kondisi3 = cuacabesok[15].weather[0]['description'];
-      final String kondisi4 = cuacabesok[23].weather[0]['description'];
-      final String kondisi5 = cuacabesok[31].weather[0]['description'];
+      // final String kondisi = cuacabesok[0].weather[0]['description'];
+      // final String kondisi2 = cuacabesok[7].weather[0]['description'];
+      // final String kondisi3 = cuacabesok[15].weather[0]['description'];
+      // final String kondisi4 = cuacabesok[23].weather[0]['description'];
+      // final String kondisi5 = cuacabesok[31].weather[0]['description'];
 
-      if (kondisi.contains("hujan") &&
-          kondisi2.contains("hujan") &&
-          kondisi3.contains("hujan") &&
-          kondisi4.contains("hujan") &&
-          kondisi5.contains("hujan")) {
-        print("pupuk semprot");
-      } else {
-        print("pupuk kandang");
-      }
+      // if (kondisi.contains("hujan") &&
+      //     kondisi2.contains("hujan") &&
+      //     kondisi3.contains("hujan") &&
+      //     kondisi4.contains("hujan") &&
+      //     kondisi5.contains("hujan")) {
+      //   print("pupuk semprot");
+      // } else {
+      //   print("pupuk kandang");
+      // }
       return Row(
         children: [
           Expanded(

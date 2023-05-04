@@ -1,9 +1,8 @@
-import 'dart:convert';
+// import 'dart:convert';
 
-UsersAkun usersAUsersAkunFromJson(String str) =>
-    UsersAkun.fromJson(json.decode(str));
+// UsersAkun usersAUsersAkunFromJson(String str) => UsersAkun.fromJson(json.decode(str));
 
-String usersAUsersAkunToJson(UsersAkun data) => json.encode(data.toJson());
+// String usersAUsersAkunToJson(UsersAkun data) => json.encode(data.toJson());
 
 class UsersAkun {
   final String? id;

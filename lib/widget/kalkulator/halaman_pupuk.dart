@@ -36,7 +36,7 @@ class _KalkulatorPupukState extends State<KalkulatorPupuk> {
                 child: Container(
                   margin: EdgeInsets.only(bottom: 15),
                   child: CircleMenu(listmenu: [
-                  "buah naga@4x.png",
+                
                   "anggur@4x.png",
                   "delima@4x.png",
                   "apel@4x.png",
@@ -44,7 +44,7 @@ class _KalkulatorPupukState extends State<KalkulatorPupuk> {
                   "pisang@4x.png",
                   "semangka@4x.png"
                   
-                ]),
+                ],open: "buah naga@4x.png",),
                 ),
               ),
                             SizedBox(

@@ -90,23 +90,6 @@ class ForecastData {
   }
 }
 
-// class FrKondisiCuaca {
-//   final int id;
-//   final String main;
-//   final String description;
-//   final String icon;
-
-//   FrKondisiCuaca(
-//       {required this.id,
-//       required this.main,
-//       required this.description,
-//       required this.icon});
-
-//     factory FrKondisiCuaca.fromJson(Map<String, dynamic> json){
-
-//     } 
-  
-// }
 
 class Namakota {
   final String Kota;

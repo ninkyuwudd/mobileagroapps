@@ -35,12 +35,12 @@ class _KalkulatorPakanState extends State<KalkulatorPakan> {
               child: Container(
                 margin: EdgeInsets.only(bottom: 15),
                 child: CircleMenu(listmenu: [
-                  "kambing_1@4x.png",
+                  
                   "Ayam@4x.png",
                   "kuda@4x.png",
                   "babi@4x.png",
                   "bebek@4x.png",
-                ]),
+                ],open: "kambing_1@4x.png",),
               ),
             ),
             SizedBox(
