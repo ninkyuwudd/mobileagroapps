@@ -38,14 +38,42 @@ class _ProfileUserPageState extends State<ProfileUserPage> {
                     ),
                   ),
                   Container(
-                    child: Text(
-                      'Profile',
-                      style: TextStyle(
-                          fontSize: 24,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold),
+                    child: Row(
+                      // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Container(
+                            padding: EdgeInsets.only(
+                                left: 5, top: 5, bottom: 5, right: 15),
+                            decoration: BoxDecoration(color: Colors.amber,borderRadius: BorderRadius.circular(5)),
+                            child: Text(
+                              "Daftar Toko",
+                              style: TextStyle(color: Colors.white),
+                            )),
+                        Expanded(
+                          flex: 2,
+                          child: Center(
+                            child: Text(
+                              'Profile',
+                              style: TextStyle(
+                                  fontSize: 24,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
+                         Expanded(
+                          child: Text(
+                            '',
+                            style: TextStyle(
+                                fontSize: 24,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        // Spacer(),
+                      ],
                     ),
-                    margin: EdgeInsets.only(left: 15, top: 40),
+                    margin: EdgeInsets.only(top: 40),
                   ),
                   Positioned(
                     left: 0,
@@ -82,11 +110,18 @@ class _ProfileUserPageState extends State<ProfileUserPage> {
               // Expanded(child: ProfileData(idx: widget.idx,)),
               GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context, '/myprofileedit',
-                      arguments: widget.idx);
+                  Navigator.pushNamed(context, '/myprofileedit', arguments: [
+                    akunnya[widget.idx].id,
+                    akunnya[widget.idx].nama,
+                    akunnya[widget.idx].username,
+                    akunnya[widget.idx].email,
+                    akunnya[widget.idx].gender,
+                    akunnya[widget.idx].phone,
+                  ]);
                 },
                 child: Container(
-                  margin: EdgeInsets.only(top: 10, right: 25, left: 25,bottom: 10),
+                  margin:
+                      EdgeInsets.only(top: 10, right: 25, left: 25, bottom: 10),
                   padding:
                       EdgeInsets.only(top: 10, bottom: 10, right: 20, left: 20),
                   decoration: BoxDecoration(
@@ -106,9 +141,10 @@ class _ProfileUserPageState extends State<ProfileUserPage> {
                   ),
                 ),
               ),
-            
+
               Container(
-                margin: EdgeInsets.only(top: 10, right: 25, left: 25,bottom: 10),
+                margin:
+                    EdgeInsets.only(top: 10, right: 25, left: 25, bottom: 10),
                 padding:
                     EdgeInsets.only(top: 10, bottom: 10, right: 20, left: 20),
                 decoration: BoxDecoration(

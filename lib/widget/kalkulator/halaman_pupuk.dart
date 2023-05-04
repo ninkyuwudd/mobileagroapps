@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobileagroapps/widget/kalkulator/menu_hewan.dart';
 import 'package:mobileagroapps/widget/kalkulator/result_card.dart';
 
 class KalkulatorPupuk extends StatefulWidget {
@@ -23,16 +24,36 @@ class _KalkulatorPupukState extends State<KalkulatorPupuk> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-                            Text(
-                "Kalkulator pupuk",
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
+              //               Text(
+              //   "Kalkulator pupuk",
+              //   style: Theme.of(context).textTheme.titleLarge,
+              // ),
               SizedBox(
                 height: 20,
+              ),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Container(
+                  margin: EdgeInsets.only(bottom: 15),
+                  child: CircleMenu(listmenu: [
+                  "buah naga@4x.png",
+                  "anggur@4x.png",
+                  "delima@4x.png",
+                  "apel@4x.png",
+                  "pir@4x.png",
+                  "pisang@4x.png",
+                  "semangka@4x.png"
+                  
+                ]),
+                ),
+              ),
+                            SizedBox(
+                height: 15,
               ),
               Visibility(
                 visible: true,
                 child: Container(
+                  
                   padding: EdgeInsets.all(15),
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -52,6 +73,7 @@ class _KalkulatorPupukState extends State<KalkulatorPupuk> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      
                       Text("Luas lahan(hektar)"),
                       SizedBox(
                         height: 15,

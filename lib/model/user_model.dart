@@ -13,6 +13,7 @@ class UsersAkun {
   final String? gender;
   final String? phone;
   final String? password;
+  final String? status;
 
   UsersAkun(
       {this.id,
@@ -21,7 +22,10 @@ class UsersAkun {
       required this.email,
       required this.gender,
       required this.phone,
-      required this.password});
+      required this.password,
+      required this.status,
+      
+      });
 
   factory UsersAkun.fromJson(Map<String, dynamic> json) => UsersAkun(
       id: json["id"],
@@ -30,7 +34,9 @@ class UsersAkun {
       email: json['email'],
       gender: json["gender"],
       phone: json["phone"],
-      password: json["password"]);
+      password: json["password"],
+      status: json["status"]
+      );
 
   Map<String, dynamic> toJson() => {
         "nama": nama,
@@ -38,6 +44,7 @@ class UsersAkun {
         "email": email,
         "gender": gender,
         "phone": phone,
-        "password": password
+        "password": password,
+        "status" : status
       };
 }

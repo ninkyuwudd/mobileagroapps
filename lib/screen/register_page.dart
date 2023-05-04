@@ -106,7 +106,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           }
                         }
                       },
-                      // controller: username,
+                      controller: username,
                       decoration: InputDecoration(
                           contentPadding: const EdgeInsets.symmetric(
                               vertical: 10, horizontal: 10),
@@ -137,13 +137,18 @@ class _RegisterPageState extends State<RegisterPage> {
                         if (value.isEmpty) {
                           setState(() {
                             ckemail = true;
+                            
                           });
                         } else {
                           ckemail = false;
                         }
-
                         textemail =EmailValidator.validate(value);
+                        if(textemail == true){
+                          
+                        }
+                        
                       },
+                      controller: email,
                       decoration: InputDecoration(
                           contentPadding: const EdgeInsets.symmetric(
                               vertical: 10, horizontal: 10),
@@ -252,11 +257,13 @@ class _RegisterPageState extends State<RegisterPage> {
                         } else {
                           ckphone = false;
                         }
+    
                         if (EmailValidator.validate(email.text) == true &&
                             nama.text.isNotEmpty &&
                             password.text.isNotEmpty &&
                             phone.text.isNotEmpty &&
                             username.text.isNotEmpty) {
+                              print("oke");
                           String id =
                               DateTime.now().millisecondsSinceEpoch.toString();
                           firestoredb.doc(id).set({
@@ -265,7 +272,8 @@ class _RegisterPageState extends State<RegisterPage> {
                             "email": email.text,
                             "gender": value,
                             "phone": phone.text,
-                            "password": password.text
+                            "password": password.text,
+                            "status" : "user"
                           });
                           firestoredb
                               .doc(id)
@@ -276,6 +284,13 @@ class _RegisterPageState extends State<RegisterPage> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => LoginPage()));
+                        }else{
+                          print("ada yg belum bener");
+                          print(nama.text);
+                          print(username.text);
+                          print(email.text);
+                          print(password.text);
+                          print(phone.text);
                         }
                       } catch (e) {
                         print("salah $e");

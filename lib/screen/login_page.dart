@@ -41,7 +41,8 @@ class _LoginPageState extends State<LoginPage> {
             email: item['email'],
             gender: item["gender"],
             phone: item["phone"],
-            password: item["password"]
+            password: item["password"],
+            status: item["status"]
             ))
         .toList();
     setState(() {
