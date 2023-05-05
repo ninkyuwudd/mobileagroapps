@@ -14,17 +14,16 @@ class UsersAkun {
   final String? password;
   final String? status;
 
-  UsersAkun(
-      {this.id,
-      required this.nama,
-      required this.username,
-      required this.email,
-      required this.gender,
-      required this.phone,
-      required this.password,
-      required this.status,
-      
-      });
+  UsersAkun({
+    this.id,
+    required this.nama,
+    required this.username,
+    required this.email,
+    required this.gender,
+    required this.phone,
+    required this.password,
+    required this.status,
+  });
 
   factory UsersAkun.fromJson(Map<String, dynamic> json) => UsersAkun(
       id: json["id"],
@@ -34,8 +33,7 @@ class UsersAkun {
       gender: json["gender"],
       phone: json["phone"],
       password: json["password"],
-      status: json["status"]
-      );
+      status: json["status"]);
 
   Map<String, dynamic> toJson() => {
         "nama": nama,
@@ -44,6 +42,20 @@ class UsersAkun {
         "gender": gender,
         "phone": phone,
         "password": password,
-        "status" : status
+        "status": status
       };
+}
+
+class UserLocList {
+  final String id;
+  final String lokasi;
+
+  UserLocList({required this.id, required this.lokasi});
+
+  factory UserLocList.fromJson(Map<String, dynamic> json) =>
+      UserLocList(id: json["id"], lokasi: json["lokasi"]);
+
+  Map<String,dynamic> toJson() => {
+    "lokasi" : lokasi
+  };
 }

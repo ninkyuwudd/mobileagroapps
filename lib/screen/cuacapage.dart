@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:mobileagroapps/model/user_model.dart';
 import 'package:mobileagroapps/provider/cuaca_service.dart';
+import 'package:mobileagroapps/provider/user_repo.dart';
 import 'package:mobileagroapps/widget/cuaca/cuacatemp_widget.dart';
 import 'package:mobileagroapps/widget/cuaca/forecuacapage.dart';
 import 'package:mobileagroapps/widget/cuaca/saran.dart';
 import 'package:provider/provider.dart';
 
 class CuacaPage extends StatefulWidget {
-  const CuacaPage({super.key});
+
+  final int idx;
+  CuacaPage({required this.idx});
+
 
   @override
   State<CuacaPage> createState() => _CuacaPageState();
@@ -20,6 +25,7 @@ class _CuacaPageState extends State<CuacaPage> {
     super.initState();
     Provider.of<CuacaProvider>(context, listen: false).getCuacaAll();
     Provider.of<CuacaProvider>(context, listen: false).getForecastCuaca();
+
   }
 
   void _reloadCuaca() {
@@ -29,6 +35,11 @@ class _CuacaPageState extends State<CuacaPage> {
 
   @override
   Widget build(BuildContext context) {
+    // final usrprov = Provider.of<UserProvider>(context);
+    // usrprov.fethcdatauser();
+    // final akunnya = usrprov.akun;
+    // final useloclistdata = Provider.of<UserProvider>(context, listen: false);
+    // useloclistdata.fetchdatauserlocation(akunnya[widget.idx].id);
     final weatherProvider = Provider.of<CuacaProvider>(context, listen: false);
     final formater = DateFormat.Hm();
     final formaterdate = DateFormat.yMMMd();
@@ -42,8 +53,8 @@ class _CuacaPageState extends State<CuacaPage> {
                 showDialog(
                     context: context,
                     builder: (ctx) => AlertDialog(
-                          contentPadding: EdgeInsets.all(20),
-                          actionsPadding: EdgeInsets.all(20),
+                          contentPadding: EdgeInsets.all(30),
+                          actionsPadding: EdgeInsets.all(30),
                           title: Text("Ubah Lokasi"),
                           content: Text("Masukkan Lokasi yang ingin dituju"),
                           actions: [
@@ -62,7 +73,30 @@ class _CuacaPageState extends State<CuacaPage> {
                                   _reloadCuaca();
                                   Navigator.of(context).pop();
                                 },
-                                child: Text("Ubah"))
+                                child: Text("Ubah")),
+               
+
+                                // Consumer<UserProvider>(builder: (context,usrlokasi,_){
+                                //   if(usrlokasi.lokasi == null){
+                                //     return CircularProgressIndicator();
+                                //   }else{
+                                //     print("nice");
+                                //     final usercuacalokasi = usrlokasi.lokasi;
+                                //     return SizedBox(
+                                //         height: 100,
+                                //         child: ListView.builder(
+                                //           itemCount: usercuacalokasi.length,
+                                //           itemBuilder: (context,index){
+                                //             return Container(
+                                //               child: Text(usercuacalokasi[index].lokasi),
+                                //             );
+                                //           }),
+                                      
+                                //     );
+                                //   }
+                                // })
+                              
+                            
                           ],
                         ));
               },

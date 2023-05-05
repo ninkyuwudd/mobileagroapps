@@ -40,7 +40,7 @@ class _ForecastCuacaPageState extends State<ForecastCuacaPage> {
                 margin: EdgeInsets.only(right: 15),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: Color.fromARGB(255, 38, 254, 78)),
+                    color: Color.fromARGB(255, 90, 207, 94)),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,

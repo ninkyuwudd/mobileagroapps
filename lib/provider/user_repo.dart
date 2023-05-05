@@ -7,6 +7,9 @@ class UserProvider extends ChangeNotifier {
 
   List<UsersAkun> get akun => _usrakun;
 
+  List<UserLocList> _usrloc = [];
+  List<UserLocList> get lokasi => _usrloc;
+
   void fethcdatauser() async {
     QuerySnapshot<Map<String, dynamic>> usrdataloc = await FirebaseFirestore.instance.collection('users').get();
         
@@ -23,5 +26,14 @@ class UserProvider extends ChangeNotifier {
             ))
         .toList();
         notifyListeners();
+  }
+
+  void fetchdatauserlocation(var id) async{
+    QuerySnapshot<Map<String, dynamic>> usrdataloclist = await FirebaseFirestore.instance.collection('users').doc(id).collection("private data").get();
+
+    _usrloc = usrdataloclist.docs.map((locs) => UserLocList(id: locs.id, lokasi: locs['lokasi'])).toList();
+    notifyListeners();
+
+
   }
 }
