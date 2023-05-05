@@ -129,7 +129,7 @@ class _ProfileUserPageState extends State<ProfileUserPage> {
                       child:
                           GestureDetector(
                             onTap: (){
-
+                              _getfromcamera();
                             },
                             child: CircleAvatar(child: Icon(Icons.edit,color: Colors.white,),backgroundColor: Colors.amber,))),
                 ],
