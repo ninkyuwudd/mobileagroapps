@@ -48,6 +48,7 @@ dependencies:
   flutter_launcher_icons: "^0.13.0"
   email_validator: ^2.1.17
   curved_navigation_bar: ^1.0.3
+  image_picker: ^0.8.7+4
 
 dev_dependencies:
   flutter_test:

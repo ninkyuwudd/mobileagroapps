@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'dart:io';
 import 'package:provider/provider.dart';
 import '../provider/user_repo.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ProfileUserPage extends StatefulWidget {
   final int idx;
@@ -11,6 +13,32 @@ class ProfileUserPage extends StatefulWidget {
 }
 
 class _ProfileUserPageState extends State<ProfileUserPage> {
+  File? imagefile;
+
+  _getfromgallery() async {
+    PickedFile? pickfile = await ImagePicker().getImage(
+      source: ImageSource.gallery,
+      maxHeight: 200,
+      maxWidth: 200,
+    );
+    if (pickfile != null) {
+      setState(() {
+        imagefile = File(pickfile.path);
+      });
+    }
+  }
+
+  _getfromcamera() async {
+    PickedFile? pickfile = await ImagePicker()
+        // ignore: deprecated_member_use
+        .getImage(source: ImageSource.camera, maxHeight: 200, maxWidth: 200);
+    if (pickfile != null) {
+      setState(() {
+        imagefile = File(pickfile.path);
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     try {
@@ -44,7 +72,9 @@ class _ProfileUserPageState extends State<ProfileUserPage> {
                         Container(
                             padding: EdgeInsets.only(
                                 left: 5, top: 5, bottom: 5, right: 15),
-                            decoration: BoxDecoration(color: Colors.amber,borderRadius: BorderRadius.circular(5)),
+                            decoration: BoxDecoration(
+                                color: Colors.amber,
+                                borderRadius: BorderRadius.circular(5)),
                             child: Text(
                               "Daftar Toko",
                               style: TextStyle(color: Colors.white),
@@ -61,7 +91,7 @@ class _ProfileUserPageState extends State<ProfileUserPage> {
                             ),
                           ),
                         ),
-                         Expanded(
+                        Expanded(
                           child: Text(
                             '',
                             style: TextStyle(
@@ -78,10 +108,30 @@ class _ProfileUserPageState extends State<ProfileUserPage> {
                   Positioned(
                     left: 0,
                     right: 0,
-                    top: 0,
-                    child:
-                        Image(image: AssetImage("images/photoMainprofile.png")),
+                    top: 120,
+                    child: Container(
+                        child: imagefile == null
+                            ? CircleAvatar(
+                              
+                                backgroundImage:
+                                    AssetImage("images/bebek@4x.png"),
+                                radius: 70,
+                              )
+                            : CircleAvatar(
+                                foregroundImage: FileImage(imagefile!),
+                                radius: 70,
+                              )),
                   ),
+                  Positioned(
+                      left: 100,
+                      right: 0,
+                      top: 220,
+                      child:
+                          GestureDetector(
+                            onTap: (){
+
+                            },
+                            child: CircleAvatar(child: Icon(Icons.edit,color: Colors.white,),backgroundColor: Colors.amber,))),
                 ],
               ),
               SizedBox(
@@ -159,7 +209,9 @@ class _ProfileUserPageState extends State<ProfileUserPage> {
                     Text("Change Password"),
                     const Spacer(),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        _getfromcamera();
+                      },
                       child: const Image(
                           image: AssetImage("images/right_row_icon.png")),
                     ),
