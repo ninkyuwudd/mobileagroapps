@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:mobileagroapps/screen/login_page.dart';
 import 'package:mobileagroapps/widget/login/rounded_field_white.dart';
 import 'package:provider/provider.dart';
-
+import 'package:phone_number/phone_number.dart';
 import '../provider/user_repo.dart';
 
 enum Genderoption { pria, wanita }
@@ -28,6 +28,7 @@ class _RegisterPageState extends State<RegisterPage> {
   bool ckphone = false;
   bool ckpass = false;
   bool textemail = true;
+  bool phnumber = true;
 
   TextEditingController nama = TextEditingController();
   TextEditingController username = TextEditingController();
@@ -117,11 +118,12 @@ class _RegisterPageState extends State<RegisterPage> {
                           fillColor: Colors.white,
                           filled: true,
                           errorText: ckusername
-                              ? "username Can't be empty!"
+                              ? "username tidak bisa kosng"
                               : ckusenamevalid
                                   ? null
-                                  : "username sudah digunakan!!"),
+                                  : "username sudah digunakan!"),
                     ),
+                    SizedBox(height: 10,),
                     Text(
                       "Email",
                       style: TextStyle(
@@ -159,7 +161,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           fillColor: Colors.white,
                           filled: true,
                           errorText: ckemail
-                              ? "email Can't be empty!"
+                              ? "email tidak bisa kosong"
                               : textemail
                                   ? null
                                   : "email tidak valid"),
@@ -204,11 +206,39 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                       ],
                     ),
-                    RoundeFieldWhite(
-                        check: ckphone,
-                        valuenya: phone,
-                        title: "Phone",
-                        hover: "masukkan phone.."),
+                    TextField(
+                      onChanged: (value) async{
+                        if (value.isEmpty) {
+                          setState(() {
+                            ckphone = true;
+                            
+                          });
+                        } else {
+                          ckphone = false;
+                        }
+                        RegionInfo region = RegionInfo(name: "Id", prefix: 62,code: "31662");
+                        phnumber = await PhoneNumberUtil().validate(value);
+                        print(phnumber);
+                        
+                      },
+                      keyboardType: TextInputType.number,
+                      controller: phone,
+                      decoration: InputDecoration(
+                          contentPadding: const EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 10),
+                          border: const OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20))),
+                          hintText: "masukkan nomor hp...",
+                          fillColor: Colors.white,
+                          filled: true,
+                          errorText: ckphone
+                              ? "nomor hp tidak bisa kosong"
+                              : phnumber
+                                  ? null
+                                  : "email tidak valid")
+                                  ,),
+                                  SizedBox(height: 15,),
                     RoundeFieldWhite(
                         check: ckpass,
                         valuenya: password,

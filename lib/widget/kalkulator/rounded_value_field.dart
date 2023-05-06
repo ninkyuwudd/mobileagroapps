@@ -38,7 +38,7 @@ class RoundeValueFieldWhiteValue extends StatelessWidget {
                       filled: true,
               
                       errorText:
-                              check ? "$title Can't be empty!" : null),
+                              check ? "$title tidak bisa kosong!" : null),
                     ),
                   SizedBox(
                     height: 20,

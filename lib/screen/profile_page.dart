@@ -112,7 +112,6 @@ class _ProfileUserPageState extends State<ProfileUserPage> {
                     child: Container(
                         child: imagefile == null
                             ? CircleAvatar(
-                              
                                 backgroundImage:
                                     AssetImage("images/bebek@4x.png"),
                                 radius: 70,
@@ -129,7 +128,7 @@ class _ProfileUserPageState extends State<ProfileUserPage> {
                       child:
                           GestureDetector(
                             onTap: (){
-                              _getfromcamera();
+                              _getfromgallery();
                             },
                             child: CircleAvatar(child: Icon(Icons.edit,color: Colors.white,),backgroundColor: Colors.amber,))),
                 ],

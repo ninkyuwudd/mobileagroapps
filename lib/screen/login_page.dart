@@ -118,7 +118,7 @@ class _LoginPageState extends State<LoginPage> {
                                         BorderRadius.all(Radius.circular(20))),
                                 hintText: 'Masukkan password ...',
                                 errorText:
-                                    passcheck ? "Username Can't be empty!" : null),
+                                    passcheck ? "password tidak bisa kosong!" : null),
                           ),
                         ],
                       ),
