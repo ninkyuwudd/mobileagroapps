@@ -11,7 +11,7 @@ class Orderproivder with ChangeNotifier {
     return _orders;
   }
 
-  void addorder(List<CartModel> cartproduct, double total) {
+  void addorder(List<CartModel> cartproduct, int total) {
     _orders.insert(
         0,
         OrderModel(

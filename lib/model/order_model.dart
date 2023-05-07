@@ -3,7 +3,7 @@ import 'package:mobileagroapps/model/cart_model.dart';
 
 class OrderModel {
   final String id;
-  final double jumlah;
+  final int jumlah;
   final List<CartModel> product;
   final DateTime dateTime;
 
