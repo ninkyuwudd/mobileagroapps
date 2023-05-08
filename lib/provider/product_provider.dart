@@ -40,4 +40,11 @@ class ProductProvider with ChangeNotifier {
     _items.add(newitemdata);
     notifyListeners();
   }
+
+
+  void hapus(int index){
+    print("manggil hapus");
+    _items.removeAt(index);
+    notifyListeners();
+  }
 }

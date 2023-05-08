@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:mobileagroapps/model/user_model.dart';
 import 'package:provider/provider.dart';
 import '../provider/user_repo.dart';
-import '../widget/kalkulator/rounded_value_field.dart';
+import '../widget/rounded_value_field.dart';
 
 class ProfileUserDataEditPage extends StatefulWidget {
 
