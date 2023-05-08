@@ -3,7 +3,6 @@ import 'package:mobileagroapps/screen/calculatorpage.dart';
 import 'package:mobileagroapps/screen/cuacapage.dart';
 import 'package:mobileagroapps/screen/profile_page.dart';
 import 'package:mobileagroapps/screen/shoppage.dart';
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
 class BottomNavbar extends StatefulWidget {
   final int idx;

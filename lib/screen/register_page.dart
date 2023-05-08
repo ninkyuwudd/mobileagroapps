@@ -123,7 +123,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                   ? null
                                   : "username sudah digunakan!"),
                     ),
-                    SizedBox(height: 10,),
+                    SizedBox(
+                      height: 10,
+                    ),
                     Text(
                       "Email",
                       style: TextStyle(
@@ -139,16 +141,12 @@ class _RegisterPageState extends State<RegisterPage> {
                         if (value.isEmpty) {
                           setState(() {
                             ckemail = true;
-                            
                           });
                         } else {
                           ckemail = false;
                         }
-                        textemail =EmailValidator.validate(value);
-                        if(textemail == true){
-                          
-                        }
-                        
+                        textemail = EmailValidator.validate(value);
+                        if (textemail == true) {}
                       },
                       controller: email,
                       decoration: InputDecoration(
@@ -206,20 +204,36 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                       ],
                     ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      "Nomor Hp",
+                      style: TextStyle(
+                          color: Color.fromARGB(255, 67, 67, 67),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
                     TextField(
-                      onChanged: (value) async{
+                      onChanged: (value) async {
                         if (value.isEmpty) {
                           setState(() {
                             ckphone = true;
-                            
                           });
                         } else {
                           ckphone = false;
                         }
-                        RegionInfo region = RegionInfo(name: "Id", prefix: 62,code: "31662");
-                        phnumber = await PhoneNumberUtil().validate(value);
+
+                        bool chvalidnumb =
+                            await PhoneNumberUtil().validate('+62$value');
+                        setState(() {
+                          phnumber = chvalidnumb;
+                        });
+
                         print(phnumber);
-                        
                       },
                       keyboardType: TextInputType.number,
                       controller: phone,
@@ -236,9 +250,11 @@ class _RegisterPageState extends State<RegisterPage> {
                               ? "nomor hp tidak bisa kosong"
                               : phnumber
                                   ? null
-                                  : "email tidak valid")
-                                  ,),
-                                  SizedBox(height: 15,),
+                                  : "nomor hp tidak valid"),
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
                     RoundeFieldWhite(
                         check: ckpass,
                         valuenya: password,
@@ -287,13 +303,13 @@ class _RegisterPageState extends State<RegisterPage> {
                         } else {
                           ckphone = false;
                         }
-    
+
                         if (EmailValidator.validate(email.text) == true &&
                             nama.text.isNotEmpty &&
                             password.text.isNotEmpty &&
                             phone.text.isNotEmpty &&
                             username.text.isNotEmpty) {
-                              print("oke");
+                          print("oke");
                           String id =
                               DateTime.now().millisecondsSinceEpoch.toString();
                           firestoredb.doc(id).set({
@@ -303,7 +319,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             "gender": value,
                             "phone": phone.text,
                             "password": password.text,
-                            "status" : "user"
+                            "status": "user"
                           });
                           firestoredb
                               .doc(id)
@@ -314,7 +330,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => LoginPage()));
-                        }else{
+                        } else {
                           print("ada yg belum bener");
                           print(nama.text);
                           print(username.text);
