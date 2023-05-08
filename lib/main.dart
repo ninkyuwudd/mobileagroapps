@@ -8,6 +8,7 @@ import 'package:mobileagroapps/provider/user_repo.dart';
 import 'package:mobileagroapps/screen/change_user_data.dart';
 import 'package:mobileagroapps/screen/login_page.dart';
 import 'package:mobileagroapps/screen/register_page.dart';
+import 'package:mobileagroapps/screen/shop/add_product.dart';
 import 'package:mobileagroapps/screen/shop/cart_page.dart';
 import 'package:mobileagroapps/screen/shop/detail_product.dart';
 import 'package:mobileagroapps/screen/shop/order_product.dart';
@@ -55,7 +56,8 @@ class MyApp extends StatelessWidget {
           DetailProductScreen.routename :(context) => DetailProductScreen(),
           ProfileUserDataEditPage.routename :(context) => ProfileUserDataEditPage(),
           OrderProductPage.routename : (context) => OrderProductPage(),
-          CartPage.routename :(context) => CartPage()
+          CartPage.routename :(context) => CartPage(),
+          AddProductPage.routename : (context) => AddProductPage()
         },
       ),
     );

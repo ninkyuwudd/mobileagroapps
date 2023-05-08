@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 
 
 
-class RoundeValueFieldWhite extends StatelessWidget {
+class RoundeValueFieldWhiteValue extends StatelessWidget {
+  final TextEditingController control;
   final String title;
   final String hover;
-  final String valuenya;
+  // final String valuenya;
   final bool check;
-  RoundeValueFieldWhite({
-    required this.valuenya,
+  RoundeValueFieldWhiteValue({
+    required this.control,
+    // required this.valuenya,
     required this.title,
     required this.hover,
     required this.check
@@ -23,7 +25,8 @@ class RoundeValueFieldWhite extends StatelessWidget {
                   Text(title,style: TextStyle(color: Color.fromARGB(255, 83, 83, 83),fontWeight: FontWeight.bold,fontSize: 18),),
                   SizedBox(height: 10,),
                   TextFormField(
-                    initialValue: valuenya,
+                    controller: control,
+                    // initialValue: valuenya,
                     decoration: InputDecoration(
                                                 contentPadding: const EdgeInsets.symmetric(
                               vertical: 10, horizontal: 10),
@@ -35,7 +38,7 @@ class RoundeValueFieldWhite extends StatelessWidget {
                       filled: true,
               
                       errorText:
-                              check ? "$title Can't be empty!" : null),
+                              check ? "$title tidak bisa kosong!" : null),
                     ),
                   SizedBox(
                     height: 20,

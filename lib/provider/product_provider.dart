@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mobileagroapps/model/product_model.dart';
 
+import '../model/cart_model.dart';
+
 class ProductProvider with ChangeNotifier {
   List<Product> _items = [
     Product(
@@ -20,12 +22,22 @@ class ProductProvider with ChangeNotifier {
             "https://belajartani.com/wp-content/uploads/2016/09/urea-bersusidi.jpg")
   ];
 
-
-  List<Product> get items{
+  List<Product> get items {
     return _items;
   }
 
-  Product finbyid(String id){
+  Product finbyid(String id) {
     return _items.firstWhere((prod) => prod.id == id);
+  }
+
+  void additem(String title, int price, String description, String image) {
+    final newitemdata = Product(
+        id: DateTime.now().millisecond.toString(),
+        title: title,
+        description: description,
+        price: price,
+        image: image);
+    _items.add(newitemdata);
+    notifyListeners();
   }
 }
