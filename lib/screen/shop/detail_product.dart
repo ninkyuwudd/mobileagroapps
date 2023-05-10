@@ -74,52 +74,53 @@ class DetailProductScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              Spacer(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      // Navigator.of(context).pushNamed(OrderProductPage.routename);
-                      cart.additem(
-                          loadproduk.id, loadproduk.price, loadproduk.title);
-                      Navigator.of(context).pushNamed(CartPage.routename);
-                    },
-                    child: Text(
-                      "Beli Langsung",
-                      style: TextStyle(color: Colors.green),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white,
-                      elevation: 10,
-                    ),
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  ElevatedButton(
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
                       onPressed: () {
+                        // Navigator.of(context).pushNamed(OrderProductPage.routename);
                         cart.additem(
                             loadproduk.id, loadproduk.price, loadproduk.title);
-                        ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                              'Barang berhasil ditambahkan',
-                              textAlign: TextAlign.center,
-                            ),
-                            backgroundColor: Colors.green,
-                            duration: Duration(seconds: 2),
-                            action: SnackBarAction(
-                                label: "UNDO",
-                                onPressed: () {
-                                  cart.remosingleitem(loadproduk.id);
-                                }),
-                          ),
-                        );
+                        Navigator.of(context).pushNamed(CartPage.routename);
                       },
-                      child: Text("+ Keranjang"))
-                ],
+                      child: Text(
+                        "Beli Langsung",
+                        style: TextStyle(color: Colors.green),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        elevation: 10,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    ElevatedButton(
+                        onPressed: () {
+                          cart.additem(
+                              loadproduk.id, loadproduk.price, loadproduk.title);
+                          ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                'Barang berhasil ditambahkan',
+                                textAlign: TextAlign.center,
+                              ),
+                              backgroundColor: Colors.green,
+                              duration: Duration(seconds: 2),
+                              action: SnackBarAction(
+                                  label: "UNDO",
+                                  onPressed: () {
+                                    cart.remosingleitem(loadproduk.id);
+                                  }),
+                            ),
+                          );
+                        },
+                        child: Text("+ Keranjang"))
+                  ],
+                ),
               )
             ],
           ),

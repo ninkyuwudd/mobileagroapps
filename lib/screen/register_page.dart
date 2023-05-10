@@ -321,11 +321,14 @@ class _RegisterPageState extends State<RegisterPage> {
                             "password": password.text,
                             "status": "user"
                           });
-                          firestoredb
-                              .doc(id)
-                              .collection('private data')
-                              .doc(id)
-                              .set({"id": id});
+                          
+                          // firestoredb
+                          //     .doc(id)
+                          //     .collection('Order')
+                          //     .doc(id)
+                          //     .set({"idOrder": id,
+                          //     "customer" : ,
+                          //     });
                           Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(

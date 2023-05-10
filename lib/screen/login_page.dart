@@ -2,7 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mobileagroapps/model/user_model.dart';
 import 'package:mobileagroapps/navigationbar.dart';
+import 'package:mobileagroapps/provider/user_repo.dart';
 import 'package:mobileagroapps/widget/login/rounded_field_white.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   // const LoginPage({super.key});
@@ -54,6 +56,9 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final usrprov = Provider.of<UserProvider>(context);
+    usrprov.fethcdatauser();
+    final akunnya = usrprov.akun;
     return SafeArea(
       child: Scaffold(
         backgroundColor: Color.fromARGB(255, 128, 211, 131),
@@ -160,6 +165,8 @@ class _LoginPageState extends State<LoginPage> {
                                 print(usersitem[i].username);
                                 if (username.text == usersitem[i].username &&
                                     password.text == usersitem[i].password) {
+                                      print(usersitem[i].id.toString());
+                                  usrprov.changedataid(akunnya[i].id.toString());
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(

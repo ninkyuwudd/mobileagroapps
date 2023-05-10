@@ -11,6 +11,19 @@ class Orderproivder with ChangeNotifier {
     return _orders;
   }
 
+  void fetchdataorder() async {
+    QuerySnapshot<Map<String, dynamic>> orderdata =
+        await FirebaseFirestore.instance.collection('order').get();
+    _orders = orderdata.docs
+        .map((doc) => OrderModel(
+            id: doc.id,
+            jumlah: doc.data()["jumlah"],
+            product: doc.data()["product"],
+            dateTime: doc.data()["datetime"]))
+        .toList();
+    notifyListeners();
+  }
+
   void addorder(List<CartModel> cartproduct, int total) {
     _orders.insert(
         0,
@@ -19,6 +32,6 @@ class Orderproivder with ChangeNotifier {
             jumlah: total,
             product: cartproduct,
             dateTime: DateTime.now()));
-            notifyListeners();
+    notifyListeners();
   }
 }

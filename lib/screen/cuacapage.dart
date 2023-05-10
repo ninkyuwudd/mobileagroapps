@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:mobileagroapps/model/user_model.dart';
 import 'package:mobileagroapps/provider/cuaca_service.dart';
@@ -74,28 +75,6 @@ class _CuacaPageState extends State<CuacaPage> {
                                   Navigator.of(context).pop();
                                 },
                                 child: Text("Ubah")),
-               
-
-                                // Consumer<UserProvider>(builder: (context,usrlokasi,_){
-                                //   if(usrlokasi.lokasi == null){
-                                //     return CircularProgressIndicator();
-                                //   }else{
-                                //     print("nice");
-                                //     final usercuacalokasi = usrlokasi.lokasi;
-                                //     return SizedBox(
-                                //         height: 100,
-                                //         child: ListView.builder(
-                                //           itemCount: usercuacalokasi.length,
-                                //           itemBuilder: (context,index){
-                                //             return Container(
-                                //               child: Text(usercuacalokasi[index].lokasi),
-                                //             );
-                                //           }),
-                                      
-                                //     );
-                                //   }
-                                // })
-                              
                             
                           ],
                         ));
@@ -116,7 +95,7 @@ class _CuacaPageState extends State<CuacaPage> {
               child: Image(image: AssetImage("images/logo_only.png"))),
           title: Text(
             "CUACA",
-            style: TextStyle(color: Color.fromARGB(210, 0, 0, 0)),
+            style: GoogleFonts.poppins(color: Color.fromARGB(210, 0, 0, 0),),
           ),
         ),
         body: SingleChildScrollView(

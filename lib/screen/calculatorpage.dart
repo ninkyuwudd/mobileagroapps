@@ -63,7 +63,11 @@ class _CalculatorPageState extends State<CalculatorPage> {
       ),
     );
   }catch(e){
-    return CircularProgressIndicator();
+    return Scaffold(
+      body: Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
   }
     
   }

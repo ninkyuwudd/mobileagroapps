@@ -15,6 +15,9 @@ import 'package:mobileagroapps/screen/shop/order_product.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -41,10 +44,14 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(
+          // fontFamily:GoogleFonts.poppins(),
+          
+          primaryTextTheme: GoogleFonts.poppinsTextTheme(),
           primarySwatch: Colors.green,
           
-          textTheme: TextTheme(
-            headline1: TextStyle(color: Colors.green),
+          textTheme: GoogleFonts.poppinsTextTheme(
+            
+            Theme.of(context).textTheme
             
           )
         ),

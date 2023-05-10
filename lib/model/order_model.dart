@@ -14,5 +14,14 @@ class OrderModel {
     required this.dateTime
   });
 
+    factory OrderModel.fromJson(Map<String, dynamic> json) =>
+      OrderModel(id: json["id"], jumlah: json["jumlah"],product: json["product"],dateTime: json["datetime"]);
 
+  Map<String,dynamic> toJson() => {
+    "id" : id,
+    "jumlah" : jumlah,
+    "product" : product,
+    "datetime" : dateTime
+
+  };
 }

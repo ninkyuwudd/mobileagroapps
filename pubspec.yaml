@@ -49,6 +49,7 @@ dependencies:
   email_validator: ^2.1.17
   image_picker: ^0.8.7+4
   phone_number: ^1.0.0
+  google_fonts: ^4.0.4
 
 
 dev_dependencies:
@@ -100,11 +101,12 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   # fonts:
-  #   - family: Schyler
+  #   - family: Poppins
   #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
+  #       - asset: font/Poppins-Regular.ttf
+  #       - asset: font/Poppins-Italic.ttf
+  #       - asset: font/Poopins-Bold.ttf
+    
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

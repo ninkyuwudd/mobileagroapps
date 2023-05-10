@@ -14,7 +14,7 @@ class ProfileUserPage extends StatefulWidget {
 
 class _ProfileUserPageState extends State<ProfileUserPage> {
   File? imagefile;
-
+  
   _getfromgallery() async {
     PickedFile? pickfile = await ImagePicker().getImage(
       source: ImageSource.gallery,
@@ -69,18 +69,18 @@ class _ProfileUserPageState extends State<ProfileUserPage> {
                     child: Row(
                       // mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Container(
-                            padding: EdgeInsets.only(
-                                left: 5, top: 5, bottom: 5, right: 15),
-                            decoration: BoxDecoration(
-                                color: Colors.amber,
-                                borderRadius: BorderRadius.circular(5)),
-                            child: Text(
-                              "Daftar Toko",
-                              style: TextStyle(color: Colors.white),
-                            )),
+                        // Container(
+                        //     padding: EdgeInsets.only(
+                        //         left: 5, top: 5, bottom: 5, right: 15),
+                        //     decoration: BoxDecoration(
+                        //         color: Colors.amber,
+                        //         borderRadius: BorderRadius.circular(5)),
+                        //     child: Text(
+                        //       "Daftar Toko",
+                        //       style: TextStyle(color: Colors.white),
+                        //     )),
                         Expanded(
-                          flex: 2,
+                         
                           child: Center(
                             child: Text(
                               'Profile',
@@ -91,16 +91,6 @@ class _ProfileUserPageState extends State<ProfileUserPage> {
                             ),
                           ),
                         ),
-                        Expanded(
-                          child: Text(
-                            '',
-                            style: TextStyle(
-                                fontSize: 24,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        // Spacer(),
                       ],
                     ),
                     margin: EdgeInsets.only(top: 40),
@@ -190,7 +180,32 @@ class _ProfileUserPageState extends State<ProfileUserPage> {
                   ),
                 ),
               ),
-
+              Container(
+                margin:
+                    EdgeInsets.only(top: 10, right: 25, left: 25, bottom: 10),
+                padding:
+                    EdgeInsets.only(top: 10, bottom: 10, right: 20, left: 20),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20)),
+                child: Row(
+                  children: [
+                    Icon(Icons.shopping_cart),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Text("Daftar Toko"),
+                    const Spacer(),
+                    GestureDetector(
+                      onTap: () {
+                        _getfromcamera();
+                      },
+                      child: const Image(
+                          image: AssetImage("images/right_row_icon.png")),
+                    ),
+                  ],
+                ),
+              ),
               Container(
                 margin:
                     EdgeInsets.only(top: 10, right: 25, left: 25, bottom: 10),

@@ -15,5 +15,20 @@ class Product with ChangeNotifier {
     required this.image
   });
 
+  factory Product.fromJson(Map<String, dynamic> json) => Product(
+        id: json["id"],
+        title: json["title"],
+        description: json["description"],
+        price: json["price"],
+        image: json["image"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "id": id,
+        "title": title,
+        "description": description,
+        "price": price,
+        "image": image,
+    };
 
 }
