@@ -23,9 +23,7 @@ class _KalkulatorPakanState extends State<KalkulatorPakan> {
   Widget build(BuildContext context) {
     var halaman = Provider.of<KalkulatorController>(context);
     var pghewan = halaman.halaman_pakan;
-    setState(() {
-      // print(pghewan);
-    });
+
     return SingleChildScrollView(
       child: Container(
         margin: EdgeInsets.all(15),

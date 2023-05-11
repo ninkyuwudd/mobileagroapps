@@ -14,7 +14,12 @@ class CircleMenu extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: () {
-            halaman.gantihalamanpakan("kambing");
+            if(open == "kambing_1@4x.png"){
+               halaman.gantihalamanpakan("kambing");
+            }else if(open == "buah naga@4x.png"){
+               halaman.gantihalamanpupuk("buahnaga");
+            }
+           
           },
           child: Container(
             padding: EdgeInsets.all(5),
@@ -64,6 +69,34 @@ class CircleMenu extends StatelessWidget {
                     halaman.gantihalamanpakan("bebek");
                   }
                   break;
+                case "anggur@4x.png":
+                  {
+                    halaman.gantihalamanpupuk("anggur");
+                  }
+                  break;
+                case "delima@4x.png":
+                  { 
+                    halaman.gantihalamanpupuk("delima");
+                  }
+                  break;
+                case "apel@4x.png":
+                  { 
+                    halaman.gantihalamanpupuk("apel");
+                  }
+                  break;
+                case "pisang@4x.png":
+                  {
+                    halaman.gantihalamanpupuk("pisang");
+                  }
+                  break;
+                case "semangka@4x.png":
+                  {
+                    halaman.gantihalamanpupuk("semangka");
+                  }
+                  break;
+                case "buah naga@4x.png" : {
+                  halaman.gantihalamanpupuk("buahnaga");
+                }
               }
             },
             child: Container(

@@ -141,7 +141,7 @@ class _CuacaPageState extends State<CuacaPage> {
                               children: [
                                 FittedBox(
                                   child: Text(
-                                    "${(cuacaData.main.temp - 273.15).toStringAsFixed(0)}°ᶜ",
+                                    "${(cuacaData.main.temp - 273.15).toStringAsFixed(0)}°",
                                     // overflow:TextOverflow.fade,
                                     // maxLines: 1,
                                     style: TextStyle(
@@ -202,7 +202,10 @@ class _CuacaPageState extends State<CuacaPage> {
                     SizedBox(
                       height: 10,
                     ),
+
+                    // ini adalah forecast untuk 5 hari kedepan per 3 jam 
                     ForecastCuacaPage(),
+                    
                     CuacaTempWidget(
                         main: cuacaData.cuacanya.first.main,
                         description: cuacaData.cuacanya.first.description),

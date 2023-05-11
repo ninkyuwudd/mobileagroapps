@@ -58,7 +58,7 @@ class _ForecastCuacaPageState extends State<ForecastCuacaPage> {
                         "http://openweathermap.org/img/w/${cuacabesok[0].weather[0]['icon']}.png"),
                     Text((double.parse(cuacabesok[0].temp) - 273.15)
                             .toStringAsFixed(1) +
-                        "°ᶜ"),
+                        "°"),
                     SizedBox(
                       height: 10,
                     ),
@@ -78,7 +78,7 @@ class _ForecastCuacaPageState extends State<ForecastCuacaPage> {
                   icon: cuacabesok[8].weather[0]['icon'],
                   temp: (double.parse(cuacabesok[8].temp) - 273.15)
                           .toStringAsFixed(1) +
-                      "°ᶜ",
+                      "°",
                   cuaca: cuacabesok[8].weather[0]['description']),
               FrCardWidget(
                   date: DateFormat.MMMd().format(
@@ -87,7 +87,7 @@ class _ForecastCuacaPageState extends State<ForecastCuacaPage> {
                   icon: cuacabesok[15].weather[0]['icon'],
                   temp: (double.parse(cuacabesok[15].temp) - 273.15)
                           .toStringAsFixed(1) +
-                      "°ᶜ",
+                      "°",
                   cuaca: cuacabesok[15].weather[0]['description']),
               FrCardWidget(
                   date: DateFormat.MMMd().format(
@@ -96,7 +96,7 @@ class _ForecastCuacaPageState extends State<ForecastCuacaPage> {
                   icon: cuacabesok[23].weather[0]['icon'],
                   temp: (double.parse(cuacabesok[23].temp) - 273.15)
                           .toStringAsFixed(1) +
-                      "°ᶜ",
+                      "°",
                   cuaca: cuacabesok[23].weather[0]['description']),
               FrCardWidget(
                   date: DateFormat.MMMd().format(
@@ -105,7 +105,7 @@ class _ForecastCuacaPageState extends State<ForecastCuacaPage> {
                   icon: cuacabesok[31].weather[0]['icon'],
                   temp: (double.parse(cuacabesok[31].temp) - 273.15)
                           .toStringAsFixed(1) +
-                      "°ᶜ",
+                      "°",
                   cuaca: cuacabesok[31].weather[0]['description']),
             ],
           ),
