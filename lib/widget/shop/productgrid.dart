@@ -84,10 +84,12 @@ class _ProductGridState extends State<ProductGrid> {
   
   @override
   Widget build(BuildContext context) {
+
+    try{
     final productdata = Provider.of<ProductProvider>(context);
     // productdata.fetchdataproduct();
     final products = productdata.items;
-    return Container(
+      return Container(
       margin: EdgeInsets.all(20),
       child: FutureBuilder(
         future: loadimage(),
@@ -103,13 +105,23 @@ class _ProductGridState extends State<ProductGrid> {
             
             itemCount: produkitem.length,
             itemBuilder:(ctx,i ) {
-              final Map file = snapshot.data![i];
-              return ProductItemsCard(namaproduk: produkitem[i].namaproduk, urlgambar: produkitem[i].gambar);
+              
+              try{
+                final Map file = snapshot.data![i];
+                return ProductItemsCard(namaproduk: produkitem[i].namaproduk, urlgambar: produkitem[i].gambar);
+              }catch(e){
+                return Center(child: CircularProgressIndicator(),);
+              }
+              
             }
               );
         }
       ),
     );
+    }catch(e){
+      return Center(child: CircularProgressIndicator(),);
+    }
+    
   }
 }
 

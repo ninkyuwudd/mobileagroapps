@@ -33,11 +33,11 @@ String imageurl = "";
   void initState() {
     // TODO: implement initState
     super.initState();
-    getImageurl();
   }
 
   Future<void> getImageurl() async{
-    Reference storageReference = storage.ref().child('file/IMG-20230504-WA0001.jpg');
+    String get ="file/${widget.namagambar}";
+    Reference storageReference = storage.ref().child(get);
     imageurl = await storageReference.getDownloadURL();
     setState(() {
       
@@ -65,7 +65,7 @@ String imageurl = "";
 
   @override
   Widget build(BuildContext context) {
-
+    getImageurl();
     var records = FirebaseFirestore.instance.collection("produk");
     var usrdata = Provider.of<UserProvider>(context);
     // var loadproduk = Provider.of<ProductProvider>(context);

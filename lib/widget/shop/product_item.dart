@@ -12,8 +12,8 @@ class ProductItemsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // final product = Provider.of<Product>(context,listen: false);
-    
-    return ClipRRect(
+    try{
+      return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: GridTile(
         child: GestureDetector(
@@ -49,5 +49,9 @@ class ProductItemsCard extends StatelessWidget {
         ),
       ),
     );
+    }catch(e){
+      return Center(child: CircularProgressIndicator(),);
+    }
+    
   }
 }
