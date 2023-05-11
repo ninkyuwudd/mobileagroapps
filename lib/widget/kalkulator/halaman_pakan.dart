@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:mobileagroapps/provider/kalkulator_controller.dart';
+
 import 'package:mobileagroapps/widget/kalkulator/menu_hewan.dart';
 import 'package:mobileagroapps/widget/kalkulator/result_card.dart';
+import 'package:mobileagroapps/widget/kalkulator/tombol_jenis/pakan/calcu_ayam.dart';
+import 'package:mobileagroapps/widget/kalkulator/tombol_jenis/pakan/calcu_babi.dart';
+import 'package:mobileagroapps/widget/kalkulator/tombol_jenis/pakan/calcu_bebek.dart';
+import 'package:mobileagroapps/widget/kalkulator/tombol_jenis/pakan/calcu_kambing.dart';
+import 'package:mobileagroapps/widget/kalkulator/tombol_jenis/pakan/calcu_kuda.dart';
+import 'package:provider/provider.dart';
 
 class KalkulatorPakan extends StatefulWidget {
   const KalkulatorPakan({super.key});
@@ -11,11 +19,13 @@ class KalkulatorPakan extends StatefulWidget {
 }
 
 class _KalkulatorPakanState extends State<KalkulatorPakan> {
-  var pakan_ampas;
-  var pakan_rumput;
-  TextEditingController pakanfield = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    var halaman = Provider.of<KalkulatorController>(context);
+    var pghewan = halaman.halaman_pakan;
+    setState(() {
+      // print(pghewan);
+    });
     return SingleChildScrollView(
       child: Container(
         margin: EdgeInsets.all(15),
@@ -34,105 +44,32 @@ class _KalkulatorPakanState extends State<KalkulatorPakan> {
               scrollDirection: Axis.horizontal,
               child: Container(
                 margin: EdgeInsets.only(bottom: 15),
-                child: CircleMenu(listmenu: [
-                  
-                  "Ayam@4x.png",
-                  "kuda@4x.png",
-                  "babi@4x.png",
-                  "bebek@4x.png",
-                ],open: "kambing_1@4x.png",),
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Visibility(
-              visible: true,
-              child: Container(
-                padding: EdgeInsets.all(15),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(15),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Color.fromARGB(70, 100, 100, 100),
-                      offset: const Offset(
-                        1.0,
-                        5.0,
-                      ),
-                      blurRadius: 7.0,
-                      spreadRadius: 1.0,
-                    ), //BoxShadow
+                child: CircleMenu(
+                  listmenu: [
+                    "Ayam@4x.png",
+                    "kuda@4x.png",
+                    "babi@4x.png",
+                    "bebek@4x.png",
                   ],
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("Jumlah Kambing"),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    TextField(
-                      controller: pakanfield,
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.symmetric(
-                            vertical: 10, horizontal: 10),
-                        border: const OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(20)),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      padding: EdgeInsets.only(right: 15, left: 15),
-                      child: SizedBox(
-                        width: double.infinity,
-                        child: ElevatedButton(
-                            onPressed: () {
-                              setState(() {
-                                pakan_rumput = double.parse(pakanfield.text) *
-                                    75 /
-                                    100 *
-                                    2.5 *
-                                    7;
-                                pakan_ampas = double.parse(pakanfield.text) *
-                                    75 /
-                                    100 *
-                                    2 *
-                                    7;
-                              });
-                            },
-                            child: Text("hitung")),
-                      ),
-                    ),
-                  ],
+                  open: "kambing_1@4x.png",
                 ),
               ),
             ),
             SizedBox(
               height: 20,
             ),
-            Text("Jumlah Pakan"),
-            SizedBox(
-              height: 10,
-            ),
-            ResultCard(
-              pupuk: "${pakan_rumput == null ? '-' : pakan_rumput}  Kg/minggu",
-              title: "Pakan Rumput",
-              img: "rumput@4x.png",
-            ),
-
-            SizedBox(
-              height: 15,
-            ),
-            ResultCard(
-              pupuk: "${pakan_ampas == null ? '-' : pakan_ampas}  Kg/minggu",
-              title: "Pakan Fermentasi",
-              img: "bekatul@4x.png",
-            ),
+            Container(
+                child:pghewan == "kambing"
+                    ? Kalkulatorkambing()
+                    : pghewan == "ayam"
+                        ? KalkulatorAyam()
+                        : pghewan == "kuda"
+                            ? KalkulatorKuda()
+                            : pghewan == "babi"
+                                ? KalkulatorBabi()
+                                : pghewan == "bebek"
+                                    ? KalkulatorBebek()
+                                    : Container()),
           ],
         ),
       ),
