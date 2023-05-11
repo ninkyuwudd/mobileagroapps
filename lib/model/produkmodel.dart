@@ -8,7 +8,7 @@ class ProdukModel with ChangeNotifier {
   final String idadmin;
   final String idjenisproduk;
   final int jumlah;
-  // final String image;
+  final String gambar;
 
   ProdukModel({
     required this.id,
@@ -17,8 +17,8 @@ class ProdukModel with ChangeNotifier {
     required this.harga,
     required this.idadmin,
     required this.idjenisproduk,
-    required this.jumlah
-    // required this.image
+    required this.jumlah,
+    required this.gambar
   });
 
   factory ProdukModel.fromJson(Map<String, dynamic> json) => ProdukModel(
@@ -28,8 +28,8 @@ class ProdukModel with ChangeNotifier {
         harga: json["harga"],
         idadmin: json["idadmin"],
         idjenisproduk: json["idjenisproduk"],
-        jumlah: json["jumlah"]
-        // image: json["image"],
+        jumlah: json["jumlah"],
+        gambar: json["gambar"],
     );
 
     Map<String, dynamic> toJson() => {
@@ -39,8 +39,8 @@ class ProdukModel with ChangeNotifier {
         "harga": harga,
         "idadmin" : idadmin,
         "idjenisproduk" : idjenisproduk,
-        "jumlah" : jumlah
-        // "image": image,
+        "jumlah" : jumlah,
+        "gambar": gambar,
     };
 
 }

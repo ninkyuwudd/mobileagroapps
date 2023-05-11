@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:mobileagroapps/model/product_model.dart';
 import 'package:mobileagroapps/provider/product_provider.dart';
@@ -16,6 +17,8 @@ class ProductGrid extends StatefulWidget {
 }
 
 class _ProductGridState extends State<ProductGrid> {
+
+  
 
     List<ProdukModel> produkitem = [];
  @override
@@ -39,11 +42,43 @@ class _ProductGridState extends State<ProductGrid> {
           harga: doc.data()["harga"], 
           idadmin: doc.data()["idadmin"], 
           idjenisproduk: doc.data()["idjenisproduk"], 
-          jumlah: doc.data()["jumlah"]))
+          jumlah: doc.data()["jumlah"],
+          gambar: doc.data()["gambar"]
+          ))
         .toList();
         setState(() {
           produkitem = _items;
         });
+  }
+
+  FirebaseStorage firebaseFirestore = FirebaseStorage.instance;
+
+  Future<List> loadimage() async {
+    List<Map> files = [];
+    final ListResult result = await firebaseFirestore
+        .ref('file/')
+        .listAll();
+    final List<Reference> allfiles = result.items;
+    await Future.forEach(allfiles, (Reference file) async {
+      final String fileurl = await file.getDownloadURL();
+      final String bckurl = file.name;
+      // final forestRef = firebaseFirestore.ref('folderbaru/${widget.usr_Login}/');
+      final metadata = await file.getMetadata();
+      final sizenya = metadata.size;
+
+      final timenya = metadata.timeCreated.toString();
+// Get metadata properties
+
+      files.add({
+        "url": fileurl,
+        "path": file.fullPath,
+        "name": bckurl,
+        "size": sizenya,
+        "date": timenya
+      });
+    });
+    print(files);
+    return files;
   }
 
   
@@ -54,25 +89,26 @@ class _ProductGridState extends State<ProductGrid> {
     final products = productdata.items;
     return Container(
       margin: EdgeInsets.all(20),
-      child: GridView.builder(
-        
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          childAspectRatio: 3 / 3,
-          crossAxisSpacing: 15,
-          mainAxisSpacing: 15,
-        ), 
-        
-        itemCount: produkitem.length,
-        itemBuilder:(ctx,i ) {
-          return Container(
-            child: ListTile(
-              title: Text(produkitem[i].namaproduk),
-              subtitle: Text(produkitem[i].deskripsi),
-            )
-          );
+      child: FutureBuilder(
+        future: loadimage(),
+        builder: (context,AsyncSnapshot snapshot) {
+          return GridView.builder(
+            
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: 3 / 3,
+              crossAxisSpacing: 15,
+              mainAxisSpacing: 15,
+            ), 
+            
+            itemCount: produkitem.length,
+            itemBuilder:(ctx,i ) {
+              final Map file = snapshot.data![i];
+              return ProductItemsCard(namaproduk: produkitem[i].namaproduk, urlgambar: produkitem[i].gambar);
+            }
+              );
         }
-          ),
+      ),
     );
   }
 }

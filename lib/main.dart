@@ -3,6 +3,7 @@ import 'package:mobileagroapps/navigationbar.dart';
 import 'package:mobileagroapps/provider/cart_provider.dart';
 import 'package:mobileagroapps/provider/cuaca_service.dart';
 import 'package:mobileagroapps/provider/order_provider.dart';
+import 'package:mobileagroapps/provider/pilihfile_controller.dart';
 import 'package:mobileagroapps/provider/product_provider.dart';
 import 'package:mobileagroapps/provider/user_repo.dart';
 import 'package:mobileagroapps/screen/change_user_data.dart';
@@ -12,6 +13,7 @@ import 'package:mobileagroapps/screen/shop/add_product.dart';
 import 'package:mobileagroapps/screen/shop/cart_page.dart';
 import 'package:mobileagroapps/screen/shop/detail_product.dart';
 import 'package:mobileagroapps/screen/shop/order_product.dart';
+import 'package:mobileagroapps/screen/shop/unggah_gambar.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -28,7 +30,7 @@ void main() async{
 
 class MyApp extends StatelessWidget {
   // const MyApp({super.key});
-  final CuacaProvider _cuacaProvider = CuacaProvider();
+  // final CuacaProvider _cuacaProvider = CuacaProvider();
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +40,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => UserProvider()),
         ChangeNotifierProvider(create: (_) => ProductProvider()),
         ChangeNotifierProvider(create: (_) => CartProvider()),
-        ChangeNotifierProvider(create: (_) => Orderproivder())
+        ChangeNotifierProvider(create: (_) => Orderproivder()),
+        ChangeNotifierProvider(create: (_) => PilihUploadfile())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -64,7 +67,8 @@ class MyApp extends StatelessWidget {
           ProfileUserDataEditPage.routename :(context) => ProfileUserDataEditPage(),
           OrderProductPage.routename : (context) => OrderProductPage(),
           CartPage.routename :(context) => CartPage(),
-          AddProductPage.routename : (context) => AddProductPage()
+          AddProductPage.routename : (context) => AddProductPage(),
+          UnggahGambar.routename : (context) => UnggahGambar(),
         },
       ),
     );

@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mobileagroapps/model/product_model.dart';
 
-import '../model/cart_model.dart';
+// import '../model/cart_model.dart';
 
 class ProductProvider with ChangeNotifier {
   List<Product> _items = [

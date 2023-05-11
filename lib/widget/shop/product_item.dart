@@ -4,25 +4,27 @@ import 'package:mobileagroapps/screen/shop/detail_product.dart';
 import 'package:provider/provider.dart';
 
 class ProductItemsCard extends StatelessWidget {
+  final String namaproduk;
+  final String urlgambar;
 
-  ProductItemsCard({super.key});
+  ProductItemsCard({required this.namaproduk,required this.urlgambar});
 
   @override
   Widget build(BuildContext context) {
-    final product = Provider.of<Product>(context,listen: false);
+    // final product = Provider.of<Product>(context,listen: false);
     
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: GridTile(
         child: GestureDetector(
           onTap: () {
-            Navigator.of(context).pushNamed(
-              DetailProductScreen.routename,
-              arguments: product.id,
-            );
+            // Navigator.of(context).pushNamed(
+            //   DetailProductScreen.routename,
+            //   arguments: product.id,
+            // );
           },
           child: Image.network(
-            product.image,
+            urlgambar,
             fit: BoxFit.cover,
           ),
         ),
@@ -40,7 +42,7 @@ class ProductItemsCard extends StatelessWidget {
           //       ),
           // ),
           title: Text(
-            product.title,
+            namaproduk,
             textAlign: TextAlign.center,
           ),
 

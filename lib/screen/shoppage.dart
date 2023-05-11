@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mobileagroapps/provider/cart_provider.dart';
 import 'package:mobileagroapps/screen/shop/add_product.dart';
 import 'package:mobileagroapps/screen/shop/cart_page.dart';
+import 'package:mobileagroapps/screen/shop/unggah_gambar.dart';
 import 'package:mobileagroapps/widget/shop/badge.dart';
 import 'package:provider/provider.dart';
 
@@ -41,7 +42,7 @@ class _ShopPageState extends State<ShopPage> {
             ),
           ),
           IconButton(onPressed: (){
-            Navigator.pushNamed(context, AddProductPage.routename);
+            Navigator.pushNamed(context, UnggahGambar.routename);
           }, icon: Icon(Icons.add,color: Colors.green,))
           
         ],

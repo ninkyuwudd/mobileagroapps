@@ -13,31 +13,31 @@ class ProfileUserPage extends StatefulWidget {
 }
 
 class _ProfileUserPageState extends State<ProfileUserPage> {
-  File? imagefile;
+  // File? imagefile;
   
-  _getfromgallery() async {
-    PickedFile? pickfile = await ImagePicker().getImage(
-      source: ImageSource.gallery,
-      maxHeight: 200,
-      maxWidth: 200,
-    );
-    if (pickfile != null) {
-      setState(() {
-        imagefile = File(pickfile.path);
-      });
-    }
-  }
+  // _getfromgallery() async {
+  //   PickedFile? pickfile = await ImagePicker().getImage(
+  //     source: ImageSource.gallery,
+  //     maxHeight: 200,
+  //     maxWidth: 200,
+  //   );
+  //   if (pickfile != null) {
+  //     setState(() {
+  //       imagefile = File(pickfile.path);
+  //     });
+  //   }
+  // }
 
-  _getfromcamera() async {
-    PickedFile? pickfile = await ImagePicker()
-        // ignore: deprecated_member_use
-        .getImage(source: ImageSource.camera, maxHeight: 200, maxWidth: 200);
-    if (pickfile != null) {
-      setState(() {
-        imagefile = File(pickfile.path);
-      });
-    }
-  }
+  // _getfromcamera() async {
+  //   PickedFile? pickfile = await ImagePicker()
+  //       // ignore: deprecated_member_use
+  //       .getImage(source: ImageSource.camera, maxHeight: 200, maxWidth: 200);
+  //   if (pickfile != null) {
+  //     setState(() {
+  //       imagefile = File(pickfile.path);
+  //     });
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -69,16 +69,6 @@ class _ProfileUserPageState extends State<ProfileUserPage> {
                     child: Row(
                       // mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        // Container(
-                        //     padding: EdgeInsets.only(
-                        //         left: 5, top: 5, bottom: 5, right: 15),
-                        //     decoration: BoxDecoration(
-                        //         color: Colors.amber,
-                        //         borderRadius: BorderRadius.circular(5)),
-                        //     child: Text(
-                        //       "Daftar Toko",
-                        //       style: TextStyle(color: Colors.white),
-                        //     )),
                         Expanded(
                          
                           child: Center(
@@ -95,32 +85,40 @@ class _ProfileUserPageState extends State<ProfileUserPage> {
                     ),
                     margin: EdgeInsets.only(top: 40),
                   ),
-                  Positioned(
+                  // Positioned(
+                  //   left: 0,
+                  //   right: 0,
+                  //   top: 120,
+                  //   child: Container(
+                  //       child: imagefile == null
+                  //           ? CircleAvatar(
+                  //               backgroundImage:
+                  //                   AssetImage("images/bebek@4x.png"),
+                  //               radius: 70,
+                  //             )
+                  //           : CircleAvatar(
+                  //               foregroundImage: FileImage(imagefile!),
+                  //               radius: 70,
+                  //             )),
+                  // ),
+                                    Positioned(
                     left: 0,
                     right: 0,
-                    top: 120,
-                    child: Container(
-                        child: imagefile == null
-                            ? CircleAvatar(
-                                backgroundImage:
-                                    AssetImage("images/bebek@4x.png"),
-                                radius: 70,
-                              )
-                            : CircleAvatar(
-                                foregroundImage: FileImage(imagefile!),
-                                radius: 70,
-                              )),
+                    top: 0,
+                    child:
+                        Image(image: AssetImage("images/photoMainprofile.png")),
+
                   ),
-                  Positioned(
-                      left: 100,
-                      right: 0,
-                      top: 220,
-                      child:
-                          GestureDetector(
-                            onTap: (){
-                              _getfromgallery();
-                            },
-                            child: CircleAvatar(child: Icon(Icons.edit,color: Colors.white,),backgroundColor: Colors.amber,))),
+                  // Positioned(
+                  //     left: 100,
+                  //     right: 0,
+                  //     top: 220,
+                  //     child:
+                  //         GestureDetector(
+                  //           onTap: (){
+                  //             _getfromgallery();
+                  //           },
+                  //           child: CircleAvatar(child: Icon(Icons.edit,color: Colors.white,),backgroundColor: Colors.amber,))),
                 ],
               ),
               SizedBox(
@@ -198,7 +196,7 @@ class _ProfileUserPageState extends State<ProfileUserPage> {
                     const Spacer(),
                     GestureDetector(
                       onTap: () {
-                        _getfromcamera();
+                 
                       },
                       child: const Image(
                           image: AssetImage("images/right_row_icon.png")),
@@ -224,7 +222,7 @@ class _ProfileUserPageState extends State<ProfileUserPage> {
                     const Spacer(),
                     GestureDetector(
                       onTap: () {
-                        _getfromcamera();
+                 
                       },
                       child: const Image(
                           image: AssetImage("images/right_row_icon.png")),

@@ -1,10 +1,17 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:file_picker/file_picker.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:mobileagroapps/model/user_model.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:mobileagroapps/provider/pilihfile_controller.dart';
+// import 'package:mobileagroapps/model/user_model.dart';
 import 'package:provider/provider.dart';
 import '../provider/user_repo.dart';
 import '../widget/rounded_value_field.dart';
+
 
 class ProfileUserDataEditPage extends StatefulWidget {
 
@@ -16,6 +23,49 @@ class ProfileUserDataEditPage extends StatefulWidget {
 }
 
 class _ProfileUserDataEditPageState extends State<ProfileUserDataEditPage> {
+ 
+
+    File? imagefile;
+  PlatformFile? pickfile;
+
+  Future uploadfile() async {
+    final path = 'file/${pickfile!.name}';
+    final file = File(pickfile!.path!);
+    final ref = FirebaseStorage.instance.ref().child(path);
+    ref.putFile(file);
+  }
+
+  Future selectFile() async {
+    final result = await FilePicker.platform.pickFiles();
+    if (result == null) return;
+    setState(() {
+      pickfile = result.files.first;
+    }); 
+  }
+
+  _getfromgallery() async {
+    PickedFile? pickfile = await ImagePicker().getImage(
+      source: ImageSource.gallery,
+      maxHeight: 200,
+      maxWidth: 200,
+    );
+    if (pickfile != null) {
+      setState(() {
+        imagefile = File(pickfile.path);
+      });
+    }
+  }
+
+  _getfromcamera() async {
+    PickedFile? pickfile = await ImagePicker()
+        // ignore: deprecated_member_use
+        .getImage(source: ImageSource.camera, maxHeight: 200, maxWidth: 200);
+    if (pickfile != null) {
+      setState(() {
+        imagefile = File(pickfile.path);
+      });
+    }
+  }
   
   
   final txnama = TextEditingController();
@@ -45,6 +95,8 @@ class _ProfileUserDataEditPageState extends State<ProfileUserDataEditPage> {
 final firestoredb = FirebaseFirestore.instance.collection('users');
   @override
   Widget build(BuildContext context) {
+    final pilihfile = Provider.of<PilihUploadfile>(context);
+
     bool ckname = false;
     bool ckusername = false;
     bool ckemail = false;
@@ -78,13 +130,42 @@ final firestoredb = FirebaseFirestore.instance.collection('users');
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.35,
                   ),
+                  // Positioned(
+                  //   left: 0,
+                  //   right: 0,
+                  //   top: 0,
+                  //   child:
+                  //       Image(image: AssetImage("images/photoMainprofile.png")),
+
+                  // ),
+
                   Positioned(
                     left: 0,
                     right: 0,
-                    top: 0,
-                    child:
-                        Image(image: AssetImage("images/photoMainprofile.png")),
+                    top: 120,
+                    child: Container(
+                        child: imagefile == null
+                            ? CircleAvatar(
+                                backgroundImage:
+                                    AssetImage("images/bebek@4x.png"),
+                                radius: 70,
+                              )
+                            : CircleAvatar(
+                                foregroundImage: FileImage(imagefile!),
+                                radius: 70,
+                              )),
                   ),
+                  Positioned(
+                      left: 100,
+                      right: 0,
+                      top: 220,
+                      child:
+                          GestureDetector(
+                            onTap: (){
+                              // selectFile();
+                              pilihfile.selectFile();
+                            },
+                            child: CircleAvatar(child: Icon(Icons.edit,color: Colors.white,),backgroundColor: Colors.amber,))),
                   Container(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -193,6 +274,8 @@ final firestoredb = FirebaseFirestore.instance.collection('users');
                     "gender": txgender.text,
                     "phone": txphone.text,
                   });
+
+                  pilihfile.uploadfile();
                 },
                 child: Container(
                   margin: EdgeInsets.only(top: 10, right: 25, left: 25),
