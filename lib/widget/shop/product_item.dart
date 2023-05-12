@@ -1,27 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:mobileagroapps/model/product_model.dart';
+import 'package:mobileagroapps/model/produkmodel.dart';
+import 'package:mobileagroapps/provider/product_provider.dart';
 import 'package:mobileagroapps/screen/shop/detail_product.dart';
 import 'package:provider/provider.dart';
 
 class ProductItemsCard extends StatelessWidget {
   final String namaproduk;
   final String urlgambar;
+  final String id;
 
-  ProductItemsCard({required this.namaproduk,required this.urlgambar});
+  ProductItemsCard({required this.namaproduk,required this.urlgambar,required this.id});
 
   @override
   Widget build(BuildContext context) {
-    // final product = Provider.of<Product>(context,listen: false);
+    // final product = Provider.of<ProductProvider>(context,listen: false);
+    // product.fetchdataproduct();
+    // var prdkdata = product.items;
     try{
       return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: GridTile(
         child: GestureDetector(
           onTap: () {
-            // Navigator.of(context).pushNamed(
-            //   DetailProductScreen.routename,
-            //   arguments: product.id,
-            // );
+            print(id);
+            Navigator.of(context).pushNamed(
+              DetailProductScreen.routename,
+              arguments: id,
+            );
           },
           child: Image.network(
             urlgambar,

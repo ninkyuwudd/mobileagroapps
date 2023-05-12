@@ -4,7 +4,7 @@ import 'package:mobileagroapps/provider/kalkulator_controller.dart';
 
 import 'package:mobileagroapps/widget/kalkulator/menu_hewan.dart';
 import 'package:mobileagroapps/widget/kalkulator/result_card.dart';
-import 'package:mobileagroapps/widget/kalkulator/tombol_jenis/pakan/calcu_ayam.dart';
+import 'package:mobileagroapps/widget/kalkulator/tombol_jenis/pakan/calcu_sapi.dart';
 import 'package:mobileagroapps/widget/kalkulator/tombol_jenis/pakan/calcu_babi.dart';
 import 'package:mobileagroapps/widget/kalkulator/tombol_jenis/pakan/calcu_bebek.dart';
 import 'package:mobileagroapps/widget/kalkulator/tombol_jenis/pakan/calcu_kambing.dart';
@@ -44,7 +44,7 @@ class _KalkulatorPakanState extends State<KalkulatorPakan> {
                 margin: EdgeInsets.only(bottom: 15),
                 child: CircleMenu(
                   listmenu: [
-                    "Ayam@4x.png",
+                    "sapi@4x.png",
                     "kuda@4x.png",
                     "babi@4x.png",
                     "bebek@4x.png",
@@ -59,8 +59,8 @@ class _KalkulatorPakanState extends State<KalkulatorPakan> {
             Container(
                 child:pghewan == "kambing"
                     ? Kalkulatorkambing()
-                    : pghewan == "ayam"
-                        ? KalkulatorAyam()
+                    : pghewan == "sapi"
+                        ? KalkulatorSapi()
                         : pghewan == "kuda"
                             ? KalkulatorKuda()
                             : pghewan == "babi"

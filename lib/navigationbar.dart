@@ -3,6 +3,7 @@ import 'package:mobileagroapps/screen/calculatorpage.dart';
 import 'package:mobileagroapps/screen/cuacapage.dart';
 import 'package:mobileagroapps/screen/profile_page.dart';
 import 'package:mobileagroapps/screen/shoppage.dart';
+import 'package:mobileagroapps/screen/testing/tesprovider.dart';
 
 class BottomNavbar extends StatefulWidget {
   final int idx;
@@ -20,6 +21,7 @@ class _BottomNavbarState extends State<BottomNavbar> {
     final _pageOption = [
       CuacaPage(idx: widget.idx,),
       CalculatorPage(idx: widget.idx),
+      // Testproductdata(),
       ShopPage(),
       ProfileUserPage(
         idx: widget.idx,

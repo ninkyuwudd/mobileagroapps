@@ -1,48 +1,39 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mobileagroapps/model/product_model.dart';
+import 'package:mobileagroapps/model/produkmodel.dart';
 
 // import '../model/cart_model.dart';
 
 class ProductProvider with ChangeNotifier {
-  List<Product> _items = [
-    Product(
-        id: 'p1',
-        title: "Pupuk Kandang nomor satu di jagat raya",
-        description:
-            "Ini adalah pupuk kandang ori dari lampung,harga perkilo yagesyak ",
-        price: 3000,
-        image:
-            "https://tse1.mm.bing.net/th?id=OIP.ZlpdscivWEuu-Q-J8qQGsgHaE9&pid=Api&P=0"),
-    Product(
-        id: 'p2',
-        title: "Pupuk Kimia",
-        description: "ini adalah pupuk kimia untuk buah naga",
-        price: 5000,
-        image:
-            "https://belajartani.com/wp-content/uploads/2016/09/urea-bersusidi.jpg")
+  List<ProdukModel> _items = [
   ];
 
-  List<Product> get items {
+  List<ProdukModel> get items {
     return _items;
   }
 
-  void fetchdataproduct() async {
-    QuerySnapshot<Map<String, dynamic>> productdata =
-        await FirebaseFirestore.instance.collection('product').get();
+  Future<void> fetchdataproduct() async {
+    final productdata = await FirebaseFirestore.instance.collection('produk').get();
+
 
     _items = productdata.docs
-        .map((doc) => Product(
-            id: doc.id,
-            title: doc.data()["title"],
-            description: doc.data()["description"],
-            price: doc.data()["price"],
-            image: ""))
+        .map((doc) => ProdukModel(
+          id: doc.id, 
+          namaproduk: doc["namaproduk"], 
+          deskripsi: doc["deskripsi"], 
+          harga: doc["harga"], 
+          idadmin: doc["idadmin"], 
+          idjenisproduk: doc["idjenisproduk"], 
+          jumlah: doc["jumlah"],
+          gambar: doc["gambar"]
+            ))
         .toList();
         notifyListeners();
   }
 
-  Product finbyid(String id) {
+  ProdukModel finbyid(String id) {
+    print("idnya : $id");
     return _items.firstWhere((prod) => prod.id == id);
   }
 
@@ -53,7 +44,7 @@ class ProductProvider with ChangeNotifier {
         description: description,
         price: price,
         image: image);
-    _items.add(newitemdata);
+    // _items.add(newitemdata);
     notifyListeners();
   }
 

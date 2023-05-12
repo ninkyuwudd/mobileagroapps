@@ -7,23 +7,30 @@ import 'package:mobileagroapps/screen/shop/order_product.dart';
 import 'package:mobileagroapps/widget/shop/order_item.dart';
 import 'package:provider/provider.dart';
 
-class DetailProductScreen extends StatelessWidget {
+class DetailProductScreen extends StatefulWidget {
   // const DetailProduct({super.key});
   static const routename = '/product_detail';
+
+  @override
+  State<DetailProductScreen> createState() => _DetailProductScreenState();
+}
+
+class _DetailProductScreenState extends State<DetailProductScreen> {
 
   @override
   Widget build(BuildContext context) {
     final cart = Provider.of<CartProvider>(context, listen: false);
     final produkid = ModalRoute.of(context)?.settings.arguments as String;
-    final loadproduk =
-        Provider.of<ProductProvider>(context, listen: false).finbyid(produkid);
+    final load = Provider.of<ProductProvider>(context);
+    // load.fetchdataproduct();
+    final loadproduk =load.finbyid(produkid);
     return Scaffold(
       appBar: AppBar(
         title: Text("Detail Product"),
       ),
       body: SingleChildScrollView(
         child: Container(
-          height: MediaQuery.of(context).size.height - 120,
+          // height: MediaQuery.of(context).size.height - 120,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -31,7 +38,7 @@ class DetailProductScreen extends StatelessWidget {
                 height: 300,
                 width: double.infinity,
                 child: Image.network(
-                  loadproduk.image,
+                  loadproduk.gambar,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -44,14 +51,14 @@ class DetailProductScreen extends StatelessWidget {
                       height: 10,
                     ),
                     Text(
-                      "Rp${loadproduk.price.toString()}",
+                      "Rp${loadproduk.harga.toString()}",
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                     ),
                     SizedBox(
                       height: 10,
                     ),
-                    Text(loadproduk.title),
+                    Text(loadproduk.namaproduk),
                     Divider(),
                     SizedBox(
                       height: 10,
@@ -64,7 +71,7 @@ class DetailProductScreen extends StatelessWidget {
                     SizedBox(
                       height: 10,
                     ),
-                    Text(loadproduk.description),
+                    Text(loadproduk.deskripsi),
                     Divider(),
                     ListTile(
                       leading: Icon(Icons.shop_2_outlined),
@@ -74,15 +81,15 @@ class DetailProductScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              Expanded(
-                child: Row(
+              SizedBox(height: 20,),
+           Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ElevatedButton(
                       onPressed: () {
-                        // Navigator.of(context).pushNamed(OrderProductPage.routename);
+                        Navigator.of(context).pushNamed(OrderProductPage.routename);
                         cart.additem(
-                            loadproduk.id, loadproduk.price, loadproduk.title);
+                            loadproduk.id, loadproduk.harga, loadproduk.namaproduk);
                         Navigator.of(context).pushNamed(CartPage.routename);
                       },
                       child: Text(
@@ -100,7 +107,7 @@ class DetailProductScreen extends StatelessWidget {
                     ElevatedButton(
                         onPressed: () {
                           cart.additem(
-                              loadproduk.id, loadproduk.price, loadproduk.title);
+                              loadproduk.id, loadproduk.harga, loadproduk.namaproduk);
                           ScaffoldMessenger.of(context).hideCurrentSnackBar();
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
@@ -121,7 +128,7 @@ class DetailProductScreen extends StatelessWidget {
                         child: Text("+ Keranjang"))
                   ],
                 ),
-              )
+              
             ],
           ),
         ),

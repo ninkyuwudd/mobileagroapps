@@ -8,7 +8,6 @@ import 'package:provider/provider.dart';
 
 import '../../model/produkmodel.dart';
 
-
 class ProductGrid extends StatefulWidget {
   const ProductGrid({super.key});
 
@@ -17,111 +16,102 @@ class ProductGrid extends StatefulWidget {
 }
 
 class _ProductGridState extends State<ProductGrid> {
-
-  
-
-    List<ProdukModel> produkitem = [];
- @override
+  // List<ProdukModel> produkitem = [];
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    fetchrecord();
+
+    Provider.of<ProductProvider>(context,listen: false).fetchdataproduct();
+    
   }
 
-  fetchrecord() async {
-    var records = await  FirebaseFirestore.instance.collection("produk").get();
-    maprecord(records);
-  }
 
-  maprecord(QuerySnapshot<Map<String, dynamic>> productdata){
-       var _items = productdata.docs
-        .map((doc) => ProdukModel(
-          id: doc.id, 
-          namaproduk: doc.data()["namaproduk"], 
-          deskripsi: doc.data()["deskripsi"], 
-          harga: doc.data()["harga"], 
-          idadmin: doc.data()["idadmin"], 
-          idjenisproduk: doc.data()["idjenisproduk"], 
-          jumlah: doc.data()["jumlah"],
-          gambar: doc.data()["gambar"]
-          ))
-        .toList();
-        setState(() {
-          produkitem = _items;
-        });
-  }
+  // fetchrecord() async {
+  //   var records = await FirebaseFirestore.instance.collection("produk").get();
+  //   maprecord(records);
+  // }
 
-  FirebaseStorage firebaseFirestore = FirebaseStorage.instance;
+  // maprecord(QuerySnapshot<Map<String, dynamic>> productdata) {
+  //   var _items = productdata.docs
+  //       .map((doc) => ProdukModel(
+  //           id: doc.id,
+  //           namaproduk: doc.data()["namaproduk"],
+  //           deskripsi: doc.data()["deskripsi"],
+  //           harga: doc.data()["harga"],
+  //           idadmin: doc.data()["idadmin"],
+  //           idjenisproduk: doc.data()["idjenisproduk"],
+  //           jumlah: doc.data()["jumlah"],
+  //           gambar: doc.data()["gambar"]))
+  //       .toList();
+  //   setState(() {
+  //     produkitem = _items;
+  //   });
+  // }
 
-  Future<List> loadimage() async {
-    List<Map> files = [];
-    final ListResult result = await firebaseFirestore
-        .ref('file/')
-        .listAll();
-    final List<Reference> allfiles = result.items;
-    await Future.forEach(allfiles, (Reference file) async {
-      final String fileurl = await file.getDownloadURL();
-      final String bckurl = file.name;
-      // final forestRef = firebaseFirestore.ref('folderbaru/${widget.usr_Login}/');
-      final metadata = await file.getMetadata();
-      final sizenya = metadata.size;
+//   FirebaseStorage firebaseFirestore = FirebaseStorage.instance;
 
-      final timenya = metadata.timeCreated.toString();
-// Get metadata properties
+//   Future<List> loadimage() async {
+//     List<Map> files = [];
+//     final ListResult result = await firebaseFirestore.ref('file/').listAll();
+//     final List<Reference> allfiles = result.items;
+//     await Future.forEach(allfiles, (Reference file) async {
+//       final String fileurl = await file.getDownloadURL();
+//       final String bckurl = file.name;
+//       // final forestRef = firebaseFirestore.ref('folderbaru/${widget.usr_Login}/');
+//       final metadata = await file.getMetadata();
+//       final sizenya = metadata.size;
 
-      files.add({
-        "url": fileurl,
-        "path": file.fullPath,
-        "name": bckurl,
-        "size": sizenya,
-        "date": timenya
-      });
-    });
-    print(files);
-    return files;
-  }
+//       final timenya = metadata.timeCreated.toString();
+// // Get metadata properties
 
-  
+//       files.add({
+//         "url": fileurl,
+//         "path": file.fullPath,
+//         "name": bckurl,
+//         "size": sizenya,
+//         "date": timenya
+//       });
+//     });
+//     print(files);
+//     return files;
+//   }
+
   @override
   Widget build(BuildContext context) {
+    var loadproduk = Provider.of<ProductProvider>(context);
 
-    try{
-    final productdata = Provider.of<ProductProvider>(context);
-    // productdata.fetchdataproduct();
-    final products = productdata.items;
+    try {
       return Container(
-      margin: EdgeInsets.all(20),
-      child: FutureBuilder(
-        future: loadimage(),
-        builder: (context,AsyncSnapshot snapshot) {
-          return GridView.builder(
-            
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              childAspectRatio: 3 / 3,
-              crossAxisSpacing: 15,
-              mainAxisSpacing: 15,
-            ), 
-            
-            itemCount: produkitem.length,
-            itemBuilder:(ctx,i ) {
-              
-              try{
-                final Map file = snapshot.data![i];
-                return ProductItemsCard(namaproduk: produkitem[i].namaproduk, urlgambar: produkitem[i].gambar);
-              }catch(e){
-                return Center(child: CircularProgressIndicator(),);
-              }
-              
-            }
-              );
-        }
-      ),
-    );
-    }catch(e){
-      return Center(child: CircularProgressIndicator(),);
+          margin: EdgeInsets.all(20),
+          child: GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 3 / 3,
+                crossAxisSpacing: 15,
+                mainAxisSpacing: 15,
+              ),
+              itemCount: loadproduk.items.length,
+              itemBuilder: (ctx, i) {
+                try {
+                  print(loadproduk.items[i].namaproduk);
+                  print("mantab");
+                  // final Map file = snapshot.data![i];
+                  return ProductItemsCard(
+                      namaproduk: loadproduk.items[i].namaproduk,
+                      urlgambar: loadproduk.items[i].gambar,
+                      id: loadproduk.items[i].id);
+                } catch (e) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+              }));
+    } catch (e) {
+      return Center(
+        child: CircularProgressIndicator(),
+      );
     }
-    
   }
 }
 

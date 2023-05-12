@@ -45,10 +45,10 @@ class CircleMenu extends StatelessWidget {
                     halaman.gantihalamanpakan("kambing");
                   }
                   break;
-                case "Ayam@4x.png":
+                case "sapi@4x.png":
                   {
-                    print("ayam");
-                    halaman.gantihalamanpakan("ayam");
+                    print("sapi");
+                    halaman.gantihalamanpakan("sapi");
                   }
                   break;
                 case "kuda@4x.png":

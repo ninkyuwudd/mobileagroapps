@@ -194,10 +194,10 @@ class _AddProductPageState extends State<AddProductPage> {
             shrinkWrap: true,
             itemCount: loadproduk.items.length,
             itemBuilder: (_, i) => Column(children: [
-                  UserProductItem(
-                      idx: i,
-                      title: loadproduk.items[i].title,
-                      imageurl: loadproduk.items[i].image),
+                  // UserProductItem(
+                  //     idx: i,
+                  //     title: loadproduk.items[i].title,
+                  //     imageurl: loadproduk.items[i].image),
                   Divider()
                 ])),
       ),
