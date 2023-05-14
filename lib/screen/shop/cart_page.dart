@@ -24,62 +24,64 @@ class CartPage extends StatelessWidget {
       appBar: AppBar(
         title: Text("Keranjang Anda"),
       ),
-      body: Column(
-        children: [
-          Card(
-            margin: EdgeInsets.all(15),
-            child: Padding(
-              padding: EdgeInsets.all(8),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text('Total'),
-                  Spacer(),
-                  Chip(
-                    label: Text(
-                      '\Rp${cart.totalamount}',
-                      style: TextStyle(color: Colors.white),
+      body: Container(
+        margin: EdgeInsets.all(15),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Card(
+              child: Padding(
+                padding: EdgeInsets.all(8),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('Total'),
+                    Spacer(),
+                    Chip(
+                      label: Text(
+                        '\Rp${cart.totalamount}',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      backgroundColor: Theme.of(context).primaryColor,
                     ),
-                    backgroundColor: Theme.of(context).primaryColor,
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      print(loaduser.curuserid);
-                      String id = DateTime.now().millisecond.toString();
-                      dborder.doc(id).set({
-                          "idcustomer" : loaduser.curuserid,
-                          "idproduk" : [
-                            "ByW7OHN10bBn7Cns8D9l"
-                          ],
-                          "date" : DateFormat.yMMMd().format(DateTime.now())
-                      });
-                      Provider.of<Orderproivder>(context, listen: false).addorder(
-                          cart.items.values.toList(), cart.totalamount);
-                      cart.clear();
-                    },
-                    child: Text("ORDER NOW"),
-                  ),
-
-                ],
+                    TextButton(
+                      onPressed: () {
+                        dborder.doc().set({
+                          "idcustomer": loaduser.curuserid,
+                          "idproduk": cart.items.keys.toList(),
+                          "date": DateFormat.yMMMd().format(DateTime.now())
+                        });
+                        Provider.of<Orderproivder>(context, listen: false)
+                            .addorder(
+                                cart.items.values.toList(), cart.totalamount);
+                        cart.clear();
+                      },
+                      child: Text("ORDER NOW"),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Expanded(
-              child: ListView.builder(
-            itemBuilder: (ctx, i) => CartItemCard(
+            SizedBox(
+              height: 10,
+            ),
+            Text("Barang yang dibeli",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
+            SizedBox(
+              height: 10,
+            ),
+            Expanded(
+                child: ListView.builder(
+              itemBuilder: (ctx, i) => CartItemCard(
                 cart.items.values.toList()[i].id,
                 cart.items.keys.toList()[i],
                 cart.items.values.toList()[i].price,
                 cart.items.values.toList()[i].quantity,
-                cart.items.values.toList()[i].title,),
-                
-                
-            itemCount: cart.items.length,
-          ))
-        ],
+                cart.items.values.toList()[i].title,
+              ),
+              itemCount: cart.items.length,
+            ))
+          ],
+        ),
       ),
     );
   }

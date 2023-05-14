@@ -25,7 +25,7 @@ class ResultCard extends StatelessWidget {
               ),
             ]),
         child: ListTile(
-          title: Text(title),
+          title: Text(title,overflow: TextOverflow.ellipsis,),
           subtitle: Text(pupuk),
           trailing: Image(image: AssetImage("images/$img")),
         ));

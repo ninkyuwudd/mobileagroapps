@@ -106,6 +106,7 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
                     ),
                     ElevatedButton(
                         onPressed: () {
+                          print(loadproduk.id);
                           cart.additem(
                               loadproduk.id, loadproduk.harga, loadproduk.namaproduk);
                           ScaffoldMessenger.of(context).hideCurrentSnackBar();
