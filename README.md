@@ -1,7 +1,5 @@
 # JAGRO 
 (mobile agro apps)
-
-
 #### Jagro adalah aplikasi yang ditujukan untuk pertanian dan peternakan, yang dibungkus dalam satu aplikasi
 
 ### Fitur dalam aplikasi:
