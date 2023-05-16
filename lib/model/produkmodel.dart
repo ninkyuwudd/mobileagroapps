@@ -9,6 +9,8 @@ class ProdukModel with ChangeNotifier {
   final String idjenisproduk;
   final int jumlah;
   final String gambar;
+  bool jnspupuk;
+
 
   ProdukModel({
     required this.id,
@@ -18,7 +20,8 @@ class ProdukModel with ChangeNotifier {
     required this.idadmin,
     required this.idjenisproduk,
     required this.jumlah,
-    required this.gambar
+    required this.gambar,
+    this.jnspupuk = false,
   });
 
   factory ProdukModel.fromJson(Map<String, dynamic> json) => ProdukModel(
@@ -42,5 +45,7 @@ class ProdukModel with ChangeNotifier {
         "jumlah" : jumlah,
         "gambar": gambar,
     };
+
+
 
 }

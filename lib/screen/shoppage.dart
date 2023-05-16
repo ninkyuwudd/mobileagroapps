@@ -8,6 +8,11 @@ import 'package:provider/provider.dart';
 
 import '../widget/shop/productgrid.dart';
 
+enum FilterOptions {
+  Favorites,
+  All,
+}
+
 class ShopPage extends StatefulWidget {
   const ShopPage({super.key});
 
@@ -16,6 +21,8 @@ class ShopPage extends StatefulWidget {
 }
 
 class _ShopPageState extends State<ShopPage> {
+  var _showOnlyFavorites = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +34,7 @@ class _ShopPageState extends State<ShopPage> {
           "Toko",
           style: TextStyle(color: Colors.green),
         ),
-        actions: [
+        actions: <Widget>[
           Consumer<CartProvider>(
             builder: (_, cart, ch) =>
                 BadgeCart(child: ch!, value: cart.itemcount.toString()),
@@ -41,10 +48,44 @@ class _ShopPageState extends State<ShopPage> {
               },
             ),
           ),
-          IconButton(onPressed: (){
-            Navigator.pushNamed(context, UnggahGambar.routename);
-          }, icon: Icon(Icons.add,color: Colors.green,))
-          
+          IconButton(
+              onPressed: () {
+                Navigator.pushNamed(context, UnggahGambar.routename);
+              },
+              icon: Icon(
+                Icons.add,
+                color: Colors.green,
+              )),
+          PopupMenuButton(
+            onSelected: (FilterOptions selectedValue) {
+              setState(() {
+                if (selectedValue == FilterOptions.Favorites) {
+                  
+                  // _showOnlyFavorites = true;
+                } else {
+                  _showOnlyFavorites = false;
+                }
+              });
+            },
+            icon: Icon(
+              Icons.more_vert,
+              color: Colors.green,
+            ),
+            itemBuilder: (_) => [
+              PopupMenuItem(
+                child: Text('Pupuk'),
+                value: FilterOptions.Favorites,
+              ),
+              PopupMenuItem(
+                child: Text('Pakan'),
+                value: FilterOptions.All,
+              ),
+              PopupMenuItem(
+                child: Text('Semua'),
+                value: FilterOptions.All,
+              ),
+            ],
+          )
         ],
       ),
       body: ProductGrid(),

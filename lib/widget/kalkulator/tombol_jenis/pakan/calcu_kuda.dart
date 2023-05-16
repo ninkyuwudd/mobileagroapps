@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mobileagroapps/widget/kalkulator/double_result.dart';
+import 'package:mobileagroapps/widget/kalkulator/result_card.dart';
 import 'package:mobileagroapps/widget/kalkulator/single_field_params.dart';
 
 class KalkulatorKuda extends StatefulWidget {
@@ -10,20 +12,49 @@ class KalkulatorKuda extends StatefulWidget {
 
 class _KalkulatorKudaState extends State<KalkulatorKuda> {
   var beratkuda = TextEditingController();
-  var hijau ;
-  var jagung;
-  var bukil;
-  var tetes;
-  var jmlhpakan;
+  double hijau = 0;
+  double jagung = 0;
+  double bukil = 0;
+  double tetes = 0;
+  double jmlhpakan = 0 ;
   @override
   Widget build(BuildContext context) {
-    return SingleFiledparameter(fungsi: (){
-      int berat = int.parse(beratkuda.text);
-      hijau = ((1.8/100) * berat) * (35/100);
-      jagung = ((1.8/100) * berat) * (65/100) * (20/100) * (78/100);
-      bukil =((1.8/100) * berat) * (65/100) * (21.53/100);
-      tetes = ((1.8/100) * berat) * (65/100) * (80/100) * (78.47/100);
-      jmlhpakan = hijau + jagung + bukil + tetes;
-    }, controller: beratkuda,judul: "Berat Kuda",);
+    return Column(
+      children: [
+        SingleFiledparameter(
+          fungsi: () {
+            var berat = double.parse(beratkuda.text);
+            hijau = ((1.8 / 100) * berat) * (35 / 100);
+            jagung =
+                ((1.8 / 100) * berat) * (65 / 100) * (20 / 100) * (78 / 100);
+            bukil = ((1.8 / 100) * berat) * (65 / 100) * (21.53 / 100);
+            tetes =
+                ((1.8 / 100) * berat) * (65 / 100) * (80 / 100) * (78.47 / 100);
+            jmlhpakan = hijau + jagung + bukil + tetes;
+          },
+          controller: beratkuda,
+          judul: "Berat Kuda",
+        ),
+        SizedBox(height: 20),
+        ResultDouble(
+            value: hijau == 0 ? "-" : hijau.toStringAsFixed(1),
+            value2: jagung == 0 ? "-" : jagung.toStringAsFixed(1),
+            judul: "Hijau",
+            gambar: "pupuk kering@4x.png",
+            judul2: "Jagung",
+            gambar2: "pupuk kering@4x.png",
+            kategori: "Komposisi"),
+        ResultDouble(
+            value: bukil == 0 ? "-" : bukil.toStringAsFixed(1),
+            value2: tetes == 0 ? "-" : tetes.toStringAsFixed(1),
+            judul: "Bukil",
+            gambar: "pupuk kering@4x.png",
+            judul2: "Tetes",
+            gambar2: "pupuk kering@4x.png",
+            kategori: " "),
+          SizedBox(height: 15,),
+          ResultCard(pupuk: jmlhpakan == 0 ? "-" : "${jmlhpakan.toStringAsFixed(1)} Kg", title: "Jumlah Pakan", img: "pupuk kering@4x.png")
+      ],
+    );
   }
 }

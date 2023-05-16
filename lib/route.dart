@@ -7,6 +7,7 @@ import 'package:mobileagroapps/screen/shop/add_product.dart';
 import 'package:mobileagroapps/screen/shop/cart_page.dart';
 import 'package:mobileagroapps/screen/shop/detail_product.dart';
 import 'package:mobileagroapps/screen/shop/order_product.dart';
+import 'package:mobileagroapps/screen/shop/perbayaran_view.dart';
 import 'package:mobileagroapps/screen/shop/unggah_gambar.dart';
 
 class Routes {
@@ -19,6 +20,7 @@ class Routes {
   static const String cartPageRoute = CartPage.routename;
   static const String addProductPageRoute = AddProductPage.routename;
   static const String unggahGambarRoute = UnggahGambar.routename;
+  static const String pembayaran = Pembayaran.routename;
 
 
 
@@ -32,6 +34,7 @@ class Routes {
     CartPage.routename: (context) => CartPage(),
     AddProductPage.routename: (context) => AddProductPage(),
     UnggahGambar.routename: (context) => UnggahGambar(),
+    Pembayaran.routename : (context) => Pembayaran()
 
 
 

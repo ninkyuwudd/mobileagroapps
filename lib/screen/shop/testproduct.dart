@@ -135,9 +135,6 @@ String imageurl = "";
                     ),
                     ElevatedButton(
                         onPressed: () {
-
-                          
-                         
                           print(imageurl);
                           String value = _character.toString().split('.').last;
                           String idjenis = "";

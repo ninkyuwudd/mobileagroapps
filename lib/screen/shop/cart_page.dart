@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:mobileagroapps/provider/cart_provider.dart';
 import 'package:mobileagroapps/provider/order_provider.dart';
 import 'package:mobileagroapps/provider/user_repo.dart';
+import 'package:mobileagroapps/screen/shop/perbayaran_view.dart';
 import 'package:provider/provider.dart';
 
 import '../../widget/shop/cart_item.dart';
@@ -46,15 +47,16 @@ class CartPage extends StatelessWidget {
                     ),
                     TextButton(
                       onPressed: () {
-                        dborder.doc().set({
-                          "idcustomer": loaduser.curuserid,
-                          "idproduk": cart.items.keys.toList(),
-                          "date": DateFormat.yMMMd().format(DateTime.now())
-                        });
-                        Provider.of<Orderproivder>(context, listen: false)
-                            .addorder(
-                                cart.items.values.toList(), cart.totalamount);
-                        cart.clear();
+                        // dborder.doc().set({
+                        //   "idcustomer": loaduser.curuserid,
+                        //   "idproduk": cart.items.keys.toList(),
+                        //   "date": DateFormat.yMMMd().format(DateTime.now())
+                        // });
+                        Navigator.pushNamed(context, Pembayaran.routename);
+                        // Provider.of<Orderproivder>(context, listen: false)
+                        //     .addorder(
+                        //         cart.items.values.toList(), cart.totalamount);
+                        // cart.clear();
                       },
                       child: Text("ORDER NOW"),
                     ),

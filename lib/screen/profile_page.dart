@@ -214,11 +214,11 @@ class _ProfileUserPageState extends State<ProfileUserPage> {
                     borderRadius: BorderRadius.circular(20)),
                 child: Row(
                   children: [
-                    Icon(Icons.lock),
+                    Icon(Icons.all_inbox),
                     SizedBox(
                       width: 20,
                     ),
-                    Text("Change Password"),
+                    Text("Daftar Produk"),
                     const Spacer(),
                     GestureDetector(
                       onTap: () {
