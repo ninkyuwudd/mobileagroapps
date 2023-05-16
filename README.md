@@ -2,7 +2,7 @@
 (mobile agro apps)
 
 
-####Jagro adalah aplikasi yang ditujukan untuk pertanian dan peternakan, yang dibungkus dalam satu aplikasi
+#### Jagro adalah aplikasi yang ditujukan untuk pertanian dan peternakan, yang dibungkus dalam satu aplikasi
 
 ### Fitur dalam aplikasi:
 1. Fitur Cuaca untuk prediksi pemupukan serta pakan ternak
