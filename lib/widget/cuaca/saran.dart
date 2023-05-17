@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../provider/cuaca_service.dart';
+import '../../controller/cuaca_controller.dart';
 
 class SaranTernakKebun extends StatefulWidget {
   const SaranTernakKebun({super.key});

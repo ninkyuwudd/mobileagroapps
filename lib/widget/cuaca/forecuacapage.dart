@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:mobileagroapps/widget/cuaca/forecast_card.dart';
 import 'package:provider/provider.dart';
 
-import '../../provider/cuaca_service.dart';
+import '../../controller/cuaca_controller.dart';
 
 class ForecastCuacaPage extends StatefulWidget {
   const ForecastCuacaPage({super.key});

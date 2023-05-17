@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:mobileagroapps/provider/kalkulator_controller.dart';
+import 'package:mobileagroapps/controller/kalkulator_controller.dart';
 
 import 'package:mobileagroapps/widget/kalkulator/menu_hewan.dart';
 import 'package:mobileagroapps/widget/kalkulator/result_card.dart';

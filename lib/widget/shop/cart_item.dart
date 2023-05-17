@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobileagroapps/provider/cart_provider.dart';
+import 'package:mobileagroapps/controller/keranjang_controller.dart';
 import 'package:provider/provider.dart';
 
 class CartItemCard extends StatelessWidget {

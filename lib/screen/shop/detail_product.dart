@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_launcher_icons/xml_templates.dart';
-import 'package:mobileagroapps/provider/cart_provider.dart';
-import 'package:mobileagroapps/provider/product_provider.dart';
+import 'package:mobileagroapps/controller/keranjang_controller.dart';
+import 'package:mobileagroapps/controller/product_controller.dart';
 import 'package:mobileagroapps/screen/shop/cart_page.dart';
 import 'package:mobileagroapps/screen/shop/order_product.dart';
 import 'package:mobileagroapps/widget/shop/order_item.dart';

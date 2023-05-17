@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobileagroapps/model/product_model.dart';
 import 'package:mobileagroapps/model/produkmodel.dart';
-import 'package:mobileagroapps/provider/product_provider.dart';
+import 'package:mobileagroapps/controller/product_controller.dart';
 import 'package:mobileagroapps/screen/shop/detail_product.dart';
 import 'package:provider/provider.dart';
 

@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:mobileagroapps/provider/pilihfile_controller.dart';
-import 'package:mobileagroapps/provider/product_provider.dart';
+import 'package:mobileagroapps/controller/pilihfile_controller.dart';
+import 'package:mobileagroapps/controller/product_controller.dart';
 import 'package:mobileagroapps/widget/rounded_value_field.dart';
 import 'package:mobileagroapps/widget/shop/user_product_item.dart';
 import 'package:provider/provider.dart';

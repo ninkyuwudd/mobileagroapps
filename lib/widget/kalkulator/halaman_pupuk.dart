@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobileagroapps/provider/kalkulator_controller.dart';
+import 'package:mobileagroapps/controller/kalkulator_controller.dart';
 import 'package:mobileagroapps/widget/kalkulator/menu_hewan.dart';
 import 'package:mobileagroapps/widget/kalkulator/tombol_jenis/pupuk/calcu_anggur.dart';
 import 'package:mobileagroapps/widget/kalkulator/tombol_jenis/pupuk/calcu_apel.dart';

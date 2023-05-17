@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:mobileagroapps/provider/pilihfile_controller.dart';
+import 'package:mobileagroapps/controller/pilihfile_controller.dart';
 import 'package:mobileagroapps/screen/shop/testproduct.dart';
 import 'package:provider/provider.dart';
 

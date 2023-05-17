@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobileagroapps/provider/order_provider.dart';
+import 'package:mobileagroapps/controller/order_controller.dart';
 import 'package:mobileagroapps/widget/shop/order_item.dart';
 import 'package:provider/provider.dart';
 

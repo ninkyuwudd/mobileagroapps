@@ -22,38 +22,32 @@ class _KalkulatorDelimaState extends State<KalkulatorDelima> {
   @override
   Widget build(BuildContext context) {
     ppkkandang(int umur, int jumlah) {
-      if (0 <= umur && umur <= 1) {
-        pupukkandangsatuan = 1;
+      if (0 <= umur && umur <= 5) {
+        pupukkandangsatuan = 200;
         pupukkandang = umur * (jumlah * pupukkandangsatuan);
       }
-      if (2 <= umur && umur <= 6) {
-        pupukkandangsatuan = 2;
-        pupukkandang = umur * (jumlah * pupukkandangsatuan);
-      }
+
     }
 
     ppkkering(int umur, int jumlah) {
-      if (0 <= umur && umur <= 1) {
-        pupukkeringsatuan = 1;
+      if (0 <= umur && umur <= 5) {
+        pupukkeringsatuan = 78;
         pupukkering = umur * (jumlah * pupukkeringsatuan);
       }
-      if (2 <= umur && umur <= 12) {
-        pupukkeringsatuan = 2;
-        pupukkering = umur * (jumlah * pupukkeringsatuan);
-      }
+
     }
 
     ppkkimia(int umur, int jumlah) {
-      if (1 <= umur && umur <= 6) {
+      if (0 <= umur && umur < 1) {
         pupukkimiasatuan = 500;
         pupukkimia = umur * (jumlah * pupukkimiasatuan) * 0.01;
       }
-      if (7 <= umur && umur <= 8) {
-        pupukkimiasatuan = 1;
+      if (1 <= umur && umur <= 3) {
+        pupukkimiasatuan = 750;
         pupukkimia = umur * (jumlah * pupukkimiasatuan);
       }
-      if (7 <= umur && umur <= 8) {
-        pupukkimiasatuan = 2;
+      if (3 <= umur && umur <= 5) {
+        pupukkimiasatuan = 1000;
         pupukkimia = umur * (jumlah * pupukkimiasatuan);
       }
     }
@@ -78,15 +72,15 @@ class _KalkulatorDelimaState extends State<KalkulatorDelima> {
           height: 20,
         ),
         ResultCard(
-            pupuk: pupukkandang == null ? "-" : "${pupukkandang.toString()}kg",
+            pupuk: pupukkandang == null ? "-" : "${pupukkandang.toString()}ml",
             title: "Pupuk Kandang",
             img: "pupuk kandang@4x.png"),
         SizedBox(
           height: 20,
         ),
         ResultDouble(
-            value: pupukkering == null ? "-" : "${pupukkering.toString()}kg",
-            value2: pupukkimia == null ? "-" : "${pupukkimia.toString()} liter",
+            value: pupukkering == null ? "-" : "${pupukkering.toString()}ml",
+            value2: pupukkimia == null ? "-" : "${pupukkimia.toString()} ml",
             judul: "kering",
             gambar: "pupuk kering@4x.png",
             judul2: "Cair",

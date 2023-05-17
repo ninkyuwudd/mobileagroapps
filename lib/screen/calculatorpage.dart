@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobileagroapps/widget/kalkulator/tips_page.dart';
 import 'package:provider/provider.dart';
-import '../provider/user_repo.dart';
+import '../controller/user_repo.dart';
 import '../widget/kalkulator/halaman_pakan.dart';
 import '../widget/kalkulator/halaman_pupuk.dart';
 

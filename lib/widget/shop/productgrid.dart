@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:mobileagroapps/model/product_model.dart';
-import 'package:mobileagroapps/provider/product_provider.dart';
+import 'package:mobileagroapps/controller/product_controller.dart';
 import 'package:mobileagroapps/widget/shop/product_item.dart';
 import 'package:provider/provider.dart';
 

@@ -6,10 +6,10 @@ import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:mobileagroapps/provider/pilihfile_controller.dart';
+import 'package:mobileagroapps/controller/pilihfile_controller.dart';
 // import 'package:mobileagroapps/model/user_model.dart';
 import 'package:provider/provider.dart';
-import '../provider/user_repo.dart';
+import '../controller/user_repo.dart';
 import '../widget/rounded_value_field.dart';
 
 
