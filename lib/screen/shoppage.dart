@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobileagroapps/controller/keranjang_controller.dart';
-import 'package:mobileagroapps/screen/shop/add_product.dart';
+import 'package:mobileagroapps/controller/product_controller.dart';
+import 'package:mobileagroapps/controller/user_repo.dart';
 import 'package:mobileagroapps/screen/shop/cart_page.dart';
 import 'package:mobileagroapps/screen/shop/unggah_gambar.dart';
 import 'package:mobileagroapps/widget/shop/badge.dart';
@@ -8,13 +9,11 @@ import 'package:provider/provider.dart';
 
 import '../widget/shop/productgrid.dart';
 
-enum FilterOptions {
-  Favorites,
-  All,
-}
+enum FilterOptions { pupuk, pakan, semua }
 
 class ShopPage extends StatefulWidget {
-  const ShopPage({super.key});
+  final int idx;
+  const ShopPage({super.key, required this.idx});
 
   @override
   State<ShopPage> createState() => _ShopPageState();
@@ -24,7 +23,18 @@ class _ShopPageState extends State<ShopPage> {
   var _showOnlyFavorites = false;
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    var cek = 
+    Provider.of<UserProvider>(context, listen: false).fethcdatauser();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    var getdatauser = Provider.of<UserProvider>(context, listen: false);
+    var getlist = getdatauser.akun;
+    var getdataproduk = Provider.of<ProductProvider>(context);
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -48,22 +58,29 @@ class _ShopPageState extends State<ShopPage> {
               },
             ),
           ),
-          IconButton(
-              onPressed: () {
-                Navigator.pushNamed(context, UnggahGambar.routename);
-              },
-              icon: Icon(
-                Icons.add,
-                color: Colors.green,
-              )),
+          Visibility(
+            visible: getlist[widget.idx].status == "user" ? false : true,
+            child: IconButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, UnggahGambar.routename);
+                },
+                icon: Icon(
+                  Icons.add,
+                  color: Colors.green,
+                )),
+          ),
           PopupMenuButton(
             onSelected: (FilterOptions selectedValue) {
               setState(() {
-                if (selectedValue == FilterOptions.Favorites) {
-                  
+                if (selectedValue == FilterOptions.pupuk) {
+                  getdataproduk.gantifilter("pupuk");
+                  // _showOnlyFavorites = true;
+                }
+                if (selectedValue == FilterOptions.pakan) {
+                  getdataproduk.gantifilter("pakan");
                   // _showOnlyFavorites = true;
                 } else {
-                  _showOnlyFavorites = false;
+                  getdataproduk.gantifilter("semua");
                 }
               });
             },
@@ -74,15 +91,15 @@ class _ShopPageState extends State<ShopPage> {
             itemBuilder: (_) => [
               PopupMenuItem(
                 child: Text('Pupuk'),
-                value: FilterOptions.Favorites,
+                value: FilterOptions.pupuk,
               ),
               PopupMenuItem(
                 child: Text('Pakan'),
-                value: FilterOptions.All,
+                value: FilterOptions.pakan,
               ),
               PopupMenuItem(
                 child: Text('Semua'),
-                value: FilterOptions.All,
+                value: FilterOptions.semua,
               ),
             ],
           )

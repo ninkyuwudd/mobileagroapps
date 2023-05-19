@@ -22,7 +22,7 @@ class _BottomNavbarState extends State<BottomNavbar> {
       CuacaPage(idx: widget.idx,),
       CalculatorPage(idx: widget.idx),
       // Testproductdata(),
-      ShopPage(),
+      ShopPage(idx: widget.idx),
       ProfileUserPage(
         idx: widget.idx,
       )

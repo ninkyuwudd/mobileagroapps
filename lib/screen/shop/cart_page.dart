@@ -52,7 +52,7 @@ class CartPage extends StatelessWidget {
                         //   "idproduk": cart.items.keys.toList(),
                         //   "date": DateFormat.yMMMd().format(DateTime.now())
                         // });
-                        Navigator.pushNamed(context, Pembayaran.routename);
+                        Navigator.pushReplacementNamed(context, Pembayaran.routename,arguments: cart.totalamount);
                         // Provider.of<Orderproivder>(context, listen: false)
                         //     .addorder(
                         //         cart.items.values.toList(), cart.totalamount);

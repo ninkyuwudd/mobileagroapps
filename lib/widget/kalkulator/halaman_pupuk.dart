@@ -10,7 +10,8 @@ import 'package:mobileagroapps/widget/kalkulator/tombol_jenis/pupuk/calcu_semang
 import 'package:provider/provider.dart';
 
 class KalkulatorPupuk extends StatefulWidget {
-  const KalkulatorPupuk({super.key});
+  final int idx;
+  const KalkulatorPupuk({super.key, required this.idx});
 
   @override
   State<KalkulatorPupuk> createState() => _KalkulatorPupukState();
@@ -49,7 +50,7 @@ class _KalkulatorPupukState extends State<KalkulatorPupuk> {
                     "pisang@4x.png",
                     "semangka@4x.png"
                   ],
-                  open: "buah naga@4x.png",
+                  open: "buah naga@4x.png",idx: widget.idx,
                 ),
               ),
             ),

@@ -12,6 +12,13 @@ class ProductProvider with ChangeNotifier {
     return _items;
   }
 
+  var setfilter;
+
+  gantifilter(String filter){
+    setfilter = filter;
+    notifyListeners();
+  }
+
   Future<void> fetchdataproduct() async {
     final productdata =
         await FirebaseFirestore.instance.collection('produk').get();
@@ -31,11 +38,13 @@ class ProductProvider with ChangeNotifier {
   }
 
   Future<void> filterpupuk() async {
-    final productdata = await FirebaseFirestore.instance.collection('produk');
-    QuerySnapshot snapshot = await productdata
-        .where('idjenisproduk', isEqualTo: "qPGLHnd6lAt4f6a7q7AS")
+    final productdata = await FirebaseFirestore.instance.collection('produk').where('idjenisproduk', isEqualTo: "qPGLHnd6lAt4f6a7q7AS")
         .get();
-    _items = snapshot.docs
+    // QuerySnapshot snapshot = await productdata
+    //     .where('idjenisproduk', isEqualTo: "qPGLHnd6lAt4f6a7q7AS")
+    //     .get();
+
+    _items = productdata.docs
         .map((doc) => ProdukModel(
             id: doc.id,
             namaproduk: doc["namaproduk"],
@@ -49,12 +58,13 @@ class ProductProvider with ChangeNotifier {
     notifyListeners();
   }
 
-    Future<void> filterpakan() async {
-    final productdata = await FirebaseFirestore.instance.collection('produk');
-    QuerySnapshot snapshot = await productdata
-        .where('idjenisproduk', isEqualTo: "uuOGJg6bqAgMKc522dFX")
+  Future<void> filterpakan() async {
+    final productdata = await FirebaseFirestore.instance.collection('produk').where('idjenisproduk', isEqualTo: "uuOGJg6bqAgMKc522dFX")
         .get();
-    _items = snapshot.docs
+    // QuerySnapshot snapshot = await productdata
+    //     .where('idjenisproduk', isEqualTo: "uuOGJg6bqAgMKc522dFX")
+    //     .get();
+    _items = productdata.docs
         .map((doc) => ProdukModel(
             id: doc.id,
             namaproduk: doc["namaproduk"],

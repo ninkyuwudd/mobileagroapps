@@ -12,7 +12,8 @@ import 'package:mobileagroapps/widget/kalkulator/tombol_jenis/pakan/calcu_kuda.d
 import 'package:provider/provider.dart';
 
 class KalkulatorPakan extends StatefulWidget {
-  const KalkulatorPakan({super.key});
+  final int idx;
+  const KalkulatorPakan({super.key, required this.idx});
 
   @override
   State<KalkulatorPakan> createState() => _KalkulatorPakanState();
@@ -49,7 +50,7 @@ class _KalkulatorPakanState extends State<KalkulatorPakan> {
                     "babi@4x.png",
                     "bebek@4x.png",
                   ],
-                  open: "kambing_1@4x.png",
+                  open: "kambing_1@4x.png",idx: widget.idx,
                 ),
               ),
             ),

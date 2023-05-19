@@ -21,15 +21,27 @@ class _ProductGridState extends State<ProductGrid> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    var cek = Provider.of<ProductProvider>(context,listen: false).setfilter;
+    if(cek == "pakan"){
+      Provider.of<ProductProvider>(context,listen: false).filterpakan();
 
-    Provider.of<ProductProvider>(context,listen: false).fetchdataproduct();
+    }else if(cek == "pupuk"){
+      Provider.of<ProductProvider>(context,listen: false).filterpupuk();
+      
+    }else{
+      Provider.of<ProductProvider>(context,listen: false).fetchdataproduct();
+      
+    }
+    
     
   }
 
   @override
   Widget build(BuildContext context) {
     var loadproduk = Provider.of<ProductProvider>(context);
-
+    setState(() {
+      
+    });
     try {
       return Container(
           margin: EdgeInsets.all(20),

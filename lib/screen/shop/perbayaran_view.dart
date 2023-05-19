@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobileagroapps/widget/tombolrounded_widget.dart';
 
 class Pembayaran extends StatefulWidget {
   static const routename = "/pembayaran";
@@ -12,6 +13,7 @@ class Pembayaran extends StatefulWidget {
 class _PembayaranState extends State<Pembayaran> {
   @override
   Widget build(BuildContext context) {
+    final data = ModalRoute.of(context)?.settings.arguments as int;
     return Scaffold(
       appBar: AppBar(
         // backgroundColor: Colors.transparent,
@@ -37,7 +39,7 @@ class _PembayaranState extends State<Pembayaran> {
               "Total Pembayaran",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
             ),
-            Text("200xx"),
+            Text("Rp$data"),
             Divider(),
             Container(
               margin: EdgeInsets.all(20),
@@ -80,7 +82,10 @@ class _PembayaranState extends State<Pembayaran> {
                   )
                 ],
               ),
-            )
+            ),
+            RoundedButtonWidget(text: "Selesai", fungsi: (){
+              Navigator.pop(context);
+            })
           ],
         ),
       ),

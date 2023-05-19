@@ -20,7 +20,6 @@ class PilihUploadfile extends ChangeNotifier {
   Future selectFile() async {
     final result = await FilePicker.platform.pickFiles();
     if (result == null) return;
-    
     pickfile = result.files.first;
    notifyListeners();
   }
