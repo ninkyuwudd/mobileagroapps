@@ -3,7 +3,7 @@ import 'package:mobileagroapps/screen/profile/daftartoko_view.dart';
 import 'package:mobileagroapps/screen/profile/premium_view.dart';
 import 'dart:io';
 import 'package:provider/provider.dart';
-import '../controller/user_repo.dart';
+import '../controller/user_controller.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ProfileUserPage extends StatefulWidget {

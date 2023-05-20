@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:mobileagroapps/model/cuaca_model.dart';
+import 'package:provider/provider.dart';
 
 
 class CuacaProvider extends ChangeNotifier {
@@ -10,8 +11,9 @@ class CuacaProvider extends ChangeNotifier {
 
   List<ForecastData>? _datacuacabesok = [];
   List<ForecastData>? get cuacafrData => _datacuacabesok;
-
-  String _location = 'Jember';
+  
+  
+  String _location = 'jember';
 
   void updateLocation(String location) {
     _location = location;

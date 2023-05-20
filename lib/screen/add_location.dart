@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 
@@ -10,6 +11,7 @@ class AddLocation extends StatefulWidget {
 }
 
 class _AddLocationState extends State<AddLocation> {
+  final firestoredb = FirebaseFirestore.instance.collection('users');
   @override
   Widget build(BuildContext context) {
     return Scaffold(

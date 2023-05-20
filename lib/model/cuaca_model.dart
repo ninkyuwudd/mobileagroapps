@@ -26,10 +26,10 @@ class KondisiCuaca {
 }
 
 class MainData {
-  final double temp;
-  final void feelsLike;
-  final double tempMin;
-  final double tempMax;
+  final dynamic temp;
+  final dynamic feelsLike;
+  final dynamic tempMin;
+  final dynamic tempMax;
   final int pressure;
   final int humidity;
   // final int seaLevel;

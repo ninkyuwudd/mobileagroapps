@@ -5,7 +5,7 @@ import 'package:mobileagroapps/screen/login_page.dart';
 import 'package:mobileagroapps/widget/login/rounded_field_white.dart';
 import 'package:provider/provider.dart';
 import 'package:phone_number/phone_number.dart';
-import '../controller/user_repo.dart';
+import '../controller/user_controller.dart';
 
 enum Genderoption { pria, wanita }
 

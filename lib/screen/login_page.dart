@@ -2,7 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mobileagroapps/model/user_model.dart';
 import 'package:mobileagroapps/navigationbar.dart';
-import 'package:mobileagroapps/controller/user_repo.dart';
+import 'package:mobileagroapps/controller/user_controller.dart';
+import 'package:mobileagroapps/screen/tambahlokasi_view.dart';
 import 'package:mobileagroapps/widget/login/rounded_field_white.dart';
 import 'package:provider/provider.dart';
 
@@ -22,34 +23,10 @@ class _LoginPageState extends State<LoginPage> {
   bool usercheck = false;
   bool notallowedalert = false;
   bool passcheck = false;
-  List<UsersAkun> usersitem = [];
   @override
   void initState() {
-    fetchRecord();
     super.initState();
-  }
-
-  fetchRecord() async {
-    var records = await FirebaseFirestore.instance.collection('users').get();
-    maprecord(records);
-  }
-
-  maprecord(QuerySnapshot<Map<String, dynamic>> records) {
-    var _list = records.docs
-        .map((item) => UsersAkun(
-            // id: item["id"],
-            nama: item['nama'],
-            username: item['username'],
-            email: item['email'],
-            gender: item["gender"],
-            phone: item["phone"],
-            password: item["password"],
-            status: item["status"]
-            ))
-        .toList();
-    setState(() {
-      usersitem = _list;
-    });
+    Provider.of<UserProvider>(context,listen: false).fethcdatauser();
   }
 
   var i = 0;
@@ -57,7 +34,6 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     final usrprov = Provider.of<UserProvider>(context);
-    usrprov.fethcdatauser();
     final akunnya = usrprov.akun;
     return SafeArea(
       child: Scaffold(
@@ -161,19 +137,24 @@ class _LoginPageState extends State<LoginPage> {
                             }
                             
                             if (password.text.isNotEmpty & username.text.isNotEmpty) {
-                              for (var i = 0; i < usersitem.length; i++) {
-                                print(usersitem[i].username);
-                                if (username.text == usersitem[i].username &&
-                                    password.text == usersitem[i].password) {
-                                      print(usersitem[i].id.toString());
+                              for (var i = 0; i < akunnya.length; i++) {
+                                print(akunnya[i].username);
+                                if (username.text == akunnya[i].username &&
+                                    password.text == akunnya[i].password) {
+                                      print(akunnya[i].id.toString());
                                   usrprov.changedataid(akunnya[i].id.toString());
-                                  
-                                  Navigator.push(
+
+                                  if(akunnya[i].lokasi == ''){
+                                    Navigator.pushReplacementNamed(context, TambahLokasi.routename,arguments: i);
+                                  }else{
+                                    Navigator.push(
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => BottomNavbar(idx: i,)));
                                       notallowedalert = false;
-                                      break;
+                                  }
+                                  break;
+                                  
                                 }else{
                                   notallowedalert = true;
                                 }

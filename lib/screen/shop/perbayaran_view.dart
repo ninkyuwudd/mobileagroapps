@@ -85,7 +85,9 @@ class _PembayaranState extends State<Pembayaran> {
             ),
             RoundedButtonWidget(text: "Selesai", fungsi: (){
               Navigator.pop(context);
-            })
+            },
+            warnabg: Colors.white,
+            )
           ],
         ),
       ),

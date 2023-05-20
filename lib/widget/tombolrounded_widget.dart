@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 
 class RoundedButtonWidget extends StatelessWidget {
   final String text;
+  final Color warnabg;
   final Function() fungsi;
-  RoundedButtonWidget({super.key, required this.text, required this.fungsi});
+  RoundedButtonWidget({super.key, required this.text, required this.fungsi, required this.warnabg});
 
   @override
   Widget build(BuildContext context) {

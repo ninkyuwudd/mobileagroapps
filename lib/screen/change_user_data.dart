@@ -9,7 +9,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:mobileagroapps/controller/pilihfile_controller.dart';
 // import 'package:mobileagroapps/model/user_model.dart';
 import 'package:provider/provider.dart';
-import '../controller/user_repo.dart';
+import '../controller/user_controller.dart';
 import '../widget/rounded_value_field.dart';
 
 

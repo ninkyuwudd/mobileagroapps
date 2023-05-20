@@ -13,6 +13,7 @@ import 'package:mobileagroapps/screen/shop/detail_product.dart';
 import 'package:mobileagroapps/screen/shop/order_product.dart';
 import 'package:mobileagroapps/screen/shop/perbayaran_view.dart';
 import 'package:mobileagroapps/screen/shop/unggah_gambar.dart';
+import 'package:mobileagroapps/screen/tambahlokasi_view.dart';
 
 class Routes {
   // static const String loginPageRoute = LoginPage.routename;
@@ -39,7 +40,8 @@ class Routes {
     DaftarPremium.routename : (context) => DaftarPremium(),
     DaftarToko.routename :(context) => DaftarToko(),
     MenungguPersetujuanToko.routename :(context) => MenungguPersetujuanToko(),
-    Tokoditerima.routename :(context) => Tokoditerima()
+    Tokoditerima.routename :(context) => Tokoditerima(),
+    TambahLokasi.routename :(context) => TambahLokasi()
 
 
 

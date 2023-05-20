@@ -39,9 +39,6 @@ class _ProductGridState extends State<ProductGrid> {
   @override
   Widget build(BuildContext context) {
     var loadproduk = Provider.of<ProductProvider>(context);
-    setState(() {
-      
-    });
     try {
       return Container(
           margin: EdgeInsets.all(20),

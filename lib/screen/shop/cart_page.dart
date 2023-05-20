@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:mobileagroapps/controller/keranjang_controller.dart';
 import 'package:mobileagroapps/controller/order_controller.dart';
-import 'package:mobileagroapps/controller/user_repo.dart';
+import 'package:mobileagroapps/controller/user_controller.dart';
 import 'package:mobileagroapps/screen/shop/perbayaran_view.dart';
 import 'package:provider/provider.dart';
 

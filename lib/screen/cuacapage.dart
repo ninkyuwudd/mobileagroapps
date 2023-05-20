@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:mobileagroapps/model/user_model.dart';
 import 'package:mobileagroapps/controller/cuaca_controller.dart';
-import 'package:mobileagroapps/controller/user_repo.dart';
+import 'package:mobileagroapps/controller/user_controller.dart';
 import 'package:mobileagroapps/widget/cuaca/cuacatemp_widget.dart';
 import 'package:mobileagroapps/widget/cuaca/forecuacapage.dart';
 import 'package:mobileagroapps/widget/cuaca/saran.dart';
@@ -24,8 +24,12 @@ class _CuacaPageState extends State<CuacaPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    var loadlokasiuser = Provider.of<UserProvider>(context, listen: false);
+    loadlokasiuser.fethcdatauser();
+    var getlokasi = loadlokasiuser.akun;
     Provider.of<CuacaProvider>(context, listen: false).getCuacaAll();
     Provider.of<CuacaProvider>(context, listen: false).getForecastCuaca();
+     Provider.of<CuacaProvider>(context, listen: false).updateLocation(getlokasi[widget.idx].lokasi.toString());
 
   }
 
