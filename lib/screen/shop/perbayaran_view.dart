@@ -87,6 +87,8 @@ class _PembayaranState extends State<Pembayaran> {
               Navigator.pop(context);
             },
             warnabg: Colors.white,
+            icon: Icons.done,
+            warnatxt: Colors.black,
             )
           ],
         ),

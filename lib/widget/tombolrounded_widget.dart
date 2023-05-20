@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 class RoundedButtonWidget extends StatelessWidget {
   final String text;
   final Color warnabg;
+  final Color warnatxt;
+  final IconData icon;
   final Function() fungsi;
-  RoundedButtonWidget({super.key, required this.text, required this.fungsi, required this.warnabg});
+  RoundedButtonWidget({super.key, required this.text, required this.fungsi, required this.warnabg, required this.warnatxt, required this.icon});
 
   @override
   Widget build(BuildContext context) {
@@ -18,15 +20,15 @@ class RoundedButtonWidget extends StatelessWidget {
                     padding: EdgeInsets.only(
                         top: 10, bottom: 10, right: 20, left: 20),
                     decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 255, 225, 0),
+                        color: warnabg,
                         borderRadius: BorderRadius.circular(20)),
                     child: Row(
                       children: [
-                        Icon(Icons.all_inbox),
+                        Icon(icon),
                         SizedBox(
                           width: 20,
                         ),
-                        Text(text),
+                        Text(text,style: TextStyle(color: warnatxt),),
                         const Spacer(),
                         Image(image: AssetImage("images/right_row_icon.png")),
                       ],

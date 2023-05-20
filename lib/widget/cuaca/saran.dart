@@ -23,7 +23,8 @@ class _SaranTernakKebunState extends State<SaranTernakKebun> {
     String pupuk = "";
     String pakan = "";
     return Consumer<CuacaProvider>(builder: (context, cuacaProvider, _) {
-      final cuacabesok = cuacaProvider.cuacafrData!;
+      try{
+        final cuacabesok = cuacaProvider.cuacafrData!;
       avgcuacaharian(int awal, int akhir) {
         int count = 0;
         for (int i = awal; i <= akhir; i++) {
@@ -137,6 +138,9 @@ class _SaranTernakKebunState extends State<SaranTernakKebun> {
           )
         ],
       );
+      }catch(e){
+        return Center(child: CircularProgressIndicator(),);
+      }
     });
   }
 }

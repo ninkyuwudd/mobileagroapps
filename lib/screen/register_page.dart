@@ -319,7 +319,8 @@ class _RegisterPageState extends State<RegisterPage> {
                             "gender": value,
                             "phone": phone.text,
                             "password": password.text,
-                            "status": "user"
+                            "status": "user",
+                            "lokasi": ''
                           });
                           
                           // firestoredb

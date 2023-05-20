@@ -10,10 +10,8 @@ import 'package:mobileagroapps/widget/cuaca/saran.dart';
 import 'package:provider/provider.dart';
 
 class CuacaPage extends StatefulWidget {
-
   final int idx;
   CuacaPage({required this.idx});
-
 
   @override
   State<CuacaPage> createState() => _CuacaPageState();
@@ -29,8 +27,8 @@ class _CuacaPageState extends State<CuacaPage> {
     var getlokasi = loadlokasiuser.akun;
     Provider.of<CuacaProvider>(context, listen: false).getCuacaAll();
     Provider.of<CuacaProvider>(context, listen: false).getForecastCuaca();
-     Provider.of<CuacaProvider>(context, listen: false).updateLocation(getlokasi[widget.idx].lokasi.toString());
-
+    Provider.of<CuacaProvider>(context, listen: false)
+        .updateLocation(getlokasi[widget.idx].lokasi.toString());
   }
 
   void _reloadCuaca() {
@@ -79,7 +77,6 @@ class _CuacaPageState extends State<CuacaPage> {
                                   Navigator.of(context).pop();
                                 },
                                 child: Text("Ubah")),
-                            
                           ],
                         ));
               },
@@ -99,16 +96,21 @@ class _CuacaPageState extends State<CuacaPage> {
               child: Image(image: AssetImage("images/logo_only.png"))),
           title: Text(
             "CUACA",
-            style: GoogleFonts.poppins(color: Color.fromARGB(210, 0, 0, 0),),
+            style: GoogleFonts.poppins(
+              color: Color.fromARGB(210, 0, 0, 0),
+            ),
           ),
         ),
         body: SingleChildScrollView(
           child: Container(
             margin: EdgeInsets.only(bottom: 20, left: 20, right: 20, top: 30),
             child:
-                Consumer<CuacaProvider>(builder: (context, cuacaProvider, _) {
-              if (cuacaProvider.cuacadata == null) {
-                return CircularProgressIndicator();
+              Consumer<CuacaProvider>(builder: (context, cuacaProvider, _) {
+              try{
+                if (cuacaProvider.cuacadata == null) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
               } else {
                 final cuacaData = cuacaProvider.cuacadata!;
                 return Column(
@@ -207,9 +209,9 @@ class _CuacaPageState extends State<CuacaPage> {
                       height: 10,
                     ),
 
-                    // ini adalah forecast untuk 5 hari kedepan per 3 jam 
+                    // ini adalah forecast untuk 5 hari kedepan per 3 jam
                     ForecastCuacaPage(),
-                    
+
                     CuacaTempWidget(
                         main: cuacaData.cuacanya.first.main,
                         description: cuacaData.cuacanya.first.description),
@@ -231,6 +233,12 @@ class _CuacaPageState extends State<CuacaPage> {
                     )
                   ],
                 );
+              }
+              }catch(e){
+                return Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height,
+                  child: Center(child: CircularProgressIndicator(),));
               }
             }),
           ),
