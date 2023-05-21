@@ -16,6 +16,7 @@ class UnggahGambar extends StatefulWidget {
 class _UnggahGambarState extends State<UnggahGambar> {
   @override
   Widget build(BuildContext context) {
+    var gettokoid = ModalRoute.of(context)?.settings.arguments as String;
     var imgcontroller = Provider.of<PilihUploadfile>(context);
     return Scaffold(
       appBar: AppBar(
@@ -57,7 +58,7 @@ class _UnggahGambarState extends State<UnggahGambar> {
                     backgroundColor: Colors.green,
                     duration: Duration(seconds: 2),
                   ));
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ProductView(namagambar: imgcontroller.pickfile!.name,)));
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ProductView(namagambar: imgcontroller.pickfile!.name,idtoko: gettokoid)));
                 },
                 child: Text("Upload file"))
           ],

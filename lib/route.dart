@@ -10,6 +10,7 @@ import 'package:mobileagroapps/screen/register_page.dart';
 import 'package:mobileagroapps/screen/shop/add_product.dart';
 import 'package:mobileagroapps/screen/shop/cart_page.dart';
 import 'package:mobileagroapps/screen/shop/detail_product.dart';
+import 'package:mobileagroapps/screen/shop/listproduk_view.dart';
 import 'package:mobileagroapps/screen/shop/order_product.dart';
 import 'package:mobileagroapps/screen/shop/perbayaran_view.dart';
 import 'package:mobileagroapps/screen/shop/unggah_gambar.dart';
@@ -41,7 +42,8 @@ class Routes {
     DaftarToko.routename :(context) => DaftarToko(),
     MenungguPersetujuanToko.routename :(context) => MenungguPersetujuanToko(),
     Tokoditerima.routename :(context) => Tokoditerima(),
-    TambahLokasi.routename :(context) => TambahLokasi()
+    TambahLokasi.routename :(context) => TambahLokasi(),
+    ListProdukView.routename :(context) => ListProdukView()
 
 
 

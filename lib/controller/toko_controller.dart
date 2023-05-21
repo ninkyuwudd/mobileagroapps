@@ -7,7 +7,7 @@ class TokoController with ChangeNotifier {
   List<TokoModel> get items {
     return _items;
   }
-
+    String curtokoid = "";
   Future<void> getdatatoko() async {
     final tokodata = await FirebaseFirestore.instance.collection('toko').get();
 
@@ -20,6 +20,11 @@ class TokoController with ChangeNotifier {
             alamat: doc["alamat"],
             gambar: doc["gambar"]))
         .toList();
+    notifyListeners();
+  }
+
+  changedataid(String id){
+    curtokoid = id;
     notifyListeners();
   }
 }

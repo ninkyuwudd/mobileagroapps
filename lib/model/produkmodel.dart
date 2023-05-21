@@ -5,7 +5,7 @@ class ProdukModel with ChangeNotifier {
   final String namaproduk;
   final String deskripsi;
   final int harga;
-  final String idadmin;
+  final String idtoko;
   final String idjenisproduk;
   final int jumlah;
   final String gambar;
@@ -17,7 +17,7 @@ class ProdukModel with ChangeNotifier {
     required this.namaproduk,
     required this.deskripsi,
     required this.harga,
-    required this.idadmin,
+    required this.idtoko,
     required this.idjenisproduk,
     required this.jumlah,
     required this.gambar,
@@ -29,7 +29,7 @@ class ProdukModel with ChangeNotifier {
         namaproduk: json["namaproduk"],
         deskripsi: json["deskripsi"],
         harga: json["harga"],
-        idadmin: json["idadmin"],
+        idtoko: json["idtoko"],
         idjenisproduk: json["idjenisproduk"],
         jumlah: json["jumlah"],
         gambar: json["gambar"],
@@ -40,7 +40,7 @@ class ProdukModel with ChangeNotifier {
         "namaproduk": namaproduk,
         "deskripsi": deskripsi,
         "harga": harga,
-        "idadmin" : idadmin,
+        "idtoko" : idtoko,
         "idjenisproduk" : idjenisproduk,
         "jumlah" : jumlah,
         "gambar": gambar,

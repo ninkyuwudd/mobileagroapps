@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobileagroapps/screen/profile/daftartoko_view.dart';
 import 'package:mobileagroapps/screen/profile/premium_view.dart';
+import 'package:mobileagroapps/screen/shop/listproduk_view.dart';
 import 'dart:io';
 import 'package:provider/provider.dart';
 import '../controller/user_controller.dart';
@@ -211,7 +212,7 @@ class _ProfileUserPageState extends State<ProfileUserPage> {
                         const Spacer(),
                         GestureDetector(
                           onTap: () {
-
+                            Navigator.pushNamed(context, ListProdukView.routename,arguments: widget.idx);
                           },
                           child: const Image(
                               image: AssetImage("images/right_row_icon.png")),

@@ -16,8 +16,6 @@ class _KalkulatorBuahnagaState extends State<KalkulatorBuahnaga> {
   TextEditingController pupuk = TextEditingController();
   @override
   Widget build(BuildContext context) {
-
-  
     return Column(
                 children: [
                   Visibility(

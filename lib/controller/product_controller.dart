@@ -19,6 +19,8 @@ class ProductProvider with ChangeNotifier {
     notifyListeners();
   }
 
+
+
   Future<void> fetchdataproduct() async {
     final productdata =
         await FirebaseFirestore.instance.collection('produk').get();
@@ -29,8 +31,8 @@ class ProductProvider with ChangeNotifier {
             namaproduk: doc["namaproduk"],
             deskripsi: doc["deskripsi"],
             harga: doc["harga"],
-            idadmin: doc["idadmin"],
             idjenisproduk: doc["idjenisproduk"],
+            idtoko: doc["idtoko"],
             jumlah: doc["jumlah"],
             gambar: doc["gambar"]))
         .toList();
@@ -50,8 +52,8 @@ class ProductProvider with ChangeNotifier {
             namaproduk: doc["namaproduk"],
             deskripsi: doc["deskripsi"],
             harga: doc["harga"],
-            idadmin: doc["idadmin"],
             idjenisproduk: doc["idjenisproduk"],
+            idtoko: doc["idtoko"],
             jumlah: doc["jumlah"],
             gambar: doc["gambar"]))
         .toList();
@@ -70,7 +72,28 @@ class ProductProvider with ChangeNotifier {
             namaproduk: doc["namaproduk"],
             deskripsi: doc["deskripsi"],
             harga: doc["harga"],
-            idadmin: doc["idadmin"],
+            idtoko: doc["idtoko"],
+            idjenisproduk: doc["idjenisproduk"],
+            jumlah: doc["jumlah"],
+            gambar: doc["gambar"]))
+        .toList();
+    notifyListeners();
+  }
+
+
+    Future<void> filtertoko(String idtoko) async {
+    final productdata = await FirebaseFirestore.instance.collection('produk').where('idtoko', isEqualTo:idtoko)
+        .get();
+    // QuerySnapshot snapshot = await productdata
+    //     .where('idjenisproduk', isEqualTo: "uuOGJg6bqAgMKc522dFX")
+    //     .get();
+    _items = productdata.docs
+        .map((doc) => ProdukModel(
+            id: doc.id,
+            namaproduk: doc["namaproduk"],
+            deskripsi: doc["deskripsi"],
+            harga: doc["harga"],
+            idtoko: doc["idtoko"],
             idjenisproduk: doc["idjenisproduk"],
             jumlah: doc["jumlah"],
             gambar: doc["gambar"]))
@@ -83,13 +106,17 @@ class ProductProvider with ChangeNotifier {
     return _items.firstWhere((prod) => prod.id == id);
   }
 
-  void additem(String title, int price, String description, String image) {
+  void additem(String title, int price, String description, String image, String idjenisproduk,String idtoko,int jumlah) {
     final newitemdata = Product(
         id: DateTime.now().millisecond.toString(),
         title: title,
         description: description,
         price: price,
-        image: image);
+        image: image,
+        idjenisproudk: idjenisproduk,
+        idtoko: idtoko,
+        jumlah: jumlah
+        );
     // _items.add(newitemdata);
     notifyListeners();
   }

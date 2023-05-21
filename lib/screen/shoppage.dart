@@ -58,17 +58,7 @@ class _ShopPageState extends State<ShopPage> {
               },
             ),
           ),
-          Visibility(
-            visible: getlist[widget.idx].status == "user" ? false : true,
-            child: IconButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, UnggahGambar.routename);
-                },
-                icon: Icon(
-                  Icons.add,
-                  color: Colors.green,
-                )),
-          ),
+          
           PopupMenuButton(
             onSelected: (FilterOptions selectedValue) {
               setState(() {

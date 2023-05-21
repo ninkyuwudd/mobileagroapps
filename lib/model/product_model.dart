@@ -6,13 +6,18 @@ class Product with ChangeNotifier {
   final String description;
   final int price;
   final String image;
+  final String idjenisproudk;
+  final String idtoko;
+  final int jumlah;
 
   Product({
     required this.id,
     required this.title,
     required this.description,
     required this.price,
-    required this.image
+    required this.image,
+    required this.idjenisproudk, required this.idtoko,
+    required this.jumlah
   });
 
   factory Product.fromJson(Map<String, dynamic> json) => Product(
@@ -21,6 +26,9 @@ class Product with ChangeNotifier {
         description: json["description"],
         price: json["price"],
         image: json["image"],
+        idjenisproudk: json["idjenisproduk"],
+        idtoko: json["idtoko"],
+        jumlah: json["jumlah"]
     );
 
     Map<String, dynamic> toJson() => {
@@ -29,6 +37,9 @@ class Product with ChangeNotifier {
         "description": description,
         "price": price,
         "image": image,
+        "idjenisproduk" : idjenisproudk,
+        "idtoko" : idtoko,
+        "jumlah" : jumlah
     };
 
 }

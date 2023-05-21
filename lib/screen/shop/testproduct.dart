@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:mobileagroapps/controller/toko_controller.dart';
 import 'package:mobileagroapps/model/produkmodel.dart';
 import 'package:mobileagroapps/navigationbar.dart';
 import 'package:mobileagroapps/controller/product_controller.dart';
@@ -15,11 +16,10 @@ import '../../widget/rounded_value_field.dart';
 enum jenisproduk { pupuk, pakan }
 
 class ProductView extends StatefulWidget {
-
+  final String idtoko;
   final String namagambar;
 
-
-  ProductView({required this.namagambar});
+  ProductView({required this.namagambar, required this.idtoko});
 
   @override
   State<ProductView> createState() => _ProductViewState();
@@ -44,7 +44,7 @@ String imageurl = "";
     });
   }
 
-      var nama = TextEditingController();
+    var nama = TextEditingController();
 
     var deskripsi = TextEditingController();
 
@@ -65,9 +65,10 @@ String imageurl = "";
 
   @override
   Widget build(BuildContext context) {
-    getImageurl();
+    
     var records = FirebaseFirestore.instance.collection("produk");
     var usrdata = Provider.of<UserProvider>(context);
+    var loadtoko = Provider.of<TokoController>(context);
     // var loadproduk = Provider.of<ProductProvider>(context);
     return Scaffold(
         appBar: AppBar(
@@ -135,6 +136,7 @@ String imageurl = "";
                     ),
                     ElevatedButton(
                         onPressed: () {
+                          getImageurl();
                           print(imageurl);
                           String value = _character.toString().split('.').last;
                           String idjenis = "";
@@ -150,7 +152,7 @@ String imageurl = "";
                             "namaproduk": nama.text,
                             "deskripsi": deskripsi.text,
                             "harga": int.parse(harga.text),
-                            "idadmin": usrdata.curuserid,
+                            "idtoko": widget.idtoko,
                             "idjenisproduk": idjenis,
                             "jumlah": int.parse(jumlah.text),
                             "gambar": imageurl,
