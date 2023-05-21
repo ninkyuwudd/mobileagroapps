@@ -11,11 +11,12 @@ class Kalkulatorkambing extends StatefulWidget {
 }
 
 class _KalkulatorkambingState extends State<Kalkulatorkambing> {
-  @override
-  Widget build(BuildContext context) {
-      var pakan_ampas;
+  var pakan_ampas;
   var pakan_rumput;
   TextEditingController pakanfield = TextEditingController();
+  @override
+  Widget build(BuildContext context) {
+
     return Column(
                 children: [
                   Visibility(

@@ -10,12 +10,14 @@ class KalkulatorBuahnaga extends StatefulWidget {
 }
 
 class _KalkulatorBuahnagaState extends State<KalkulatorBuahnaga> {
-  @override
-  Widget build(BuildContext context) {
-      var kandang_hektar;
+  var kandang_hektar;
   var pupuk_kimia_cair;
   var pupuk_kimia;
   TextEditingController pupuk = TextEditingController();
+  @override
+  Widget build(BuildContext context) {
+
+  
     return Column(
                 children: [
                   Visibility(

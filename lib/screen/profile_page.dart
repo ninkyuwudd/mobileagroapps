@@ -159,32 +159,35 @@ class _ProfileUserPageState extends State<ProfileUserPage> {
                     ),
                   ),
                 ),
-                GestureDetector(
-                  onTap: (){
-                    Navigator.pushNamed(context, DaftarToko.routename);
-                  },
-                  child: Container(
-                    margin:
-                        EdgeInsets.only(top: 10, right: 25, left: 25, bottom: 10),
-                    padding:
-                        EdgeInsets.only(top: 10, bottom: 10, right: 20, left: 20),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20)),
-                    child: Row(
-                      children: [
-                        Icon(Icons.shopping_cart),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        Text("Daftar Toko"),
-                        const Spacer(),
-                        GestureDetector(
-                          onTap: () {},
-                          child: const Image(
-                              image: AssetImage("images/right_row_icon.png")),
-                        ),
-                      ],
+                Visibility(
+                  visible: akunnya[widget.idx].status == "user"? true : false ,
+                  child: GestureDetector(
+                    onTap: (){
+                      Navigator.pushNamed(context, DaftarToko.routename,arguments: akunnya[widget.idx].id,);
+                    },
+                    child: Container(
+                      margin:
+                          EdgeInsets.only(top: 10, right: 25, left: 25, bottom: 10),
+                      padding:
+                          EdgeInsets.only(top: 10, bottom: 10, right: 20, left: 20),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20)),
+                      child: Row(
+                        children: [
+                          Icon(Icons.shopping_cart),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Text("Daftar Toko"),
+                          const Spacer(),
+                          GestureDetector(
+                            onTap: () {},
+                            child: const Image(
+                                image: AssetImage("images/right_row_icon.png")),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -207,7 +210,9 @@ class _ProfileUserPageState extends State<ProfileUserPage> {
                         Text("Daftar Produk"),
                         const Spacer(),
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+
+                          },
                           child: const Image(
                               image: AssetImage("images/right_row_icon.png")),
                         ),

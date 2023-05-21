@@ -1,7 +1,10 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mobileagroapps/controller/pilihfile_controller.dart';
+import 'package:mobileagroapps/controller/toko_controller.dart';
+import 'package:mobileagroapps/controller/user_controller.dart';
 import 'package:mobileagroapps/screen/profile/uploadtoko_view.dart';
 import 'package:mobileagroapps/widget/rounded_value_field.dart';
 import 'package:provider/provider.dart';
@@ -16,6 +19,14 @@ class DaftarToko extends StatefulWidget {
 }
 
 class _DaftarTokoState extends State<DaftarToko> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Provider.of<TokoController>(context, listen: false).getdatatoko();
+    Provider.of<UserProvider>(context, listen: false).fethcdatauser();
+  }
+
   var namatoko = TextEditingController();
   var emailtoko = TextEditingController();
   var nomorhp = TextEditingController();
@@ -25,8 +36,16 @@ class _DaftarTokoState extends State<DaftarToko> {
   bool emailtokock = false;
   bool nomorhpck = false;
   bool alamatck = false;
+
   @override
   Widget build(BuildContext context) {
+    var loadtoko = Provider.of<TokoController>(context, listen: false);
+    var dbtoko = FirebaseFirestore.instance.collection("toko");
+    var dbuser = FirebaseFirestore.instance.collection("users");
+    var loaduser = Provider.of<UserProvider>(context, listen: false);
+    var getid = ModalRoute.of(context)?.settings.arguments as String;
+    var gettoko = loadtoko.items;
+    var getuser = loaduser.akun;
     var imgcontroller = Provider.of<PilihUploadfile>(context);
     return Scaffold(
       appBar: AppBar(
@@ -89,14 +108,30 @@ class _DaftarTokoState extends State<DaftarToko> {
                       child: Text("Pilih gambar")),
                 ],
               ),
-              SizedBox(height: 20,),
+              SizedBox(
+                height: 20,
+              ),
               ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     minimumSize: Size(double.infinity,
                         48), // Atur lebar sesuai kebutuhan Anda
                   ),
-                  onPressed: () {
-                    // imgcontroller.uploadfile();
+                  onPressed: () async {
+                    imgcontroller.uploadfile();
+                    var newDocRef = await dbtoko.add({
+                      "namatoko": namatoko.text,
+                      "email": emailtoko.text,
+                      "nomorhp": nomorhp.text,
+                      "alamat": alamat.text,
+                      "gambar": ""
+                    });
+                    String newId = newDocRef.id;
+                    dbuser.doc(getid).update({
+                      "toko" : newId,
+                      "status" : "admin"
+                    });
+
+                    // });
                     ScaffoldMessenger.of(context).hideCurrentSnackBar();
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                       content: Text(
@@ -106,7 +141,9 @@ class _DaftarTokoState extends State<DaftarToko> {
                       backgroundColor: Colors.green,
                       duration: Duration(seconds: 2),
                     ));
-                    Navigator.pushReplacementNamed(context, MenungguPersetujuanToko.routename);
+
+                    // Navigator.pushReplacementNamed(
+                    //     context, MenungguPersetujuanToko.routename);
                   },
                   child: Text("Upload file"))
             ],
