@@ -23,6 +23,23 @@ class TokoController with ChangeNotifier {
     notifyListeners();
   }
 
+
+    Future<void> getmydatatoko(String idnya) async {
+    final tokodata = await FirebaseFirestore.instance.collection('toko').where("id",isEqualTo: idnya).get();
+
+    _items = tokodata.docs
+        .map((doc) => TokoModel(
+            id: doc.id,
+            namatoko: doc["namatoko"],
+            email: doc["email"],
+            nomorhp: doc["nomorhp"],
+            alamat: doc["alamat"],
+            gambar: doc["gambar"]))
+        .toList();
+    notifyListeners();
+  }
+
+
   changedataid(String id){
     curtokoid = id;
     notifyListeners();

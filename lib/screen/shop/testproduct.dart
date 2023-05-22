@@ -39,7 +39,7 @@ String imageurl = "";
     String get ="file/${widget.namagambar}";
     Reference storageReference = storage.ref().child(get);
     imageurl = await storageReference.getDownloadURL();
-    setState(() {
+    setState((){
       
     });
   }
@@ -69,6 +69,7 @@ String imageurl = "";
     var records = FirebaseFirestore.instance.collection("produk");
     var usrdata = Provider.of<UserProvider>(context);
     var loadtoko = Provider.of<TokoController>(context);
+    getImageurl();
     // var loadproduk = Provider.of<ProductProvider>(context);
     return Scaffold(
         appBar: AppBar(
@@ -130,6 +131,7 @@ String imageurl = "";
                         onChanged: (jenisproduk? value) {
                           setState(() {
                             _character = value;
+                            print(value);
                           });
                         },
                       ),
@@ -141,7 +143,7 @@ String imageurl = "";
                           String value = _character.toString().split('.').last;
                           String idjenis = "";
                           if (value == "pakan") {
-                            idjenis = "qPGLHnd6lAt4f6a7q7AS";
+                            idjenis = "uuOGJg6bqAgMKc522dFX";
                           } else {
                             idjenis = "qPGLHnd6lAt4f6a7q7AS";
                           }

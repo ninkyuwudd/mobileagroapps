@@ -26,9 +26,10 @@ class _ShopPageState extends State<ShopPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    var cek = 
-    Provider.of<UserProvider>(context, listen: false).fethcdatauser();
+    var cek = Provider.of<UserProvider>(context, listen: false).fethcdatauser();
   }
+
+  String filter = "";
 
   @override
   Widget build(BuildContext context) {
@@ -58,21 +59,34 @@ class _ShopPageState extends State<ShopPage> {
               },
             ),
           ),
-          
           PopupMenuButton(
             onSelected: (FilterOptions selectedValue) {
-              setState(() {
-                if (selectedValue == FilterOptions.pupuk) {
+              if (selectedValue == FilterOptions.pupuk) {
+                setState(() {
                   getdataproduk.gantifilter("pupuk");
-                  // _showOnlyFavorites = true;
-                }
-                if (selectedValue == FilterOptions.pakan) {
+                  getdataproduk.filterpupuk();
+                  filter = "pupuk";
+                });
+                print("ini pupuk");
+                // _showOnlyFavorites = true;
+              }
+              if (selectedValue == FilterOptions.pakan) {
+                setState(() {
                   getdataproduk.gantifilter("pakan");
-                  // _showOnlyFavorites = true;
-                } else {
-                  getdataproduk.gantifilter("semua");
-                }
-              });
+                  getdataproduk.filterpakan();
+                  filter = "pakan";
+                });
+                print("ini pakan");
+
+                // _showOnlyFavorites = true;
+              } else {
+                getdataproduk.gantifilter("semua");
+                getdataproduk.filtertprodukoko(getlist[widget.idx].toko.toString());
+                print("ini semua");
+                setState(() {
+                  filter = "semua";
+                });
+              }
             },
             icon: Icon(
               Icons.more_vert,
@@ -95,7 +109,7 @@ class _ShopPageState extends State<ShopPage> {
           )
         ],
       ),
-      body: ProductGrid(),
+      body: ProductGrid(cekfilter: filter,),
     );
   }
 }

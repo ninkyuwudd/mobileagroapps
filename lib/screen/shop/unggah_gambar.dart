@@ -58,6 +58,7 @@ class _UnggahGambarState extends State<UnggahGambar> {
                     backgroundColor: Colors.green,
                     duration: Duration(seconds: 2),
                   ));
+               
                   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ProductView(namagambar: imgcontroller.pickfile!.name,idtoko: gettokoid)));
                 },
                 child: Text("Upload file"))

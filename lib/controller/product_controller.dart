@@ -39,6 +39,24 @@ class ProductProvider with ChangeNotifier {
     notifyListeners();
   }
 
+    Future<void> fetchdataproductsendiri(String iduser) async {
+    final productdata =
+        await FirebaseFirestore.instance.collection('produk').where('idtoko',isNotEqualTo: iduser).get();
+
+    _items = productdata.docs
+        .map((doc) => ProdukModel(
+            id: doc.id,
+            namaproduk: doc["namaproduk"],
+            deskripsi: doc["deskripsi"],
+            harga: doc["harga"],
+            idjenisproduk: doc["idjenisproduk"],
+            idtoko: doc["idtoko"],
+            jumlah: doc["jumlah"],
+            gambar: doc["gambar"]))
+        .toList();
+    notifyListeners();
+  }
+
   Future<void> filterpupuk() async {
     final productdata = await FirebaseFirestore.instance.collection('produk').where('idjenisproduk', isEqualTo: "qPGLHnd6lAt4f6a7q7AS")
         .get();
@@ -80,13 +98,27 @@ class ProductProvider with ChangeNotifier {
     notifyListeners();
   }
 
+      Future<void> filtertprodukoko(String idtoko) async {
+    final productdata = await FirebaseFirestore.instance.collection('produk').where('idtoko', isNotEqualTo:idtoko)
+        .get();
+    _items = productdata.docs
+        .map((doc) => ProdukModel(
+            id: doc.id,
+            namaproduk: doc["namaproduk"],
+            deskripsi: doc["deskripsi"],
+            harga: doc["harga"],
+            idtoko: doc["idtoko"],
+            idjenisproduk: doc["idjenisproduk"],
+            jumlah: doc["jumlah"],
+            gambar: doc["gambar"]))
+        .toList();
+    notifyListeners();
+  }
+
 
     Future<void> filtertoko(String idtoko) async {
     final productdata = await FirebaseFirestore.instance.collection('produk').where('idtoko', isEqualTo:idtoko)
         .get();
-    // QuerySnapshot snapshot = await productdata
-    //     .where('idjenisproduk', isEqualTo: "uuOGJg6bqAgMKc522dFX")
-    //     .get();
     _items = productdata.docs
         .map((doc) => ProdukModel(
             id: doc.id,

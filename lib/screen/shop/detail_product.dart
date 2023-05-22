@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_launcher_icons/xml_templates.dart';
 import 'package:mobileagroapps/controller/keranjang_controller.dart';
 import 'package:mobileagroapps/controller/product_controller.dart';
+import 'package:mobileagroapps/controller/toko_controller.dart';
+import 'package:mobileagroapps/controller/user_controller.dart';
 import 'package:mobileagroapps/screen/shop/cart_page.dart';
 import 'package:mobileagroapps/screen/shop/order_product.dart';
 import 'package:mobileagroapps/widget/shop/order_item.dart';
@@ -16,14 +18,28 @@ class DetailProductScreen extends StatefulWidget {
 }
 
 class _DetailProductScreenState extends State<DetailProductScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    final load = Provider.of<UserProvider>(context,listen: false);
+      load.fethcdatauser();
+      final getdata = load.akun;
+    Future.delayed(Duration.zero, () {
+      var getidx = ModalRoute.of(context)?.settings.arguments as int;
+      Provider.of<ProductProvider>(context, listen: false).filtertoko(getdata[getidx].toko.toString());
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     final cart = Provider.of<CartProvider>(context, listen: false);
+    // final toko = Provider.of<TokoController>(context, listen: false);
+    // final gettoko = toko.items;
     final produkid = ModalRoute.of(context)?.settings.arguments as String;
     final load = Provider.of<ProductProvider>(context);
     // load.fetchdataproduct();
-    final loadproduk =load.finbyid(produkid);
+    final loadproduk = load.finbyid(produkid);
     return Scaffold(
       appBar: AppBar(
         title: Text("Detail Product"),
@@ -75,61 +91,63 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
                     Divider(),
                     ListTile(
                       leading: Icon(Icons.shop_2_outlined),
-                      title: Text("Nama Toko"),
+                      title: Text("namatoko"),
                       subtitle: Text("kota Bekasi"),
                     )
                   ],
                 ),
               ),
-              SizedBox(height: 20,),
-           Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ElevatedButton(
+              SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context)
+                          .pushNamed(OrderProductPage.routename);
+                      cart.additem(loadproduk.id, loadproduk.harga,
+                          loadproduk.namaproduk);
+                      Navigator.of(context).pushNamed(CartPage.routename);
+                    },
+                    child: Text(
+                      "Beli Langsung",
+                      style: TextStyle(color: Colors.green),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      elevation: 10,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  ElevatedButton(
                       onPressed: () {
-                        Navigator.of(context).pushNamed(OrderProductPage.routename);
-                        cart.additem(
-                            loadproduk.id, loadproduk.harga, loadproduk.namaproduk);
-                        Navigator.of(context).pushNamed(CartPage.routename);
-                      },
-                      child: Text(
-                        "Beli Langsung",
-                        style: TextStyle(color: Colors.green),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        elevation: 10,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    ElevatedButton(
-                        onPressed: () {
-                          print(loadproduk.id);
-                          cart.additem(
-                              loadproduk.id, loadproduk.harga, loadproduk.namaproduk);
-                          ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                'Barang berhasil ditambahkan',
-                                textAlign: TextAlign.center,
-                              ),
-                              backgroundColor: Colors.green,
-                              duration: Duration(seconds: 2),
-                              action: SnackBarAction(
-                                  label: "UNDO",
-                                  onPressed: () {
-                                    cart.remosingleitem(loadproduk.id);
-                                  }),
+                        print(loadproduk.id);
+                        cart.additem(loadproduk.id, loadproduk.harga,
+                            loadproduk.namaproduk);
+                        ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              'Barang berhasil ditambahkan',
+                              textAlign: TextAlign.center,
                             ),
-                          );
-                        },
-                        child: Text("+ Keranjang"))
-                  ],
-                ),
-              
+                            backgroundColor: Colors.green,
+                            duration: Duration(seconds: 2),
+                            action: SnackBarAction(
+                                label: "UNDO",
+                                onPressed: () {
+                                  cart.remosingleitem(loadproduk.id);
+                                }),
+                          ),
+                        );
+                      },
+                      child: Text("+ Keranjang"))
+                ],
+              ),
             ],
           ),
         ),

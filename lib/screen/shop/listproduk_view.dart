@@ -34,7 +34,7 @@ class _ListProdukViewState extends State<ListProdukView> {
   Widget build(BuildContext context) {
     var loaduser = Provider.of<UserProvider>(context, listen: false);
     var getuser = loaduser.akun;
-    var getidx = ModalRoute.of(context)?.settings.arguments as int;
+    var getidxtoko = ModalRoute.of(context)?.settings.arguments as int;
     var loadproduk = Provider.of<ProductProvider>(context);
     var getproduk = loadproduk.items;
     var loadtoko = Provider.of<TokoController>(context);
@@ -46,18 +46,53 @@ class _ListProdukViewState extends State<ListProdukView> {
         actions: [
           IconButton(
               onPressed: () {
-                Navigator.pushNamed(context, UnggahGambar.routename,arguments:getuser[getidx].toko );
+    
+                
+                Navigator.pushNamed(context, UnggahGambar.routename,arguments: getuser[getidxtoko].toko);
               },
               icon: Icon(
                 Icons.add,
               )),
         ],
       ),
-      body: Container(
-        child: Column(
-          children: [],
-        ),
-      ),
+      body: ListView.builder(
+        itemCount: getproduk.length,
+        itemBuilder: (ctx,idx){
+          return Container(
+            margin: EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                  color: Color.fromARGB(18, 0, 0, 0),
+                  blurRadius: 2,
+                  spreadRadius: 4
+                )
+              ]
+            ),
+            child: Column(
+              children: [
+                Container(
+                  height: 100,
+                  
+                  decoration: BoxDecoration(
+                   image: DecorationImage(image:NetworkImage(getproduk[idx].gambar),fit: BoxFit.cover),
+                   
+                  ),
+                  
+                ),
+                Container(
+                  child: ListTile(
+                    title: Text(getproduk[idx].namaproduk),
+                    trailing: Icon(Icons.edit),
+                    
+                  ),
+                ),
+              ],
+            ),
+          );
+        })
     );
   }
 }

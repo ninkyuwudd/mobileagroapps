@@ -9,7 +9,8 @@ import 'package:provider/provider.dart';
 import '../../model/produkmodel.dart';
 
 class ProductGrid extends StatefulWidget {
-  const ProductGrid({super.key});
+  final String cekfilter;
+  ProductGrid({super.key, required this.cekfilter});
 
   @override
   State<ProductGrid> createState() => _ProductGridState();
@@ -21,23 +22,26 @@ class _ProductGridState extends State<ProductGrid> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    var cek = Provider.of<ProductProvider>(context,listen: false).setfilter;
-    if(cek == "pakan"){
-      Provider.of<ProductProvider>(context,listen: false).filterpakan();
-
-    }else if(cek == "pupuk"){
-      Provider.of<ProductProvider>(context,listen: false).filterpupuk();
-      
-    }else{
-      Provider.of<ProductProvider>(context,listen: false).fetchdataproduct();
-      
-    }
-    
-    
   }
+
+  // filterfunc(){
+  //   // var cek = Provider.of<ProductProvider>(context,listen: false).setfilter;
+  //   if(widget.cekfilter == "pakan"){
+  //     Provider.of<ProductProvider>(context,listen: false).filterpakan();
+
+  //   }else if(widget.cekfilter == "pupuk"){
+  //     Provider.of<ProductProvider>(context,listen: false).filterpupuk();
+      
+  //   }else{
+  //     Provider.of<ProductProvider>(context,listen: false).fetchdataproduct();
+      
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
+    print(widget.cekfilter);
+    // filterfunc();
     var loadproduk = Provider.of<ProductProvider>(context);
     try {
       return Container(
