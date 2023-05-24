@@ -26,7 +26,10 @@ class _ShopPageState extends State<ShopPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    var cek = Provider.of<UserProvider>(context, listen: false).fethcdatauser();
+    var getdatauser = Provider.of<UserProvider>(context, listen: false);
+    getdatauser.fethcdatauser();
+    var getlist = getdatauser.akun;
+    Provider.of<ProductProvider>(context,listen: false).filtertprodukoko(getlist[widget.idx].toko.toString());
   }
 
   String filter = "";
@@ -61,31 +64,17 @@ class _ShopPageState extends State<ShopPage> {
           ),
           PopupMenuButton(
             onSelected: (FilterOptions selectedValue) {
+              print(selectedValue.name);
               if (selectedValue == FilterOptions.pupuk) {
-                setState(() {
-                  getdataproduk.gantifilter("pupuk");
-                  getdataproduk.filterpupuk();
-                  filter = "pupuk";
-                });
+                getdataproduk.filterpupuk(getlist[widget.idx].toko.toString());
                 print("ini pupuk");
-                // _showOnlyFavorites = true;
               }
-              if (selectedValue == FilterOptions.pakan) {
-                setState(() {
-                  getdataproduk.gantifilter("pakan");
-                  getdataproduk.filterpakan();
-                  filter = "pakan";
-                });
+              else if (selectedValue == FilterOptions.pakan) {
+                getdataproduk.filterpakan(getlist[widget.idx].toko.toString());
                 print("ini pakan");
-
-                // _showOnlyFavorites = true;
               } else {
-                getdataproduk.gantifilter("semua");
                 getdataproduk.filtertprodukoko(getlist[widget.idx].toko.toString());
                 print("ini semua");
-                setState(() {
-                  filter = "semua";
-                });
               }
             },
             icon: Icon(

@@ -1,12 +1,15 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:email_validator/email_validator.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:mobileagroapps/controller/pilihfile_controller.dart';
 import 'package:mobileagroapps/controller/toko_controller.dart';
 import 'package:mobileagroapps/controller/user_controller.dart';
 import 'package:mobileagroapps/screen/profile/uploadtoko_view.dart';
 import 'package:mobileagroapps/widget/rounded_value_field.dart';
+import 'package:phone_number/phone_number.dart';
 import 'package:provider/provider.dart';
 
 class DaftarToko extends StatefulWidget {
@@ -19,6 +22,8 @@ class DaftarToko extends StatefulWidget {
 }
 
 class _DaftarTokoState extends State<DaftarToko> {
+  FirebaseStorage storage = FirebaseStorage.instance;
+  String imageurl = "";
   @override
   void initState() {
     // TODO: implement initState
@@ -27,10 +32,22 @@ class _DaftarTokoState extends State<DaftarToko> {
     Provider.of<UserProvider>(context, listen: false).fethcdatauser();
   }
 
+    Future<void> getImageurl(String namaimg) async{
+    String get ="file/$namaimg";
+    Reference storageReference = storage.ref().child(get);
+    imageurl = await storageReference.getDownloadURL();
+    setState((){
+      
+    });
+  }
+
   var namatoko = TextEditingController();
   var emailtoko = TextEditingController();
   var nomorhp = TextEditingController();
   var alamat = TextEditingController();
+  
+  bool textemail = true;
+  bool phnumber = true;
 
   bool namatokock = false;
   bool emailtokock = false;
@@ -47,6 +64,7 @@ class _DaftarTokoState extends State<DaftarToko> {
     var gettoko = loadtoko.items;
     var getuser = loaduser.akun;
     var imgcontroller = Provider.of<PilihUploadfile>(context);
+    getImageurl(imgcontroller.pickfile!.name);
     return Scaffold(
       appBar: AppBar(
         title: Text("Daftar Toko"),
@@ -62,16 +80,89 @@ class _DaftarTokoState extends State<DaftarToko> {
                   title: "Nama Toko",
                   hover: "masukkan nama toko...",
                   check: namatokock),
-              RoundeValueFieldWhiteValue(
-                  control: emailtoko,
-                  title: "Email Toko",
-                  hover: "masukkan email...",
-                  check: emailtokock),
-              RoundeValueFieldWhiteValue(
-                  control: nomorhp,
-                  title: "Nomor hp",
-                  hover: "masukkan nomor hp...",
-                  check: nomorhpck),
+              Text(
+                "Email",
+                style: TextStyle(
+                    color: Color.fromARGB(255, 67, 67, 67),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              TextField(
+                onChanged: (value) {
+                  if (value.isEmpty) {
+                    setState(() {
+                      emailtokock = true;
+                    });
+                  } else {
+                    emailtokock = false;
+                  }
+                  setState(() {
+                    textemail = EmailValidator.validate(value);
+                  });
+                },
+                controller: emailtoko,
+                decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 10),
+                    border: const OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20))),
+                    hintText: "masukkan email...",
+                    fillColor: Colors.white,
+                    filled: true,
+                    errorText: emailtokock
+                        ? "email tidak bisa kosong"
+                        : textemail
+                            ? null
+                            : "email tidak valid"),
+              ),
+              Text(
+                "Nomor Hp",
+                style: TextStyle(
+                    color: Color.fromARGB(255, 67, 67, 67),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              TextField(
+                onChanged: (value) async {
+                  if (value.isEmpty) {
+                    setState(() {
+                      nomorhpck = true;
+                    });
+                  } else {
+                    nomorhpck = false;
+                  }
+
+                  bool chvalidnumb =
+                      await PhoneNumberUtil().validate('+62$value');
+                  setState(() {
+                    phnumber = chvalidnumb;
+                  });
+
+                  print(phnumber);
+                },
+                keyboardType: TextInputType.number,
+                controller: nomorhp,
+                decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 10),
+                    border: const OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20))),
+                    hintText: "masukkan nomor hp...",
+                    fillColor: Colors.white,
+                    filled: true,
+                    errorText: nomorhpck
+                        ? "nomor hp tidak bisa kosong"
+                        : phnumber
+                            ? null
+                            : "nomor hp tidak valid"),
+              ),
+              SizedBox(height: 5,),
               RoundeValueFieldWhiteValue(
                   control: alamat,
                   title: "Alamat Toko",
@@ -117,33 +208,61 @@ class _DaftarTokoState extends State<DaftarToko> {
                         48), // Atur lebar sesuai kebutuhan Anda
                   ),
                   onPressed: () async {
-                    imgcontroller.uploadfile();
-                    var newDocRef = await dbtoko.add({
-                      "namatoko": namatoko.text,
-                      "email": emailtoko.text,
-                      "nomorhp": nomorhp.text,
-                      "alamat": alamat.text,
-                      "gambar": ""
-                    });
-                    String newId = newDocRef.id;
-                    dbuser.doc(getid).update({
-                      "toko" : newId,
-                      "status" : "admin"
-                    });
+                    print("nice");
+                   setState(() {
+                      if (namatoko.text.isEmpty) {
+                      namatokock = true;
+                    } else {
+                      namatokock = false;
+                    }
+                    if (alamat.text.isEmpty) {
+                      alamatck = true;
+                    } else {
+                      alamatck = false;
+                    }
+                    if (emailtoko.text.isEmpty) {
+                      emailtokock = true;
+                    } else {
+                      emailtokock = false;
+                    }
+                    if (nomorhp.text.isEmpty) {
+                      nomorhpck = true;
+                    } else {
+                      nomorhpck = false;
+                    }
+                   });
+                    if (nomorhpck == false &&
+                        emailtokock == false &&
+                        alamatck == false &&
+                        namatokock == false) {
+                      imgcontroller.uploadfile();
+                      var newDocRef = await dbtoko.add({
+                        "namatoko": namatoko.text,
+                        "email": emailtoko.text,
+                        "nomorhp": nomorhp.text,
+                        "alamat": alamat.text,
+                        "gambar": imageurl
+                      });
+                      String newId = newDocRef.id;
+                      dbuser
+                          .doc(getid)
+                          .update({"toko": newId, "status": "admin"});
+                      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text(
+                          'Submit Data Successfully',
+                          textAlign: TextAlign.center,
+                        ),
+                        backgroundColor: Colors.green,
+                        duration: Duration(seconds: 2),
+                      ));
+                                          Navigator.pushReplacementNamed(
+                        context, MenungguPersetujuanToko.routename);
+                    }
 
                     // });
-                    ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text(
-                        'Submit Data Successfully',
-                        textAlign: TextAlign.center,
-                      ),
-                      backgroundColor: Colors.green,
-                      duration: Duration(seconds: 2),
-                    ));
 
-                    // Navigator.pushReplacementNamed(
-                    //     context, MenungguPersetujuanToko.routename);
+
                   },
                   child: Text("Upload file"))
             ],

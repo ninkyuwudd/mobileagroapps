@@ -57,8 +57,8 @@ class ProductProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> filterpupuk() async {
-    final productdata = await FirebaseFirestore.instance.collection('produk').where('idjenisproduk', isEqualTo: "qPGLHnd6lAt4f6a7q7AS")
+  Future<void> filterpupuk(String idtoko) async {
+    final productdata = await FirebaseFirestore.instance.collection('produk').where("idtoko",isNotEqualTo: idtoko).where('idjenisproduk', isEqualTo: "qPGLHnd6lAt4f6a7q7AS")
         .get();
     // QuerySnapshot snapshot = await productdata
     //     .where('idjenisproduk', isEqualTo: "qPGLHnd6lAt4f6a7q7AS")
@@ -78,8 +78,8 @@ class ProductProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> filterpakan() async {
-    final productdata = await FirebaseFirestore.instance.collection('produk').where('idjenisproduk', isEqualTo: "uuOGJg6bqAgMKc522dFX")
+  Future<void> filterpakan(String idtoko) async {
+    final productdata = await FirebaseFirestore.instance.collection('produk').where("idtoko",isNotEqualTo: idtoko).where('idjenisproduk', isEqualTo: "uuOGJg6bqAgMKc522dFX")
         .get();
     // QuerySnapshot snapshot = await productdata
     //     .where('idjenisproduk', isEqualTo: "uuOGJg6bqAgMKc522dFX")

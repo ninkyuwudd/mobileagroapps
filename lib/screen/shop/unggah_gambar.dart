@@ -29,16 +29,24 @@ class _UnggahGambarState extends State<UnggahGambar> {
             Row(
               children: [
                 Container(
+                  height: 120,
+                  width: 120,
+                  decoration: BoxDecoration(
+                    image:imgcontroller.pickfile == null?DecorationImage(image: AssetImage("images/empty.jpg"),fit: BoxFit.cover): DecorationImage(image: FileImage(File(imgcontroller.pickfile!.path!)),fit: BoxFit.cover)
+                  ),
                     child: imgcontroller.pickfile == null
                         ? CircleAvatar(
-                            backgroundImage: AssetImage("images/bebek@4x.png"),
+                            backgroundImage: AssetImage("images/empty.jpg"),
+                            
                             radius: 70,
                           )
                         : CircleAvatar(
                             foregroundImage:
                                 FileImage(File(imgcontroller.pickfile!.path!)),
                             radius: 70,
-                          )),
+                          )
+                          ),
+                          SizedBox(width: 10,),
                 TextButton(
                     onPressed: () {
                       imgcontroller.selectFile();
@@ -46,6 +54,7 @@ class _UnggahGambarState extends State<UnggahGambar> {
                     child: Text("Ambil gambar"))
               ],
             ),
+            SizedBox(height: 20,),
             ElevatedButton(
                 onPressed: () {
                   imgcontroller.uploadfile();

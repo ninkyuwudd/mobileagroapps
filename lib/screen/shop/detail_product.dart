@@ -22,23 +22,16 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    final load = Provider.of<UserProvider>(context,listen: false);
-      load.fethcdatauser();
-      final getdata = load.akun;
-    Future.delayed(Duration.zero, () {
-      var getidx = ModalRoute.of(context)?.settings.arguments as int;
-      Provider.of<ProductProvider>(context, listen: false).filtertoko(getdata[getidx].toko.toString());
-    });
+    // final load = Provider.of<UserProvider>(context,listen: false);
+    //   load.fethcdatauser();
+    //   final getdata = load.akun;
   }
 
   @override
   Widget build(BuildContext context) {
     final cart = Provider.of<CartProvider>(context, listen: false);
-    // final toko = Provider.of<TokoController>(context, listen: false);
-    // final gettoko = toko.items;
     final produkid = ModalRoute.of(context)?.settings.arguments as String;
     final load = Provider.of<ProductProvider>(context);
-    // load.fetchdataproduct();
     final loadproduk = load.finbyid(produkid);
     return Scaffold(
       appBar: AppBar(
@@ -105,11 +98,13 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
                 children: [
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.of(context)
-                          .pushNamed(OrderProductPage.routename);
+                      // Navigator.of(context)
+                      //     .pushNamed(OrderProductPage.routename);
+                      // cart.additem(loadproduk.id, loadproduk.harga,
+                      //     loadproduk.namaproduk);
                       cart.additem(loadproduk.id, loadproduk.harga,
-                          loadproduk.namaproduk);
-                      Navigator.of(context).pushNamed(CartPage.routename);
+                            loadproduk.namaproduk);
+                      Navigator.of(context).pushReplacementNamed(CartPage.routename);
                     },
                     child: Text(
                       "Beli Langsung",

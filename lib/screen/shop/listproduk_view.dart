@@ -21,6 +21,7 @@ class _ListProdukViewState extends State<ListProdukView> {
     var loaduser = Provider.of<UserProvider>(context, listen: false);
     loaduser.fethcdatauser();
     var getuser = loaduser.akun;
+    Provider.of<UserProvider>(context, listen: false).fethcdatauser();
     // var getidx = ModalRoute.of(context)?.settings.arguments as int;
     // Provider.of<ProductProvider>(context,listen: false).filtertoko(getuser[getidx].toko.toString());
     Future.delayed(Duration.zero, () {
@@ -32,11 +33,13 @@ class _ListProdukViewState extends State<ListProdukView> {
 
   @override
   Widget build(BuildContext context) {
-    var loaduser = Provider.of<UserProvider>(context, listen: false);
+    var loaduser = Provider.of<UserProvider>(context);
     var getuser = loaduser.akun;
+
     var getidxtoko = ModalRoute.of(context)?.settings.arguments as int;
     var loadproduk = Provider.of<ProductProvider>(context);
     var getproduk = loadproduk.items;
+
     var loadtoko = Provider.of<TokoController>(context);
     var gettoko = loadtoko.items;
 
@@ -46,8 +49,6 @@ class _ListProdukViewState extends State<ListProdukView> {
         actions: [
           IconButton(
               onPressed: () {
-    
-                
                 Navigator.pushNamed(context, UnggahGambar.routename,arguments: getuser[getidxtoko].toko);
               },
               icon: Icon(

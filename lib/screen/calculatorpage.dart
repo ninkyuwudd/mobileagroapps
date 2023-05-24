@@ -18,6 +18,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
 
   @override
   Widget build(BuildContext context) {
+    print(widget.idx);
     try {
       final usrprov = Provider.of<UserProvider>(context);
       usrprov.fethcdatauser();
