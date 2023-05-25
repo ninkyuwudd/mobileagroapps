@@ -24,19 +24,6 @@ class _ProductGridState extends State<ProductGrid> {
     super.initState();
   }
 
-  // filterfunc(){
-  //   // var cek = Provider.of<ProductProvider>(context,listen: false).setfilter;
-  //   if(widget.cekfilter == "pakan"){
-  //     Provider.of<ProductProvider>(context,listen: false).filterpakan();
-
-  //   }else if(widget.cekfilter == "pupuk"){
-  //     Provider.of<ProductProvider>(context,listen: false).filterpupuk();
-      
-  //   }else{
-  //     Provider.of<ProductProvider>(context,listen: false).fetchdataproduct();
-      
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {

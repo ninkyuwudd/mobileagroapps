@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mobileagroapps/model/user_model.dart';
 import 'package:mobileagroapps/navigationbar.dart';
 import 'package:mobileagroapps/controller/user_controller.dart';
-import 'package:mobileagroapps/screen/tambahlokasi_view.dart';
+import 'package:mobileagroapps/view/tambahlokasi_view.dart';
 import 'package:mobileagroapps/widget/login/rounded_field_white.dart';
 import 'package:provider/provider.dart';
 

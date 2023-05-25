@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mobileagroapps/controller/keranjang_controller.dart';
 import 'package:mobileagroapps/controller/product_controller.dart';
 import 'package:mobileagroapps/controller/user_controller.dart';
-import 'package:mobileagroapps/screen/shop/cart_page.dart';
-import 'package:mobileagroapps/screen/shop/unggah_gambar.dart';
+import 'package:mobileagroapps/view/shop/cart_page_view.dart';
+import 'package:mobileagroapps/view/shop/unggah_gambar.dart';
 import 'package:mobileagroapps/widget/shop/badge.dart';
 import 'package:provider/provider.dart';
 

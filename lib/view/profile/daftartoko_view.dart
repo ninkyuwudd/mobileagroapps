@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:mobileagroapps/controller/pilihfile_controller.dart';
 import 'package:mobileagroapps/controller/toko_controller.dart';
 import 'package:mobileagroapps/controller/user_controller.dart';
-import 'package:mobileagroapps/screen/profile/uploadtoko_view.dart';
+import 'package:mobileagroapps/view/profile/uploadtoko_view.dart';
 import 'package:mobileagroapps/widget/rounded_value_field.dart';
 import 'package:phone_number/phone_number.dart';
 import 'package:provider/provider.dart';

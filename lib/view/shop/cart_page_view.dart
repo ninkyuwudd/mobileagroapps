@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:mobileagroapps/controller/keranjang_controller.dart';
 import 'package:mobileagroapps/controller/order_controller.dart';
 import 'package:mobileagroapps/controller/user_controller.dart';
-import 'package:mobileagroapps/screen/shop/perbayaran_view.dart';
+import 'package:mobileagroapps/view/shop/perbayaran_view.dart';
 import 'package:provider/provider.dart';
 
 import '../../widget/shop/cart_item.dart';
@@ -52,7 +52,21 @@ class CartPage extends StatelessWidget {
                         //   "idproduk": cart.items.keys.toList(),
                         //   "date": DateFormat.yMMMd().format(DateTime.now())
                         // });
-                        Navigator.pushReplacementNamed(context, Pembayaran.routename,arguments: cart.totalamount);
+                        if (cart.totalamount != 0) {
+                          Navigator.pushReplacementNamed(
+                              context, Pembayaran.routename,
+                              arguments: cart.totalamount);
+                        } else {
+                          ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text(
+                                'Tidak ada pesanan !',
+                                textAlign: TextAlign.center,
+                              ),
+                              backgroundColor: Color.fromARGB(255, 208, 77, 77),
+                              duration: Duration(seconds: 2)));
+                        }
+
                         // Provider.of<Orderproivder>(context, listen: false)
                         //     .addorder(
                         //         cart.items.values.toList(), cart.totalamount);
@@ -67,7 +81,10 @@ class CartPage extends StatelessWidget {
             SizedBox(
               height: 10,
             ),
-            Text("Barang yang dibeli",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
+            Text(
+              "Barang yang dibeli",
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
             SizedBox(
               height: 10,
             ),

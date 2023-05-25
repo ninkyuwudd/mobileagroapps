@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:mobileagroapps/navigationbar.dart';
-import 'package:mobileagroapps/screen/change_user_data.dart';
-import 'package:mobileagroapps/screen/login_page.dart';
-import 'package:mobileagroapps/screen/profile/daftartoko_view.dart';
-import 'package:mobileagroapps/screen/profile/premium_view.dart';
-import 'package:mobileagroapps/screen/profile/uploadberhasil_view.dart';
-import 'package:mobileagroapps/screen/profile/uploadtoko_view.dart';
-import 'package:mobileagroapps/screen/register_page.dart';
-import 'package:mobileagroapps/screen/shop/add_product.dart';
-import 'package:mobileagroapps/screen/shop/cart_page.dart';
-import 'package:mobileagroapps/screen/shop/detail_product.dart';
-import 'package:mobileagroapps/screen/shop/listproduk_view.dart';
-import 'package:mobileagroapps/screen/shop/order_product.dart';
-import 'package:mobileagroapps/screen/shop/perbayaran_view.dart';
-import 'package:mobileagroapps/screen/shop/unggah_gambar.dart';
-import 'package:mobileagroapps/screen/tambahlokasi_view.dart';
+import 'package:mobileagroapps/view/change_user_data.dart';
+import 'package:mobileagroapps/view/login_page.dart';
+import 'package:mobileagroapps/view/profile/daftartoko_view.dart';
+import 'package:mobileagroapps/view/profile/premium_view.dart';
+import 'package:mobileagroapps/view/profile/uploadberhasil_view.dart';
+import 'package:mobileagroapps/view/profile/uploadtoko_view.dart';
+import 'package:mobileagroapps/view/register_page.dart';
+import 'package:mobileagroapps/view/shop/add_product_view.dart';
+import 'package:mobileagroapps/view/shop/cart_page_view.dart';
+import 'package:mobileagroapps/view/shop/detail_product.dart';
+import 'package:mobileagroapps/view/shop/edit_produk_view.dart';
+import 'package:mobileagroapps/view/shop/listproduk_view.dart';
+import 'package:mobileagroapps/view/shop/order_product.dart';
+import 'package:mobileagroapps/view/shop/perbayaran_view.dart';
+import 'package:mobileagroapps/view/shop/unggah_gambar.dart';
+import 'package:mobileagroapps/view/tambahlokasi_view.dart';
 
 class Routes {
   // static const String loginPageRoute = LoginPage.routename;
@@ -43,8 +44,8 @@ class Routes {
     MenungguPersetujuanToko.routename :(context) => MenungguPersetujuanToko(),
     Tokoditerima.routename :(context) => Tokoditerima(),
     TambahLokasi.routename :(context) => TambahLokasi(),
-    ListProdukView.routename :(context) => ListProdukView()
-
+    ListProdukView.routename :(context) => ListProdukView(),
+    EditProdukView.routename :(context) => EditProdukView()
 
 
   };

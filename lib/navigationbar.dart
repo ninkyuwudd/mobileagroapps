@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mobileagroapps/screen/calculatorpage.dart';
-import 'package:mobileagroapps/screen/cuacapage.dart';
-import 'package:mobileagroapps/screen/profile_page.dart';
-import 'package:mobileagroapps/screen/shoppage.dart';
-import 'package:mobileagroapps/screen/testing/tesprovider.dart';
+import 'package:mobileagroapps/view/calculatorpage.dart';
+import 'package:mobileagroapps/view/cuacapage.dart';
+import 'package:mobileagroapps/view/profile_page.dart';
+import 'package:mobileagroapps/view/shoppage.dart';
+import 'package:mobileagroapps/view/testing/tesprovider.dart';
 
 class BottomNavbar extends StatefulWidget {
   final int idx;

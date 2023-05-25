@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mobileagroapps/screen/profile/daftartoko_view.dart';
-import 'package:mobileagroapps/screen/profile/uploadberhasil_view.dart';
+import 'package:mobileagroapps/view/profile/daftartoko_view.dart';
+import 'package:mobileagroapps/view/profile/uploadberhasil_view.dart';
 
 class MenungguPersetujuanToko extends StatefulWidget {
   static const routename = "/MenungguPersetujuanToko";

@@ -1,23 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_launcher_icons/xml_templates.dart';
 import 'package:mobileagroapps/controller/keranjang_controller.dart';
 import 'package:mobileagroapps/controller/product_controller.dart';
-import 'package:mobileagroapps/controller/toko_controller.dart';
-import 'package:mobileagroapps/controller/user_controller.dart';
-import 'package:mobileagroapps/screen/shop/cart_page.dart';
-import 'package:mobileagroapps/screen/shop/order_product.dart';
-import 'package:mobileagroapps/widget/shop/order_item.dart';
+import 'package:mobileagroapps/view/shop/cart_page_view.dart';
 import 'package:provider/provider.dart';
 
-class DetailProductScreen extends StatefulWidget {
+class EditProdukView extends StatefulWidget {
   // const DetailProduct({super.key});
-  static const routename = '/product_detail';
+  static const routename = '/editproductdetail';
 
   @override
-  State<DetailProductScreen> createState() => _DetailProductScreenState();
+  State<EditProdukView> createState() => _EditProdukViewState();
 }
 
-class _DetailProductScreenState extends State<DetailProductScreen> {
+class _EditProdukViewState extends State<EditProdukView> {
   @override
   void initState() {
     // TODO: implement initState
@@ -67,8 +62,11 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
                     SizedBox(
                       height: 10,
                     ),
-                    Text(loadproduk.namaproduk),
+                    Text(loadproduk.namaproduk,style: TextStyle(fontSize: 17),),
+
                     Divider(),
+                                        SizedBox(height: 5,),
+                    Text("Tersedia: ${loadproduk.jumlah}"),
                     SizedBox(
                       height: 10,
                     ),

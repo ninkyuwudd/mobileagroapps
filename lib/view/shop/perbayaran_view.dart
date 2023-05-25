@@ -1,5 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:mobileagroapps/widget/tombolrounded_widget.dart';
+import 'package:provider/provider.dart';
+
+import '../../controller/keranjang_controller.dart';
+import '../../controller/order_controller.dart';
+import '../../controller/user_controller.dart';
 
 class Pembayaran extends StatefulWidget {
   static const routename = "/pembayaran";
@@ -11,8 +18,14 @@ class Pembayaran extends StatefulWidget {
 }
 
 class _PembayaranState extends State<Pembayaran> {
+    final dborder = FirebaseFirestore.instance.collection("order");
+      final dbproduk = FirebaseFirestore.instance.collection('produk');
+  final dbcustomer = FirebaseFirestore.instance.collection("users");
   @override
   Widget build(BuildContext context) {
+        final cart = Provider.of<CartProvider>(context);
+    final loaduser = Provider.of<UserProvider>(context);
+    loaduser.fethcdatauser;
     final data = ModalRoute.of(context)?.settings.arguments as int;
     return Scaffold(
       appBar: AppBar(
@@ -53,16 +66,16 @@ class _PembayaranState extends State<Pembayaran> {
                       Text("Transfer bank")
                     ],
                   ),
-                  SizedBox(height: 20,),
-                                    Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text("Nama Bank"),
-                      Spacer(),
-                      Text("BRI")
-                    ],
+                  SizedBox(
+                    height: 20,
                   ),
-                  SizedBox(height: 20,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [Text("Nama Bank"), Spacer(), Text("BRI")],
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -75,20 +88,35 @@ class _PembayaranState extends State<Pembayaran> {
                   Container(
                     child: Column(
                       children: [
-                        SizedBox(height: 20,),
-                        Text("Cara Pembayaran",style: TextStyle(fontWeight: FontWeight.bold),)
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Text(
+                          "Cara Pembayaran",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        )
                       ],
                     ),
                   )
                 ],
               ),
             ),
-            RoundedButtonWidget(text: "Selesai", fungsi: (){
-              Navigator.pop(context);
-            },
-            warnabg: Colors.white,
-            icon: Icons.done,
-            warnatxt: Colors.black,
+            RoundedButtonWidget(
+              text: "Selesai",
+              fungsi: () {
+                dborder.doc().set({
+                  "idcustomer": loaduser.curuserid,
+                  "idproduk": cart.items.keys.toList(),
+                  "date": DateFormat.yMMMd().format(DateTime.now())
+                });
+                Provider.of<Orderproivder>(context, listen: false)
+                    .addorder(cart.items.values.toList(), cart.totalamount);
+                cart.clear();
+                Navigator.pop(context);
+              },
+              warnabg: Colors.white,
+              icon: Icons.done,
+              warnatxt: Colors.black,
             )
           ],
         ),

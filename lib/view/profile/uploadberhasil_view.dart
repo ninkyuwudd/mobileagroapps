@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobileagroapps/screen/profile/daftartoko_view.dart';
+import 'package:mobileagroapps/view/profile/daftartoko_view.dart';
 
 class Tokoditerima extends StatefulWidget {
   static const routename = "/Tokoditerima";

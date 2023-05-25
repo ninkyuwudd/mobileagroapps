@@ -144,14 +144,14 @@ final firestoredb = FirebaseFirestore.instance.collection('users');
                     right: 0,
                     top: 120,
                     child: Container(
-                        child: imagefile == null
+                        child: pilihfile.pickfile == null
                             ? CircleAvatar(
                                 backgroundImage:
                                     AssetImage("images/bebek@4x.png"),
                                 radius: 70,
                               )
                             : CircleAvatar(
-                                foregroundImage: FileImage(imagefile!),
+                                foregroundImage: FileImage(File(pilihfile.pickfile!.path!)),
                                 radius: 70,
                               )),
                   ),
@@ -276,6 +276,15 @@ final firestoredb = FirebaseFirestore.instance.collection('users');
                   });
 
                   pilihfile.uploadfile();
+                  ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text(
+                      'Submit Data Successfully',
+                      textAlign: TextAlign.center,
+                    ),
+                    backgroundColor: Colors.green,
+                    duration: Duration(seconds: 2),
+                  ));
                 },
                 child: Container(
                   margin: EdgeInsets.only(top: 10, right: 25, left: 25),

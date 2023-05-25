@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mobileagroapps/controller/product_controller.dart';
 import 'package:mobileagroapps/controller/toko_controller.dart';
 import 'package:mobileagroapps/controller/user_controller.dart';
-import 'package:mobileagroapps/screen/shop/unggah_gambar.dart';
+import 'package:mobileagroapps/view/shop/edit_produk_view.dart';
+import 'package:mobileagroapps/view/shop/unggah_gambar.dart';
 import 'package:provider/provider.dart';
 
 class ListProdukView extends StatefulWidget {
@@ -59,38 +60,43 @@ class _ListProdukViewState extends State<ListProdukView> {
       body: ListView.builder(
         itemCount: getproduk.length,
         itemBuilder: (ctx,idx){
-          return Container(
-            margin: EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(20),
-              boxShadow: [
-                BoxShadow(
-                  color: Color.fromARGB(18, 0, 0, 0),
-                  blurRadius: 2,
-                  spreadRadius: 4
-                )
-              ]
-            ),
-            child: Column(
-              children: [
-                Container(
-                  height: 100,
-                  
-                  decoration: BoxDecoration(
-                   image: DecorationImage(image:NetworkImage(getproduk[idx].gambar),fit: BoxFit.cover),
-                   
-                  ),
-                  
-                ),
-                Container(
-                  child: ListTile(
-                    title: Text(getproduk[idx].namaproduk),
-                    trailing: Icon(Icons.edit),
+          return GestureDetector(
+            onTap: (){
+              Navigator.pushNamed(context, EditProdukView.routename,arguments: getproduk[idx].id);
+            },
+            child: Container(
+              margin: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: [
+                  BoxShadow(
+                    color: Color.fromARGB(18, 0, 0, 0),
+                    blurRadius: 2,
+                    spreadRadius: 4
+                  )
+                ]
+              ),
+              child: Column(
+                children: [
+                  Container(
+                    height: 100,
+                    
+                    decoration: BoxDecoration(
+                     image: DecorationImage(image:NetworkImage(getproduk[idx].gambar),fit: BoxFit.cover),
+                     
+                    ),
                     
                   ),
-                ),
-              ],
+                  Container(
+                    child: ListTile(
+                      title: Text(getproduk[idx].namaproduk),
+                      trailing: Icon(Icons.edit),
+                      
+                    ),
+                  ),
+                ],
+              ),
             ),
           );
         })
