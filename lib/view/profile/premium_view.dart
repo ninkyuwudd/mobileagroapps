@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobileagroapps/view/profile/daftartoko_view.dart';
+import 'package:mobileagroapps/view/profile/pembayaran_premium_view.dart';
 import 'package:mobileagroapps/widget/profile/list_fitur_premium.dart';
 
 class DaftarPremium extends StatefulWidget {
@@ -73,7 +74,9 @@ class _DaftarPremiumState extends State<DaftarPremium> {
                     height: MediaQuery.of(context).size.height / 20 - 10,
                   ),
                   GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.pushReplacementNamed(context, PembayaranPremium.routename);
+                      },
                       child: Container(
                         width: double.infinity,
                         margin:
@@ -92,6 +95,7 @@ class _DaftarPremiumState extends State<DaftarPremium> {
                 ],
               ),
             ),
+            Divider(),
             SizedBox(
               height: MediaQuery.of(context).size.height / 20 - 25,
             ),

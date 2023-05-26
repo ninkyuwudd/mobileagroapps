@@ -3,6 +3,8 @@ import 'package:mobileagroapps/navigationbar.dart';
 import 'package:mobileagroapps/view/change_user_data.dart';
 import 'package:mobileagroapps/view/login_page.dart';
 import 'package:mobileagroapps/view/profile/daftartoko_view.dart';
+import 'package:mobileagroapps/view/profile/menunggu_premium.dart';
+import 'package:mobileagroapps/view/profile/pembayaran_premium_view.dart';
 import 'package:mobileagroapps/view/profile/premium_view.dart';
 import 'package:mobileagroapps/view/profile/uploadberhasil_view.dart';
 import 'package:mobileagroapps/view/profile/uploadtoko_view.dart';
@@ -45,7 +47,9 @@ class Routes {
     Tokoditerima.routename :(context) => Tokoditerima(),
     TambahLokasi.routename :(context) => TambahLokasi(),
     ListProdukView.routename :(context) => ListProdukView(),
-    EditProdukView.routename :(context) => EditProdukView()
+    EditProdukView.routename :(context) => EditProdukView(),
+    PembayaranPremium.routename :  (context) => PembayaranPremium(),
+    PremiumWait.routename :(context) =>  PremiumWait()
 
 
   };

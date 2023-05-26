@@ -12,6 +12,8 @@ class UserProvider extends ChangeNotifier {
 
   String curuserid = "";
 
+  int curidx = 0;
+
   void fethcdatauser() async {
     QuerySnapshot<Map<String, dynamic>> usrdataloc = await FirebaseFirestore.instance.collection('users').get();
         
@@ -43,6 +45,11 @@ class UserProvider extends ChangeNotifier {
 
   changedataid(String id){
     curuserid = id;
+    notifyListeners();
+  }
+
+    changedataidx(int idx){
+    curidx= idx;
     notifyListeners();
   }
 }

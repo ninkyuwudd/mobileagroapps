@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mobileagroapps/controller/keranjang_controller.dart';
 import 'package:mobileagroapps/controller/product_controller.dart';
 import 'package:mobileagroapps/view/shop/cart_page_view.dart';
+import 'package:mobileagroapps/widget/rounded_value_field.dart';
 import 'package:provider/provider.dart';
 
 class EditProdukView extends StatefulWidget {
@@ -13,13 +14,27 @@ class EditProdukView extends StatefulWidget {
 }
 
 class _EditProdukViewState extends State<EditProdukView> {
+  bool ckharga = false;
+  bool ckjduul = false;
+  bool ckstok = false;
+  bool ckdeskripsi = false;
+  var harga = TextEditingController();
+  var judul = TextEditingController();
+  var stok = TextEditingController();
+  var deskripsi = TextEditingController();
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    // final load = Provider.of<UserProvider>(context,listen: false);
-    //   load.fethcdatauser();
-    //   final getdata = load.akun;
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      final produkid = ModalRoute.of(context)?.settings.arguments as String;
+      final load = Provider.of<ProductProvider>(context, listen: false);
+      final loadproduk = load.finbyid(produkid);
+      harga.text = loadproduk.harga.toString();
+      judul.text = loadproduk.namaproduk.toString();
+      stok.text = loadproduk.jumlah.toString();
+      deskripsi.text = loadproduk.deskripsi.toString();
+    });
   }
 
   @override
@@ -30,7 +45,7 @@ class _EditProdukViewState extends State<EditProdukView> {
     final loadproduk = load.finbyid(produkid);
     return Scaffold(
       appBar: AppBar(
-        title: Text("Detail Product"),
+        title: Text("Edit Detail Product"),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -54,93 +69,110 @@ class _EditProdukViewState extends State<EditProdukView> {
                     SizedBox(
                       height: 10,
                     ),
-                    Text(
-                      "Rp${loadproduk.harga.toString()}",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                    RoundeValueFieldWhiteValue(
+                      control: harga,
+                      title: "Harga",
+                      hover: "masukkan harga",
+                      check: ckharga,
+                      fungsi: (value) {
+                        print(value);
+                        if (value == "") {
+                          setState(() {
+                            ckharga = true;
+                          });
+                        } else {
+                          setState(() {
+                            ckharga = false;
+                          });
+                        }
+                      },
                     ),
                     SizedBox(
                       height: 10,
                     ),
-                    Text(loadproduk.namaproduk,style: TextStyle(fontSize: 17),),
-
-                    Divider(),
-                                        SizedBox(height: 5,),
-                    Text("Tersedia: ${loadproduk.jumlah}"),
+                    RoundeValueFieldWhiteValue(
+                      control: judul,
+                      title: "Judul",
+                      hover: "masukkan judul...",
+                      check: ckjduul,
+                      fungsi: (value) {
+                        print(value);
+                        if (value == "") {
+                          setState(() {
+                            ckjduul = true;
+                          });
+                        } else {
+                          setState(() {
+                            ckjduul = false;
+                          });
+                        }
+                      },
+                    ),
+                    RoundeValueFieldWhiteValue(
+                      control: stok,
+                      title: "Stok",
+                      hover: "masukkan jumlah stok...",
+                      check: ckstok,
+                      fungsi: (value) {
+                        print(value);
+                        if (value == "") {
+                          setState(() {
+                            ckstok = true;
+                          });
+                        } else {
+                          setState(() {
+                            ckstok = false;
+                          });
+                        }
+                      },
+                    ),
                     SizedBox(
                       height: 10,
                     ),
-                    Text(
-                      "Deskripsi Produk",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                    RoundeValueFieldWhiteValue(
+                      control: deskripsi,
+                      title: "Deskripsi",
+                      hover: "masukkan deskripsi....",
+                      check: ckdeskripsi,
+                      fungsi: (value) {
+                        print(value);
+                        if (value == "") {
+                          setState(() {
+                            ckdeskripsi= true;
+                          });
+                        } else {
+                          setState(() {
+                            ckdeskripsi= false;
+                          });
+                        }
+                      },
                     ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(loadproduk.deskripsi),
-                    Divider(),
-                    ListTile(
-                      leading: Icon(Icons.shop_2_outlined),
-                      title: Text("namatoko"),
-                      subtitle: Text("kota Bekasi"),
-                    )
                   ],
                 ),
               ),
               SizedBox(
                 height: 20,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      // Navigator.of(context)
-                      //     .pushNamed(OrderProductPage.routename);
-                      // cart.additem(loadproduk.id, loadproduk.harga,
-                      //     loadproduk.namaproduk);
-                      cart.additem(loadproduk.id, loadproduk.harga,
-                            loadproduk.namaproduk);
-                      Navigator.of(context).pushReplacementNamed(CartPage.routename);
-                    },
-                    child: Text(
-                      "Beli Langsung",
-                      style: TextStyle(color: Colors.green),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white,
-                      elevation: 10,
-                    ),
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  ElevatedButton(
-                      onPressed: () {
-                        print(loadproduk.id);
-                        cart.additem(loadproduk.id, loadproduk.harga,
-                            loadproduk.namaproduk);
-                        ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                              'Barang berhasil ditambahkan',
-                              textAlign: TextAlign.center,
-                            ),
-                            backgroundColor: Colors.green,
-                            duration: Duration(seconds: 2),
-                            action: SnackBarAction(
-                                label: "UNDO",
-                                onPressed: () {
-                                  cart.remosingleitem(loadproduk.id);
-                                }),
-                          ),
-                        );
-                      },
-                      child: Text("+ Keranjang"))
-                ],
-              ),
+
+             GestureDetector(
+                onTap: () {
+                  
+                },
+                child: Container(
+                  width: double.infinity,
+                  margin:
+                      EdgeInsets.only(top: 10, right: 25, left: 25, bottom: 10),
+                  padding:
+                      EdgeInsets.only(top: 10, bottom: 10, right: 20, left: 20),
+                  decoration: BoxDecoration(
+                      color: Colors.green,
+                      borderRadius: BorderRadius.circular(20)),
+                  child: Center(
+                      child: Text(
+                    "Simpan",
+                    style: TextStyle(color: Colors.white),
+                  )),
+                )),
             ],
           ),
         ),

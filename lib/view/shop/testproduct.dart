@@ -88,21 +88,73 @@ String imageurl = "";
                   height: 10,
                 ),
                 RoundeValueFieldWhiteValue(
+                                  fungsi:(value) {
+                        print(value);
+                        if (value == "") {
+                          setState(() {
+                            cknama = true;
+                          });
+                        } else {
+                          setState(() {
+                            cknama = false;
+                          });
+                        }
+
+                      },
                     control: nama,
                     title: "Nama Barang",
                     hover: "Isi nama barang",
                     check: cknama),
                 RoundeValueFieldWhiteValue(
+                                                    fungsi:(value) {
+                        print(value);
+                        if (value == "") {
+                          setState(() {
+                            ckdeskripsi = true;
+                          });
+                        } else {
+                          setState(() {
+                            ckdeskripsi = false;
+                          });
+                        }
+
+                      },
                     control: deskripsi,
                     title: "Deskripsi",
                     hover: "isi deskripsi",
                     check: ckdeskripsi),
                 RoundeValueFieldWhiteValue(
+                                                    fungsi:(value) {
+                        print(value);
+                        if (value == "") {
+                          setState(() {
+                            ckharga = true;
+                          });
+                        } else {
+                          setState(() {
+                            ckharga = false;
+                          });
+                        }
+
+                      },
                     control: harga,
                     title: "Harga",
                     hover: "isi harga",
                     check: ckharga),
                 RoundeValueFieldWhiteValue(
+                                                    fungsi:(value) {
+                        print(value);
+                        if (value == "") {
+                          setState(() {
+                            ckjumlah = true;
+                          });
+                        } else {
+                          setState(() {
+                            ckjumlah = false;
+                          });
+                        }
+
+                      },
                     control: jumlah,
                     title: "Jumlah",
                     hover: "isi jumlah",

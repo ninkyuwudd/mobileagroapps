@@ -16,17 +16,17 @@ class ProfileUserPage extends StatefulWidget {
 }
 
 class _ProfileUserPageState extends State<ProfileUserPage> {
-
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    Provider.of<UserProvider>(context,listen: false).fethcdatauser();
+    Provider.of<UserProvider>(context, listen: false).fethcdatauser();
   }
+
   @override
   Widget build(BuildContext context) {
     try {
-      final usrprov = Provider.of<UserProvider>(context,listen: false);
+      final usrprov = Provider.of<UserProvider>(context, listen: false);
       final akunnya = usrprov.akun;
       return SafeArea(
         child: Scaffold(
@@ -106,10 +106,29 @@ class _ProfileUserPageState extends State<ProfileUserPage> {
                 SizedBox(
                   height: 10,
                 ),
-                Text(
-                  akunnya[widget.idx].nama.toString(),
-                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                Container(
+                  child: akunnya[widget.idx].status == "premium"
+                      ? Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              akunnya[widget.idx].nama.toString(),
+                              style: TextStyle(
+                                  fontSize: 25, fontWeight: FontWeight.bold),
+                            ),
+                            Icon(
+                              Icons.workspace_premium_rounded,
+                              color: Colors.amber,
+                            )
+                          ],
+                        )
+                      : Text(
+                          akunnya[widget.idx].nama.toString(),
+                          style: TextStyle(
+                              fontSize: 25, fontWeight: FontWeight.bold),
+                        ),
                 ),
+
                 SizedBox(
                   height: 10,
                 ),
@@ -161,17 +180,21 @@ class _ProfileUserPageState extends State<ProfileUserPage> {
                   ),
                 ),
                 Visibility(
-                  visible: akunnya[widget.idx].status == "user"? true : false ,
+                  visible: akunnya[widget.idx].status == "user" ? true : false,
                   child: GestureDetector(
-                    onTap: (){
+                    onTap: () {
                       // print(akunnya[widget.idx].id);
-                      Navigator.pushNamed(context, DaftarToko.routename,arguments: akunnya[widget.idx].id,);
+                      Navigator.pushNamed(
+                        context,
+                        DaftarToko.routename,
+                        arguments: akunnya[widget.idx].id,
+                      );
                     },
                     child: Container(
-                      margin:
-                          EdgeInsets.only(top: 10, right: 25, left: 25, bottom: 10),
-                      padding:
-                          EdgeInsets.only(top: 10, bottom: 10, right: 20, left: 20),
+                      margin: EdgeInsets.only(
+                          top: 10, right: 25, left: 25, bottom: 10),
+                      padding: EdgeInsets.only(
+                          top: 10, bottom: 10, right: 20, left: 20),
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(20)),
@@ -194,12 +217,12 @@ class _ProfileUserPageState extends State<ProfileUserPage> {
                   ),
                 ),
                 Visibility(
-                  visible: akunnya[widget.idx].status == "user"? false : true,
+                  visible: akunnya[widget.idx].status == "user" ? false : true,
                   child: Container(
-                    margin:
-                        EdgeInsets.only(top: 10, right: 25, left: 25, bottom: 10),
-                    padding:
-                        EdgeInsets.only(top: 10, bottom: 10, right: 20, left: 20),
+                    margin: EdgeInsets.only(
+                        top: 10, right: 25, left: 25, bottom: 10),
+                    padding: EdgeInsets.only(
+                        top: 10, bottom: 10, right: 20, left: 20),
                     decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(20)),
@@ -213,7 +236,9 @@ class _ProfileUserPageState extends State<ProfileUserPage> {
                         const Spacer(),
                         GestureDetector(
                           onTap: () {
-                            Navigator.pushNamed(context, ListProdukView.routename,arguments: widget.idx);
+                            Navigator.pushNamed(
+                                context, ListProdukView.routename,
+                                arguments: widget.idx);
                           },
                           child: const Image(
                               image: AssetImage("images/right_row_icon.png")),
@@ -222,28 +247,32 @@ class _ProfileUserPageState extends State<ProfileUserPage> {
                     ),
                   ),
                 ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pushNamed(context, DaftarPremium.routename);
-                  },
-                  child: Container(
-                    margin: EdgeInsets.only(
-                        top: 10, right: 25, left: 25, bottom: 10),
-                    padding: EdgeInsets.only(
-                        top: 10, bottom: 10, right: 20, left: 20),
-                    decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 255, 225, 0),
-                        borderRadius: BorderRadius.circular(20)),
-                    child: Row(
-                      children: [
-                        Icon(Icons.all_inbox),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        Text("Daftar Premium"),
-                        const Spacer(),
-                        Image(image: AssetImage("images/right_row_icon.png")),
-                      ],
+                Visibility(
+                  visible:
+                      akunnya[widget.idx].status == "premium" ? false : true,
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(context, DaftarPremium.routename);
+                    },
+                    child: Container(
+                      margin: EdgeInsets.only(
+                          top: 10, right: 25, left: 25, bottom: 10),
+                      padding: EdgeInsets.only(
+                          top: 10, bottom: 10, right: 20, left: 20),
+                      decoration: BoxDecoration(
+                          color: Color.fromARGB(255, 255, 225, 0),
+                          borderRadius: BorderRadius.circular(20)),
+                      child: Row(
+                        children: [
+                          Icon(Icons.all_inbox),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Text("Daftar Premium"),
+                          const Spacer(),
+                          Image(image: AssetImage("images/right_row_icon.png")),
+                        ],
+                      ),
                     ),
                   ),
                 ),

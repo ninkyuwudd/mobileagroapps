@@ -224,6 +224,19 @@ final firestoredb = FirebaseFirestore.instance.collection('users');
                 child: Column(
                   children: [
                     RoundeValueFieldWhiteValue(
+                                      fungsi:(value) {
+                        print(value);
+                        if (value == "") {
+                          setState(() {
+                            ckname = true;
+                          });
+                        } else {
+                          setState(() {
+                            ckname = false;
+                          });
+                        }
+
+                      },
                         control: txnama,
 
                         // valuenya: getdataakun
@@ -233,6 +246,19 @@ final firestoredb = FirebaseFirestore.instance.collection('users');
                         hover: "Masukkan nama",
                         check: ckname),
                     RoundeValueFieldWhiteValue(
+                                      fungsi:(value) {
+                        print(value);
+                        if (value == "") {
+                          setState(() {
+                            ckusername = true;
+                          });
+                        } else {
+                          setState(() {
+                            ckusername = false;
+                          });
+                        }
+
+                      },
                         control: txusername,
                         // valuenya: getdataakun
                         //     .username
@@ -241,6 +267,19 @@ final firestoredb = FirebaseFirestore.instance.collection('users');
                         hover: "Masukkan Username",
                         check: ckusername),
                     RoundeValueFieldWhiteValue(
+                                      fungsi:(value) {
+                        print(value);
+                        if (value == "") {
+                          setState(() {
+                            ckemail = true;
+                          });
+                        } else {
+                          setState(() {
+                            ckemail = false;
+                          });
+                        }
+
+                      },
                         control: txemail,
                         // valuenya: getdataakun
                         //     .email
@@ -249,11 +288,37 @@ final firestoredb = FirebaseFirestore.instance.collection('users');
                         hover: "Masukkan Email",
                         check: ckemail),
                     RoundeValueFieldWhiteValue(
+                                      fungsi:(value) {
+                        print(value);
+                        if (value == "") {
+                          setState(() {
+                            ckgender = true;
+                          });
+                        } else {
+                          setState(() {
+                            ckgender = false;
+                          });
+                        }
+
+                      },
                         control: txgender,
                         title: "Gender",
                         hover: "Masukkan Gender",
                         check: ckgender),
                     RoundeValueFieldWhiteValue(
+                                      fungsi:(value) {
+                        print(value);
+                        if (value == "") {
+                          setState(() {
+                            ckphone = true;
+                          });
+                        } else {
+                          setState(() {
+                            ckphone = false;
+                          });
+                        }
+
+                      },
                         control: txphone,
                         // valuenya: getdataakun
                         //     .phone

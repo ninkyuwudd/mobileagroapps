@@ -76,6 +76,19 @@ class _DaftarTokoState extends State<DaftarToko> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               RoundeValueFieldWhiteValue(
+                                                  fungsi:(value) {
+                        print(value);
+                        if (value == "") {
+                          setState(() {
+                            namatokock= true;
+                          });
+                        } else {
+                          setState(() {
+                            namatokock= false;
+                          });
+                        }
+
+                      },
                   control: namatoko,
                   title: "Nama Toko",
                   hover: "masukkan nama toko...",
@@ -164,6 +177,19 @@ class _DaftarTokoState extends State<DaftarToko> {
               ),
               SizedBox(height: 5,),
               RoundeValueFieldWhiteValue(
+                                                  fungsi:(value) {
+                        print(value);
+                        if (value == "") {
+                          setState(() {
+                            alamatck = true;
+                          });
+                        } else {
+                          setState(() {
+                            alamatck = false;
+                          });
+                        }
+
+                      },
                   control: alamat,
                   title: "Alamat Toko",
                   hover: "masukkan alamat",

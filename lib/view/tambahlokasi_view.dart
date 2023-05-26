@@ -25,6 +25,7 @@ class _TambahLokasiState extends State<TambahLokasi> {
     super.initState();
     Provider.of<UserProvider>(context, listen: false).fethcdatauser();
   }
+  bool ckusername = false;
 
   var lokasi = TextEditingController();
   bool cek = false;
@@ -46,6 +47,19 @@ class _TambahLokasiState extends State<TambahLokasi> {
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             RoundeValueFieldWhiteValue(
+                fungsi:(value) {
+                        print(value);
+                        if (value == "") {
+                          setState(() {
+                            ckusername = true;
+                          });
+                        } else {
+                          setState(() {
+                            ckusername = false;
+                          });
+                        }
+
+                      },
                 control: lokasi,
                 title: "",
                 hover: "masukkan lokasi anda",
