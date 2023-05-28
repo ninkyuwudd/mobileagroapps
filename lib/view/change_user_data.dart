@@ -74,6 +74,7 @@ class _ProfileUserDataEditPageState extends State<ProfileUserDataEditPage> {
   final txgender = TextEditingController();
   final txphone = TextEditingController();
   final txid = TextEditingController();
+  String imglink = '';
   List? data;
   @override
   void initState() {
@@ -87,6 +88,7 @@ class _ProfileUserDataEditPageState extends State<ProfileUserDataEditPage> {
     txgender.text = data![4].toString();
     txphone.text = data![5].toString();
     txid.text = data![0].toString();
+    imglink = data![6].toString();
     });
 
   }
@@ -96,7 +98,7 @@ final firestoredb = FirebaseFirestore.instance.collection('users');
   @override
   Widget build(BuildContext context) {
     final pilihfile = Provider.of<PilihUploadfile>(context);
-
+    
     bool ckname = false;
     bool ckusername = false;
     bool ckemail = false;
@@ -130,15 +132,6 @@ final firestoredb = FirebaseFirestore.instance.collection('users');
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.35,
                   ),
-                  // Positioned(
-                  //   left: 0,
-                  //   right: 0,
-                  //   top: 0,
-                  //   child:
-                  //       Image(image: AssetImage("images/photoMainprofile.png")),
-
-                  // ),
-
                   Positioned(
                     left: 0,
                     right: 0,
@@ -147,7 +140,7 @@ final firestoredb = FirebaseFirestore.instance.collection('users');
                         child: pilihfile.pickfile == null
                             ? CircleAvatar(
                                 backgroundImage:
-                                    AssetImage("images/bebek@4x.png"),
+                                    NetworkImage(imglink),
                                 radius: 70,
                               )
                             : CircleAvatar(

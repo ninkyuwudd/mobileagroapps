@@ -40,7 +40,7 @@ class _ForecastCuacaPageState extends State<ForecastCuacaPage> {
                 margin: EdgeInsets.only(right: 15),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: Color.fromARGB(255, 90, 207, 94)),
+                    color: Color.fromARGB(255, 92, 191, 53)),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -58,7 +58,8 @@ class _ForecastCuacaPageState extends State<ForecastCuacaPage> {
                         "http://openweathermap.org/img/w/${cuacabesok[0].weather[0]['icon']}.png"),
                     Text((double.parse(cuacabesok[0].temp) - 273.15)
                             .toStringAsFixed(1) +
-                        "°"),
+                        "°",style: TextStyle(
+                            fontWeight: FontWeight.bold, color: Colors.white)),
                     SizedBox(
                       height: 10,
                     ),
@@ -66,7 +67,8 @@ class _ForecastCuacaPageState extends State<ForecastCuacaPage> {
                       cuacabesok[0].weather[0]['description'],
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.center,
+                      textAlign: TextAlign.center,style: TextStyle(
+                            fontWeight: FontWeight.bold, color: Colors.white)
                     )
                   ],
                 ),

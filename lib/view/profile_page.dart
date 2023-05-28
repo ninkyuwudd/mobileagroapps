@@ -84,13 +84,22 @@ class _ProfileUserPageState extends State<ProfileUserPage> {
                     //               radius: 70,
                     //             )),
                     // ),
+
                     Positioned(
-                      left: 0,
-                      right: 0,
-                      top: 0,
-                      child: Image(
-                          image: AssetImage("images/photoMainprofile.png")),
-                    ),
+                        left: 0,
+                        right: 0,
+                        top: MediaQuery.of(context).size.height / 6,
+                        child: Container(
+                          width: 130,
+                          height: 130,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                                image: NetworkImage(
+                                    akunnya[widget.idx].gambar.toString()),
+                                fit: BoxFit.cover),
+                          ),
+                        )),
                     // Positioned(
                     //     left: 100,
                     //     right: 0,
@@ -109,7 +118,7 @@ class _ProfileUserPageState extends State<ProfileUserPage> {
                 Container(
                   child: akunnya[widget.idx].status == "premium"
                       ? Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
                               akunnya[widget.idx].nama.toString(),
@@ -155,6 +164,7 @@ class _ProfileUserPageState extends State<ProfileUserPage> {
                       akunnya[widget.idx].email,
                       akunnya[widget.idx].gender,
                       akunnya[widget.idx].phone,
+                      akunnya[widget.idx].gambar
                     ]);
                   },
                   child: Container(

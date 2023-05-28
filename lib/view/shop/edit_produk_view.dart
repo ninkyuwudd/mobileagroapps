@@ -138,11 +138,11 @@ class _EditProdukViewState extends State<EditProdukView> {
                         print(value);
                         if (value == "") {
                           setState(() {
-                            ckdeskripsi= true;
+                            ckdeskripsi = true;
                           });
                         } else {
                           setState(() {
-                            ckdeskripsi= false;
+                            ckdeskripsi = false;
                           });
                         }
                       },
@@ -153,26 +153,39 @@ class _EditProdukViewState extends State<EditProdukView> {
               SizedBox(
                 height: 20,
               ),
-
-             GestureDetector(
-                onTap: () {
-                  
-                },
-                child: Container(
-                  width: double.infinity,
-                  margin:
-                      EdgeInsets.only(top: 10, right: 25, left: 25, bottom: 10),
-                  padding:
-                      EdgeInsets.only(top: 10, bottom: 10, right: 20, left: 20),
-                  decoration: BoxDecoration(
-                      color: Colors.green,
-                      borderRadius: BorderRadius.circular(20)),
-                  child: Center(
-                      child: Text(
-                    "Simpan",
-                    style: TextStyle(color: Colors.white),
+              GestureDetector(
+                  onTap: () {
+                    load.updateDataProduct(
+                        produkid,
+                        judul.text,
+                        int.parse(harga.text),
+                        deskripsi.text,
+                        int.parse(stok.text));
+                    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text(
+                        'Update Data Successfully',
+                        textAlign: TextAlign.center,
+                      ),
+                      backgroundColor: Colors.green,
+                      duration: Duration(seconds: 2),
+                    ));
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    margin: EdgeInsets.only(
+                        top: 10, right: 25, left: 25, bottom: 10),
+                    padding: EdgeInsets.only(
+                        top: 10, bottom: 10, right: 20, left: 20),
+                    decoration: BoxDecoration(
+                        color: Colors.green,
+                        borderRadius: BorderRadius.circular(20)),
+                    child: Center(
+                        child: Text(
+                      "Simpan",
+                      style: TextStyle(color: Colors.white),
+                    )),
                   )),
-                )),
             ],
           ),
         ),

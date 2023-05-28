@@ -28,7 +28,8 @@ class UserProvider extends ChangeNotifier {
             password: doc.data()['password'],
             status: doc.data()['status'],
             lokasi: doc.data()['lokasi'],
-            toko: doc.data()['toko']
+            toko: doc.data()['toko'],
+            gambar: doc.data()['gambar']
             ))
         .toList();
         notifyListeners();

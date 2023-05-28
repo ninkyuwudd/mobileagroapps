@@ -39,6 +39,22 @@ class ProductProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> updateDataProduct(String id,String namaproduk,int harga,String deskripsi,int jumlah) async{
+        try{
+                  final productdata =
+        await FirebaseFirestore.instance.collection('produk');
+        productdata.doc(id).update({
+          "namaproduk" : namaproduk,
+          "harga" : harga,
+          "deskripsi" : deskripsi,
+          "jumlah" : jumlah
+        });
+
+        }catch(e){
+          print(e);
+        }
+  }
+
     Future<void> fetchdataproductsendiri(String iduser) async {
     final productdata =
         await FirebaseFirestore.instance.collection('produk').where('idtoko',isNotEqualTo: iduser).get();
