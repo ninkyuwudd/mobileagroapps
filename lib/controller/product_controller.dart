@@ -169,6 +169,23 @@ class ProductProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  // void deleteitem()async{
+
+  //   await productdata.
+  
+  // }
+
+  Future<void> deleteitem(String id)async{
+    try{
+      final FirebaseFirestore productdata = await FirebaseFirestore.instance;
+      final DocumentReference documentReference = productdata.collection('produk').doc(id);
+      await documentReference.delete();
+      print("produk berhasil dihapus");
+    }catch(e){
+      print("produk gagal dihapus");
+    }
+  }
+
   void hapus(int index) {
     print("manggil hapus");
     _items.removeAt(index);

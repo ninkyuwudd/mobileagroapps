@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mobileagroapps/view/calculatorpage.dart';
-import 'package:mobileagroapps/view/cuacapage.dart';
-import 'package:mobileagroapps/view/profile_page.dart';
-import 'package:mobileagroapps/view/shoppage.dart';
-import 'package:mobileagroapps/view/testing/tesprovider.dart';
+import 'package:mobileagroapps/view/kalkulator/calculatorpage.dart';
+import 'package:mobileagroapps/view/cuaca/cuacapage.dart';
+import 'package:mobileagroapps/view/profile/profile_page.dart';
+import 'package:mobileagroapps/view/shop/shoppage.dart';
 
 class BottomNavbar extends StatefulWidget {
   final int idx;
@@ -19,7 +18,9 @@ class _BottomNavbarState extends State<BottomNavbar> {
   @override
   Widget build(BuildContext context) {
     final _pageOption = [
-      CuacaPage(idx: widget.idx,),
+      CuacaPage(
+        idx: widget.idx,
+      ),
       CalculatorPage(idx: widget.idx),
       // Testproductdata(),
       ShopPage(idx: widget.idx),
@@ -34,7 +35,7 @@ class _BottomNavbarState extends State<BottomNavbar> {
         bottomNavigationBar: Theme(
           data: Theme.of(context).copyWith(
               // sets the background color of the `BottomNavigationBar`
-              
+
               canvasColor: Colors.white,
               // sets the active color of the `BottomNavigationBar` if `Brightness` is light
               primaryColor: Colors.red,
@@ -42,15 +43,16 @@ class _BottomNavbarState extends State<BottomNavbar> {
                   .textTheme
                   .copyWith(caption: new TextStyle(color: Colors.yellow))),
           child: BottomNavigationBar(
-              selectedItemColor: Colors.green,
-  unselectedItemColor: Colors.grey,
+            selectedItemColor: Colors.green,
+            unselectedItemColor: Colors.grey,
             backgroundColor: Colors.white,
             items: [
               BottomNavigationBarItem(icon: Icon(Icons.home), label: "Cuaca"),
               BottomNavigationBarItem(
                   icon: Icon(Icons.nature), label: "Calculator"),
               BottomNavigationBarItem(icon: Icon(Icons.shop), label: "Toko"),
-              BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile")
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.person), label: "Profile")
             ],
             onTap: (int index) {
               setState(() {

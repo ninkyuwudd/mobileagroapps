@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobileagroapps/navigationbar.dart';
-import 'package:mobileagroapps/view/change_user_data.dart';
+import 'package:mobileagroapps/view/profile/change_user_data.dart';
 import 'package:mobileagroapps/view/login_page.dart';
 import 'package:mobileagroapps/view/profile/daftartoko_view.dart';
 import 'package:mobileagroapps/view/profile/menunggu_premium.dart';
@@ -17,7 +17,7 @@ import 'package:mobileagroapps/view/shop/listproduk_view.dart';
 import 'package:mobileagroapps/view/shop/order_product.dart';
 import 'package:mobileagroapps/view/shop/perbayaran_view.dart';
 import 'package:mobileagroapps/view/shop/unggah_gambar.dart';
-import 'package:mobileagroapps/view/tambahlokasi_view.dart';
+import 'package:mobileagroapps/view/cuaca/tambahlokasi_view.dart';
 
 class Routes {
   // static const String loginPageRoute = LoginPage.routename;

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mobileagroapps/model/user_model.dart';
 import 'package:mobileagroapps/navigationbar.dart';
 import 'package:mobileagroapps/controller/user_controller.dart';
-import 'package:mobileagroapps/view/tambahlokasi_view.dart';
+import 'package:mobileagroapps/view/cuaca/tambahlokasi_view.dart';
 import 'package:mobileagroapps/widget/login/rounded_field_white.dart';
 import 'package:provider/provider.dart';
 
@@ -143,10 +143,11 @@ class _LoginPageState extends State<LoginPage> {
                                     password.text == akunnya[i].password) {
                                       print(akunnya[i].id.toString());
                                   usrprov.changedataid(akunnya[i].id.toString());
-
+                                  
                                   if(akunnya[i].lokasi == ''){
                                     Navigator.pushReplacementNamed(context, TambahLokasi.routename,arguments: i);
                                   }else{
+                                    usrprov.changedataidx(i);
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(

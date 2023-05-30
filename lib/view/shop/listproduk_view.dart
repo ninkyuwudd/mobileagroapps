@@ -4,6 +4,8 @@ import 'package:mobileagroapps/controller/toko_controller.dart';
 import 'package:mobileagroapps/controller/user_controller.dart';
 import 'package:mobileagroapps/view/shop/edit_produk_view.dart';
 import 'package:mobileagroapps/view/shop/unggah_gambar.dart';
+import 'package:mobileagroapps/widget/popup_warning.dart';
+import 'package:mobileagroapps/widget/popup_widget.dart';
 import 'package:provider/provider.dart';
 
 class ListProdukView extends StatefulWidget {
@@ -34,6 +36,8 @@ class _ListProdukViewState extends State<ListProdukView> {
 
   @override
   Widget build(BuildContext context) {
+    var getidx = ModalRoute.of(context)?.settings.arguments as int;
+
     var loaduser = Provider.of<UserProvider>(context);
     var getuser = loaduser.akun;
 
@@ -45,61 +49,70 @@ class _ListProdukViewState extends State<ListProdukView> {
     var gettoko = loadtoko.items;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Daftar Produk Anda"),
-        actions: [
-          IconButton(
-              onPressed: () {
-                Navigator.pushNamed(context, UnggahGambar.routename,arguments: getuser[getidxtoko].toko);
-              },
-              icon: Icon(
-                Icons.add,
-              )),
-        ],
-      ),
-      body: ListView.builder(
-        itemCount: getproduk.length,
-        itemBuilder: (ctx,idx){
-          return GestureDetector(
-            onTap: (){
-              Navigator.pushNamed(context, EditProdukView.routename,arguments: getproduk[idx].id);
-            },
-            child: Container(
-              margin: EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: [
-                  BoxShadow(
-                    color: Color.fromARGB(18, 0, 0, 0),
-                    blurRadius: 2,
-                    spreadRadius: 4
-                  )
-                ]
-              ),
-              child: Column(
-                children: [
-                  Container(
-                    height: 100,
-                    
-                    decoration: BoxDecoration(
-                     image: DecorationImage(image:NetworkImage(getproduk[idx].gambar),fit: BoxFit.cover),
-                     
-                    ),
-                    
+        appBar: AppBar(
+          title: Text("Daftar Produk Anda"),
+          actions: [
+            IconButton(
+                onPressed: () {
+                  if (getproduk.length > 3 &&
+                      getuser[getidx].status == "premium") {
+                    Navigator.pushNamed(context, UnggahGambar.routename,
+                        arguments: getuser[getidxtoko].toko);
+                  } else if (getproduk.length <= 3) {
+                    Navigator.pushNamed(context, UnggahGambar.routename,
+                        arguments: getuser[getidxtoko].toko);
+                  } else {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return PopupWarning(pesan: "upgrade premium untuk unggah lebih banyak produk");
+                        });
+                  }
+                },
+                icon: Icon(
+                  Icons.add,
+                )),
+          ],
+        ),
+        body: ListView.builder(
+            itemCount: getproduk.length,
+            itemBuilder: (ctx, idx) {
+              return GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, EditProdukView.routename,
+                      arguments: getproduk[idx].id);
+                },
+                child: Container(
+                  margin: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: [
+                        BoxShadow(
+                            color: Color.fromARGB(18, 0, 0, 0),
+                            blurRadius: 2,
+                            spreadRadius: 4)
+                      ]),
+                  child: Column(
+                    children: [
+                      Container(
+                        height: 100,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: NetworkImage(getproduk[idx].gambar),
+                              fit: BoxFit.cover),
+                        ),
+                      ),
+                      Container(
+                        child: ListTile(
+                          title: Text(getproduk[idx].namaproduk),
+                          trailing: Icon(Icons.edit),
+                        ),
+                      ),
+                    ],
                   ),
-                  Container(
-                    child: ListTile(
-                      title: Text(getproduk[idx].namaproduk),
-                      trailing: Icon(Icons.edit),
-                      
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          );
-        })
-    );
+                ),
+              );
+            }));
   }
 }

@@ -7,7 +7,7 @@ import 'package:mobileagroapps/view/shop/unggah_gambar.dart';
 import 'package:mobileagroapps/widget/shop/badge.dart';
 import 'package:provider/provider.dart';
 
-import '../widget/shop/productgrid.dart';
+import '../../widget/shop/productgrid.dart';
 
 enum FilterOptions { pupuk, pakan, semua }
 

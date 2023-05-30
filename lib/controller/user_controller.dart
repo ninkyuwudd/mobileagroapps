@@ -49,7 +49,7 @@ class UserProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-    changedataidx(int idx){
+  changedataidx(int idx){
     curidx= idx;
     notifyListeners();
   }

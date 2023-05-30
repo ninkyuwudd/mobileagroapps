@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mobileagroapps/controller/keranjang_controller.dart';
 import 'package:mobileagroapps/controller/product_controller.dart';
+import 'package:mobileagroapps/controller/user_controller.dart';
 import 'package:mobileagroapps/view/shop/cart_page_view.dart';
+import 'package:mobileagroapps/view/shop/listproduk_view.dart';
+import 'package:mobileagroapps/widget/popup_widget.dart';
 import 'package:mobileagroapps/widget/rounded_value_field.dart';
 import 'package:provider/provider.dart';
 
@@ -40,12 +43,23 @@ class _EditProdukViewState extends State<EditProdukView> {
   @override
   Widget build(BuildContext context) {
     final cart = Provider.of<CartProvider>(context, listen: false);
+    final loaduser = Provider.of<UserProvider>(context);
     final produkid = ModalRoute.of(context)?.settings.arguments as String;
     final load = Provider.of<ProductProvider>(context);
     final loadproduk = load.finbyid(produkid);
     return Scaffold(
       appBar: AppBar(
         title: Text("Edit Detail Product"),
+        actions: [
+          TextButton(onPressed: (){
+            showDialog(context: context,builder: (context) {
+              return Popup(yesfunc: (){
+                load.deleteitem(produkid);
+                Navigator.pushReplacementNamed(context, ListProdukView.routename,arguments: loaduser.curidx);
+              }, nofunc: (){Navigator.pop(context);});
+            },);
+          }, child: Text("Hapus",style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold),))
+        ],
       ),
       body: SingleChildScrollView(
         child: Container(

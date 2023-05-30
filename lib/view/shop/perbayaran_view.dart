@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:mobileagroapps/controller/product_controller.dart';
 import 'package:mobileagroapps/widget/tombolrounded_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -18,11 +19,22 @@ class Pembayaran extends StatefulWidget {
 }
 
 class _PembayaranState extends State<Pembayaran> {
-    final dborder = FirebaseFirestore.instance.collection("order");
-      final dbproduk = FirebaseFirestore.instance.collection('produk');
+  final dborder = FirebaseFirestore.instance.collection("order");
+
+  final dbproduk = FirebaseFirestore.instance.collection('produk');
+
   final dbcustomer = FirebaseFirestore.instance.collection("users");
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Provider.of<ProductProvider>(context,listen: false).fetchdataproduct();
+  }
+
   @override
   Widget build(BuildContext context) {
+      final loadproduk = Provider.of<ProductProvider>(context);
         final cart = Provider.of<CartProvider>(context);
     final loaduser = Provider.of<UserProvider>(context);
     loaduser.fethcdatauser;
