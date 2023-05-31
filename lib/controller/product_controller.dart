@@ -12,6 +12,8 @@ class ProductProvider with ChangeNotifier {
     return _items;
   }
 
+  List<ProdukModel> jumlahProduk = [];
+
   var setfilter;
 
   gantifilter(String filter){
@@ -47,6 +49,19 @@ class ProductProvider with ChangeNotifier {
           "namaproduk" : namaproduk,
           "harga" : harga,
           "deskripsi" : deskripsi,
+          "jumlah" : jumlah
+        });
+
+        }catch(e){
+          print(e);
+        }
+  }
+
+    Future<void> updateDataStok(String id,int jumlah) async{
+        try{
+                  final productdata =
+        await FirebaseFirestore.instance.collection('produk');
+        productdata.doc(id).update({
           "jumlah" : jumlah
         });
 

@@ -7,6 +7,8 @@ class CartProvider with ChangeNotifier {
     return _items;
   }
 
+  var pesanansemetara = [];
+
   int get itemcount {
     return _items.length;
   }
@@ -67,6 +69,16 @@ class CartProvider with ChangeNotifier {
 
   void clear(){
     _items = {};
+    notifyListeners();
+  }
+
+  void addIdPesananSementara(String id){
+    pesanansemetara.add(id);
+    notifyListeners();
+  }
+
+  void clearIdPesananSementara(){
+    pesanansemetara = [];
     notifyListeners();
   }
 }

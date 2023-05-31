@@ -53,6 +53,12 @@ class CartPage extends StatelessWidget {
                         //   "date": DateFormat.yMMMd().format(DateTime.now())
                         // });
                         if (cart.totalamount != 0) {
+                          // cart.clearIdPesananSementara();
+                          for(var x = 0; x < cart.items.length; x ++){
+                            
+                            cart.addIdPesananSementara(cart.items.values.toList()[x].id);
+                          }
+                          print(cart.pesanansemetara);
                           Navigator.pushReplacementNamed(
                               context, Pembayaran.routename,
                               arguments: cart.totalamount);
@@ -90,13 +96,15 @@ class CartPage extends StatelessWidget {
             ),
             Expanded(
                 child: ListView.builder(
-              itemBuilder: (ctx, i) => CartItemCard(
+              itemBuilder: (ctx, i) =>
+                CartItemCard(
                 cart.items.values.toList()[i].id,
                 cart.items.keys.toList()[i],
                 cart.items.values.toList()[i].price,
                 cart.items.values.toList()[i].quantity,
                 cart.items.values.toList()[i].title,
               ),
+              
               itemCount: cart.items.length,
             ))
           ],

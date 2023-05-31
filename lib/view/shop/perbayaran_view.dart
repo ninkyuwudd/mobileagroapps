@@ -39,6 +39,7 @@ class _PembayaranState extends State<Pembayaran> {
     final loaduser = Provider.of<UserProvider>(context);
     loaduser.fethcdatauser;
     final data = ModalRoute.of(context)?.settings.arguments as int;
+
     return Scaffold(
       appBar: AppBar(
         // backgroundColor: Colors.transparent,
@@ -116,6 +117,16 @@ class _PembayaranState extends State<Pembayaran> {
             RoundedButtonWidget(
               text: "Selesai",
               fungsi: () {
+                
+                for(var x = 0; x < cart.items.length ; x ++){
+                  int jumlahPerbarang = cart.items.values.toList()[x].quantity;
+
+                  var produkdata = loadproduk.finbyid(cart.pesanansemetara[x]);
+                  print("produk ${produkdata.namaproduk}, jumlah :${produkdata.jumlah}");
+
+                  loadproduk.updateDataStok(cart.items.values.toList()[x].id,produkdata.jumlah - jumlahPerbarang );
+                  print("produk ${produkdata.namaproduk}, jumlah :${produkdata.jumlah}");
+                }
                 dborder.doc().set({
                   "idcustomer": loaduser.curuserid,
                   "idproduk": cart.items.keys.toList(),
@@ -124,6 +135,7 @@ class _PembayaranState extends State<Pembayaran> {
                 Provider.of<Orderproivder>(context, listen: false)
                     .addorder(cart.items.values.toList(), cart.totalamount);
                 cart.clear();
+                cart.clearIdPesananSementara();
                 Navigator.pop(context);
               },
               warnabg: Colors.white,
