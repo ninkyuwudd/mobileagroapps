@@ -72,9 +72,12 @@ class _ShopPageState extends State<ShopPage> {
               else if (selectedValue == FilterOptions.pakan) {
                 getdataproduk.filterpakan(getlist[widget.idx].toko.toString());
                 print("ini pakan");
-              } else {
+              }else if (selectedValue == FilterOptions.semua){
                 getdataproduk.filtertprodukoko(getlist[widget.idx].toko.toString());
                 print("ini semua");
+              } 
+              else {
+                print("salah input filter");
               }
             },
             icon: Icon(

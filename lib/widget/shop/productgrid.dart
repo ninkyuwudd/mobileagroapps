@@ -24,7 +24,6 @@ class _ProductGridState extends State<ProductGrid> {
     super.initState();
   }
 
-
   @override
   Widget build(BuildContext context) {
     print(widget.cekfilter);
@@ -40,21 +39,15 @@ class _ProductGridState extends State<ProductGrid> {
                 crossAxisSpacing: 15,
                 mainAxisSpacing: 15,
               ),
-              itemCount: loadproduk.items.length,
+              itemCount: loadproduk.items.where((item) => item.jumlah != 0).length,
               itemBuilder: (ctx, i) {
-
+                final filteredItems = loadproduk.items.where((item) => item.jumlah != 0).toList();
                 try {
-                  if(loadproduk.items[i].jumlah == 0){
-                    print("kosong");
-                  }else{
-                    return ProductItemsCard(
-                        namaproduk: loadproduk.items[i].namaproduk,
-                        urlgambar: loadproduk.items[i].gambar,
-                        id: loadproduk.items[i].id,
-                        
-                        );
-                  }
-
+                  return ProductItemsCard(
+                      namaproduk: filteredItems[i].namaproduk,
+                      urlgambar: filteredItems[i].gambar,
+                      id: filteredItems[i].id,
+                    );
                 } catch (e) {
                   return Center(
                     child: CircularProgressIndicator(),

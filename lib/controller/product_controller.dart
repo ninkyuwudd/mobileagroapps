@@ -95,9 +95,6 @@ class ProductProvider with ChangeNotifier {
   Future<void> filterpupuk(String idtoko) async {
     final productdata = await FirebaseFirestore.instance.collection('produk').where("idtoko",isNotEqualTo: idtoko).where('idjenisproduk', isEqualTo: "qPGLHnd6lAt4f6a7q7AS")
         .get();
-    // QuerySnapshot snapshot = await productdata
-    //     .where('idjenisproduk', isEqualTo: "qPGLHnd6lAt4f6a7q7AS")
-    //     .get();
 
     _items = productdata.docs
         .map((doc) => ProdukModel(
@@ -105,8 +102,8 @@ class ProductProvider with ChangeNotifier {
             namaproduk: doc["namaproduk"],
             deskripsi: doc["deskripsi"],
             harga: doc["harga"],
-            idjenisproduk: doc["idjenisproduk"],
             idtoko: doc["idtoko"],
+            idjenisproduk: doc["idjenisproduk"],
             jumlah: doc["jumlah"],
             gambar: doc["gambar"]))
         .toList();
@@ -116,9 +113,7 @@ class ProductProvider with ChangeNotifier {
   Future<void> filterpakan(String idtoko) async {
     final productdata = await FirebaseFirestore.instance.collection('produk').where("idtoko",isNotEqualTo: idtoko).where('idjenisproduk', isEqualTo: "uuOGJg6bqAgMKc522dFX")
         .get();
-    // QuerySnapshot snapshot = await productdata
-    //     .where('idjenisproduk', isEqualTo: "uuOGJg6bqAgMKc522dFX")
-    //     .get();
+
     _items = productdata.docs
         .map((doc) => ProdukModel(
             id: doc.id,
@@ -133,7 +128,7 @@ class ProductProvider with ChangeNotifier {
     notifyListeners();
   }
 
-      Future<void> filtertprodukoko(String idtoko) async {
+  Future<void> filtertprodukoko(String idtoko) async {
     final productdata = await FirebaseFirestore.instance.collection('produk').where('idtoko', isNotEqualTo:idtoko)
         .get();
     _items = productdata.docs
