@@ -42,12 +42,19 @@ class _ProductGridState extends State<ProductGrid> {
               ),
               itemCount: loadproduk.items.length,
               itemBuilder: (ctx, i) {
+
                 try {
-                  print(loadproduk.items[i].namaproduk);
-                  return ProductItemsCard(
-                      namaproduk: loadproduk.items[i].namaproduk,
-                      urlgambar: loadproduk.items[i].gambar,
-                      id: loadproduk.items[i].id);
+                  if(loadproduk.items[i].jumlah == 0){
+                    print("kosong");
+                  }else{
+                    return ProductItemsCard(
+                        namaproduk: loadproduk.items[i].namaproduk,
+                        urlgambar: loadproduk.items[i].gambar,
+                        id: loadproduk.items[i].id,
+                        
+                        );
+                  }
+
                 } catch (e) {
                   return Center(
                     child: CircularProgressIndicator(),

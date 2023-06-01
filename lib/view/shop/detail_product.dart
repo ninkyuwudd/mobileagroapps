@@ -18,21 +18,38 @@ class DetailProductScreen extends StatefulWidget {
 }
 
 class _DetailProductScreenState extends State<DetailProductScreen> {
+
+  
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    // final load = Provider.of<UserProvider>(context,listen: false);
-    //   load.fethcdatauser();
-    //   final getdata = load.akun;
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final produkid = ModalRoute.of(context)?.settings.arguments as String;
+      final load = Provider.of<ProductProvider>(context, listen: false);
+      final loadproduk = load.finbyid(produkid);
+      // final tokodata = Provider.of<TokoController>(context,listen: false);
+      // idtoko = loadproduk.idtoko;
+      // tokodata.fetchdatabyid(loadproduk.idtoko);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     final cart = Provider.of<CartProvider>(context, listen: false);
+
+    final loadtoko = Provider.of<TokoController>(context,listen: true);
+
     final produkid = ModalRoute.of(context)?.settings.arguments as String;
+
     final load = Provider.of<ProductProvider>(context);
+
     final loadproduk = load.finbyid(produkid);
+    // String tokoid = loadproduk.idtoko;
+    // loadtoko.fetchdatabyid(tokoid);
+    // print(loadproduk.idtoko);
+    
     return Scaffold(
       appBar: AppBar(
         title: Text("Detail Product"),
@@ -67,10 +84,15 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
                     SizedBox(
                       height: 10,
                     ),
-                    Text(loadproduk.namaproduk,style: TextStyle(fontSize: 17),),
+                    Text(
+                      loadproduk.namaproduk,
+                      style: TextStyle(fontSize: 17),
+                    ),
 
                     Divider(),
-                                        SizedBox(height: 5,),
+                    SizedBox(
+                      height: 5,
+                    ),
                     Text("Tersedia: ${loadproduk.jumlah}"),
                     SizedBox(
                       height: 10,
@@ -86,9 +108,9 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
                     Text(loadproduk.deskripsi),
                     Divider(),
                     ListTile(
-                      leading: Icon(Icons.shop_2_outlined),
-                      title: Text("namatoko"),
-                      subtitle: Text("kota Bekasi"),
+                      // leading: Image(image: NetworkImage(gettoko.gambar)),
+                      title: Text(loadtoko.nama),
+                      // subtitle: Text(gettoko.alamat),
                     )
                   ],
                 ),
@@ -101,13 +123,10 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
                 children: [
                   ElevatedButton(
                     onPressed: () {
-                      // Navigator.of(context)
-                      //     .pushNamed(OrderProductPage.routename);
-                      // cart.additem(loadproduk.id, loadproduk.harga,
-                      //     loadproduk.namaproduk);
                       cart.additem(loadproduk.id, loadproduk.harga,
-                            loadproduk.namaproduk);
-                      Navigator.of(context).pushReplacementNamed(CartPage.routename);
+                          loadproduk.namaproduk);
+                      Navigator.of(context)
+                          .pushReplacementNamed(CartPage.routename);
                     },
                     child: Text(
                       "Beli Langsung",

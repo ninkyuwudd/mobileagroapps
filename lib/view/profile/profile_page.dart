@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:mobileagroapps/controller/keranjang_controller.dart';
+import 'package:mobileagroapps/controller/order_controller.dart';
+import 'package:mobileagroapps/controller/pilihfile_controller.dart';
+import 'package:mobileagroapps/controller/product_controller.dart';
+import 'package:mobileagroapps/controller/toko_controller.dart';
+import 'package:mobileagroapps/view/login_page.dart';
 import 'package:mobileagroapps/view/profile/daftartoko_view.dart';
 import 'package:mobileagroapps/view/profile/premium_view.dart';
 import 'package:mobileagroapps/view/shop/listproduk_view.dart';
@@ -25,6 +31,14 @@ class _ProfileUserPageState extends State<ProfileUserPage> {
 
   @override
   Widget build(BuildContext context) {
+
+    final cartproivder = Provider.of<CartProvider>(context);
+    final orderprovider = Provider.of<Orderproivder>(context);
+    final pickprovider = Provider.of<PilihUploadfile>(context);
+    final pordukprovider = Provider.of<ProductProvider>(context);
+    final tokoprovider = Provider.of<TokoController>(context);
+    final userprovider = Provider.of<UserProvider>(context);
+
     try {
       final usrprov = Provider.of<UserProvider>(context, listen: false);
       final akunnya = usrprov.akun;
@@ -94,7 +108,7 @@ class _ProfileUserPageState extends State<ProfileUserPage> {
                           height: 130,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            image: DecorationImage(
+                            image:akunnya[widget.idx].gambar == null ?DecorationImage(image: AssetImage("images/empty_profile.png")) :DecorationImage(
                                 image: NetworkImage(
                                     akunnya[widget.idx].gambar.toString()),
                                 fit: BoxFit.cover),
@@ -288,7 +302,15 @@ class _ProfileUserPageState extends State<ProfileUserPage> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.pop(context);
+                    cartproivder.clear();
+                    orderprovider.clear();
+                    pickprovider.clear();
+                    pordukprovider.clear();
+                    tokoprovider.clear();
+                    userprovider.clear();
+
+                    Navigator.pushReplacementNamed(context, LoginPage.routename);
+                    // Navigator.pop(context);
                   },
                   child: Container(
                     margin: EdgeInsets.only(top: 10, right: 25, left: 25),

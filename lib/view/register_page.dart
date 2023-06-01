@@ -39,9 +39,11 @@ class _RegisterPageState extends State<RegisterPage> {
   final firestoredb = FirebaseFirestore.instance.collection('users');
   @override
   Widget build(BuildContext context) {
+    
     final usrprov = Provider.of<UserProvider>(context);
     usrprov.fethcdatauser();
     final akunnya = usrprov.akun;
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: Color.fromARGB(255, 128, 211, 131),

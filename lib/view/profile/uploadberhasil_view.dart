@@ -11,6 +11,8 @@ class Tokoditerima extends StatefulWidget {
 
 class _TokoditerimaState extends State<Tokoditerima> {
 
+  bool statuspersetujuan = false;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -19,7 +21,11 @@ class _TokoditerimaState extends State<Tokoditerima> {
   }
 
   void navigatenext() async{
-    await Future.delayed(Duration(seconds: 3));
+    await Future.delayed(Duration(seconds: 5));
+    setState(() {
+      statuspersetujuan = true;
+    });
+    await Future.delayed(Duration(seconds: 2));
     Navigator.pop(context);
   }
 
@@ -28,15 +34,30 @@ class _TokoditerimaState extends State<Tokoditerima> {
     return Scaffold(
       body: Container(
         width: MediaQuery.of(context).size.width,
-        child: Column(
+        child:statuspersetujuan == false ? Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+
+           CircularProgressIndicator(),
             SizedBox(
               height: 15,
             ),
-            Text("Selamat!"),
-            Text("Toko anda berhasil dibuat")
+          
+            Text("Menunggu menyelesaikan pembayaran....")
+          ],
+        ): Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+
+           Icon(Icons.check_circle,color: Colors.green,size: 80,),
+            SizedBox(
+              height: 15,
+            ),
+          Text("Pembayaran Berhasil!"),
+            Text("Terimakasih!"),
+            
           ],
         ),
       ),

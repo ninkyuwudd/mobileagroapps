@@ -21,6 +21,10 @@ class ProductProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  void clear(){
+    _items = [];
+    notifyListeners();
+  }
 
 
   Future<void> fetchdataproduct() async {

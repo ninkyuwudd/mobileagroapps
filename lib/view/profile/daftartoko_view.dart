@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:mobileagroapps/controller/pilihfile_controller.dart';
 import 'package:mobileagroapps/controller/toko_controller.dart';
 import 'package:mobileagroapps/controller/user_controller.dart';
-import 'package:mobileagroapps/view/profile/uploadtoko_view.dart';
+import 'package:mobileagroapps/view/profile/uploadberhasil_view.dart';
 import 'package:mobileagroapps/widget/rounded_value_field.dart';
 import 'package:phone_number/phone_number.dart';
 import 'package:provider/provider.dart';
@@ -56,15 +56,22 @@ class _DaftarTokoState extends State<DaftarToko> {
 
   @override
   Widget build(BuildContext context) {
-    var loadtoko = Provider.of<TokoController>(context, listen: false);
+    // var loadtoko = Provider.of<TokoController>(context, listen: false);
     var dbtoko = FirebaseFirestore.instance.collection("toko");
     var dbuser = FirebaseFirestore.instance.collection("users");
-    var loaduser = Provider.of<UserProvider>(context, listen: false);
+    // var loaduser = Provider.of<UserProvider>(context, listen: false);
     var getid = ModalRoute.of(context)?.settings.arguments as String;
-    var gettoko = loadtoko.items;
-    var getuser = loaduser.akun;
+    // var gettoko = loadtoko.items;
+    // var getuser = loaduser.akun;
     var imgcontroller = Provider.of<PilihUploadfile>(context);
-    getImageurl(imgcontroller.pickfile!.name);
+    // print(imgcontroller.pickfile?.name);
+    if(imgcontroller.pickfile != null){
+      getImageurl(imgcontroller.pickfile!.name);
+    }else{
+      print("data masih kosong");
+    }
+    
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Daftar Toko"),
@@ -283,7 +290,7 @@ class _DaftarTokoState extends State<DaftarToko> {
                         duration: Duration(seconds: 2),
                       ));
                                           Navigator.pushReplacementNamed(
-                        context, MenungguPersetujuanToko.routename);
+                        context, Tokoditerima.routename);
                     }
 
                     // });

@@ -24,6 +24,11 @@ class Orderproivder with ChangeNotifier {
     notifyListeners();
   }
 
+  void clear(){
+    _orders = [];
+    notifyListeners();
+  }
+
   void addorder(List<CartModel> cartproduct, int total) {
     _orders.insert(
         0,

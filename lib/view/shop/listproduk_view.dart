@@ -65,7 +65,9 @@ class _ListProdukViewState extends State<ListProdukView> {
                     showDialog(
                         context: context,
                         builder: (context) {
-                          return PopupWarning(pesan: "upgrade premium untuk unggah lebih banyak produk");
+                          return PopupWarning(
+                              pesan:
+                                  "upgrade premium untuk unggah lebih banyak produk");
                         });
                   }
                 },
@@ -95,6 +97,20 @@ class _ListProdukViewState extends State<ListProdukView> {
                       ]),
                   child: Column(
                     children: [
+                      if (getproduk[idx].jumlah == 0) ...[
+                        Container(
+                          height: 50,
+                          decoration: BoxDecoration(
+                            color: Color.fromARGB(174, 244, 67, 54),
+                          ),
+                          child: Center(
+                            child: Text(
+                              "Produk Habis",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ],
                       Container(
                         height: 100,
                         decoration: BoxDecoration(

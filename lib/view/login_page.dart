@@ -26,7 +26,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
-    Provider.of<UserProvider>(context,listen: false).fethcdatauser();
+    Provider.of<UserProvider>(context, listen: false).fethcdatauser();
   }
 
   var i = 0;
@@ -63,22 +63,29 @@ class _LoginPageState extends State<LoginPage> {
                 Container(
                   padding: EdgeInsets.all(15),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: Colors.white
-                  ),
+                      borderRadius: BorderRadius.circular(15),
+                      color: Colors.white),
                   child: Column(
                     children: [
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           RoundeFieldWhite(
-                              valuenya: username,
-                              title: "Username",
-                              hover: "masukkan username..",
-                              check: usercheck ,
-                              ),
-                                            Text("Password",style: TextStyle(color: Color.fromARGB(255, 65, 65, 65),fontWeight: FontWeight.bold,fontSize: 18),),
-                  SizedBox(height: 10,),
+                            valuenya: username,
+                            title: "Username",
+                            hover: "masukkan username..",
+                            check: usercheck,
+                          ),
+                          Text(
+                            "Password",
+                            style: TextStyle(
+                                color: Color.fromARGB(255, 65, 65, 65),
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
                           TextFormField(
                             controller: password,
                             obscureText: _obscuretext,
@@ -98,12 +105,15 @@ class _LoginPageState extends State<LoginPage> {
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(20))),
                                 hintText: 'Masukkan password ...',
-                                errorText:
-                                    passcheck ? "password tidak bisa kosong!" : null),
+                                errorText: passcheck
+                                    ? "password tidak bisa kosong!"
+                                    : null),
                           ),
                         ],
                       ),
-                      SizedBox(height: 10,),
+                      SizedBox(
+                        height: 10,
+                      ),
                       Visibility(
                         child: Text(
                           "Username atau Password Salah !",
@@ -127,7 +137,7 @@ class _LoginPageState extends State<LoginPage> {
                                 usercheck = false;
                               });
                             }
-                
+
                             if (password.text.isEmpty) {
                               setState(() {
                                 passcheck = true;
@@ -135,32 +145,37 @@ class _LoginPageState extends State<LoginPage> {
                             } else {
                               passcheck = false;
                             }
-                            
-                            if (password.text.isNotEmpty & username.text.isNotEmpty) {
+
+                            if (password.text.isNotEmpty &
+                                username.text.isNotEmpty) {
                               for (var i = 0; i < akunnya.length; i++) {
                                 print(akunnya[i].username);
                                 if (username.text == akunnya[i].username &&
                                     password.text == akunnya[i].password) {
-                                      print(akunnya[i].id.toString());
-                                  usrprov.changedataid(akunnya[i].id.toString());
-                                  
-                                  if(akunnya[i].lokasi == ''){
-                                    Navigator.pushReplacementNamed(context, TambahLokasi.routename,arguments: i);
-                                  }else{
+                                  print(akunnya[i].id.toString());
+                                  usrprov
+                                      .changedataid(akunnya[i].id.toString());
+
+                                  if (akunnya[i].lokasi == '') {
+                                    Navigator.pushReplacementNamed(
+                                        context, TambahLokasi.routename,
+                                        arguments: i);
+                                  } else {
                                     usrprov.changedataidx(i);
                                     Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => BottomNavbar(idx: i,)));
-                                      notallowedalert = false;
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => BottomNavbar(
+                                                  idx: i,
+                                                )));
+                                    notallowedalert = false;
                                   }
                                   break;
-                                  
-                                }else{
+                                } else {
                                   notallowedalert = true;
                                 }
                               }
-                            }else{
+                            } else {
                               print("salah");
                             }
                           },
@@ -179,10 +194,10 @@ class _LoginPageState extends State<LoginPage> {
                               onPressed: () {
                                 Navigator.of(context).pushNamed('/register');
                               },
-                              child: Text(
-                                "Register",
-                                style: TextStyle(color: Colors.green,fontWeight: FontWeight.bold)
-                              )),
+                              child: Text("SignUp",
+                                  style: TextStyle(
+                                      color: Colors.green,
+                                      fontWeight: FontWeight.bold))),
                         ],
                       ),
                     ],

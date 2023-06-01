@@ -7,18 +7,29 @@ class TokoController with ChangeNotifier {
   List<TokoModel> get items {
     return _items;
   }
-    String curtokoid = "";
+  String curtokoid = "";
+
+  String nama = "";
+  String alamat = "";
+  String imgurl = "";
+
+  void clear(){
+    _items = [];
+    notifyListeners();
+  }
+
+
   Future<void> getdatatoko() async {
     final tokodata = await FirebaseFirestore.instance.collection('toko').get();
 
     _items = tokodata.docs
         .map((doc) => TokoModel(
             id: doc.id,
-            namatoko: doc["namatoko"],
-            email: doc["email"],
-            nomorhp: doc["nomorhp"],
-            alamat: doc["alamat"],
-            gambar: doc["gambar"]))
+            namatoko: doc.data()["namatoko"],
+            email: doc.data()["email"],
+            nomorhp: doc.data()["nomorhp"],
+            alamat: doc.data()["alamat"],
+            gambar: doc.data()["gambar"]))
         .toList();
     notifyListeners();
   }
@@ -30,11 +41,11 @@ class TokoController with ChangeNotifier {
     _items = tokodata.docs
         .map((doc) => TokoModel(
             id: doc.id,
-            namatoko: doc["namatoko"],
-            email: doc["email"],
-            nomorhp: doc["nomorhp"],
-            alamat: doc["alamat"],
-            gambar: doc["gambar"]))
+            namatoko: doc.data()["namatoko"],
+            email: doc.data()["email"],
+            nomorhp: doc.data()["nomorhp"],
+            alamat: doc.data()["alamat"],
+            gambar: doc.data()["gambar"]))
         .toList();
     notifyListeners();
   }
@@ -43,5 +54,29 @@ class TokoController with ChangeNotifier {
   changedataid(String id){
     curtokoid = id;
     notifyListeners();
+  }
+
+  TokoModel finbyid(String id) {
+    print("idnya : $id");
+    final founditm = _items.firstWhere((toko) => toko.id == id);
+    return founditm;
+  }
+
+
+  Future<void> fetchdatabyid(String id) async {
+    try{
+      DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance.collection('toko').doc(id).get();
+
+      Map<String,dynamic>? data = documentSnapshot.data() as Map<String, dynamic>?;
+
+      if(data != null){
+        nama = data['namatoko'];
+        alamat = data['alamat'];
+        imgurl = data['gambar'];
+        notifyListeners();
+      }     
+    }catch(e){
+        print("error $e");
+    }
   }
 }

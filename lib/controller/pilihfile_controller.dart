@@ -24,4 +24,9 @@ class PilihUploadfile extends ChangeNotifier {
    notifyListeners();
   }
 
+  void clear(){
+    pickfile = null;
+    notifyListeners();
+  }
+
 }

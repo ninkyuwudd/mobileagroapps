@@ -14,6 +14,14 @@ class UserProvider extends ChangeNotifier {
 
   int curidx = 0;
 
+  void clear(){
+    _usrakun = [];
+    curidx = 0;
+    curuserid = "";
+    _usrloc = [];
+    notifyListeners();
+  }
+
   void fethcdatauser() async {
     QuerySnapshot<Map<String, dynamic>> usrdataloc = await FirebaseFirestore.instance.collection('users').get();
         
@@ -35,6 +43,8 @@ class UserProvider extends ChangeNotifier {
         notifyListeners();
   }
 
+  void KlikTombolRegister() async{}
+
   void fetchdatauserlocation(var id) async{
     QuerySnapshot<Map<String, dynamic>> usrdataloclist = await FirebaseFirestore.instance.collection('users').doc(id).collection("private data").get();
 
@@ -43,6 +53,8 @@ class UserProvider extends ChangeNotifier {
 
 
   }
+
+
 
   changedataid(String id){
     curuserid = id;
