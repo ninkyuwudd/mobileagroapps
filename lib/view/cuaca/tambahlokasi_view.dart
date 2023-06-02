@@ -4,7 +4,6 @@ import 'package:mobileagroapps/controller/cuaca_controller.dart';
 import 'package:mobileagroapps/controller/user_controller.dart';
 import 'package:mobileagroapps/navigationbar.dart';
 import 'package:mobileagroapps/widget/rounded_value_field.dart';
-import 'package:mobileagroapps/widget/tombolrounded_widget.dart';
 import 'package:provider/provider.dart';
 
 class TambahLokasi extends StatefulWidget {

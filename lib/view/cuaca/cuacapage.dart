@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
-import 'package:mobileagroapps/model/user_model.dart';
 import 'package:mobileagroapps/controller/cuaca_controller.dart';
 import 'package:mobileagroapps/controller/user_controller.dart';
 import 'package:mobileagroapps/widget/cuaca/cuacatemp_widget.dart';
@@ -44,7 +43,7 @@ class _CuacaPageState extends State<CuacaPage> {
     // final useloclistdata = Provider.of<UserProvider>(context, listen: false);
     // useloclistdata.fetchdatauserlocation(akunnya[widget.idx].id);
     final weatherProvider = Provider.of<CuacaProvider>(context, listen: false);
-    final formater = DateFormat.Hm();
+    // final formater = DateFormat.Hm();
     final formaterdate = DateFormat.yMMMd();
     return SafeArea(
       child: Scaffold(

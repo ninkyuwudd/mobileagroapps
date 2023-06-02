@@ -1,6 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:mobileagroapps/model/user_model.dart';
 import 'package:mobileagroapps/navigationbar.dart';
 import 'package:mobileagroapps/controller/user_controller.dart';
 import 'package:mobileagroapps/view/cuaca/tambahlokasi_view.dart';

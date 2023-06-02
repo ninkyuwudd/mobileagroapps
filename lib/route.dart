@@ -13,6 +13,7 @@ import 'package:mobileagroapps/view/shop/cart_page_view.dart';
 import 'package:mobileagroapps/view/shop/detail_product.dart';
 import 'package:mobileagroapps/view/shop/edit_produk_view.dart';
 import 'package:mobileagroapps/view/shop/listproduk_view.dart';
+import 'package:mobileagroapps/view/shop/menunggu_pembayaran.dart';
 import 'package:mobileagroapps/view/shop/order_product.dart';
 import 'package:mobileagroapps/view/shop/perbayaran_view.dart';
 import 'package:mobileagroapps/view/shop/unggah_gambar.dart';
@@ -47,7 +48,8 @@ class Routes {
     ListProdukView.routename :(context) => ListProdukView(),
     EditProdukView.routename :(context) => EditProdukView(),
     PembayaranPremium.routename :  (context) => PembayaranPremium(),
-    PremiumWait.routename :(context) =>  PremiumWait()
+    PremiumWait.routename :(context) =>  PremiumWait(),
+    MenungguBayarToko.routename :(context) => MenungguBayarToko()
 
 
   };

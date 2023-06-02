@@ -32,6 +32,16 @@ class _ListProdukViewState extends State<ListProdukView> {
       Provider.of<ProductProvider>(context, listen: false)
           .filtertoko(getuser[getidx].toko.toString());
     });
+    loadingcontent();
+  }
+
+
+  bool showcontent = false;
+  void loadingcontent() async {
+    await Future.delayed(Duration(seconds: 2));
+    setState(() {
+      showcontent = true;
+    });
   }
 
   @override
@@ -76,7 +86,7 @@ class _ListProdukViewState extends State<ListProdukView> {
                 )),
           ],
         ),
-        body: ListView.builder(
+        body:showcontent == false? Center(child: CircularProgressIndicator(),) :ListView.builder(
             itemCount: getproduk.length,
             itemBuilder: (ctx, idx) {
               return GestureDetector(

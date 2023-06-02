@@ -3,7 +3,6 @@ import 'package:mobileagroapps/controller/keranjang_controller.dart';
 import 'package:mobileagroapps/controller/product_controller.dart';
 import 'package:mobileagroapps/controller/user_controller.dart';
 import 'package:mobileagroapps/view/shop/cart_page_view.dart';
-import 'package:mobileagroapps/view/shop/unggah_gambar.dart';
 import 'package:mobileagroapps/widget/shop/badge.dart';
 import 'package:provider/provider.dart';
 
@@ -30,9 +29,18 @@ class _ShopPageState extends State<ShopPage> {
     getdatauser.fethcdatauser();
     var getlist = getdatauser.akun;
     Provider.of<ProductProvider>(context,listen: false).filtertprodukoko(getlist[widget.idx].toko.toString());
+    loadingcontent();
   }
 
   String filter = "";
+
+      bool showcontent = false;
+  void loadingcontent() async {
+    await Future.delayed(Duration(seconds: 2));
+    setState(() {
+      showcontent = true;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,9 +57,20 @@ class _ShopPageState extends State<ShopPage> {
           style: TextStyle(color: Colors.green),
         ),
         actions: <Widget>[
+     
           Consumer<CartProvider>(
+            
             builder: (_, cart, ch) =>
-                BadgeCart(child: ch!, value: cart.itemcount.toString()),
+            cart.itemcount == 0 ?IconButton(
+              icon: Icon(
+                Icons.shopping_cart,
+                color: Colors.green,
+              ),
+              onPressed: () {
+                Navigator.of(context).pushNamed(CartPage.routename);
+              },
+            ):
+            BadgeCart(child: ch!, value: cart.itemcount.toString()),
             child: IconButton(
               icon: Icon(
                 Icons.shopping_cart,
@@ -101,7 +120,7 @@ class _ShopPageState extends State<ShopPage> {
           )
         ],
       ),
-      body: ProductGrid(cekfilter: filter,),
+      body:showcontent == false ? Center(child: CircularProgressIndicator(),) : ProductGrid(cekfilter: filter,),
     );
   }
 }

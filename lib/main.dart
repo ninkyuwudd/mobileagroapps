@@ -9,7 +9,6 @@ import 'package:mobileagroapps/controller/toko_controller.dart';
 import 'package:mobileagroapps/controller/user_controller.dart';
 import 'package:mobileagroapps/route.dart';
 import 'package:mobileagroapps/view/login_page.dart';
-import 'package:mobileagroapps/view/testing/testtokoprovider.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';

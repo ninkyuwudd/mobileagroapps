@@ -6,6 +6,7 @@ import 'package:mobileagroapps/controller/toko_controller.dart';
 import 'package:mobileagroapps/controller/user_controller.dart';
 import 'package:mobileagroapps/view/shop/cart_page_view.dart';
 import 'package:mobileagroapps/view/shop/order_product.dart';
+import 'package:mobileagroapps/view/shop/perbayaran_view.dart';
 import 'package:mobileagroapps/widget/shop/order_item.dart';
 import 'package:provider/provider.dart';
 
@@ -29,9 +30,6 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
       final produkid = ModalRoute.of(context)?.settings.arguments as String;
       final load = Provider.of<ProductProvider>(context, listen: false);
       final loadproduk = load.finbyid(produkid);
-      // final tokodata = Provider.of<TokoController>(context,listen: false);
-      // idtoko = loadproduk.idtoko;
-      // tokodata.fetchdatabyid(loadproduk.idtoko);
     });
   }
 
@@ -125,8 +123,10 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
                     onPressed: () {
                       cart.additem(loadproduk.id, loadproduk.harga,
                           loadproduk.namaproduk);
-                      Navigator.of(context)
-                          .pushReplacementNamed(CartPage.routename);
+                      cart.addIdPesananSementara(cart.items.values.toList()[0].id);
+                      Navigator.pushReplacementNamed(
+                              context, Pembayaran.routename,
+                              arguments: cart.totalamount);
                     },
                     child: Text(
                       "Beli Langsung",
