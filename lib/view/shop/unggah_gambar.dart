@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:mobileagroapps/controller/pilihfile_controller.dart';
 import 'package:mobileagroapps/view/shop/testproduct.dart';
+import 'package:mobileagroapps/widget/popup_warning.dart';
 import 'package:provider/provider.dart';
 
 class UnggahGambar extends StatefulWidget {
@@ -57,7 +58,10 @@ class _UnggahGambarState extends State<UnggahGambar> {
             SizedBox(height: 20,),
             ElevatedButton(
                 onPressed: () {
-                  imgcontroller.uploadfile();
+                  if(imgcontroller.pickfile == null){
+                    showDialog(context: context, builder: (context) => PopupWarning(pesan: "Belum upload gambar"),);
+                  }else{
+                    imgcontroller.uploadfile();
                   ScaffoldMessenger.of(context).hideCurrentSnackBar();
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                     content: Text(
@@ -69,6 +73,8 @@ class _UnggahGambarState extends State<UnggahGambar> {
                   ));
                
                   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ProductView(namagambar: imgcontroller.pickfile!.name,idtoko: gettokoid)));
+                  }
+                  
                 },
                 child: Text("Upload file"))
           ],
