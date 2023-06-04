@@ -47,7 +47,7 @@ class _KalkulatorSapiState extends State<KalkulatorSapi> {
           value2: hijauan == null ? "-" : konsentrat!.toStringAsFixed(1),
           judul: "Hijauan",
           judul2: "Konsentrat",
-          gambar: "pupuk kering@4x.png",
+          gambar: "iconpakan/Rumput@4x.png",
           gambar2: "pupuk kering@4x.png",
           kategori: "Basah: 60:40",
         ),
@@ -59,7 +59,7 @@ class _KalkulatorSapiState extends State<KalkulatorSapi> {
             judul: "Hijauan",
             gambar: "pupuk kering@4x.png",
             judul2: "Konsentrat",
-            gambar2: "pupuk kering@4x.png",
+            gambar2: "iconpakan/Rumput@4x.png",
             kategori: "Kering: 60:40"),
       ],
     );

@@ -6,6 +6,7 @@ import 'package:mobileagroapps/view/shop/cart_page_view.dart';
 import 'package:mobileagroapps/view/shop/listproduk_view.dart';
 import 'package:mobileagroapps/widget/popup_widget.dart';
 import 'package:mobileagroapps/widget/rounded_value_field.dart';
+import 'package:mobileagroapps/widget/rounded_value_filed_intcek.dart';
 import 'package:provider/provider.dart';
 
 class EditProdukView extends StatefulWidget {
@@ -20,6 +21,7 @@ class _EditProdukViewState extends State<EditProdukView> {
   bool ckharga = false;
   bool ckjduul = false;
   bool ckstok = false;
+  bool ckintstok = false;
   bool ckdeskripsi = false;
   var harga = TextEditingController();
   var judul = TextEditingController();
@@ -47,6 +49,31 @@ class _EditProdukViewState extends State<EditProdukView> {
     final produkid = ModalRoute.of(context)?.settings.arguments as String;
     final load = Provider.of<ProductProvider>(context);
     final loadproduk = load.finbyid(produkid);
+
+    void cekValueInput(var value, bool ckint,bool ck){
+      if(value != "" && int.tryParse(value) == null) {
+                          print("salah input");
+                          setState(() {
+                            ckint = true;
+                            ck = false;
+                          });
+                        }
+                        else if (value == "") {
+                          print("kosong");
+                          setState(() {
+                            ckint = false;
+                            ck = true;
+                          });
+                        } 
+                        else{
+                          print("oke");
+                          setState(() {
+                            ckint = false;
+                            ck = false;
+                          });
+                        }
+    }
+    
     return Scaffold(
       appBar: AppBar(
         title: Text("Edit Detail Product"),
@@ -89,12 +116,21 @@ class _EditProdukViewState extends State<EditProdukView> {
                       hover: "masukkan harga",
                       check: ckharga,
                       fungsi: (value) {
-                        print(value);
-                        if (value == "") {
+    
+                        if(int.tryParse(value) == null) {
+                          print("salah input");
                           setState(() {
                             ckharga = true;
                           });
-                        } else {
+                        }
+                        else if (value == "") {
+                          print("kosong");
+                          setState(() {
+                            ckharga = true;
+                          });
+                        } 
+                        else{
+                          print("oke");
                           setState(() {
                             ckharga = false;
                           });
@@ -122,24 +158,38 @@ class _EditProdukViewState extends State<EditProdukView> {
                         }
                       },
                     ),
-                    RoundeValueFieldWhiteValue(
+                    RoundeValueFieldWhiteValueIntcek(
                       control: stok,
                       title: "Stok",
                       hover: "masukkan jumlah stok...",
                       check: ckstok,
+                      checkInt: ckintstok,
                       fungsi: (value) {
-                        print(value);
-                        if (value == "") {
+
+                        if(value != "" && int.tryParse(value) == null) {
+                          print("salah input");
                           setState(() {
+                            ckintstok = true;
+                            ckstok = false;
+                          });
+                        }
+                        else if (value == "") {
+                          print("kosong");
+                          setState(() {
+                            ckintstok = false;
                             ckstok = true;
                           });
-                        } else {
+                        } 
+                        else{
+                          print("oke");
                           setState(() {
+                            ckintstok = false;
                             ckstok = false;
                           });
                         }
                       },
                     ),
+
                     SizedBox(
                       height: 10,
                     ),

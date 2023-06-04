@@ -5,6 +5,7 @@ import 'package:mobileagroapps/controller/keranjang_controller.dart';
 import 'package:mobileagroapps/controller/order_controller.dart';
 import 'package:mobileagroapps/controller/user_controller.dart';
 import 'package:mobileagroapps/view/shop/perbayaran_view.dart';
+import 'package:mobileagroapps/widget/rounded_button_gree.dart';
 import 'package:provider/provider.dart';
 
 import '../../widget/shop/cart_item.dart';
@@ -30,56 +31,101 @@ class CartPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Text('Total'),
             Card(
               child: Padding(
                 padding: EdgeInsets.all(8),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Total'),
-                    Spacer(),
+                    
+                    
                     Chip(
                       label: Text(
                         '\Rp${cart.totalamount}',
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(color: Colors.black87,fontWeight: FontWeight.bold,fontSize: 18),
                       ),
-                      backgroundColor: Theme.of(context).primaryColor,
+                      elevation: 0,
+                      backgroundColor: Colors.white,
                     ),
-                    TextButton(
-                      onPressed: () {
-                        // dborder.doc().set({
-                        //   "idcustomer": loaduser.curuserid,
-                        //   "idproduk": cart.items.keys.toList(),
-                        //   "date": DateFormat.yMMMd().format(DateTime.now())
-                        // });
-                        if (cart.totalamount != 0) {
-                          // cart.clearIdPesananSementara();
-                          for(var x = 0; x < cart.items.length; x ++){
-                            
-                            cart.addIdPesananSementara(cart.items.values.toList()[x].id);
-                          }
-                          print(cart.pesanansemetara);
-                          Navigator.pushReplacementNamed(
-                              context, Pembayaran.routename,
-                              arguments: cart.totalamount);
-                        } else {
-                          ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              content: Text(
-                                'Tidak ada pesanan !',
-                                textAlign: TextAlign.center,
-                              ),
-                              backgroundColor: Color.fromARGB(255, 208, 77, 77),
-                              duration: Duration(seconds: 2)));
-                        }
+                    Container(
+                      width: 200,
+                      child: GestureDetector(
+                          onTap: () {
+                            if (cart.totalamount != 0) {
+                              // cart.clearIdPesananSementara();
+                              for (var x = 0; x < cart.items.length; x++) {
+                                cart.addIdPesananSementara(
+                                    cart.items.values.toList()[x].id);
+                              }
+                              print(cart.pesanansemetara);
+                              Navigator.pushReplacementNamed(
+                                  context, Pembayaran.routename,
+                                  arguments: cart.totalamount);
+                            } else {
+                              ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                  content: Text(
+                                    'Tidak ada pesanan !',
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  backgroundColor:
+                                      Color.fromARGB(255, 208, 77, 77),
+                                  duration: Duration(seconds: 2)));
+                            }
+                          },
+                          child: Container(
+                            width: double.infinity,
+                            margin: EdgeInsets.only(
+                                left: 25),
+                            padding: EdgeInsets.only(
+                                top: 10, bottom: 10, right: 20, left: 20),
+                            decoration: BoxDecoration(
+                                color: Colors.green,
+                                borderRadius: BorderRadius.circular(20)),
+                            child: Center(
+                                child: Text(
+                              "Pesan Sekarang",
+                              style: TextStyle(color: Colors.white),
+                            )),
+                          )),
+                    ),
 
-                        // Provider.of<Orderproivder>(context, listen: false)
-                        //     .addorder(
-                        //         cart.items.values.toList(), cart.totalamount);
-                        // cart.clear();
-                      },
-                      child: Text("ORDER NOW"),
-                    ),
+                    // TextButton(
+                    //   onPressed: () {
+                    //     // dborder.doc().set({
+                    //     //   "idcustomer": loaduser.curuserid,
+                    //     //   "idproduk": cart.items.keys.toList(),
+                    //     //   "date": DateFormat.yMMMd().format(DateTime.now())
+                    //     // });
+                    //     if (cart.totalamount != 0) {
+                    //       // cart.clearIdPesananSementara();
+                    //       for(var x = 0; x < cart.items.length; x ++){
+
+                    //         cart.addIdPesananSementara(cart.items.values.toList()[x].id);
+                    //       }
+                    //       print(cart.pesanansemetara);
+                    //       Navigator.pushReplacementNamed(
+                    //           context, Pembayaran.routename,
+                    //           arguments: cart.totalamount);
+                    //     } else {
+                    //       ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                    //       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    //           content: Text(
+                    //             'Tidak ada pesanan !',
+                    //             textAlign: TextAlign.center,
+                    //           ),
+                    //           backgroundColor: Color.fromARGB(255, 208, 77, 77),
+                    //           duration: Duration(seconds: 2)));
+                    //     }
+
+                    //     // Provider.of<Orderproivder>(context, listen: false)
+                    //     //     .addorder(
+                    //     //         cart.items.values.toList(), cart.totalamount);
+                    //     // cart.clear();
+                    //   },
+                    //   child: Text("ORDER NOW"),
+                    // ),
                   ],
                 ),
               ),
@@ -96,15 +142,13 @@ class CartPage extends StatelessWidget {
             ),
             Expanded(
                 child: ListView.builder(
-              itemBuilder: (ctx, i) =>
-                CartItemCard(
+              itemBuilder: (ctx, i) => CartItemCard(
                 cart.items.values.toList()[i].id,
                 cart.items.keys.toList()[i],
                 cart.items.values.toList()[i].price,
                 cart.items.values.toList()[i].quantity,
                 cart.items.values.toList()[i].title,
               ),
-              
               itemCount: cart.items.length,
             ))
           ],
