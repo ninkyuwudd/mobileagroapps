@@ -19,6 +19,7 @@ class EditProdukView extends StatefulWidget {
 
 class _EditProdukViewState extends State<EditProdukView> {
   bool ckharga = false;
+  bool ckintharga = false;
   bool ckjduul = false;
   bool ckstok = false;
   bool ckintstok = false;
@@ -50,42 +51,31 @@ class _EditProdukViewState extends State<EditProdukView> {
     final load = Provider.of<ProductProvider>(context);
     final loadproduk = load.finbyid(produkid);
 
-    void cekValueInput(var value, bool ckint,bool ck){
-      if(value != "" && int.tryParse(value) == null) {
-                          print("salah input");
-                          setState(() {
-                            ckint = true;
-                            ck = false;
-                          });
-                        }
-                        else if (value == "") {
-                          print("kosong");
-                          setState(() {
-                            ckint = false;
-                            ck = true;
-                          });
-                        } 
-                        else{
-                          print("oke");
-                          setState(() {
-                            ckint = false;
-                            ck = false;
-                          });
-                        }
-    }
-    
     return Scaffold(
       appBar: AppBar(
         title: Text("Edit Detail Product"),
         actions: [
-          TextButton(onPressed: (){
-            showDialog(context: context,builder: (context) {
-              return Popup(yesfunc: (){
-                load.deleteitem(produkid);
-                Navigator.pushReplacementNamed(context, ListProdukView.routename,arguments: loaduser.curidx);
-              }, nofunc: (){Navigator.pop(context);});
-            },);
-          }, child: Text("Hapus",style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold),))
+          TextButton(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return Popup(yesfunc: () {
+                      load.deleteitem(produkid);
+                      Navigator.pushReplacementNamed(
+                          context, ListProdukView.routename,
+                          arguments: loaduser.curidx);
+                    }, nofunc: () {
+                      Navigator.pop(context);
+                    });
+                  },
+                );
+              },
+              child: Text(
+                "Hapus",
+                style:
+                    TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+              ))
         ],
       ),
       body: SingleChildScrollView(
@@ -110,28 +100,29 @@ class _EditProdukViewState extends State<EditProdukView> {
                     SizedBox(
                       height: 10,
                     ),
-                    RoundeValueFieldWhiteValue(
+                    RoundeValueFieldWhiteValueIntcek(
                       control: harga,
                       title: "Harga",
                       hover: "masukkan harga",
                       check: ckharga,
+                      checkInt: ckintharga,
                       fungsi: (value) {
-    
-                        if(int.tryParse(value) == null) {
+                        if (value != "" && int.tryParse(value) == null) {
                           print("salah input");
                           setState(() {
-                            ckharga = true;
+                            ckintharga = true;
+                            ckharga = false;
                           });
-                        }
-                        else if (value == "") {
+                        } else if (value == "") {
                           print("kosong");
                           setState(() {
+                            ckintharga = false;
                             ckharga = true;
                           });
-                        } 
-                        else{
+                        } else {
                           print("oke");
                           setState(() {
+                            ckintharga = false;
                             ckharga = false;
                           });
                         }
@@ -165,22 +156,19 @@ class _EditProdukViewState extends State<EditProdukView> {
                       check: ckstok,
                       checkInt: ckintstok,
                       fungsi: (value) {
-
-                        if(value != "" && int.tryParse(value) == null) {
+                        if (value != "" && int.tryParse(value) == null) {
                           print("salah input");
                           setState(() {
                             ckintstok = true;
                             ckstok = false;
                           });
-                        }
-                        else if (value == "") {
+                        } else if (value == "") {
                           print("kosong");
                           setState(() {
                             ckintstok = false;
                             ckstok = true;
                           });
-                        } 
-                        else{
+                        } else {
                           print("oke");
                           setState(() {
                             ckintstok = false;
@@ -189,7 +177,6 @@ class _EditProdukViewState extends State<EditProdukView> {
                         }
                       },
                     ),
-
                     SizedBox(
                       height: 10,
                     ),
