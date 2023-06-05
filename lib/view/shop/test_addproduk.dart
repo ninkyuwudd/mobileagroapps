@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:mobileagroapps/controller/pilihfile_controller.dart';
 import 'package:mobileagroapps/controller/product_controller.dart';
 import 'package:mobileagroapps/widget/rounded_value_field.dart';
+import 'package:mobileagroapps/widget/rounded_value_filed_intcek.dart';
 import 'package:mobileagroapps/widget/shop/user_product_item.dart';
 import 'package:provider/provider.dart';
 
@@ -59,6 +60,7 @@ class _AddProductPageState extends State<AddProductPage> {
   bool ckdeskripsi = false;
 
   bool ckharga = false;
+  bool ckintharga = false;
 
   bool ckgambar = false;
   var gambarproduk;
@@ -88,56 +90,63 @@ class _AddProductPageState extends State<AddProductPage> {
                       height: 10,
                     ),
                     RoundeValueFieldWhiteValue(
-                                                        fungsi:(value) {
-                        print(value);
-                        if (value == "") {
-                          setState(() {
-                            cknama = true;
-                          });
-                        } else {
-                          setState(() {
-                            cknama = false;
-                          });
-                        }
-
-                      },
+                        fungsi: (value) {
+                          print(value);
+                          if (value == "") {
+                            setState(() {
+                              cknama = true;
+                            });
+                          } else {
+                            setState(() {
+                              cknama = false;
+                            });
+                          }
+                        },
                         control: nama,
                         title: "Nama Barang",
                         hover: "Isi nama barang",
                         check: cknama),
                     RoundeValueFieldWhiteValue(
-                                                        fungsi:(value) {
-                        print(value);
-                        if (value == "") {
-                          setState(() {
-                            ckdeskripsi = true;
-                          });
-                        } else {
-                          setState(() {
-                            ckdeskripsi = false;
-                          });
-                        }
-
-                      },
+                        fungsi: (value) {
+                          print(value);
+                          if (value == "") {
+                            setState(() {
+                              ckdeskripsi = true;
+                            });
+                          } else {
+                            setState(() {
+                              ckdeskripsi = false;
+                            });
+                          }
+                        },
                         control: deskripsi,
                         title: "Deskripsi",
                         hover: "isi deskripsi",
                         check: ckdeskripsi),
-                    RoundeValueFieldWhiteValue(
-                                                        fungsi:(value) {
-                        print(value);
-                        if (value == "") {
+                    RoundeValueFieldWhiteValueIntcek(
+                        fungsi: (value) {
+                          if (value != "" && int.tryParse(value) == null) {
+                          print("salah input");
                           setState(() {
+                            ckintharga = true;
+                            ckharga = false;
+                          });
+                        } else if (value == "") {
+                          print("kosong");
+                          setState(() {
+                            ckintharga = false;
                             ckharga = true;
                           });
                         } else {
+                          print("oke");
                           setState(() {
+                            ckintharga = false;
                             ckharga = false;
                           });
                         }
-
-                      },
+                        },
                         control: harga,
+                        checkInt: ckintharga,
                         title: "Harga",
                         hover: "isi harga",
                         check: ckharga),
@@ -179,35 +188,34 @@ class _AddProductPageState extends State<AddProductPage> {
                         future: loadimage(),
                         builder: (context, AsyncSnapshot snapshot) {
                           final Map file = snapshot.data![snapshot.data.length];
-                          for(var i = 0; i < snapshot.data.length; i++){
+                          for (var i = 0; i < snapshot.data.length; i++) {
                             final Map file = snapshot.data![i];
                             String getimg = pilihfile.pickfile!.name;
-                            if (snapshot.hasData && getimg == file['url'] ) {
-                            return ElevatedButton(
-                                onPressed: () {
-                                  pilihfile.uploadfile();
-                                  // loadproduk.additem(nama.text, int.parse(harga.text),
-                                  //     deskripsi.text, url);
-                                  
-                                  ScaffoldMessenger.of(context)
-                                      .hideCurrentSnackBar();
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(
-                                        'Submit Data Successfully',
-                                        textAlign: TextAlign.center,
+                            if (snapshot.hasData && getimg == file['url']) {
+                              return ElevatedButton(
+                                  onPressed: () {
+                                    pilihfile.uploadfile();
+                                    // loadproduk.additem(nama.text, int.parse(harga.text),
+                                    //     deskripsi.text, url);
+
+                                    ScaffoldMessenger.of(context)
+                                        .hideCurrentSnackBar();
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                          'Submit Data Successfully',
+                                          textAlign: TextAlign.center,
+                                        ),
+                                        backgroundColor: Colors.green,
+                                        duration: Duration(seconds: 2),
+                                        // action: SnackBarAction(label: "UNDO", onPressed: (){
+                                        //   cart.removeSingleItem(product.id);
+                                        // }),
                                       ),
-                                      backgroundColor: Colors.green,
-                                      duration: Duration(seconds: 2),
-                                      // action: SnackBarAction(label: "UNDO", onPressed: (){
-                                      //   cart.removeSingleItem(product.id);
-                                      // }),
-                                    ),
-                                  );
-                                },
-                                child: Text("Tambah"));
-                                
-                          } 
+                                    );
+                                  },
+                                  child: Text("Tambah"));
+                            }
                           }
                           return CircularProgressIndicator();
                         }),
