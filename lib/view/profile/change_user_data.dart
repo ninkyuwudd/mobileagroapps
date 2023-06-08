@@ -7,10 +7,13 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mobileagroapps/controller/pilihfile_controller.dart';
+import 'package:mobileagroapps/widget/popup_warning.dart';
 // import 'package:mobileagroapps/model/user_model.dart';
 import 'package:provider/provider.dart';
 import '../../controller/user_controller.dart';
 import '../../widget/rounded_value_field.dart';
+
+enum Genderoption { pria, wanita }
 
 class ProfileUserDataEditPage extends StatefulWidget {
   static const routename = "/myprofileedit";
@@ -21,6 +24,8 @@ class ProfileUserDataEditPage extends StatefulWidget {
 }
 
 class _ProfileUserDataEditPageState extends State<ProfileUserDataEditPage> {
+  Genderoption? _character = Genderoption.pria;
+
   File? imagefile;
   PlatformFile? pickfile;
 
@@ -87,7 +92,7 @@ class _ProfileUserDataEditPageState extends State<ProfileUserDataEditPage> {
     });
   }
 
-   void navigatenext() async{
+  void navigatenext() async {
     return await Future.delayed(Duration(seconds: 2));
   }
 
@@ -122,7 +127,7 @@ class _ProfileUserDataEditPageState extends State<ProfileUserDataEditPage> {
       child: Scaffold(
         body: SingleChildScrollView(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Stack(
                 children: [
@@ -227,6 +232,7 @@ class _ProfileUserDataEditPageState extends State<ProfileUserDataEditPage> {
                 ),
                 margin: EdgeInsets.all(20),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     RoundeValueFieldWhiteValue(
                         fungsi: (value) {
@@ -289,23 +295,43 @@ class _ProfileUserDataEditPageState extends State<ProfileUserDataEditPage> {
                         title: "Email",
                         hover: "Masukkan Email",
                         check: ckemail),
-                    RoundeValueFieldWhiteValue(
-                        fungsi: (value) {
-                          print(value);
-                          if (value == "") {
-                            setState(() {
-                              ckgender = true;
-                            });
-                          } else {
-                            setState(() {
-                              ckgender = false;
-                            });
-                          }
-                        },
-                        control: txgender,
-                        title: "Gender",
-                        hover: "Masukkan Gender",
-                        check: ckgender),
+                    Text(
+                      "Jenis Kelamin",
+                      style: TextStyle(
+                          color: Color.fromARGB(255, 77, 76, 76),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18),
+                    ),
+                    Column(
+                      children: <Widget>[
+                        ListTile(
+                          title: const Text('Laki-laki'),
+                          leading: Radio<Genderoption>(
+                            activeColor: Colors.green,
+                            value: Genderoption.pria,
+                            groupValue: _character,
+                            onChanged: (Genderoption? value) {
+                              setState(() {
+                                _character = value;
+                              });
+                            },
+                          ),
+                        ),
+                        ListTile(
+                          title: const Text('Perempuan'),
+                          leading: Radio<Genderoption>(
+                            activeColor: Colors.green,
+                            value: Genderoption.wanita,
+                            groupValue: _character,
+                            onChanged: (Genderoption? value) {
+                              setState(() {
+                                _character = value;
+                              });
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
                     RoundeValueFieldWhiteValue(
                         fungsi: (value) {
                           print(value);
@@ -330,31 +356,42 @@ class _ProfileUserDataEditPageState extends State<ProfileUserDataEditPage> {
                 ),
               ),
               GestureDetector(
-                onTap: () async{
-                  pilihfile.uploadfile();
-                  await Future.delayed(Duration(seconds: 5));
-                  getImageurl(pilihfile.pickfile!.name);
-                  
-                  print(txid.text);
-                  firestoredb.doc(txid.text).update({
-                    "nama": txnama.text,
-                    "username": txusername.text.trim(),
-                    "email": txemail.text,
-                    "gender": txgender.text,
-                    "phone": txphone.text,
-                    "gambar": imageurl
-                  });
+                onTap: () async {
+                  if (txnama.text.isEmpty ||
+                      txusername.text.isEmpty ||
+                      txemail.text.isEmpty ||
+                      txgender.text.isEmpty ||
+                      txphone.text.isEmpty) {
+                        showDialog(context: context, builder: (context){
+                          return PopupWarning(pesan: "Data ada yang kosong!");
+                        });
+                  } else {
+                    String value = _character.toString().split('.').last;
+                    pilihfile.uploadfile();
+                    await Future.delayed(Duration(seconds: 5));
+                    getImageurl(pilihfile.pickfile!.name);
 
-                  pilihfile.uploadfile();
-                  ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    content: Text(
-                      'Submit Data Successfully',
-                      textAlign: TextAlign.center,
-                    ),
-                    backgroundColor: Colors.green,
-                    duration: Duration(seconds: 2),
-                  ));
+                    print(txid.text);
+                    firestoredb.doc(txid.text).update({
+                      "nama": txnama.text,
+                      "username": txusername.text.trim(),
+                      "email": txemail.text,
+                      "gender": value,
+                      "phone": txphone.text,
+                      "gambar": imageurl
+                    });
+
+                    pilihfile.uploadfile();
+                    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text(
+                        'Submit Data Successfully',
+                        textAlign: TextAlign.center,
+                      ),
+                      backgroundColor: Colors.green,
+                      duration: Duration(seconds: 2),
+                    ));
+                  }
                 },
                 child: Container(
                   margin: EdgeInsets.only(top: 10, right: 25, left: 25),
