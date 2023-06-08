@@ -7,7 +7,8 @@ class SingleFiledparameter extends StatelessWidget {
   final Function() fungsi;
   final TextEditingController controller;
   final String judul;
-  const SingleFiledparameter({required this.fungsi,required this.controller,required this.judul});
+  final String hint;
+  const SingleFiledparameter({required this.fungsi,required this.controller,required this.judul, required this.hint});
 
   @override
   Widget build(BuildContext context) {
@@ -31,14 +32,18 @@ class SingleFiledparameter extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(judul),
+                          Text(judul,style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color: Colors.green),),
                           SizedBox(
                             height: 15,
                           ),
                           TextField(
+                            onChanged: (value){
+                              
+                            },
                             controller: controller,
                             keyboardType: TextInputType.number,
                             decoration: InputDecoration(
+                              hintText: hint,
                               contentPadding: const EdgeInsets.symmetric(
                                   vertical: 10, horizontal: 10),
                               border: const OutlineInputBorder(

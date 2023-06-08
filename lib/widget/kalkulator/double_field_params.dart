@@ -10,7 +10,9 @@ class DoubleFiledparameter extends StatelessWidget {
   final String finaljudul;
   final String judul;
   final String judul2;
-  const DoubleFiledparameter({required this.finaljudul,required this.fungsi,required this.controller,required this.controller2,required this.judul,required this.judul2});
+  final String hint_01;
+  final String hint_02;
+  const DoubleFiledparameter({required this.finaljudul,required this.fungsi,required this.controller,required this.controller2,required this.judul,required this.judul2, required this.hint_01, required this.hint_02});
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +46,7 @@ class DoubleFiledparameter extends StatelessWidget {
                             controller: controller,
                             keyboardType: TextInputType.number,
                             decoration: InputDecoration(
+                              hintText: hint_01,
                               contentPadding: const EdgeInsets.symmetric(
                                   vertical: 10, horizontal: 10),
                               border: const OutlineInputBorder(
@@ -60,6 +63,7 @@ class DoubleFiledparameter extends StatelessWidget {
                             controller: controller2,
                             keyboardType: TextInputType.number,
                             decoration: InputDecoration(
+                              hintText: hint_02,
                               contentPadding: const EdgeInsets.symmetric(
                                   vertical: 10, horizontal: 10),
                               border: const OutlineInputBorder(

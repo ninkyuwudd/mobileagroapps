@@ -36,6 +36,7 @@ dependencies:
   firebase_storage: ^11.1.2
  
   file_picker: ^5.3.0
+  easy_search_bar: ^2.5.0
 
 
 dev_dependencies:

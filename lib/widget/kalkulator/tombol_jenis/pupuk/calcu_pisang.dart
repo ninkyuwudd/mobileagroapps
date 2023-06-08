@@ -62,6 +62,8 @@ class _KalkulatorPisangState extends State<KalkulatorPisang> {
     return Column(
       children: [
         DoubleFiledparameter(
+          hint_01: "...bulan",
+          hint_02: "...jumlah tanaman",
           fungsi: () {
             var umur = int.parse(waktu.text);
             var jmltanaman = int.parse(jumlah.text);

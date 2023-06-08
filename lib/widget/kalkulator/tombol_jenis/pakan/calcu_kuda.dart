@@ -22,6 +22,7 @@ class _KalkulatorKudaState extends State<KalkulatorKuda> {
     return Column(
       children: [
         SingleFiledparameter(
+          hint: " Kg",
           fungsi: () {
             var berat = double.parse(beratkuda.text);
             hijau = ((1.8 / 100) * berat) * (35 / 100);
@@ -40,20 +41,20 @@ class _KalkulatorKudaState extends State<KalkulatorKuda> {
             value: hijau == 0 ? "-" : hijau.toStringAsFixed(1),
             value2: jagung == 0 ? "-" : jagung.toStringAsFixed(1),
             judul: "Hijau",
-            gambar: "pupuk kering@4x.png",
+            gambar: "iconpakan/Rumput@4x.png",
             judul2: "Jagung",
-            gambar2: "pupuk kering@4x.png",
+            gambar2: "iconpakan/jaggung@4x.png",
             kategori: "Komposisi"),
         ResultDouble(
             value: bukil == 0 ? "-" : bukil.toStringAsFixed(1),
             value2: tetes == 0 ? "-" : tetes.toStringAsFixed(1),
             judul: "Bukil",
-            gambar: "pupuk kering@4x.png",
+            gambar: "iconpakan/bukil.png",
             judul2: "Tetes",
-            gambar2: "pupuk kering@4x.png",
+            gambar2: "iconpakan/tetees2.png",
             kategori: " "),
           SizedBox(height: 15,),
-          ResultCard(pupuk: jmlhpakan == 0 ? "-" : "${jmlhpakan.toStringAsFixed(1)} Kg", title: "Jumlah Pakan", img: "pupuk kering@4x.png")
+          ResultCard(pupuk: jmlhpakan == 0 ? "-" : "${jmlhpakan.toStringAsFixed(1)} Kg", title: "Jumlah Pakan", img: "bekatul@4x.png")
       ],
     );
   }

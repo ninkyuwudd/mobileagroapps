@@ -17,6 +17,7 @@ class _KalkulatorBabiState extends State<KalkulatorBabi> {
     return Column(
       children: [
         SingleFiledparameter(
+          hint: " Kg",
             fungsi: () {
               double berat = double.parse(beratbabi.text);
 

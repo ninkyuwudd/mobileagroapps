@@ -8,7 +8,7 @@ import 'package:mobileagroapps/view/profile/pembayaran_premium_view.dart';
 import 'package:mobileagroapps/view/profile/premium_view.dart';
 import 'package:mobileagroapps/view/profile/uploadberhasil_view.dart';
 import 'package:mobileagroapps/view/register_page.dart';
-import 'package:mobileagroapps/view/shop/add_product_view.dart';
+import 'package:mobileagroapps/view/shop/test_addproduk.dart';
 import 'package:mobileagroapps/view/shop/cart_page_view.dart';
 import 'package:mobileagroapps/view/shop/detail_product.dart';
 import 'package:mobileagroapps/view/shop/edit_produk_view.dart';

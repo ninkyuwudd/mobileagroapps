@@ -12,9 +12,7 @@ import 'package:provider/provider.dart';
 import '../../controller/user_controller.dart';
 import '../../widget/rounded_value_field.dart';
 
-
 class ProfileUserDataEditPage extends StatefulWidget {
-
   static const routename = "/myprofileedit";
 
   @override
@@ -23,9 +21,7 @@ class ProfileUserDataEditPage extends StatefulWidget {
 }
 
 class _ProfileUserDataEditPageState extends State<ProfileUserDataEditPage> {
- 
-
-    File? imagefile;
+  File? imagefile;
   PlatformFile? pickfile;
 
   Future uploadfile() async {
@@ -40,7 +36,7 @@ class _ProfileUserDataEditPageState extends State<ProfileUserDataEditPage> {
     if (result == null) return;
     setState(() {
       pickfile = result.files.first;
-    }); 
+    });
   }
 
   _getfromgallery() async {
@@ -66,8 +62,7 @@ class _ProfileUserDataEditPageState extends State<ProfileUserDataEditPage> {
       });
     }
   }
-  
-  
+
   final txnama = TextEditingController();
   final txusername = TextEditingController();
   final txemail = TextEditingController();
@@ -80,25 +75,37 @@ class _ProfileUserDataEditPageState extends State<ProfileUserDataEditPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Future.microtask((){
-    data = ModalRoute.of(context)?.settings.arguments as List;
-    txnama.text = data![1].toString();
-    txusername.text = data![2].toString();
-    txemail.text = data![3].toString();
-    txgender.text = data![4].toString();
-    txphone.text = data![5].toString();
-    txid.text = data![0].toString();
-    imglink = data![6].toString();
+    Future.microtask(() {
+      data = ModalRoute.of(context)?.settings.arguments as List;
+      txnama.text = data![1].toString();
+      txusername.text = data![2].toString();
+      txemail.text = data![3].toString();
+      txgender.text = data![4].toString();
+      txphone.text = data![5].toString();
+      txid.text = data![0].toString();
+      imglink = data![6].toString();
     });
-
   }
-  
 
-final firestoredb = FirebaseFirestore.instance.collection('users');
+   void navigatenext() async{
+    return await Future.delayed(Duration(seconds: 2));
+  }
+
+  FirebaseStorage storage = FirebaseStorage.instance;
+  String imageurl = "";
+
+  Future<void> getImageurl(String namagambar) async {
+    String get = "file/${namagambar}";
+    Reference storageReference = storage.ref().child(get);
+    imageurl = await storageReference.getDownloadURL();
+    setState(() {});
+  }
+
+  final firestoredb = FirebaseFirestore.instance.collection('users');
   @override
   Widget build(BuildContext context) {
     final pilihfile = Provider.of<PilihUploadfile>(context);
-    
+
     bool ckname = false;
     bool ckusername = false;
     bool ckemail = false;
@@ -108,7 +115,7 @@ final firestoredb = FirebaseFirestore.instance.collection('users');
     final usrprov = Provider.of<UserProvider>(context);
     usrprov.fethcdatauser();
     final akunnya = usrprov.akun;
-    
+
     // final getdataakun = akunnya[int.parse(data.toString())];
 
     return SafeArea(
@@ -139,12 +146,12 @@ final firestoredb = FirebaseFirestore.instance.collection('users');
                     child: Container(
                         child: pilihfile.pickfile == null
                             ? CircleAvatar(
-                                backgroundImage:
-                                    NetworkImage(imglink),
+                                backgroundImage: NetworkImage(imglink),
                                 radius: 70,
                               )
                             : CircleAvatar(
-                                foregroundImage: FileImage(File(pilihfile.pickfile!.path!)),
+                                foregroundImage:
+                                    FileImage(File(pilihfile.pickfile!.path!)),
                                 radius: 70,
                               )),
                   ),
@@ -152,13 +159,18 @@ final firestoredb = FirebaseFirestore.instance.collection('users');
                       left: 100,
                       right: 0,
                       top: 220,
-                      child:
-                          GestureDetector(
-                            onTap: (){
-                              // selectFile();
-                              pilihfile.selectFile();
-                            },
-                            child: CircleAvatar(child: Icon(Icons.edit,color: Colors.white,),backgroundColor: Colors.amber,))),
+                      child: GestureDetector(
+                          onTap: () {
+                            // selectFile();
+                            pilihfile.selectFile();
+                          },
+                          child: CircleAvatar(
+                            child: Icon(
+                              Icons.edit,
+                              color: Colors.white,
+                            ),
+                            backgroundColor: Colors.amber,
+                          ))),
                   Container(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -217,19 +229,18 @@ final firestoredb = FirebaseFirestore.instance.collection('users');
                 child: Column(
                   children: [
                     RoundeValueFieldWhiteValue(
-                                      fungsi:(value) {
-                        print(value);
-                        if (value == "") {
-                          setState(() {
-                            ckname = true;
-                          });
-                        } else {
-                          setState(() {
-                            ckname = false;
-                          });
-                        }
-
-                      },
+                        fungsi: (value) {
+                          print(value);
+                          if (value == "") {
+                            setState(() {
+                              ckname = true;
+                            });
+                          } else {
+                            setState(() {
+                              ckname = false;
+                            });
+                          }
+                        },
                         control: txnama,
 
                         // valuenya: getdataakun
@@ -239,19 +250,18 @@ final firestoredb = FirebaseFirestore.instance.collection('users');
                         hover: "Masukkan nama",
                         check: ckname),
                     RoundeValueFieldWhiteValue(
-                                      fungsi:(value) {
-                        print(value);
-                        if (value == "") {
-                          setState(() {
-                            ckusername = true;
-                          });
-                        } else {
-                          setState(() {
-                            ckusername = false;
-                          });
-                        }
-
-                      },
+                        fungsi: (value) {
+                          print(value);
+                          if (value == "") {
+                            setState(() {
+                              ckusername = true;
+                            });
+                          } else {
+                            setState(() {
+                              ckusername = false;
+                            });
+                          }
+                        },
                         control: txusername,
                         // valuenya: getdataakun
                         //     .username
@@ -260,19 +270,18 @@ final firestoredb = FirebaseFirestore.instance.collection('users');
                         hover: "Masukkan Username",
                         check: ckusername),
                     RoundeValueFieldWhiteValue(
-                                      fungsi:(value) {
-                        print(value);
-                        if (value == "") {
-                          setState(() {
-                            ckemail = true;
-                          });
-                        } else {
-                          setState(() {
-                            ckemail = false;
-                          });
-                        }
-
-                      },
+                        fungsi: (value) {
+                          print(value);
+                          if (value == "") {
+                            setState(() {
+                              ckemail = true;
+                            });
+                          } else {
+                            setState(() {
+                              ckemail = false;
+                            });
+                          }
+                        },
                         control: txemail,
                         // valuenya: getdataakun
                         //     .email
@@ -281,37 +290,35 @@ final firestoredb = FirebaseFirestore.instance.collection('users');
                         hover: "Masukkan Email",
                         check: ckemail),
                     RoundeValueFieldWhiteValue(
-                                      fungsi:(value) {
-                        print(value);
-                        if (value == "") {
-                          setState(() {
-                            ckgender = true;
-                          });
-                        } else {
-                          setState(() {
-                            ckgender = false;
-                          });
-                        }
-
-                      },
+                        fungsi: (value) {
+                          print(value);
+                          if (value == "") {
+                            setState(() {
+                              ckgender = true;
+                            });
+                          } else {
+                            setState(() {
+                              ckgender = false;
+                            });
+                          }
+                        },
                         control: txgender,
                         title: "Gender",
                         hover: "Masukkan Gender",
                         check: ckgender),
                     RoundeValueFieldWhiteValue(
-                                      fungsi:(value) {
-                        print(value);
-                        if (value == "") {
-                          setState(() {
-                            ckphone = true;
-                          });
-                        } else {
-                          setState(() {
-                            ckphone = false;
-                          });
-                        }
-
-                      },
+                        fungsi: (value) {
+                          print(value);
+                          if (value == "") {
+                            setState(() {
+                              ckphone = true;
+                            });
+                          } else {
+                            setState(() {
+                              ckphone = false;
+                            });
+                          }
+                        },
                         control: txphone,
                         // valuenya: getdataakun
                         //     .phone
@@ -323,7 +330,11 @@ final firestoredb = FirebaseFirestore.instance.collection('users');
                 ),
               ),
               GestureDetector(
-                onTap: () {
+                onTap: () async{
+                  pilihfile.uploadfile();
+                  await Future.delayed(Duration(seconds: 5));
+                  getImageurl(pilihfile.pickfile!.name);
+                  
                   print(txid.text);
                   firestoredb.doc(txid.text).update({
                     "nama": txnama.text,
@@ -331,6 +342,7 @@ final firestoredb = FirebaseFirestore.instance.collection('users');
                     "email": txemail.text,
                     "gender": txgender.text,
                     "phone": txphone.text,
+                    "gambar": imageurl
                   });
 
                   pilihfile.uploadfile();

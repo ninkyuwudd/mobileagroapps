@@ -106,13 +106,13 @@ class _KalkulatorBuahnagaState extends State<KalkulatorBuahnaga> {
                   Row(
                     children: [
                       Expanded(
-                        child: ResultCard(title: "Pupuk Cair",pupuk: "${pupuk_kimia_cair == null ? '-' : pupuk_kimia_cair}  Liter",img: "pupuk cair@4x.png",)
+                        child: ResultCard(title: "Cair",pupuk: "${pupuk_kimia_cair == null ? '-' : pupuk_kimia_cair}  Liter",img: "pupuk cair@4x.png",)
                       ),
                       SizedBox(
                         width: 15,
                       ),
                       Expanded(
-                        child: ResultCard(title: "Pupuk Kering",pupuk: "${pupuk_kimia == null ? '-' : pupuk_kimia}  Kg",img: "pupuk kering@4x.png",)
+                        child: ResultCard(title: "Kering",pupuk: "${pupuk_kimia == null ? '-' : pupuk_kimia}  Kg",img: "pupuk kering@4x.png",)
                       )
                     ],
                   ),

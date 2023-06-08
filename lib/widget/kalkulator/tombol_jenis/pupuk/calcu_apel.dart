@@ -54,6 +54,8 @@ class _KalkulatorApelState extends State<KalkulatorApel> {
     return Column(
       children: [
         DoubleFiledparameter(
+          hint_01: "...tahun",
+          hint_02: "...jumlah",
           fungsi: () {
             var umur = int.parse(waktu.text);
             var jmltanaman = int.parse(jumlah.text);

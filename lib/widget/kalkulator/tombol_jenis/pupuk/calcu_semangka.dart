@@ -73,6 +73,8 @@ class _KalkulatorSemangkaState extends State<KalkulatorSemangka> {
     return Column(
       children: [
         DoubleFiledparameter(
+          hint_01: "...hari",
+          hint_02: "...jumlah",
           fungsi: () {
             var umur = int.parse(waktu.text);
             var jmltanaman = int.parse(jumlah.text);
@@ -95,6 +97,7 @@ class _KalkulatorSemangkaState extends State<KalkulatorSemangka> {
           height: 20,
         ),
         ResultDouble(
+
             value: pupukkering == null ? "-" : "${pupukkering.toString()}kg",
             value2: pupukkimia == null ? "-" : "${pupukkimia.toString()} liter",
             judul: "kering",

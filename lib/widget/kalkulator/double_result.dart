@@ -22,7 +22,7 @@ class ResultDouble extends StatelessWidget {
           children: [
             Expanded(child: ResultCard(pupuk: "$value", title: judul, img: gambar)),
             SizedBox(width: 10,),
-            Expanded(child: ResultCard(pupuk: "$value2", title: judul2, img: gambar)),
+            Expanded(child: ResultCard(pupuk: "$value2", title: judul2, img: gambar2)),
           ],
         ),
       ],

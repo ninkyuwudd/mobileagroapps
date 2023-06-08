@@ -73,6 +73,5 @@ class _KalkulatorPakanState extends State<KalkulatorPakan> {
         ),
       ),
     );
-    ;
   }
 }

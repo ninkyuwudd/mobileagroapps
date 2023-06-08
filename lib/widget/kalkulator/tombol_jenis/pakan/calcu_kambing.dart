@@ -41,7 +41,8 @@ class _KalkulatorkambingState extends State<Kalkulatorkambing> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Jumlah Kambing"),
+                          Text("Kambing",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color: Colors.green),),
+                       
                           SizedBox(
                             height: 15,
                           ),
@@ -49,6 +50,7 @@ class _KalkulatorkambingState extends State<Kalkulatorkambing> {
                             controller: pakanfield,
                             keyboardType: TextInputType.number,
                             decoration: InputDecoration(
+                              hintText: "jumlah kambing...",
                               contentPadding: const EdgeInsets.symmetric(
                                   vertical: 10, horizontal: 10),
                               border: const OutlineInputBorder(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mobileagroapps/widget/kalkulator/double_result.dart';
 import 'package:mobileagroapps/widget/kalkulator/result_card.dart';
 import 'package:mobileagroapps/widget/kalkulator/single_field_params.dart';
+import 'package:mobileagroapps/widget/popup_warning.dart';
 
 class KalkulatorBebek extends StatefulWidget {
   const KalkulatorBebek({super.key});
@@ -22,8 +23,14 @@ class _KalkulatorBebekState extends State<KalkulatorBebek> {
     return Column(
       children: [
         SingleFiledparameter(
+          hint: "...bulan",
             fungsi: () {
-              int umur = int.parse(umurbebek.text);
+              if(umurbebek.text.contains(",")){
+                showDialog(context: context, builder: (context){
+                  return PopupWarning(pesan: "tidak bisa mengunnakan koma (',')");
+                });
+              }else{
+                int umur = int.parse(umurbebek.text);
               setState(() {
                 if (1 <= umur && umur <= 12) {
                   em = 2900;
@@ -47,6 +54,8 @@ class _KalkulatorBebekState extends State<KalkulatorBebek> {
                   print("salah input");
                 }
               });
+              }
+              
             },
             controller: umurbebek,
             judul: "Umur Bebek"),
@@ -54,17 +63,17 @@ class _KalkulatorBebekState extends State<KalkulatorBebek> {
             value: em == null ? "-" : "${em.toString()} kkal/kg",
             value2: pr == null ? "-" : "$pr%",
             judul: "EM",
-            gambar: "rumput@4x.png",
+            gambar: "iconpakan/bebek.png",
             judul2: "Protein",
-            gambar2: "rumput@4x.png",
+            gambar2: "iconpakan/bebek.png",
             kategori: ""),
         ResultDouble(
             value: lmk == null ? "-" : "${lmk.toString()}%",
             value2: kls == null ? "-" : "${kls.toString()}%",
             judul: "Lemak",
-            gambar: "rumput@4x.png",
+            gambar: "iconpakan/bebek.png",
             judul2: "Kalsium",
-            gambar2: "rumput@4x.png",
+            gambar2: "iconpakan/bebek.png",
             kategori: ""),
             SizedBox(height: 20,),
           ResultCard(pupuk: ffr == null ? "-" :"${ffr.toString()}%", title: "Fosfor", img: "rumput@4x.png")

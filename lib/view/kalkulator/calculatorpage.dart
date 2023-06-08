@@ -17,14 +17,22 @@ class _CalculatorPageState extends State<CalculatorPage> {
   int urutan = 0;
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    Provider.of<UserProvider>(context,listen: false).fethcdatauser();
+      
+  }
+
+  @override
   Widget build(BuildContext context) {
     print(widget.idx);
     try {
       final usrprov = Provider.of<UserProvider>(context);
-      usrprov.fethcdatauser();
       final akunnya = usrprov.akun;
       final getdataakun = akunnya[widget.idx];
-      print(getdataakun.status);
+      // print(getdataakun.status);
       return DefaultTabController(
         initialIndex: 0,
         length: 2,

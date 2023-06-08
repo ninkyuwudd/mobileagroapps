@@ -62,9 +62,10 @@ class _EditProdukViewState extends State<EditProdukView> {
                   builder: (context) {
                     return Popup(yesfunc: () {
                       load.deleteitem(produkid);
-                      Navigator.pushReplacementNamed(
-                          context, ListProdukView.routename,
-                          arguments: loaduser.curidx);
+                      Navigator.pop(context);
+                      // Navigator.pushReplacementNamed(
+                      //     context, ListProdukView.routename,
+                      //     arguments: loaduser.curidx);
                     }, nofunc: () {
                       Navigator.pop(context);
                     });
