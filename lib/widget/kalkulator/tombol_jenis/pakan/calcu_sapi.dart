@@ -4,6 +4,8 @@ import 'package:mobileagroapps/widget/kalkulator/double_result.dart';
 import 'package:mobileagroapps/widget/kalkulator/result_card.dart';
 import 'package:mobileagroapps/widget/kalkulator/single_field_params.dart';
 
+import '../../../popup_warning.dart';
+
 class KalkulatorSapi extends StatefulWidget {
   const KalkulatorSapi({super.key});
 
@@ -18,13 +20,19 @@ class _KalkulatorSapiState extends State<KalkulatorSapi> {
   double? hijauankering;
   double? konsentratkering;
   hitungbasah(var berat) {
+    setState(() {
     hijauan = (60 / 100) * ((10 / 100) * berat);
     konsentrat = (40 / 100) * ((10 / 100) * berat);
+      
+    });
   }
 
   hitungkering(var berat) {
+    setState(() {
     hijauankering = (60 / 100) * ((3 / 100) * berat);
     konsentratkering = (40 / 100) * ((3 / 100) * berat);
+      
+    });
   }
 
   var kering;
@@ -36,8 +44,21 @@ class _KalkulatorSapiState extends State<KalkulatorSapi> {
         SingleFiledparameter(
           hint: "Kg",
           fungsi: () {
-            hitungbasah(int.parse(berat.text));
-            hitungkering(int.parse(berat.text));
+            if (berat.text.contains(",")) {
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return PopupWarning(
+                        pesan: "tidak bisa mengunnakan koma (',')");
+                  });
+            } else {
+              print("gas");
+        
+                hitungbasah(int.parse(berat.text));
+                hitungkering(int.parse(berat.text));
+            
+
+            }
           },
           controller: berat,
           judul: "Berat Sapi",
