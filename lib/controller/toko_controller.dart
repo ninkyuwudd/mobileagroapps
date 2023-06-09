@@ -11,6 +11,7 @@ class TokoController with ChangeNotifier {
 
   String nama = "";
   String alamat = "";
+  String nomorhp = "";
   String imgurl = "";
 
   void clear(){
@@ -63,15 +64,23 @@ class TokoController with ChangeNotifier {
   }
 
 
+  getdata(String nama,String nomorhp){
+    nama = nama;
+    nomorhp = nomorhp;
+    notifyListeners();
+  }
+
+
   Future<void> fetchdatabyid(String id) async {
     try{
       DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance.collection('toko').doc(id).get();
-
       Map<String,dynamic>? data = documentSnapshot.data() as Map<String, dynamic>?;
-
+      print("id : $id");
+      print("nama : ${data?['namatoko']}");
       if(data != null){
         nama = data['namatoko'];
         alamat = data['alamat'];
+        nomorhp = data['nomorhp'];
         imgurl = data['gambar'];
         notifyListeners();
       }     

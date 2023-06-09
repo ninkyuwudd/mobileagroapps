@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:mobileagroapps/controller/product_controller.dart';
+import 'package:mobileagroapps/controller/toko_controller.dart';
 import 'package:mobileagroapps/view/shop/menunggu_pembayaran.dart';
 import 'package:mobileagroapps/widget/rounded_button_gree.dart';
 import 'package:mobileagroapps/widget/tombolrounded_widget.dart';
@@ -43,6 +44,8 @@ class _PembayaranState extends State<Pembayaran> {
     final loaduser = Provider.of<UserProvider>(context);
     loaduser.fethcdatauser;
     final data = ModalRoute.of(context)?.settings.arguments as int;
+    final loadtoko = Provider.of<TokoController>(context);
+    
 
     return Scaffold(
       appBar: AppBar(
@@ -75,6 +78,17 @@ class _PembayaranState extends State<Pembayaran> {
                       Text("Jenis Transaksi"),
                       Spacer(),
                       Text("Transfer bank")
+                    ],
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("Nomor HP"),
+                      Spacer(),
+                      Text(loadtoko.nomorhp)
                     ],
                   ),
                   SizedBox(
@@ -115,30 +129,35 @@ class _PembayaranState extends State<Pembayaran> {
                 ],
               ),
             ),
-            RoundedButtonGreen(fungsi: (){
-              for (var x = 0; x < cart.items.length; x++) {
-                  int jumlahPerbarang = cart.items.values.toList()[x].quantity;
+            RoundedButtonGreen(
+                fungsi: () {
+                  for (var x = 0; x < cart.items.length; x++) {
+                    int jumlahPerbarang =
+                        cart.items.values.toList()[x].quantity;
 
-                  var produkdata = loadproduk.finbyid(cart.pesanansemetara[x]);
-                  print(
-                      "produk ${produkdata.namaproduk}, jumlah :${produkdata.jumlah}");
+                    var produkdata =
+                        loadproduk.finbyid(cart.pesanansemetara[x]);
+                    print(
+                        "produk ${produkdata.namaproduk}, jumlah :${produkdata.jumlah}");
 
-                  loadproduk.updateDataStok(cart.items.values.toList()[x].id,
-                      produkdata.jumlah - jumlahPerbarang);
-                  print(
-                      "produk ${produkdata.namaproduk}, jumlah :${produkdata.jumlah}");
-                }
-                dborder.doc().set({
-                  "idcustomer": loaduser.curuserid,
-                  "idproduk": cart.items.keys.toList(),
-                  "date": DateFormat.yMMMd().format(DateTime.now())
-                });
-                Provider.of<Orderproivder>(context, listen: false)
-                    .addorder(cart.items.values.toList(), cart.totalamount);
-                cart.clear();
-                cart.clearIdPesananSementara();
-                Navigator.pushReplacementNamed(context, MenungguBayarToko.routename);
-            }, text:  "Bayar"),
+                    loadproduk.updateDataStok(cart.items.values.toList()[x].id,
+                        produkdata.jumlah - jumlahPerbarang);
+                    print(
+                        "produk ${produkdata.namaproduk}, jumlah :${produkdata.jumlah}");
+                  }
+                  dborder.doc().set({
+                    "idcustomer": loaduser.curuserid,
+                    "idproduk": cart.items.keys.toList(),
+                    "date": DateFormat.yMMMd().format(DateTime.now())
+                  });
+                  Provider.of<Orderproivder>(context, listen: false)
+                      .addorder(cart.items.values.toList(), cart.totalamount);
+                  cart.clear();
+                  cart.clearIdPesananSementara();
+                  Navigator.pushReplacementNamed(
+                      context, MenungguBayarToko.routename);
+                },
+                text: "Bayar"),
             // RoundedButtonWidget(
             //   text: "Selesai",
             //   fungsi: () {
@@ -171,7 +190,7 @@ class _PembayaranState extends State<Pembayaran> {
             // ),
             Divider(),
             Padding(
-              padding: const EdgeInsets.only(left: 15,bottom: 10),
+              padding: const EdgeInsets.only(left: 15, bottom: 10),
               child: Text(
                 "Barang yang dibeli",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),

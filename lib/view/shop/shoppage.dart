@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobileagroapps/controller/keranjang_controller.dart';
 import 'package:mobileagroapps/controller/product_controller.dart';
+import 'package:mobileagroapps/controller/toko_controller.dart';
 import 'package:mobileagroapps/controller/user_controller.dart';
 import 'package:mobileagroapps/view/shop/cart_page_view.dart';
 import 'package:mobileagroapps/widget/shop/badge.dart';
@@ -26,6 +27,7 @@ class _ShopPageState extends State<ShopPage> {
     // TODO: implement initState
     super.initState();
     var getdatauser = Provider.of<UserProvider>(context, listen: false);
+    
     getdatauser.fethcdatauser();
     var getlist = getdatauser.akun;
     Provider.of<ProductProvider>(context,listen: false).filtertprodukoko(getlist[widget.idx].toko.toString());
@@ -47,6 +49,7 @@ class _ShopPageState extends State<ShopPage> {
     var getdatauser = Provider.of<UserProvider>(context, listen: false);
     var getlist = getdatauser.akun;
     var getdataproduk = Provider.of<ProductProvider>(context);
+    var loadtoko = Provider.of<TokoController>(context);
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -77,6 +80,7 @@ class _ShopPageState extends State<ShopPage> {
                 color: Colors.green,
               ),
               onPressed: () {
+                loadtoko.fetchdatabyid(getlist[widget.idx].toko.toString());
                 Navigator.of(context).pushNamed(CartPage.routename);
               },
             ),

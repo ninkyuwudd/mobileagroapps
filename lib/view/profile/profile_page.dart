@@ -204,7 +204,7 @@ class _ProfileUserPageState extends State<ProfileUserPage> {
                   ),
                 ),
                 Visibility(
-                  visible: akunnya[widget.idx].status == "user" ? true : false,
+                  visible: akunnya[widget.idx].status == "user" ? true : akunnya[widget.idx].status == "premium" && akunnya[widget.idx].toko == "" ? true : akunnya[widget.idx].status == "premium" && akunnya[widget.idx].toko != ""? false:false,
                   child: GestureDetector(
                     onTap: () {
                       // print(akunnya[widget.idx].id);
@@ -241,7 +241,7 @@ class _ProfileUserPageState extends State<ProfileUserPage> {
                   ),
                 ),
                 Visibility(
-                  visible: akunnya[widget.idx].status == "user" ? false : true,
+                  visible: akunnya[widget.idx].status == "user" ? false : akunnya[widget.idx].status == "premium" && akunnya[widget.idx].toko == "" ? false : akunnya[widget.idx].status == "premium" && akunnya[widget.idx].toko != ""? true:false,
                   child: Container(
                     margin: EdgeInsets.only(
                         top: 10, right: 25, left: 25, bottom: 10),
