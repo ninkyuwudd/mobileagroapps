@@ -2,9 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mobileagroapps/controller/cuaca_controller.dart';
 import 'package:mobileagroapps/controller/user_controller.dart';
+import 'package:mobileagroapps/model/datalokasi_model.dart';
 import 'package:mobileagroapps/navigationbar.dart';
+import 'package:mobileagroapps/widget/popup_warning.dart';
 import 'package:mobileagroapps/widget/rounded_value_field.dart';
 import 'package:provider/provider.dart';
+import 'package:easy_search_bar/easy_search_bar.dart';
 
 class TambahLokasi extends StatefulWidget {
   static const routename = "/tambahlokasi";
@@ -17,6 +20,19 @@ class TambahLokasi extends StatefulWidget {
 }
 
 class _TambahLokasiState extends State<TambahLokasi> {
+  String searchValue = '';
+  final List<String> _suggestions = [
+    'Afeganistan',
+    'Albania',
+    'Algeria',
+    'Australia',
+    'Brazil',
+    'German',
+    'Madagascar',
+    'Mozambique',
+    'Portugal',
+    'Zambia'
+  ];
   final firestoredb = FirebaseFirestore.instance.collection('users');
   @override
   void initState() {
@@ -24,6 +40,7 @@ class _TambahLokasiState extends State<TambahLokasi> {
     super.initState();
     Provider.of<UserProvider>(context, listen: false).fethcdatauser();
   }
+
   bool ckusername = false;
 
   var lokasi = TextEditingController();
@@ -35,75 +52,63 @@ class _TambahLokasiState extends State<TambahLokasi> {
     var loaduser = Provider.of<UserProvider>(context);
     var ambildata = loaduser.akun;
     return Scaffold(
-      body: Container(
-        margin: EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              "Tambah Lokasi Anda",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            RoundeValueFieldWhiteValue(
-                fungsi:(value) {
-                        print(value);
-                        if (value == "") {
-                          setState(() {
-                            ckusername = true;
-                          });
-                        } else {
-                          setState(() {
-                            ckusername = false;
-                          });
-                        }
-
-                      },
-                control: lokasi,
-                title: "",
-                hover: "masukkan lokasi anda",
-                check: cek),
-            GestureDetector(
-              onTap: () {
-                try {
-                  if (lokasi.text.isEmpty) {
-                    setState(() {
-                      cek = true;
-                    });
-                  }else{
-                    setState(() {
-                      cek = false;
-                    });
-                    firestoredb
-                      .doc(ambildata[loadidx].id)
-                      .update({"lokasi": lokasi.text});
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => BottomNavbar(
-                        idx: loadidx,
-                      ),
-                    ),
-                  );
-                  loadcuaca.updateLocation(lokasi.text);
-                  }
-                  
-                } catch (e) {
-                  print("masih ada eror");
-                }
-              },
-              child: Container(
-                margin:
-                    EdgeInsets.only(top: 10, right: 25, left: 25, bottom: 10),
-                padding:
-                    EdgeInsets.only(top: 10, bottom: 10, right: 20, left: 20),
-                decoration: BoxDecoration(
-                    color: Colors.green,
-                    borderRadius: BorderRadius.circular(20)),
-                child: Text("Tambahkan", style: TextStyle(color: Colors.white)),
+      appBar: EasySearchBar(
+        title: Text("Lokasi"),
+        onSearch: (value) => setState(() => searchValue = value),
+        suggestions: dataListlokasi,
+        leading: Text(""),
+      ),
+      body: Center(
+        child: Container(
+          margin: EdgeInsets.all(20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "Tambah Lokasi Anda",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
-            ),
-          ],
+              Text('Value: $searchValue'),
+              GestureDetector(
+                onTap: () {
+                  try {
+                    if (searchValue.isEmpty) {
+                      showDialog(context: context, builder: (context){
+                        return PopupWarning(pesan: "Lokasi tidak bisa kosong !");
+                      });
+                    } else {
+      
+                      firestoredb
+                          .doc(ambildata[loadidx].id)
+                          .update({"lokasi": searchValue});
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => BottomNavbar(
+                            idx: loadidx,
+                          ),
+                        ),
+                      );
+                      loadcuaca.updateLocation(lokasi.text);
+                    }
+                  } catch (e) {
+                    print("masih ada eror");
+                  }
+                },
+                child: Container(
+                  margin:
+                      EdgeInsets.only(top: 10, right: 25, left: 25, bottom: 10),
+                  padding:
+                      EdgeInsets.only(top: 10, bottom: 10, right: 20, left: 20),
+                  decoration: BoxDecoration(
+                      color: Colors.green,
+                      borderRadius: BorderRadius.circular(20)),
+                  child: Text("Tambahkan", style: TextStyle(color: Colors.white)),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

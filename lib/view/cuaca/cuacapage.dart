@@ -47,6 +47,7 @@ class _CuacaPageState extends State<CuacaPage> {
     final formaterdate = DateFormat.yMMMd();
     return SafeArea(
       child: Scaffold(
+        
         extendBody: true,
         appBar: AppBar(
           actions: [
