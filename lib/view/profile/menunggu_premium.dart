@@ -5,6 +5,8 @@ import 'package:mobileagroapps/controller/user_controller.dart';
 import 'package:mobileagroapps/view/profile/daftartoko_view.dart';
 import 'package:provider/provider.dart';
 
+import '../../navigationbar.dart';
+
 class PremiumWait extends StatefulWidget {
   static const routename = "/premiumwait";
   const PremiumWait({super.key});
@@ -21,11 +23,13 @@ class _PremiumWaitState extends State<PremiumWait> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    navigatenext();
+    var getidxuser = Provider.of<UserProvider>(context,listen: false);
+    print("idx: $getidxuser");
+    navigatenext(getidxuser.curidx);
 
   }
 
-  void navigatenext() async{
+  void navigatenext(int idx) async{
     await Future.delayed(Duration(seconds: 5));
     setState(() {
       statuspembayaran = true;
@@ -36,7 +40,12 @@ class _PremiumWaitState extends State<PremiumWait> {
     dbuser.doc(iduser).update({
       "status" : "premium"
     });
-    Navigator.pop(context);
+     Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+            builder: (context) => BottomNavbar(
+                  idx: idx,
+                )));
   }
 
   @override
