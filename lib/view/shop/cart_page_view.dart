@@ -1,11 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:mobileagroapps/controller/keranjang_controller.dart';
-import 'package:mobileagroapps/controller/order_controller.dart';
 import 'package:mobileagroapps/controller/user_controller.dart';
 import 'package:mobileagroapps/view/shop/perbayaran_view.dart';
-import 'package:mobileagroapps/widget/rounded_button_gree.dart';
 import 'package:provider/provider.dart';
 
 import '../../widget/shop/cart_item.dart';
@@ -52,7 +49,7 @@ class CartPage extends StatelessWidget {
                       width: 200,
                       child: GestureDetector(
                           onTap: () {
-                            if (cart.totalamount != 0) {
+                            if (cart.totalamount != 0 && cart.items.length != cart.pesanansemetara.length) {
                               // cart.clearIdPesananSementara();
                               for (var x = 0; x < cart.items.length; x++) {
                                 cart.addIdPesananSementara(
@@ -62,7 +59,14 @@ class CartPage extends StatelessWidget {
                               Navigator.pushNamed(
                                   context, Pembayaran.routename,
                                   arguments: cart.totalamount);
-                            } else {
+                            }else if(cart.items.length == cart.pesanansemetara.length){
+                              print("lanjut");
+                              Navigator.pushNamed(
+                                  context, Pembayaran.routename,
+                                  arguments: cart.totalamount);
+                              print(cart.pesanansemetara);
+                            }
+                          else {
                               ScaffoldMessenger.of(context).hideCurrentSnackBar();
                               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                   content: Text(
@@ -90,42 +94,6 @@ class CartPage extends StatelessWidget {
                             )),
                           )),
                     ),
-
-                    // TextButton(
-                    //   onPressed: () {
-                    //     // dborder.doc().set({
-                    //     //   "idcustomer": loaduser.curuserid,
-                    //     //   "idproduk": cart.items.keys.toList(),
-                    //     //   "date": DateFormat.yMMMd().format(DateTime.now())
-                    //     // });
-                    //     if (cart.totalamount != 0) {
-                    //       // cart.clearIdPesananSementara();
-                    //       for(var x = 0; x < cart.items.length; x ++){
-
-                    //         cart.addIdPesananSementara(cart.items.values.toList()[x].id);
-                    //       }
-                    //       print(cart.pesanansemetara);
-                    //       Navigator.pushReplacementNamed(
-                    //           context, Pembayaran.routename,
-                    //           arguments: cart.totalamount);
-                    //     } else {
-                    //       ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                    //       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    //           content: Text(
-                    //             'Tidak ada pesanan !',
-                    //             textAlign: TextAlign.center,
-                    //           ),
-                    //           backgroundColor: Color.fromARGB(255, 208, 77, 77),
-                    //           duration: Duration(seconds: 2)));
-                    //     }
-
-                    //     // Provider.of<Orderproivder>(context, listen: false)
-                    //     //     .addorder(
-                    //     //         cart.items.values.toList(), cart.totalamount);
-                    //     // cart.clear();
-                    //   },
-                    //   child: Text("ORDER NOW"),
-                    // ),
                   ],
                 ),
               ),
