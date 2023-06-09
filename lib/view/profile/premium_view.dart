@@ -75,7 +75,7 @@ class _DaftarPremiumState extends State<DaftarPremium> {
                   ),
                   GestureDetector(
                       onTap: () {
-                        Navigator.pushReplacementNamed(context, PembayaranPremium.routename);
+                        Navigator.pushNamed(context, PembayaranPremium.routename);
                       },
                       child: Container(
                         width: double.infinity,

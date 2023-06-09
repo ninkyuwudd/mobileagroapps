@@ -30,28 +30,29 @@ class _DaftarTokoState extends State<DaftarToko> {
     super.initState();
     Provider.of<TokoController>(context, listen: false).getdatatoko();
     Provider.of<UserProvider>(context, listen: false).fethcdatauser();
+    
   }
 
-    Future<void> getImageurl(String namaimg) async{
-    String get ="file/$namaimg";
+  Future<void> getImageurl(String namaimg) async {
+    String get = "file/$namaimg";
     Reference storageReference = storage.ref().child(get);
     imageurl = await storageReference.getDownloadURL();
-    setState((){
-      
-    });
+    setState(() {});
   }
 
   var namatoko = TextEditingController();
   var emailtoko = TextEditingController();
   var nomorhp = TextEditingController();
+  var nomorrekening = TextEditingController();
   var alamat = TextEditingController();
-  
+
   bool textemail = true;
   bool phnumber = true;
 
   bool namatokock = false;
   bool emailtokock = false;
   bool nomorhpck = false;
+  bool ckrekening = false;
   bool alamatck = false;
 
   @override
@@ -59,22 +60,26 @@ class _DaftarTokoState extends State<DaftarToko> {
     // var loadtoko = Provider.of<TokoController>(context, listen: false);
     var dbtoko = FirebaseFirestore.instance.collection("toko");
     var dbuser = FirebaseFirestore.instance.collection("users");
-    // var loaduser = Provider.of<UserProvider>(context, listen: false);
+    var loaduser = Provider.of<UserProvider>(context, listen: false);
     var getid = ModalRoute.of(context)?.settings.arguments as String;
     // var gettoko = loadtoko.items;
     // var getuser = loaduser.akun;
     var imgcontroller = Provider.of<PilihUploadfile>(context);
     // print(imgcontroller.pickfile?.name);
-    if(imgcontroller.pickfile != null){
+    if (imgcontroller.pickfile != null) {
       getImageurl(imgcontroller.pickfile!.name);
-    }else{
+    } else {
       print("data masih kosong");
     }
-    
 
     return Scaffold(
       appBar: AppBar(
         title: Text("Daftar Toko"),
+        actions: [
+          IconButton(onPressed: (){
+            print("curidx: ${loaduser.curidx}");
+          }, icon: Icon(Icons.add))
+        ],
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -83,19 +88,18 @@ class _DaftarTokoState extends State<DaftarToko> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               RoundeValueFieldWhiteValue(
-                                                  fungsi:(value) {
-                        print(value);
-                        if (value == "") {
-                          setState(() {
-                            namatokock= true;
-                          });
-                        } else {
-                          setState(() {
-                            namatokock= false;
-                          });
-                        }
-
-                      },
+                  fungsi: (value) {
+                    print(value);
+                    if (value == "") {
+                      setState(() {
+                        namatokock = true;
+                      });
+                    } else {
+                      setState(() {
+                        namatokock = false;
+                      });
+                    }
+                  },
                   control: namatoko,
                   title: "Nama Toko",
                   hover: "masukkan nama toko...",
@@ -137,6 +141,9 @@ class _DaftarTokoState extends State<DaftarToko> {
                         : textemail
                             ? null
                             : "email tidak valid"),
+              ),
+                                          SizedBox(
+                height: 10,
               ),
               Text(
                 "Nomor Hp",
@@ -182,21 +189,60 @@ class _DaftarTokoState extends State<DaftarToko> {
                             ? null
                             : "nomor hp tidak valid"),
               ),
-              SizedBox(height: 5,),
-              RoundeValueFieldWhiteValue(
-                                                  fungsi:(value) {
-                        print(value);
-                        if (value == "") {
-                          setState(() {
-                            alamatck = true;
-                          });
-                        } else {
-                          setState(() {
-                            alamatck = false;
-                          });
-                        }
+                            SizedBox(
+                height: 10,
+              ),
+               Text(
+                "Nomor Rekening",
+                style: TextStyle(
+                    color: Color.fromARGB(255, 67, 67, 67),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              TextField(
+                onChanged: (value) async {
+                  if (value.isEmpty) {
+                    setState(() {
+                      nomorhpck = true;
+                    });
+                  } else {
+                    nomorhpck = false;
+                  }
+                },
+                keyboardType: TextInputType.number,
+                controller: nomorrekening,
+                decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 10),
+                    border: const OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20))),
+                    hintText: "masukkan nomor rekening...",
+                    fillColor: Colors.white,
+                    filled: true,
+                    errorText: ckrekening
+                        ? "nomor rekening tidak bisa kosong"
+                        : null),
+              ),
+                            SizedBox(
+                height: 10,
+              ),
 
-                      },
+              RoundeValueFieldWhiteValue(
+                  fungsi: (value) {
+                    print(value);
+                    if (value == "") {
+                      setState(() {
+                        alamatck = true;
+                      });
+                    } else {
+                      setState(() {
+                        alamatck = false;
+                      });
+                    }
+                  },
                   control: alamat,
                   title: "Alamat Toko",
                   hover: "masukkan alamat",
@@ -242,28 +288,28 @@ class _DaftarTokoState extends State<DaftarToko> {
                   ),
                   onPressed: () async {
                     print("nice");
-                   setState(() {
+                    setState(() {
                       if (namatoko.text.isEmpty) {
-                      namatokock = true;
-                    } else {
-                      namatokock = false;
-                    }
-                    if (alamat.text.isEmpty) {
-                      alamatck = true;
-                    } else {
-                      alamatck = false;
-                    }
-                    if (emailtoko.text.isEmpty) {
-                      emailtokock = true;
-                    } else {
-                      emailtokock = false;
-                    }
-                    if (nomorhp.text.isEmpty) {
-                      nomorhpck = true;
-                    } else {
-                      nomorhpck = false;
-                    }
-                   });
+                        namatokock = true;
+                      } else {
+                        namatokock = false;
+                      }
+                      if (alamat.text.isEmpty) {
+                        alamatck = true;
+                      } else {
+                        alamatck = false;
+                      }
+                      if (emailtoko.text.isEmpty) {
+                        emailtokock = true;
+                      } else {
+                        emailtokock = false;
+                      }
+                      if (nomorhp.text.isEmpty) {
+                        nomorhpck = true;
+                      } else {
+                        nomorhpck = false;
+                      }
+                    });
                     if (nomorhpck == false &&
                         emailtokock == false &&
                         alamatck == false &&
@@ -274,6 +320,7 @@ class _DaftarTokoState extends State<DaftarToko> {
                         "email": emailtoko.text,
                         "nomorhp": nomorhp.text,
                         "alamat": alamat.text,
+                        "rekening" : nomorrekening.text,
                         "gambar": imageurl
                       });
                       String newId = newDocRef.id;
@@ -283,19 +330,17 @@ class _DaftarTokoState extends State<DaftarToko> {
                       ScaffoldMessenger.of(context).hideCurrentSnackBar();
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         content: Text(
-                          'Submit Data Successfully',
+                          'Berhasil daftar toko',
                           textAlign: TextAlign.center,
                         ),
                         backgroundColor: Colors.green,
                         duration: Duration(seconds: 2),
                       ));
-                                          Navigator.pushReplacementNamed(
-                        context, Tokoditerima.routename);
+                      Navigator.pushReplacementNamed(
+                          context, Tokoditerima.routename);
                     }
 
                     // });
-
-
                   },
                   child: Text("Upload file"))
             ],

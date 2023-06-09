@@ -6,6 +6,7 @@ class TokoModel with ChangeNotifier {
   final String email;
   final String nomorhp;
   final String alamat;
+  final String rekening;
   final String gambar;
 
   TokoModel({
@@ -14,6 +15,7 @@ class TokoModel with ChangeNotifier {
     required this.email,
     required this.nomorhp,
     required this.alamat,
+    required this.rekening,
     required this.gambar
   });
 
@@ -23,6 +25,7 @@ class TokoModel with ChangeNotifier {
       email: json["email"],
       nomorhp: json["nomorhp"],
       alamat: json["alamat"],
+      rekening: json["rekening"],
       gambar: json['gambar']
       );
 
@@ -32,6 +35,7 @@ class TokoModel with ChangeNotifier {
     "email" : email,
     "nomorhp" : nomorhp,
     "alamat" : alamat,
+    "rekening" : rekening,
     "gambar" : gambar
   };
 

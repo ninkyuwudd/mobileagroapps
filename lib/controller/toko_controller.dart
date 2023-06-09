@@ -30,6 +30,7 @@ class TokoController with ChangeNotifier {
             email: doc.data()["email"],
             nomorhp: doc.data()["nomorhp"],
             alamat: doc.data()["alamat"],
+            rekening: doc.data()["rekening"],
             gambar: doc.data()["gambar"]))
         .toList();
     notifyListeners();
@@ -46,6 +47,7 @@ class TokoController with ChangeNotifier {
             email: doc.data()["email"],
             nomorhp: doc.data()["nomorhp"],
             alamat: doc.data()["alamat"],
+            rekening: doc.data()["rekening"],
             gambar: doc.data()["gambar"]))
         .toList();
     notifyListeners();

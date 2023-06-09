@@ -22,7 +22,7 @@ class _KalkulatorDelimaState extends State<KalkulatorDelima> {
   @override
   Widget build(BuildContext context) {
     ppkkandang(int umur, int jumlah) {
-      if (0 <= umur && umur <= 5) {
+      if (0 <= umur) {
         pupukkandangsatuan = 200;
         pupukkandang = umur * (jumlah * pupukkandangsatuan);
       }
@@ -30,7 +30,7 @@ class _KalkulatorDelimaState extends State<KalkulatorDelima> {
     }
 
     ppkkering(int umur, int jumlah) {
-      if (0 <= umur && umur <= 5) {
+      if (0 <= umur) {
         pupukkeringsatuan = 78;
         pupukkering = umur * (jumlah * pupukkeringsatuan);
       }
@@ -38,15 +38,15 @@ class _KalkulatorDelimaState extends State<KalkulatorDelima> {
     }
 
     ppkkimia(int umur, int jumlah) {
-      if (0 <= umur && umur < 1) {
+      if (0 <= umur && umur < 12) {
         pupukkimiasatuan = 500;
         pupukkimia = umur * (jumlah * pupukkimiasatuan) * 0.01;
       }
-      if (1 <= umur && umur <= 3) {
+      if (12 <= umur && umur < 36) {
         pupukkimiasatuan = 750;
         pupukkimia = umur * (jumlah * pupukkimiasatuan);
       }
-      if (3 <= umur && umur <= 5) {
+      if (36 <= umur) {
         pupukkimiasatuan = 1000;
         pupukkimia = umur * (jumlah * pupukkimiasatuan);
       }
@@ -77,14 +77,14 @@ class _KalkulatorDelimaState extends State<KalkulatorDelima> {
           height: 20,
         ),
         ResultCard(
-            pupuk: pupukkandang == null ? "-" : "${pupukkandang.toString()}ml",
+            pupuk: pupukkandang == null ? "-" : "${pupukkandang.toString()} ml",
             title: "Pupuk Kandang",
             img: "pupuk kandang@4x.png"),
         SizedBox(
           height: 20,
         ),
         ResultDouble(
-            value: pupukkering == null ? "-" : "${pupukkering.toString()}ml",
+            value: pupukkering == null ? "-" : "${pupukkering.toString()} ml",
             value2: pupukkimia == null ? "-" : "${pupukkimia.toString()} ml",
             judul: "kering",
             gambar: "pupuk kering@4x.png",

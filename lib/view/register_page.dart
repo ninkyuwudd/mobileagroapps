@@ -39,7 +39,6 @@ class _RegisterPageState extends State<RegisterPage> {
   final firestoredb = FirebaseFirestore.instance.collection('users');
   @override
   Widget build(BuildContext context) {
-    
     final usrprov = Provider.of<UserProvider>(context);
     usrprov.fethcdatauser();
     final akunnya = usrprov.akun;
@@ -324,14 +323,16 @@ class _RegisterPageState extends State<RegisterPage> {
                             "status": "user",
                             "lokasi": ''
                           });
-                          
-                          // firestoredb
-                          //     .doc(id)
-                          //     .collection('Order')
-                          //     .doc(id)
-                          //     .set({"idOrder": id,
-                          //     "customer" : ,
-                          //     });
+
+                          ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text(
+                              'Submit Data Successfully',
+                              textAlign: TextAlign.center,
+                            ),
+                            backgroundColor: Colors.green,
+                            duration: Duration(seconds: 2),
+                          ));
                           Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(

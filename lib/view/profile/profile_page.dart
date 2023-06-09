@@ -82,22 +82,6 @@ class _ProfileUserPageState extends State<ProfileUserPage> {
                       ),
                       margin: EdgeInsets.only(top: 40),
                     ),
-                    // Positioned(
-                    //   left: 0,
-                    //   right: 0,
-                    //   top: 120,
-                    //   child: Container(
-                    //       child: imagefile == null
-                    //           ? CircleAvatar(
-                    //               backgroundImage:
-                    //                   AssetImage("images/bebek@4x.png"),
-                    //               radius: 70,
-                    //             )
-                    //           : CircleAvatar(
-                    //               foregroundImage: FileImage(imagefile!),
-                    //               radius: 70,
-                    //             )),
-                    // ),
 
                     Positioned(
                         left: 0,
@@ -114,16 +98,6 @@ class _ProfileUserPageState extends State<ProfileUserPage> {
                                 fit: BoxFit.cover),
                           ),
                         )),
-                    // Positioned(
-                    //     left: 100,
-                    //     right: 0,
-                    //     top: 220,
-                    //     child:
-                    //         GestureDetector(
-                    //           onTap: (){
-                    //             _getfromgallery();
-                    //           },
-                    //           child: CircleAvatar(child: Icon(Icons.edit,color: Colors.white,),backgroundColor: Colors.amber,))),
                   ],
                 ),
                 SizedBox(
@@ -231,7 +205,9 @@ class _ProfileUserPageState extends State<ProfileUserPage> {
                           Text("Daftar Toko"),
                           const Spacer(),
                           GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              
+                            },
                             child: const Image(
                                 image: AssetImage("images/right_row_icon.png")),
                           ),
@@ -241,7 +217,7 @@ class _ProfileUserPageState extends State<ProfileUserPage> {
                   ),
                 ),
                 Visibility(
-                  visible: akunnya[widget.idx].status == "user" ? false : akunnya[widget.idx].status == "premium" && akunnya[widget.idx].toko == "" ? false : akunnya[widget.idx].status == "premium" && akunnya[widget.idx].toko != ""? true:false,
+                  visible: akunnya[widget.idx].status == "user" ? false : akunnya[widget.idx].status == "admin" ? true: akunnya[widget.idx].status == "premium" && akunnya[widget.idx].toko == "" ? false : akunnya[widget.idx].status == "premium" && akunnya[widget.idx].toko != ""? true:false,
                   child: Container(
                     margin: EdgeInsets.only(
                         top: 10, right: 25, left: 25, bottom: 10),

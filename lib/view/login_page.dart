@@ -151,6 +151,7 @@ class _LoginPageState extends State<LoginPage> {
                                 if (username.text == akunnya[i].username &&
                                     password.text == akunnya[i].password) {
                                   print(akunnya[i].id.toString());
+                                  print("idx : $i");
                                   usrprov
                                       .changedataid(akunnya[i].id.toString());
 
