@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mobileagroapps/controller/keranjang_controller.dart';
 import 'package:provider/provider.dart';
 
+import '../../controller/product_controller.dart';
+
 class CartItemCard extends StatelessWidget {
   final String id;
   final String productId;
@@ -13,6 +15,12 @@ class CartItemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cart = Provider.of<CartProvider>(context, listen: false);
+    final load = Provider.of<ProductProvider>(context);
+
+    final loadproduk = load.finbyid(productId);
+
+
     return Dismissible(
         key: ValueKey(id),
               background: Container(
@@ -44,16 +52,47 @@ class CartItemCard extends StatelessWidget {
             margin: EdgeInsets.symmetric(horizontal: 15, vertical: 4),
             child: Padding(
               padding: EdgeInsets.all(8),
-              child: ListTile(
-                leading: CircleAvatar(
-                  child: Padding(
-                      padding: EdgeInsets.all(5),
-                      child: FittedBox(child: Text("\$$price"))),
-                ),
-                title: Text(title),
-                subtitle: Text("Total : ${(price * quantity)}"),
-                trailing: Text("$quantity"),
-              ),
+              child:               Container(
+  child: Row(
+    children: [
+      Expanded(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(title),
+            SizedBox(height: 10,),
+            Text("Total : ${(price * quantity)}",style: TextStyle(fontSize: 17,fontWeight: FontWeight.bold),),
+          ],
+        ),
+      ),
+      Row(
+        children: [
+          IconButton(onPressed: (){
+            cart.minusitem(loadproduk.id, loadproduk.harga,
+                            loadproduk.namaproduk);
+          }, icon: Icon(Icons.remove,color: Colors.green,)),
+          Text("$quantity",style: TextStyle(fontWeight: FontWeight.bold),),
+          IconButton(onPressed: (){
+            cart.additem(loadproduk.id, loadproduk.harga,
+                            loadproduk.namaproduk);
+          }, icon: Icon(Icons.add,color: Colors.green,)),
+        ],
+      ),
+    ],
+  ),
+),
+
+              // ListTile(
+              //   leading: CircleAvatar(
+              //     child: Padding(
+              //         padding: EdgeInsets.all(5),
+              //         child: FittedBox(child: Text("\$$price"))),
+              //   ),
+              //   title: Text(title),
+              //   subtitle: Text("Total : ${(price * quantity)}"),
+              //   trailing: Text("$quantity"),
+                
+              // ),
             )));
   }
 }

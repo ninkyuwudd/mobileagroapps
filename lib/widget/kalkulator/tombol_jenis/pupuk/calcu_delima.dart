@@ -58,11 +58,14 @@ class _KalkulatorDelimaState extends State<KalkulatorDelima> {
           hint_01: "...bulan",
           hint_02: "...jumlah tanaman",
           fungsi: () {
+            setState(() {
+              
             var umur = int.parse(waktu.text);
             var jmltanaman = int.parse(jumlah.text);
             ppkkandang(umur, jmltanaman);
             ppkkering(umur, jmltanaman);
             ppkkimia(umur, jmltanaman);
+            });
           },
           finaljudul: "Delima",
           controller2: jumlah,

@@ -22,11 +22,11 @@ class _KalkulatorSemangkaState extends State<KalkulatorSemangka> {
   @override
   Widget build(BuildContext context) {
     ppkkandang(int umur, int jumlah) {
-      if (1 <= umur && umur <= 2) {
+      if (7 <= umur && umur < 14) {
         pupukkandangsatuan = 1;
         pupukkandang = umur * (jumlah * pupukkandangsatuan);
-      }
-      if (2 <= umur && umur <= 15) {
+      }else
+      if (14 <= umur ) {
         pupukkandangsatuan = 1.5;
         pupukkandang = umur * (jumlah * pupukkandangsatuan);
       }
@@ -36,20 +36,20 @@ class _KalkulatorSemangkaState extends State<KalkulatorSemangka> {
       if (0 <= umur && umur <= 7) {
         pupukkeringsatuan = 4.5;
         pupukkering = umur * (jumlah * pupukkeringsatuan);
-      }
+      }else
       if (8 <= umur && umur <= 14) {
         pupukkeringsatuan = 8.5;
         pupukkering = umur * (jumlah * pupukkeringsatuan);
-      }
+      }else
       if (15 <= umur && umur <= 21) {
         pupukkeringsatuan = 27.5;
         pupukkering = umur * (jumlah * pupukkeringsatuan);
-      }
+      }else
       if (22 <= umur && umur <= 35) {
         pupukkeringsatuan = 21;
         pupukkering = umur * (jumlah * pupukkeringsatuan);
-      }
-      if (36 <= umur && umur <= 120) {
+      }else
+      if (36 < umur) {
         pupukkeringsatuan = 10;
         pupukkering = umur * (jumlah * pupukkeringsatuan);
       }
@@ -59,12 +59,12 @@ class _KalkulatorSemangkaState extends State<KalkulatorSemangka> {
       if (1 <= umur && umur <= 6) {
         pupukkimiasatuan = 300;
         pupukkimia = umur * (jumlah * pupukkimiasatuan);
-      }
+      }else
       if (7 <= umur && umur <= 8) {
         pupukkimiasatuan = 400;
         pupukkimia = umur * (jumlah * pupukkimiasatuan);
-      }
-      if (7 <= umur && umur <= 8) {
+      }else
+      if (7 <= umur) {
         pupukkimiasatuan = 500;
         pupukkimia = umur * (jumlah * pupukkimiasatuan);
       }
@@ -76,11 +76,14 @@ class _KalkulatorSemangkaState extends State<KalkulatorSemangka> {
           hint_01: "...hari",
           hint_02: "...jumlah",
           fungsi: () {
+            setState(() {
+              
             var umur = int.parse(waktu.text);
             var jmltanaman = int.parse(jumlah.text);
             ppkkandang(umur, jmltanaman);
             ppkkering(umur, jmltanaman);
             ppkkimia(umur, jmltanaman);
+            });
           },
           finaljudul: "Semangka",
           controller2: jumlah,

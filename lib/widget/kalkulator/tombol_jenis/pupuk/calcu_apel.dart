@@ -57,11 +57,14 @@ class _KalkulatorApelState extends State<KalkulatorApel> {
           hint_01: "...tahun",
           hint_02: "...jumlah",
           fungsi: () {
+            setState(() {
             var umur = int.parse(waktu.text);
             var jmltanaman = int.parse(jumlah.text);
             ppkkandang(umur, jmltanaman);
             ppkkering(umur, jmltanaman);
             ppkkimia(umur, jmltanaman);
+              
+            });
           },
           finaljudul: "Apel",
           controller2: jumlah,

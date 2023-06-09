@@ -65,11 +65,14 @@ class _KalkulatorPisangState extends State<KalkulatorPisang> {
           hint_01: "...bulan",
           hint_02: "...jumlah tanaman",
           fungsi: () {
+            setState(() {
+              
             var umur = int.parse(waktu.text);
             var jmltanaman = int.parse(jumlah.text);
             ppkkandang(umur, jmltanaman);
             ppkkering(umur, jmltanaman);
             ppkkimia(umur, jmltanaman);
+            });
           },
           finaljudul: "Pisang",
           controller2: jumlah,

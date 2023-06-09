@@ -59,7 +59,7 @@ class CartPage extends StatelessWidget {
                                     cart.items.values.toList()[x].id);
                               }
                               print(cart.pesanansemetara);
-                              Navigator.pushReplacementNamed(
+                              Navigator.pushNamed(
                                   context, Pembayaran.routename,
                                   arguments: cart.totalamount);
                             } else {

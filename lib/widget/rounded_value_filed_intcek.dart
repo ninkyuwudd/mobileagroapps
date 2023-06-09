@@ -31,6 +31,7 @@ class RoundeValueFieldWhiteValueIntcek extends StatelessWidget {
                   TextFormField(
                     onChanged:(value) => fungsi(value),
                     controller: control,
+                    keyboardType: TextInputType.number,
                     // initialValue: valuenya,
                     decoration: InputDecoration(
                                                 contentPadding: const EdgeInsets.symmetric(

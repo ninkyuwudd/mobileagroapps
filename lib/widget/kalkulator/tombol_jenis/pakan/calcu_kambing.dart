@@ -12,6 +12,22 @@ class Kalkulatorkambing extends StatefulWidget {
 }
 
 class _KalkulatorkambingState extends State<Kalkulatorkambing> {
+  static const menukambing = [
+    'Kambing dewasa',
+    'Induk dikawinkan',
+    'Induk bunting',
+    'Induk menyusui > 2 anak',
+    'Induk menyusui 1 anak',
+    'Anak kambing'
+  ];
+  final List<DropdownMenuItem<String>> _dropDownMenuItem = menukambing
+      .map((val) => DropdownMenuItem(
+            child: Text(val),
+            value: val,
+          ))
+      .toList();
+  String? _btnSelectVal;
+
   var pakan_ampas;
   var pakan_rumput;
   TextEditingController pakanfield = TextEditingController();
@@ -51,6 +67,22 @@ class _KalkulatorkambingState extends State<Kalkulatorkambing> {
                 SizedBox(
                   height: 15,
                 ),
+                ListTile(
+                  trailing: DropdownButton(
+                      value: _btnSelectVal,
+                      items: _dropDownMenuItem,
+                      hint: const Text("Pilih Umur"),
+                      onChanged: (String? newval) {
+                        if (newval != null) {
+                          setState(() {
+                            _btnSelectVal = newval;
+                          });
+                        }
+                      }),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
                 TextField(
                   inputFormatters: <TextInputFormatter>[
                     FilteringTextInputFormatter.digitsOnly
@@ -76,27 +108,46 @@ class _KalkulatorkambingState extends State<Kalkulatorkambing> {
                     child: ElevatedButton(
                         onPressed: () {
                           setState(() {
-                            if (pakanfield.text.contains(",")) {
+                            if (_btnSelectVal == null ||
+                                pakanfield.text == "") {
+                                  print("kosong");
                               showDialog(
                                   context: context,
                                   builder: (context) {
                                     return PopupWarning(
-                                        pesan:
-                                            "tidak bisa mengunnakan koma (',')");
+                                        pesan: "Data tidak boleh kosong !");
                                   });
                             } else {
-                              pakan_rumput = double.parse(pakanfield.text) *
-                                  75 /
-                                  100 *
-                                  2.5 *
-                                  7;
-                              pakan_ampas = double.parse(pakanfield.text) *
-                                  75 /
-                                  100 *
-                                  2 *
-                                  7;
+                              setState(() {
+                              int jumlah = int.parse(pakanfield.text);
+                              print("tidak kkosong");
+                              print(_btnSelectVal);
+                              if (_btnSelectVal ==
+                                  "Anak Lepas sapih (sedang tumbuh)") {
+                                pakan_rumput = 1.0 * jumlah;
+                                pakan_ampas = 1 * jumlah;
+                              } else if (_btnSelectVal == "Kambing dewasa") {
+                                pakan_rumput = 1.5 * jumlah;
+                                pakan_ampas = 0.5 * jumlah;
+                              } else if (_btnSelectVal ==
+                                      "Induk yang dikawinkan" ||
+                                  _btnSelectVal == "Induk bunting 3 bulan" ||
+                                  _btnSelectVal == "Induk menyusui > 2 anak") {
+                                pakan_rumput = 1.5 * jumlah;
+                                pakan_ampas = 2-3 * jumlah;
+                              } else if (_btnSelectVal ==
+                                  "Induk menyusui anak tunggal") {
+                                pakan_rumput = 1.5 * jumlah;
+                                pakan_ampas = 1 * jumlah;
+                              } else if (_btnSelectVal == "Anak kambing") {
+                                pakan_rumput = 0.5 * jumlah;
+                                pakan_ampas = 0.25 * jumlah;
+                              }
+                              });
                             }
                           });
+                          print(pakan_rumput);
+                          print(pakan_ampas);
                         },
                         child: Text("hitung")),
                   ),
@@ -113,7 +164,7 @@ class _KalkulatorkambingState extends State<Kalkulatorkambing> {
           height: 10,
         ),
         ResultCard(
-          pupuk: "${pakan_rumput == null ? '-' : pakan_rumput}  Kg/minggu",
+          pupuk: "${pakan_rumput == null ? '-' : pakan_rumput}  Kg/hari",
           title: "Pakan Rumput",
           img: "rumput@4x.png",
         ),
@@ -121,7 +172,7 @@ class _KalkulatorkambingState extends State<Kalkulatorkambing> {
           height: 15,
         ),
         ResultCard(
-          pupuk: "${pakan_ampas == null ? '-' : pakan_ampas}  Kg/minggu",
+          pupuk: "${pakan_ampas == null ? '-' : pakan_ampas}  Kg/hari",
           title: "Pakan Fermentasi",
           img: "bekatul@4x.png",
         ),

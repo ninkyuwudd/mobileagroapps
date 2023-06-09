@@ -37,6 +37,7 @@ class SingleFiledparameter extends StatelessWidget {
                             height: 15,
                           ),
                           TextField(
+                            maxLength: 10,
                             onChanged: (value){
                               
                             },

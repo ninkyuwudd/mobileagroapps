@@ -43,6 +43,7 @@ class DoubleFiledparameter extends StatelessWidget {
                             height: 15,
                           ),
                           TextField(
+                            maxLength: 10,
                             controller: controller,
                             keyboardType: TextInputType.number,
                             decoration: InputDecoration(
@@ -60,6 +61,7 @@ class DoubleFiledparameter extends StatelessWidget {
                           Text(judul2),
                           SizedBox(height: 10),
                           TextField(
+                            maxLength: 10,
                             controller: controller2,
                             keyboardType: TextInputType.number,
                             decoration: InputDecoration(
