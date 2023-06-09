@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobileagroapps/widget/kalkulator/result_card.dart';
 
+import '../../double_field_params.dart';
 
 class KalkulatorBuahnaga extends StatefulWidget {
   const KalkulatorBuahnaga({super.key});
@@ -10,113 +11,148 @@ class KalkulatorBuahnaga extends StatefulWidget {
 }
 
 class _KalkulatorBuahnagaState extends State<KalkulatorBuahnaga> {
-  var kandang_hektar;
-  var pupuk_kimia_cair;
-  var pupuk_kimia;
-  TextEditingController pupuk = TextEditingController();
+  var pupukkandang;
+  var pupukkandangsatuan;
+  var pupukkering;
+  var pupukkeringsatuan;
+  var pupukkimia;
+  var pupukkimiasatuan;
+  var jumlah = TextEditingController();
+  var waktu = TextEditingController();
+
+     ppkkandang(int umur, int jumlah) {
+      if (0 <= umur && umur <= 2) {
+        pupukkandangsatuan = 10;
+        pupukkandang = umur * (jumlah * pupukkandangsatuan);
+      }
+      if (3 <= umur && umur <= 5) {
+        pupukkandangsatuan = 15;
+        pupukkandang = umur * (jumlah * pupukkandangsatuan);
+      }
+      if (6 <= umur && umur < 8) {
+        pupukkandangsatuan = 300;
+        pupukkandang = umur * (jumlah * pupukkandangsatuan);
+      }
+      if (8 <= umur && umur <= 12) {
+        pupukkandangsatuan = 500;
+        pupukkandang = umur * (jumlah * pupukkandangsatuan);
+      }
+      if (13 <= umur && umur <= 17) {
+        pupukkandangsatuan = 750;
+        pupukkandang = umur * (jumlah * pupukkandangsatuan);
+      }
+      if (18 <= umur && umur <= 25) {
+        pupukkandangsatuan = 1000;
+        pupukkandang = umur * (jumlah * pupukkandangsatuan);
+      }
+    }
+
+    ppkkering(int umur, int jumlah) {
+      if (0 <= umur && umur <= 2) {
+        pupukkeringsatuan = 10;
+        pupukkering = umur * (jumlah * pupukkeringsatuan);
+      }
+      if (3 <= umur && umur <= 5) {
+        pupukkeringsatuan = 25;
+        pupukkering = umur * (jumlah * pupukkeringsatuan);
+      }
+      if (6 <= umur && umur < 8) {
+        pupukkeringsatuan = 300;
+        pupukkering = umur * (jumlah * pupukkeringsatuan);
+      }
+      if (8 <= umur && umur <= 12) {
+        pupukkeringsatuan = 500;
+        pupukkering = umur * (jumlah * pupukkeringsatuan);
+      }
+      if (13 <= umur && umur <= 17) {
+        pupukkeringsatuan = 750;
+        pupukkering = umur * (jumlah * pupukkeringsatuan);
+      }
+      if (18 <= umur && umur <= 25) {
+        pupukkeringsatuan = 1000;
+        pupukkering = umur * (jumlah * pupukkeringsatuan);
+      }
+    }
+
+    ppkkimia(int umur, int jumlah) {
+      if (1 <= umur && umur <= 5) {
+        pupukkimiasatuan = 5;
+        pupukkimia = umur * (jumlah * pupukkimiasatuan) * 0.01;
+      }
+      if (6 <= umur && umur <= 10) {
+        pupukkimiasatuan = 10;
+        pupukkimia = umur * (jumlah * pupukkimiasatuan);
+      }
+      if (11 <= umur && umur <= 25) {
+        pupukkimiasatuan = 5;
+        pupukkimia = umur * (jumlah * pupukkimiasatuan);
+      }
+    } 
   @override
   Widget build(BuildContext context) {
     return Column(
-                children: [
-                  Visibility(
-                    visible: true,
-                    child: Container(
-                      
-                      padding: EdgeInsets.all(15),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(15),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Color.fromARGB(70, 100, 100, 100),
-                            offset: const Offset(
-                              1.0,
-                              5.0,
-                            ),
-                            blurRadius: 7.0,
-                            spreadRadius: 1.0,
-                          ), //BoxShadow
-                        ],
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          
-                          Text("Luas lahan(hektar)"),
-                          SizedBox(
-                            height: 15,
-                          ),
-                          TextField(
-                            controller: pupuk,
-                            keyboardType: TextInputType.number,
-                            decoration: InputDecoration(
-                              contentPadding: const EdgeInsets.symmetric(
-                                  vertical: 10, horizontal: 10),
-                              border: const OutlineInputBorder(
-                                borderRadius: BorderRadius.all(Radius.circular(20)),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Container(
-                            padding: EdgeInsets.only(right: 15, left: 15),
-                            child: SizedBox(
-                              width: double.infinity,
-                              child: ElevatedButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      kandang_hektar =
-                                          double.parse(pupuk.text) *
-                                              400 *
-                                              0.125;
-                                      pupuk_kimia_cair = double.parse(pupuk.text) *
-                                              400 *
-                                              2;
-                                      pupuk_kimia = double.parse(pupuk.text) *
-                                              400 *
-                                              0.25;
-                                    });
-
-                                    print(kandang_hektar);
-                                  },
-                                  child: Text("hitung")),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Text("Pupuk Organik(pupuk kandang)"),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  ResultCard(pupuk: "${pupuk_kimia_cair == null ? '-' : pupuk_kimia_cair}  Kg", title: "Pupuk Kandang",img: "pupuk kandang@4x.png",),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Text("Pupuk Kimia"),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: ResultCard(title: "Cair",pupuk: "${pupuk_kimia_cair == null ? '-' : pupuk_kimia_cair}  Liter",img: "pupuk cair@4x.png",)
-                      ),
-                      SizedBox(
-                        width: 15,
-                      ),
-                      Expanded(
-                        child: ResultCard(title: "Kering",pupuk: "${pupuk_kimia == null ? '-' : pupuk_kimia}  Kg",img: "pupuk kering@4x.png",)
-                      )
-                    ],
-                  ),
-                ],
-              );
+      children: [
+        Visibility(
+          visible: true,
+          child: DoubleFiledparameter(
+                  hint_01: "...bulan",
+                  hint_02: "...jumlah tanaman",
+                  fungsi: () {
+                                var umur = int.parse(waktu.text);
+            var jmltanaman = int.parse(jumlah.text);
+                    setState(() {
+                      ppkkandang(umur,jmltanaman);
+                      ppkkering(umur, jmltanaman);
+                      ppkkimia(umur, jmltanaman);
+                    });
+                  },
+                  finaljudul: "Buah Naga",
+                  controller2: jumlah,
+                  controller: waktu,
+                  judul: "Umur",
+                  judul2: "Jumlah Tanaman",
+                ),
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        Text("Pupuk Organik(pupuk kandang)"),
+        SizedBox(
+          height: 10,
+        ),
+        ResultCard(
+          pupuk: "${pupukkandang == null ? '-' : pupukkandang}  Kg",
+          title: "Pupuk Kandang",
+          img: "pupuk kandang@4x.png",
+        ),
+        SizedBox(
+          height: 15,
+        ),
+        Text("Pupuk Kimia"),
+        SizedBox(
+          height: 10,
+        ),
+        Row(
+          children: [
+            Expanded(
+                child: ResultCard(
+              title: "Cair",
+              pupuk:
+                  "${pupukkimia == null ? '-' : pupukkimia}  Liter",
+              img: "pupuk cair@4x.png",
+            )),
+            SizedBox(
+              width: 15,
+            ),
+            Expanded(
+                child: ResultCard(
+              title: "Kering",
+              pupuk: "${pupukkering == null ? '-' : pupukkering}  Kg",
+              img: "pupuk kering@4x.png",
+            ))
+          ],
+        ),
+      ],
+    );
   }
 }
