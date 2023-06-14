@@ -121,6 +121,11 @@ class _ProfileUserDataEditPageState extends State<ProfileUserDataEditPage> {
     usrprov.fethcdatauser();
     final akunnya = usrprov.akun;
 
+        if (pilihfile.pickfile != null) {
+      getImageurl(pilihfile.pickfile!.name);
+    } else {
+      print("data masih kosong");
+    }
     // final getdataakun = akunnya[int.parse(data.toString())];
 
     return SafeArea(
@@ -148,17 +153,30 @@ class _ProfileUserDataEditPageState extends State<ProfileUserDataEditPage> {
                     left: 0,
                     right: 0,
                     top: 120,
-                    child: Container(
-                        child: pilihfile.pickfile == null
-                            ? CircleAvatar(
-                                backgroundImage: NetworkImage(imglink),
-                                radius: 70,
-                              )
-                            : CircleAvatar(
-                                foregroundImage:
-                                    FileImage(File(pilihfile.pickfile!.path!)),
-                                radius: 70,
-                              )),
+                    child: 
+                    Container(
+                          width: 130,
+                          height: 130,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            image:pilihfile.pickfile == null ?DecorationImage(image: AssetImage("images/empty_profile.png")) :DecorationImage(
+                                image: FileImage(File(pilihfile.pickfile!.path!)),
+                                fit: BoxFit.cover),
+                          ),
+                        )
+                    
+                    // Container(
+                      
+                    //     child: 
+                    //         ? CircleAvatar(
+                    //             backgroundImage: AssetImage("images/empty_profile.png"),
+                    //             radius: 70,
+                    //           )
+                    //         : CircleAvatar(
+                    //             foregroundImage:
+                    //                 FileImage(File(pilihfile.pickfile!.path!)),
+                    //             radius: 70,
+                    //           )),
                   ),
                   Positioned(
                       left: 100,
@@ -370,6 +388,7 @@ class _ProfileUserDataEditPageState extends State<ProfileUserDataEditPage> {
                     pilihfile.uploadfile();
                     // await Future.delayed(Duration(seconds: 1));
                     getImageurl(pilihfile.pickfile!.name);
+                    print(imageurl);
 
                     print(txid.text);
                     firestoredb.doc(txid.text).update({
@@ -381,7 +400,10 @@ class _ProfileUserDataEditPageState extends State<ProfileUserDataEditPage> {
                       "gambar": imageurl
                     });
 
-                    pilihfile.uploadfile();
+                    // pilihfile.uploadfile();
+
+
+
                     ScaffoldMessenger.of(context).hideCurrentSnackBar();
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                       content: Text(
