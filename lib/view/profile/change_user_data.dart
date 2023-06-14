@@ -368,7 +368,7 @@ class _ProfileUserDataEditPageState extends State<ProfileUserDataEditPage> {
                   } else {
                     String value = _character.toString().split('.').last;
                     pilihfile.uploadfile();
-                    await Future.delayed(Duration(seconds: 1));
+                    // await Future.delayed(Duration(seconds: 1));
                     getImageurl(pilihfile.pickfile!.name);
 
                     print(txid.text);

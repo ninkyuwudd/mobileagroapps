@@ -51,46 +51,77 @@ class _TambahLokasiState extends State<TambahLokasi> {
     var loadidx = ModalRoute.of(context)?.settings.arguments as int;
     var loaduser = Provider.of<UserProvider>(context);
     var ambildata = loaduser.akun;
+  
     return Scaffold(
-      appBar: EasySearchBar(
-        title: Text("Lokasi"),
-        onSearch: (value) => setState(() => searchValue = value),
-        suggestions: dataListlokasi,
-        leading: Text(""),
+
+      appBar: AppBar(
+        title: Text("Tambah Lokasi"),
+        // actions: [
+        //   IconButton(onPressed: (){
+        //     showSearch(context: context, delegate: customSearchDelegate());
+        //   }, icon: Icon(Icons.search))
+        // ],
       ),
-      body: Center(
-        child: Container(
-          margin: EdgeInsets.all(20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                "Tambah Lokasi Anda",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              Text('Value: $searchValue'),
-              GestureDetector(
-                onTap: () {
-                  try {
-                    if (searchValue.isEmpty) {
-                      showDialog(context: context, builder: (context){
-                        return PopupWarning(pesan: "Lokasi tidak bisa kosong !");
-                      });
-                    } else {
-      
-                      firestoredb
-                          .doc(ambildata[loadidx].id)
-                          .update({"lokasi": searchValue});
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => BottomNavbar(
-                            idx: loadidx,
-                          ),
-                        ),
-                      );
+
+      body: Container(
+        margin: EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "Tambah Lokasi Anda",
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            RoundeValueFieldWhiteValue(
+                fungsi:(value) {
+                        print(value);
+                        if (value == "") {
+                          setState(() {
+                            ckusername = true;
+                          });
+                        } else {
+                          setState(() {
+                            ckusername = false;
+                          });
+                        }
+
+                      },
+                control: lokasi,
+                title: "",
+                hover: "masukkan lokasi anda",
+                check: cek),
+            GestureDetector(
+              onTap: ()async {
+                try {
+                  if (lokasi.text.isEmpty){
+                    setState(() {
+                      cek = true;
+                    });
+                  }else{
+                    setState(() {
+                      cek = false;
+                    });
+                    firestoredb
+                      .doc(ambildata[loadidx].id)
+                      .update({"lokasi": lokasi.text});
                       loadcuaca.updateLocation(lokasi.text);
+                  Provider.of<CuacaProvider>(context, listen: false).getCuacaAll();
+                  await Future.delayed(Duration(seconds: 2));
+                  if(loadcuaca.cuacadata == null){
+                    showDialog(context: context, builder: (context){
+                      return PopupWarning(pesan: "Nama lokasi tidak ditemukan");
+                    });
+                  }else{
+                    Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => BottomNavbar(
+                        idx: loadidx,
+                      ),
+                    ),
+                  );
+                  }
                     }
                   } catch (e) {
                     print("masih ada eror");
@@ -110,7 +141,83 @@ class _TambahLokasiState extends State<TambahLokasi> {
             ],
           ),
         ),
-      ),
-    );
+      );
+  
   }
+}
+
+
+
+class customSearchDelegate extends SearchDelegate{
+
+    final List<String> _suggestions = [
+    'Afeganistan',
+    'Albania',
+    'Algeria',
+    'Australia',
+    'Brazil',
+    'German',
+    'Madagascar',
+    'Mozambique',
+    'Portugal',
+    'Zambia'
+  ];
+  @override
+  List<Widget> buildActions(BuildContext context){
+    return[
+      IconButton(onPressed:(){
+        query = '';
+      }, icon: Icon(Icons.clear)),
+
+    ];
+  }
+    @override
+  Widget buildLeading(BuildContext context){
+    return 
+      IconButton(onPressed:(){
+        close(context, null);
+      }, icon: Icon(Icons.arrow_back));
+
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context){
+    List<String> matchquery = [];
+    for(var city in _suggestions){
+      if(city.toLowerCase().contains(query.toLowerCase())){
+        matchquery.add(city);
+      }
+    }
+    return ListView.builder(
+      itemCount: matchquery.length,
+      itemBuilder: (context,idx){
+      var result = matchquery[idx];
+      return ListTile(
+        title: Text(result),
+      );
+    });
+
+  }
+  
+  @override
+  Widget buildResults(BuildContext context) {
+    List<String> matchquery = [];
+    for(var city in _suggestions){
+      if(city.toLowerCase().contains(query.toLowerCase())){
+        matchquery.add(city);
+      }
+    }
+    return ListView.builder(
+      itemCount: matchquery.length,
+      itemBuilder: (context,idx){
+      var result = matchquery[idx];
+      return ListTile(
+        title: Text(result),
+      );
+    });
+
+
+  }
+
+
 }

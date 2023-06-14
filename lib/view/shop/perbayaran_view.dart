@@ -83,17 +83,17 @@ class _PembayaranState extends State<Pembayaran> {
                   SizedBox(
                     height: 20,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text("Nomor HP"),
-                      Spacer(),
-                      Text(loadtoko.nomorhp)
-                    ],
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.center,
+                  //   children: [
+                  //     Text("Nomor HP"),
+                  //     Spacer(),
+                  //     Text(loadtoko.nomorhp)
+                  //   ],
+                  // ),
+                  // SizedBox(
+                  //   height: 20,
+                  // ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [Text("Nama Bank"), Spacer(), Text("BRI")],

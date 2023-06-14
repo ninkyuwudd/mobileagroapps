@@ -8,6 +8,8 @@ import 'package:mobileagroapps/widget/cuaca/forecuacapage.dart';
 import 'package:mobileagroapps/widget/cuaca/saran.dart';
 import 'package:provider/provider.dart';
 
+import '../../widget/popup_warning.dart';
+
 class CuacaPage extends StatefulWidget {
   final int idx;
   CuacaPage({required this.idx});
@@ -47,7 +49,6 @@ class _CuacaPageState extends State<CuacaPage> {
     final formaterdate = DateFormat.yMMMd();
     return SafeArea(
       child: Scaffold(
-        
         extendBody: true,
         appBar: AppBar(
           actions: [
@@ -72,9 +73,21 @@ class _CuacaPageState extends State<CuacaPage> {
                               height: 10,
                             ),
                             ElevatedButton(
-                                onPressed: () {
+                                onPressed: () async {
                                   _reloadCuaca();
-                                  Navigator.of(context).pop();
+                                  await Future.delayed(Duration(seconds: 2));
+                                  if (weatherProvider.cuacadata == null) {
+                                    showDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          return PopupWarning(
+                                              pesan:
+                                                  "Nama lokasi tidak ditemukan");
+                                        });
+                                  } else {
+                                    Navigator.of(context).pop();
+                                  }
+                                  
                                 },
                                 child: Text("Ubah")),
                           ],
@@ -105,140 +118,142 @@ class _CuacaPageState extends State<CuacaPage> {
           child: Container(
             margin: EdgeInsets.only(bottom: 20, left: 20, right: 20, top: 30),
             child:
-              Consumer<CuacaProvider>(builder: (context, cuacaProvider, _) {
-              try{
+                Consumer<CuacaProvider>(builder: (context, cuacaProvider, _) {
+              try {
                 if (cuacaProvider.cuacadata == null) {
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else {
-                final cuacaData = cuacaProvider.cuacadata!;
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(bottom: 20),
-                      padding: EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            color: Color.fromARGB(76, 100, 100, 100),
-                            offset: const Offset(
-                              5.0,
-                              5.0,
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else {
+                  final cuacaData = cuacaProvider.cuacadata!;
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(bottom: 20),
+                        padding: EdgeInsets.all(20),
+                        decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Color.fromARGB(76, 100, 100, 100),
+                              offset: const Offset(
+                                5.0,
+                                5.0,
+                              ),
+                              blurRadius: 7.0,
+                              spreadRadius: 1.0,
+                            ), //BoxShadow
+                          ],
+                          borderRadius: BorderRadius.circular(10),
+                          image: DecorationImage(
+                            image: AssetImage("images/gr_gradient2.png"),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        child: Row(
+                          children: [
+                            // Padding(padding: EdgeInsets.only(top:10)),
+
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  FittedBox(
+                                    child: Text(
+                                      "${(cuacaData.main.temp - 273.15).toStringAsFixed(0)}°",
+                                      // overflow:TextOverflow.fade,
+                                      // maxLines: 1,
+                                      style: TextStyle(
+                                          fontSize: 70,
+                                          fontWeight: FontWeight.bold,
+                                          color: Color.fromARGB(
+                                              255, 255, 255, 255)),
+                                    ),
+                                  ),
+                                  Text(
+                                    '${formaterdate.format(DateTime.now())}',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(
+                                    cuacaData.kotanya.Kota,
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                ],
+                              ),
                             ),
-                            blurRadius: 7.0,
-                            spreadRadius: 1.0,
-                          ), //BoxShadow
-                        ],
-                        borderRadius: BorderRadius.circular(10),
-                        image: DecorationImage(
-                          image: AssetImage("images/gr_gradient2.png"),
-                          fit: BoxFit.cover,
+                            // Spacer(),
+                            Expanded(
+                              child: Column(
+                                children: [
+                                  Container(
+                                    width: 90,
+                                    child: Image.network(
+                                      "http://openweathermap.org/img/w/${cuacaData.cuacanya.first.icon}.png",
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                  Text(
+                                    "Hari ini ${cuacaData.cuacanya.first.main}",
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                  Text(
+                                    cuacaData.cuacanya.first.description,
+                                    style: TextStyle(color: Colors.white),
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 2,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      child: Row(
-                        children: [
-                          // Padding(padding: EdgeInsets.only(top:10)),
-
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                FittedBox(
-                                  child: Text(
-                                    "${(cuacaData.main.temp - 273.15).toStringAsFixed(0)}°",
-                                    // overflow:TextOverflow.fade,
-                                    // maxLines: 1,
-                                    style: TextStyle(
-                                        fontSize: 70,
-                                        fontWeight: FontWeight.bold,
-                                        color:
-                                            Color.fromARGB(255, 255, 255, 255)),
-                                  ),
-                                ),
-                                Text(
-                                  '${formaterdate.format(DateTime.now())}',
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  cuacaData.kotanya.Kota,
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                              ],
-                            ),
-                          ),
-                          // Spacer(),
-                          Expanded(
-                            child: Column(
-                              children: [
-                                Container(
-                                  width: 90,
-                                  child: Image.network(
-                                    "http://openweathermap.org/img/w/${cuacaData.cuacanya.first.icon}.png",
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                Text(
-                                  "Hari ini ${cuacaData.cuacanya.first.main}",
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                Text(
-                                  cuacaData.cuacanya.first.description,
-                                  style: TextStyle(color: Colors.white),
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 2,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
+                      Divider(
+                        height: 10,
+                        thickness: 2,
+                        indent: 30,
+                        endIndent: 30,
+                        color: Color.fromARGB(174, 82, 82, 82),
                       ),
-                    ),
-                    Divider(
-                      height: 10,
-                      thickness: 2,
-                      indent: 30,
-                      endIndent: 30,
-                      color: Color.fromARGB(174, 82, 82, 82),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
+                      SizedBox(
+                        height: 10,
+                      ),
 
-                    // ini adalah forecast untuk 5 hari kedepan per 3 jam
-                    ForecastCuacaPage(),
+                      // ini adalah forecast untuk 5 hari kedepan per 3 jam
+                      ForecastCuacaPage(),
 
-                    CuacaTempWidget(
-                        main: cuacaData.cuacanya.first.main,
-                        description: cuacaData.cuacanya.first.description),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Text(
-                      "Saran",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                          color: Color.fromARGB(255, 43, 101, 45)),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Container(
-                      child: SaranTernakKebun(),
-                    )
-                  ],
-                );
-              }
-              }catch(e){
+                      CuacaTempWidget(
+                          main: cuacaData.cuacanya.first.main,
+                          description: cuacaData.cuacanya.first.description),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        "Saran",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: Color.fromARGB(255, 43, 101, 45)),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Container(
+                        child: SaranTernakKebun(),
+                      )
+                    ],
+                  );
+                }
+              } catch (e) {
                 return Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height,
-                  child: Center(child: CircularProgressIndicator(),));
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height,
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ));
               }
             }),
           ),

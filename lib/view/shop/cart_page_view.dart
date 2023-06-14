@@ -59,7 +59,7 @@ class CartPage extends StatelessWidget {
                               Navigator.pushNamed(
                                   context, Pembayaran.routename,
                                   arguments: cart.totalamount);
-                            }else if(cart.items.length == cart.pesanansemetara.length){
+                            }else if(cart.totalamount != 0 && cart.items.length == cart.pesanansemetara.length){
                               print("lanjut");
                               Navigator.pushNamed(
                                   context, Pembayaran.routename,
