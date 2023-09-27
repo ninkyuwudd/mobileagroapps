@@ -55,12 +55,8 @@ class _TambahLokasiState extends State<TambahLokasi> {
     return Scaffold(
 
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text("Tambah Lokasi"),
-        // actions: [
-        //   IconButton(onPressed: (){
-        //     showSearch(context: context, delegate: customSearchDelegate());
-        //   }, icon: Icon(Icons.search))
-        // ],
       ),
 
       body: Container(

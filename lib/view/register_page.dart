@@ -40,7 +40,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     final usrprov = Provider.of<UserProvider>(context);
-    usrprov.fethcdatauser();
+    // usrprov.fethcdatauser();
     final akunnya = usrprov.akun;
 
     return SafeArea(
@@ -49,7 +49,7 @@ class _RegisterPageState extends State<RegisterPage> {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
-          title: Text(
+          title: const Text(
             "Register",
             style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
           ),
@@ -70,7 +70,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         valuenya: nama,
                         title: "Nama",
                         hover: "masukkan nama.."),
-                    Text(
+                    const Text(
                       "Username",
                       style: TextStyle(
                           color: Color.fromARGB(255, 67, 67, 67),
