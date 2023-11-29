@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobileagroapps/controller/kalkulator_controller.dart';
 import 'package:mobileagroapps/controller/user_controller.dart';
+import 'package:mobileagroapps/utils/images.dart';
 import 'package:provider/provider.dart';
 
 class CircleMenu extends StatefulWidget {
@@ -30,9 +31,9 @@ class _CircleMenuState extends State<CircleMenu> {
       children: [
         GestureDetector(
           onTap: () {
-            if (widget.open == "kambing_1@4x.png") {
+            if (widget.open == Images.kambing) {
               halaman.gantihalamanpakan("kambing");
-            } else if (widget.open == "buah naga@4x.png") {
+            } else if (widget.open == Images.buah_naga) {
               halaman.gantihalamanpupuk("buahnaga");
             }
           },
@@ -44,7 +45,7 @@ class _CircleMenuState extends State<CircleMenu> {
             child: Row(
               children: [
                 CircleAvatar(
-                  child: Image(image: AssetImage("images/${widget.open}")),
+                  child: Image(image: AssetImage(widget.open)),
                 ),
               ],
             ),
@@ -53,71 +54,70 @@ class _CircleMenuState extends State<CircleMenu> {
         for (var i in widget.listmenu)
           GestureDetector(
             onTap: () {
+              print(i);
               if (loaduser[widget.idx].status == "premium") {
                 switch (i) {
-                  case "kambing_@4x.png":
+                  case "assets/images/kambing_@4x.png":
                     {
                       print("kambing");
                       halaman.gantihalamanpakan("kambing");
                     }
                     break;
-                  case "sapi@4x.png":
+                  case "assets/images/sapi@4x.png":
                     {
                       print("sapi");
                       halaman.gantihalamanpakan("sapi");
                     }
                     break;
-                  case "kuda@4x.png":
+                  case "assets/images/kuda@4x.png":
                     {
                       print("kuda");
                       halaman.gantihalamanpakan("kuda");
                     }
                     break;
-                  case "babi@4x.png":
+                  case "assets/images/babi@4x.png":
                     {
                       print("babi");
                       halaman.gantihalamanpakan("babi");
                     }
                     break;
-                  case "bebek@4x.png":
+                  case "assets/images/bebek@4x.png":
                     {
                       print("bebek");
                       halaman.gantihalamanpakan("bebek");
                     }
                     break;
-                  case "anggur@4x.png":
+                  case "assets/images/anggur@4x.png":
                     {
                       halaman.gantihalamanpupuk("anggur");
                     }
                     break;
-                  case "delima@4x.png":
+                  case "assets/images/delima@4x.png":
                     {
                       halaman.gantihalamanpupuk("delima");
                     }
                     break;
-                  case "apel@4x.png":
+                  case "assets/images/apel@4x.png":
                     {
                       halaman.gantihalamanpupuk("apel");
                     }
                     break;
-                  case "pisang@4x.png":
+                  case "assets/images/pisang@4x.png":
                     {
                       halaman.gantihalamanpupuk("pisang");
                     }
                     break;
-                  case "semangka@4x.png":
+                  case "assets/images/semangka@4x.png":
                     {
                       halaman.gantihalamanpupuk("semangka");
                     }
                     break;
-                  case "buah naga@4x.png":
+                  case "assets/images/buah naga@4x.png":
                     {
                       halaman.gantihalamanpupuk("buahnaga");
                     }
                 }
-              }else{
-                
-              }
+              } else {}
             },
             child: Container(
               padding: EdgeInsets.all(5),
@@ -133,13 +133,13 @@ class _CircleMenuState extends State<CircleMenu> {
                     visible:
                         loaduser[widget.idx].status == "premium" ? false : true,
                     child: Image(
-                      image: AssetImage("images/gembok.png"),
+                      image: AssetImage(Images.gembok),
                       width: 20,
                     ),
                   ),
                   CircleAvatar(
                     backgroundColor: Colors.transparent,
-                    child: Image(image: AssetImage("images/$i")),
+                    child: Image(image: AssetImage(i)),
                   ),
                 ],
               ),

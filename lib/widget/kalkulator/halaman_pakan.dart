@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:mobileagroapps/controller/kalkulator_controller.dart';
+import 'package:mobileagroapps/utils/images.dart';
 
 import 'package:mobileagroapps/widget/kalkulator/menu_hewan.dart';
 import 'package:mobileagroapps/widget/kalkulator/result_card.dart';
@@ -31,26 +32,22 @@ class _KalkulatorPakanState extends State<KalkulatorPakan> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Text(
-            //   "Kalkulator pakan",
-            //   style: Theme.of(context).textTheme.titleLarge,
-            // ),
             SizedBox(
               height: 20,
             ),
-
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Container(
                 margin: EdgeInsets.only(bottom: 15),
                 child: CircleMenu(
                   listmenu: [
-                    "sapi@4x.png",
-                    "kuda@4x.png",
-                    "babi@4x.png",
-                    "bebek@4x.png",
+                    Images.sapi,
+                    Images.kuda,
+                    Images.babi4x,
+                    Images.bebek4x
                   ],
-                  open: "kambing_1@4x.png",idx: widget.idx,
+                  open: Images.kambing_1,
+                  idx: widget.idx,
                 ),
               ),
             ),
@@ -58,7 +55,7 @@ class _KalkulatorPakanState extends State<KalkulatorPakan> {
               height: 20,
             ),
             Container(
-                child:pghewan == "kambing"
+                child: pghewan == "kambing"
                     ? Kalkulatorkambing()
                     : pghewan == "sapi"
                         ? KalkulatorSapi()

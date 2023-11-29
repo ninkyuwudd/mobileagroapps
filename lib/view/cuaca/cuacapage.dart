@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:mobileagroapps/controller/cuaca_controller.dart';
 import 'package:mobileagroapps/controller/user_controller.dart';
+import 'package:mobileagroapps/utils/images.dart';
 import 'package:mobileagroapps/widget/cuaca/cuacatemp_widget.dart';
 import 'package:mobileagroapps/widget/cuaca/forecuacapage.dart';
 import 'package:mobileagroapps/widget/cuaca/saran.dart';
@@ -39,13 +40,8 @@ class _CuacaPageState extends State<CuacaPage> {
 
   @override
   Widget build(BuildContext context) {
-    // final usrprov = Provider.of<UserProvider>(context);
-    // usrprov.fethcdatauser();
-    // final akunnya = usrprov.akun;
-    // final useloclistdata = Provider.of<UserProvider>(context, listen: false);
-    // useloclistdata.fetchdatauserlocation(akunnya[widget.idx].id);
     final weatherProvider = Provider.of<CuacaProvider>(context, listen: false);
-    // final formater = DateFormat.Hm();
+
     final formaterdate = DateFormat.yMMMd();
     return SafeArea(
       child: Scaffold(
@@ -87,7 +83,6 @@ class _CuacaPageState extends State<CuacaPage> {
                                   } else {
                                     Navigator.of(context).pop();
                                   }
-                                  
                                 },
                                 child: Text("Ubah")),
                           ],
@@ -106,7 +101,7 @@ class _CuacaPageState extends State<CuacaPage> {
           elevation: 0,
           leading: Container(
               padding: EdgeInsets.all(8),
-              child: Image(image: AssetImage("images/logo_only.png"))),
+              child: Image(image: AssetImage(Images.logo_only))),
           title: Text(
             "CUACA",
             style: GoogleFonts.poppins(
@@ -146,7 +141,7 @@ class _CuacaPageState extends State<CuacaPage> {
                           ],
                           borderRadius: BorderRadius.circular(10),
                           image: DecorationImage(
-                            image: AssetImage("images/gr_gradient2.png"),
+                            image: AssetImage(Images.gr_gradient2),
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -161,8 +156,6 @@ class _CuacaPageState extends State<CuacaPage> {
                                   FittedBox(
                                     child: Text(
                                       "${(cuacaData.main.temp - 273.15).toStringAsFixed(0)}°",
-                                      // overflow:TextOverflow.fade,
-                                      // maxLines: 1,
                                       style: TextStyle(
                                           fontSize: 70,
                                           fontWeight: FontWeight.bold,
@@ -184,7 +177,7 @@ class _CuacaPageState extends State<CuacaPage> {
                                 ],
                               ),
                             ),
-                            // Spacer(),
+
                             Expanded(
                               child: Column(
                                 children: [

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobileagroapps/controller/kalkulator_controller.dart';
+import 'package:mobileagroapps/utils/images.dart';
 import 'package:mobileagroapps/widget/kalkulator/menu_hewan.dart';
 import 'package:mobileagroapps/widget/kalkulator/tombol_jenis/pupuk/calcu_anggur.dart';
 import 'package:mobileagroapps/widget/kalkulator/tombol_jenis/pupuk/calcu_apel.dart';
@@ -31,10 +32,6 @@ class _KalkulatorPupukState extends State<KalkulatorPupuk> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            //               Text(
-            //   "Kalkulator pupuk",
-            //   style: Theme.of(context).textTheme.titleLarge,
-            // ),
             SizedBox(
               height: 20,
             ),
@@ -44,13 +41,14 @@ class _KalkulatorPupukState extends State<KalkulatorPupuk> {
                 margin: EdgeInsets.only(bottom: 15),
                 child: CircleMenu(
                   listmenu: [
-                    "anggur@4x.png",
-                    "delima@4x.png",
-                    "apel@4x.png",
-                    "pisang@4x.png",
-                    "semangka@4x.png"
+                    Images.anggur,
+                    Images.delima,
+                    Images.apel,
+                    Images.pisang,
+                    Images.semangka
                   ],
-                  open: "buah naga@4x.png",idx: widget.idx,
+                  open: Images.buah_naga,
+                  idx: widget.idx,
                 ),
               ),
             ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobileagroapps/utils/images.dart';
 import 'package:mobileagroapps/widget/kalkulator/double_field_params.dart';
 import 'package:mobileagroapps/widget/kalkulator/double_result.dart';
 import 'package:mobileagroapps/widget/kalkulator/result_card.dart';
@@ -25,7 +26,7 @@ class _KalkulatorApelState extends State<KalkulatorApel> {
       if (1 <= umur && umur < 15) {
         pupukkandangsatuan = 20;
         pupukkandang = umur * (jumlah * pupukkandangsatuan);
-      }else{}
+      } else {}
     }
 
     ppkkering(int umur, int jumlah) {
@@ -33,7 +34,6 @@ class _KalkulatorApelState extends State<KalkulatorApel> {
         pupukkeringsatuan = 1;
         pupukkering = umur * (jumlah * pupukkeringsatuan);
       }
-
     }
 
     ppkkimia(int umur, int jumlah) {
@@ -58,12 +58,11 @@ class _KalkulatorApelState extends State<KalkulatorApel> {
           hint_02: "...jumlah",
           fungsi: () {
             setState(() {
-            var umur = int.parse(waktu.text);
-            var jmltanaman = int.parse(jumlah.text);
-            ppkkandang(umur, jmltanaman);
-            ppkkering(umur, jmltanaman);
-            ppkkimia(umur, jmltanaman);
-              
+              var umur = int.parse(waktu.text);
+              var jmltanaman = int.parse(jumlah.text);
+              ppkkandang(umur, jmltanaman);
+              ppkkering(umur, jmltanaman);
+              ppkkimia(umur, jmltanaman);
             });
           },
           finaljudul: "Apel",
@@ -78,15 +77,17 @@ class _KalkulatorApelState extends State<KalkulatorApel> {
         ResultCard(
             pupuk: pupukkandang == null ? "-" : "${pupukkandang.toString()}kg",
             title: "Pupuk Kandang",
-            img: "pupuk kandang@4x.png"),
-        SizedBox(height: 20,),
+            img: Images.pupuk_kandang),
+        SizedBox(
+          height: 20,
+        ),
         ResultDouble(
             value: pupukkering == null ? "-" : "${pupukkering.toString()}kg",
             value2: pupukkimia == null ? "-" : "${pupukkimia.toString()} liter",
             judul: "kering",
-            gambar: "pupuk kering@4x.png",
+            gambar: Images.pupuk_kering,
             judul2: "Cair",
-            gambar2: "pupuk cair@4x.png",
+            gambar2: Images.pupuk_cair,
             kategori: "Pupuk Kimia")
       ],
     );

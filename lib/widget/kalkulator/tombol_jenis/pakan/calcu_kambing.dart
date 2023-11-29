@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mobileagroapps/utils/images.dart';
 import 'package:mobileagroapps/widget/kalkulator/result_card.dart';
 
 import '../../../popup_warning.dart';
@@ -110,7 +111,7 @@ class _KalkulatorkambingState extends State<Kalkulatorkambing> {
                           setState(() {
                             if (_btnSelectVal == null ||
                                 pakanfield.text == "") {
-                                  print("kosong");
+                              print("kosong");
                               showDialog(
                                   context: context,
                                   builder: (context) {
@@ -119,30 +120,31 @@ class _KalkulatorkambingState extends State<Kalkulatorkambing> {
                                   });
                             } else {
                               setState(() {
-                              int jumlah = int.parse(pakanfield.text);
-                              print("tidak kkosong");
-                              print(_btnSelectVal);
-                              if (_btnSelectVal ==
-                                  "Anak Lepas sapih (sedang tumbuh)") {
-                                pakan_rumput = 1.0 * jumlah;
-                                pakan_ampas = 1 * jumlah;
-                              } else if (_btnSelectVal == "Kambing dewasa") {
-                                pakan_rumput = 1.5 * jumlah;
-                                pakan_ampas = 0.5 * jumlah;
-                              } else if (_btnSelectVal ==
-                                      "Induk yang dikawinkan" ||
-                                  _btnSelectVal == "Induk bunting 3 bulan" ||
-                                  _btnSelectVal == "Induk menyusui > 2 anak") {
-                                pakan_rumput = 1.5 * jumlah;
-                                pakan_ampas = 2-3 * jumlah;
-                              } else if (_btnSelectVal ==
-                                  "Induk menyusui anak tunggal") {
-                                pakan_rumput = 1.5 * jumlah;
-                                pakan_ampas = 1 * jumlah;
-                              } else if (_btnSelectVal == "Anak kambing") {
-                                pakan_rumput = 0.5 * jumlah;
-                                pakan_ampas = 0.25 * jumlah;
-                              }
+                                int jumlah = int.parse(pakanfield.text);
+                                print("tidak kkosong");
+                                print(_btnSelectVal);
+                                if (_btnSelectVal ==
+                                    "Anak Lepas sapih (sedang tumbuh)") {
+                                  pakan_rumput = 1.0 * jumlah;
+                                  pakan_ampas = 1 * jumlah;
+                                } else if (_btnSelectVal == "Kambing dewasa") {
+                                  pakan_rumput = 1.5 * jumlah;
+                                  pakan_ampas = 0.5 * jumlah;
+                                } else if (_btnSelectVal ==
+                                        "Induk yang dikawinkan" ||
+                                    _btnSelectVal == "Induk bunting 3 bulan" ||
+                                    _btnSelectVal ==
+                                        "Induk menyusui > 2 anak") {
+                                  pakan_rumput = 1.5 * jumlah;
+                                  pakan_ampas = 2 - 3 * jumlah;
+                                } else if (_btnSelectVal ==
+                                    "Induk menyusui anak tunggal") {
+                                  pakan_rumput = 1.5 * jumlah;
+                                  pakan_ampas = 1 * jumlah;
+                                } else if (_btnSelectVal == "Anak kambing") {
+                                  pakan_rumput = 0.5 * jumlah;
+                                  pakan_ampas = 0.25 * jumlah;
+                                }
                               });
                             }
                           });
@@ -166,7 +168,7 @@ class _KalkulatorkambingState extends State<Kalkulatorkambing> {
         ResultCard(
           pupuk: "${pakan_rumput == null ? '-' : pakan_rumput}  Kg/hari",
           title: "Pakan Rumput",
-          img: "rumput@4x.png",
+          img: Images.rumput4x,
         ),
         SizedBox(
           height: 15,
@@ -174,7 +176,7 @@ class _KalkulatorkambingState extends State<Kalkulatorkambing> {
         ResultCard(
           pupuk: "${pakan_ampas == null ? '-' : pakan_ampas}  Kg/hari",
           title: "Pakan Fermentasi",
-          img: "bekatul@4x.png",
+          img: Images.bekatul,
         ),
       ],
     );

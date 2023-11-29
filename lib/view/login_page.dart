@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobileagroapps/navigationbar.dart';
 import 'package:mobileagroapps/controller/user_controller.dart';
+import 'package:mobileagroapps/utils/images.dart';
 import 'package:mobileagroapps/view/cuaca/tambahlokasi_view.dart';
 import 'package:mobileagroapps/widget/login/rounded_field_white.dart';
 import 'package:provider/provider.dart';
@@ -52,7 +53,7 @@ class _LoginPageState extends State<LoginPage> {
               children: [
                 Image(
                   image: AssetImage(
-                    "images/logo.png",
+                    Images.logo,
                   ),
                   width: 200,
                 ),
@@ -153,7 +154,7 @@ class _LoginPageState extends State<LoginPage> {
                                     password.text == akunnya[i].password) {
                                   print(akunnya[i].id.toString());
                                   print("idx : $i");
-                                  
+
                                   usrprov
                                       .changedataid(akunnya[i].id.toString());
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobileagroapps/utils/images.dart';
 import 'package:mobileagroapps/view/profile/daftartoko_view.dart';
 import 'package:mobileagroapps/view/profile/pembayaran_premium_view.dart';
 import 'package:mobileagroapps/widget/profile/list_fitur_premium.dart';
@@ -33,30 +34,29 @@ class _DaftarPremiumState extends State<DaftarPremium> {
             Container(
               padding: EdgeInsets.all(10),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: Colors.white,
-                boxShadow: [
-                BoxShadow(
-                  color: Color.fromARGB(24, 0, 0, 0),
-                  blurRadius: 2,
-                  spreadRadius: 1,
-                  offset: Offset(0, 5)
-                )
-                ]
-              ),
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                        color: Color.fromARGB(24, 0, 0, 0),
+                        blurRadius: 2,
+                        spreadRadius: 1,
+                        offset: Offset(0, 5))
+                  ]),
               child: Column(
                 children: [
                   Row(
                     children: [
                       Image(
-                        image: AssetImage("images/diskon.png"),
+                        image: AssetImage(Images.diskon),
                         width: 150,
                       ),
                       Spacer(),
                       Text(
                         "Rp99.000",
                         style: TextStyle(
-                            decoration: TextDecoration.lineThrough, fontSize: 17),
+                            decoration: TextDecoration.lineThrough,
+                            fontSize: 17),
                       ),
                     ],
                   ),
@@ -75,14 +75,15 @@ class _DaftarPremiumState extends State<DaftarPremium> {
                   ),
                   GestureDetector(
                       onTap: () {
-                        Navigator.pushNamed(context, PembayaranPremium.routename);
+                        Navigator.pushNamed(
+                            context, PembayaranPremium.routename);
                       },
                       child: Container(
                         width: double.infinity,
-                        margin:
-                            EdgeInsets.only(top: 10, right: 25, left: 25, bottom: 10),
-                        padding:
-                            EdgeInsets.only(top: 10, bottom: 10, right: 20, left: 20),
+                        margin: EdgeInsets.only(
+                            top: 10, right: 25, left: 25, bottom: 10),
+                        padding: EdgeInsets.only(
+                            top: 10, bottom: 10, right: 20, left: 20),
                         decoration: BoxDecoration(
                             color: Colors.green,
                             borderRadius: BorderRadius.circular(20)),
@@ -115,10 +116,16 @@ class _DaftarPremiumState extends State<DaftarPremium> {
                 SizedBox(
                   width: 10,
                 ),
-                Expanded(child: Text("Fitur kalkulator Pupuk",style: TextStyle(fontWeight: FontWeight.bold),)),
+                Expanded(
+                    child: Text(
+                  "Fitur kalkulator Pupuk",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                )),
               ],
             ),
-            SizedBox(height: MediaQuery.of(context).size.height / 20 - 25,),
+            SizedBox(
+              height: MediaQuery.of(context).size.height / 20 - 25,
+            ),
             Container(
               margin: EdgeInsets.only(left: 50),
               child: Column(
@@ -128,10 +135,12 @@ class _DaftarPremiumState extends State<DaftarPremium> {
                   FiturListPremium(judul: "Kalkulator delima"),
                   FiturListPremium(judul: "Kalkulator apel"),
                   FiturListPremium(judul: "Kalkulator anggur"),
-                  ],
+                ],
               ),
             ),
-            SizedBox(height: MediaQuery.of(context).size.height / 20 - 25,),
+            SizedBox(
+              height: MediaQuery.of(context).size.height / 20 - 25,
+            ),
             Row(
               children: [
                 Icon(
@@ -141,10 +150,16 @@ class _DaftarPremiumState extends State<DaftarPremium> {
                 SizedBox(
                   width: 10,
                 ),
-                Expanded(child: Text("Fitur kalkulator Pupuk",style: TextStyle(fontWeight: FontWeight.bold),)),
+                Expanded(
+                    child: Text(
+                  "Fitur kalkulator Pupuk",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                )),
               ],
             ),
-            SizedBox(height: MediaQuery.of(context).size.height / 20 - 25,),
+            SizedBox(
+              height: MediaQuery.of(context).size.height / 20 - 25,
+            ),
             Container(
               margin: EdgeInsets.only(left: 50),
               child: Column(
@@ -154,10 +169,12 @@ class _DaftarPremiumState extends State<DaftarPremium> {
                   FiturListPremium(judul: "Kalkulator delima"),
                   FiturListPremium(judul: "Kalkulator apel"),
                   FiturListPremium(judul: "Kalkulator anggur"),
-                  ],
+                ],
               ),
             ),
-            SizedBox(height: MediaQuery.of(context).size.height / 20 - 25,),
+            SizedBox(
+              height: MediaQuery.of(context).size.height / 20 - 25,
+            ),
             Row(
               children: [
                 Icon(
@@ -167,16 +184,23 @@ class _DaftarPremiumState extends State<DaftarPremium> {
                 SizedBox(
                   width: 10,
                 ),
-                Expanded(child: Text("Fitur Toko",style: TextStyle(fontWeight: FontWeight.bold),)),
+                Expanded(
+                    child: Text(
+                  "Fitur Toko",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                )),
               ],
             ),
-            SizedBox(height: MediaQuery.of(context).size.height / 20 - 25,),
+            SizedBox(
+              height: MediaQuery.of(context).size.height / 20 - 25,
+            ),
             Container(
               margin: EdgeInsets.only(left: 50),
               child: Column(
                 children: [
-                  FiturListPremium(judul: "Tidak ada batasan jumlah unggah Produk"),
-                  ],
+                  FiturListPremium(
+                      judul: "Tidak ada batasan jumlah unggah Produk"),
+                ],
               ),
             ),
           ],

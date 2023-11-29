@@ -4,14 +4,13 @@ import 'package:mobileagroapps/controller/order_controller.dart';
 import 'package:mobileagroapps/controller/pilihfile_controller.dart';
 import 'package:mobileagroapps/controller/product_controller.dart';
 import 'package:mobileagroapps/controller/toko_controller.dart';
+import 'package:mobileagroapps/utils/images.dart';
 import 'package:mobileagroapps/view/login_page.dart';
 import 'package:mobileagroapps/view/profile/daftartoko_view.dart';
 import 'package:mobileagroapps/view/profile/premium_view.dart';
 import 'package:mobileagroapps/view/shop/listproduk_view.dart';
-import 'dart:io';
 import 'package:provider/provider.dart';
 import '../../controller/user_controller.dart';
-import 'package:image_picker/image_picker.dart';
 
 class ProfileUserPage extends StatefulWidget {
   final int idx;
@@ -31,7 +30,6 @@ class _ProfileUserPageState extends State<ProfileUserPage> {
 
   @override
   Widget build(BuildContext context) {
-
     final cartproivder = Provider.of<CartProvider>(context);
     final orderprovider = Provider.of<Orderproivder>(context);
     final pickprovider = Provider.of<PilihUploadfile>(context);
@@ -57,9 +55,9 @@ class _ProfileUserPageState extends State<ProfileUserPage> {
                       height: MediaQuery.of(context).size.height * 0.25,
                       alignment: Alignment.center,
                       padding: EdgeInsets.all(32),
-                      decoration: const BoxDecoration(
+                      decoration: BoxDecoration(
                         image: DecorationImage(
-                            image: AssetImage("images/bg_profile.png"),
+                            image: AssetImage(Images.bg_profile),
                             fit: BoxFit.cover),
                       ),
                     ),
@@ -82,7 +80,6 @@ class _ProfileUserPageState extends State<ProfileUserPage> {
                       ),
                       margin: EdgeInsets.only(top: 40),
                     ),
-
                     Positioned(
                         left: 0,
                         right: 0,
@@ -92,10 +89,13 @@ class _ProfileUserPageState extends State<ProfileUserPage> {
                           height: 130,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            image:akunnya[widget.idx].gambar == null ?DecorationImage(image: AssetImage("images/empty_profile.png")) :DecorationImage(
-                                image: NetworkImage(
-                                    akunnya[widget.idx].gambar.toString()),
-                                fit: BoxFit.cover),
+                            image: akunnya[widget.idx].gambar == null
+                                ? DecorationImage(
+                                    image: AssetImage(Images.empty_profile))
+                                : DecorationImage(
+                                    image: NetworkImage(
+                                        akunnya[widget.idx].gambar.toString()),
+                                    fit: BoxFit.cover),
                           ),
                         )),
                   ],
@@ -171,14 +171,21 @@ class _ProfileUserPageState extends State<ProfileUserPage> {
                         ),
                         Text("My Profile"),
                         const Spacer(),
-                        const Image(
-                            image: AssetImage("images/right_row_icon.png")),
+                        Image(image: AssetImage(Images.right_row_icon)),
                       ],
                     ),
                   ),
                 ),
                 Visibility(
-                  visible: akunnya[widget.idx].status == "user" ? true : akunnya[widget.idx].status == "premium" && akunnya[widget.idx].toko == "" ? true : akunnya[widget.idx].status == "premium" && akunnya[widget.idx].toko != ""? false:false,
+                  visible: akunnya[widget.idx].status == "user"
+                      ? true
+                      : akunnya[widget.idx].status == "premium" &&
+                              akunnya[widget.idx].toko == ""
+                          ? true
+                          : akunnya[widget.idx].status == "premium" &&
+                                  akunnya[widget.idx].toko != ""
+                              ? false
+                              : false,
                   child: GestureDetector(
                     onTap: () {
                       // print(akunnya[widget.idx].id);
@@ -205,11 +212,9 @@ class _ProfileUserPageState extends State<ProfileUserPage> {
                           Text("Daftar Toko"),
                           const Spacer(),
                           GestureDetector(
-                            onTap: () {
-                              
-                            },
-                            child: const Image(
-                                image: AssetImage("images/right_row_icon.png")),
+                            onTap: () {},
+                            child:
+                                Image(image: AssetImage(Images.right_row_icon)),
                           ),
                         ],
                       ),
@@ -217,7 +222,17 @@ class _ProfileUserPageState extends State<ProfileUserPage> {
                   ),
                 ),
                 Visibility(
-                  visible: akunnya[widget.idx].status == "user" ? false : akunnya[widget.idx].status == "admin" ? true: akunnya[widget.idx].status == "premium" && akunnya[widget.idx].toko == "" ? false : akunnya[widget.idx].status == "premium" && akunnya[widget.idx].toko != ""? true:false,
+                  visible: akunnya[widget.idx].status == "user"
+                      ? false
+                      : akunnya[widget.idx].status == "admin"
+                          ? true
+                          : akunnya[widget.idx].status == "premium" &&
+                                  akunnya[widget.idx].toko == ""
+                              ? false
+                              : akunnya[widget.idx].status == "premium" &&
+                                      akunnya[widget.idx].toko != ""
+                                  ? true
+                                  : false,
                   child: Container(
                     margin: EdgeInsets.only(
                         top: 10, right: 25, left: 25, bottom: 10),
@@ -240,8 +255,8 @@ class _ProfileUserPageState extends State<ProfileUserPage> {
                                 context, ListProdukView.routename,
                                 arguments: widget.idx);
                           },
-                          child: const Image(
-                              image: AssetImage("images/right_row_icon.png")),
+                          child:
+                              Image(image: AssetImage(Images.right_row_icon)),
                         ),
                       ],
                     ),
@@ -270,7 +285,7 @@ class _ProfileUserPageState extends State<ProfileUserPage> {
                           ),
                           Text("Daftar Premium"),
                           const Spacer(),
-                          Image(image: AssetImage("images/right_row_icon.png")),
+                          Image(image: AssetImage(Images.right_row_icon)),
                         ],
                       ),
                     ),
@@ -285,7 +300,8 @@ class _ProfileUserPageState extends State<ProfileUserPage> {
                     tokoprovider.clear();
                     userprovider.clear();
 
-                    Navigator.pushReplacementNamed(context, LoginPage.routename);
+                    Navigator.pushReplacementNamed(
+                        context, LoginPage.routename);
                     // Navigator.pop(context);
                   },
                   child: Container(

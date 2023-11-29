@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobileagroapps/utils/images.dart';
 import 'package:mobileagroapps/widget/kalkulator/double_field_params.dart';
 import 'package:mobileagroapps/widget/kalkulator/double_result.dart';
 import 'package:mobileagroapps/widget/kalkulator/result_card.dart';
@@ -97,12 +98,11 @@ class _KalkulatorAnggurState extends State<KalkulatorAnggur> {
           hint_02: "...jumlah tanaman",
           fungsi: () {
             setState(() {
-            var umur = int.parse(waktu.text);
-            var jmltanaman = int.parse(jumlah.text);
-            ppkkandang(umur, jmltanaman);
-            ppkkering(umur, jmltanaman);
-            ppkkimia(umur, jmltanaman);
-              
+              var umur = int.parse(waktu.text);
+              var jmltanaman = int.parse(jumlah.text);
+              ppkkandang(umur, jmltanaman);
+              ppkkering(umur, jmltanaman);
+              ppkkimia(umur, jmltanaman);
             });
           },
           finaljudul: "Anggur",
@@ -117,7 +117,7 @@ class _KalkulatorAnggurState extends State<KalkulatorAnggur> {
         ResultCard(
             pupuk: pupukkandang == null ? "-" : "${pupukkandang.toString()}gr",
             title: "Pupuk Kandang",
-            img: "pupuk kandang@4x.png"),
+            img: Images.pupuk_kandang),
         SizedBox(
           height: 20,
         ),
@@ -127,7 +127,7 @@ class _KalkulatorAnggurState extends State<KalkulatorAnggur> {
             judul: "kering",
             gambar: "pupuk kering@4x.png",
             judul2: "Cair",
-            gambar2: "pupuk cair@4x.png",
+            gambar2: Images.pupuk_cair,
             kategori: "Pupuk Kimia")
       ],
     );

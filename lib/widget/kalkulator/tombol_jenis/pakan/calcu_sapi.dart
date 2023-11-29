@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobileagroapps/utils/images.dart';
 import 'package:mobileagroapps/widget/kalkulator/double_field_params.dart';
 import 'package:mobileagroapps/widget/kalkulator/double_result.dart';
 import 'package:mobileagroapps/widget/kalkulator/result_card.dart';
@@ -21,17 +22,15 @@ class _KalkulatorSapiState extends State<KalkulatorSapi> {
   double? konsentratkering;
   hitungbasah(var berat) {
     setState(() {
-    hijauan = (60 / 100) * ((10 / 100) * berat);
-    konsentrat = (40 / 100) * ((10 / 100) * berat);
-      
+      hijauan = (60 / 100) * ((10 / 100) * berat);
+      konsentrat = (40 / 100) * ((10 / 100) * berat);
     });
   }
 
   hitungkering(var berat) {
     setState(() {
-    hijauankering = (60 / 100) * ((3 / 100) * berat);
-    konsentratkering = (40 / 100) * ((3 / 100) * berat);
-      
+      hijauankering = (60 / 100) * ((3 / 100) * berat);
+      konsentratkering = (40 / 100) * ((3 / 100) * berat);
     });
   }
 
@@ -53,11 +52,9 @@ class _KalkulatorSapiState extends State<KalkulatorSapi> {
                   });
             } else {
               print("gas");
-        
-                hitungbasah(int.parse(berat.text));
-                hitungkering(int.parse(berat.text));
-            
 
+              hitungbasah(int.parse(berat.text));
+              hitungkering(int.parse(berat.text));
             }
           },
           controller: berat,
@@ -69,8 +66,8 @@ class _KalkulatorSapiState extends State<KalkulatorSapi> {
           value2: hijauan == null ? "-" : konsentrat!.toStringAsFixed(1),
           judul: "Hijauan",
           judul2: "Konsentrat",
-          gambar: "iconpakan/Rumput@4x.png",
-          gambar2: "iconpakan/konsentrat@4x.png",
+          gambar: Images.rumput4x,
+          gambar2: Images.konsentrat,
           kategori: "Basah: 60:40",
         ),
         SizedBox(height: 20),
@@ -79,9 +76,9 @@ class _KalkulatorSapiState extends State<KalkulatorSapi> {
             value2:
                 hijauan == null ? "-" : konsentratkering!.toStringAsFixed(1),
             judul: "Hijauan",
-            gambar: "iconpakan/Rumput@4x.png",
+            gambar: Images.rumput4x,
             judul2: "Konsentrat",
-            gambar2: "iconpakan/konsentrat@4x.png",
+            gambar2: Images.konsentrat,
             kategori: "Kering: 60:40"),
       ],
     );

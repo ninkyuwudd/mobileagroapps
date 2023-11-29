@@ -14,8 +14,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -24,9 +23,6 @@ void main() async{
 }
 
 class MyApp extends StatelessWidget {
-  // const MyApp({super.key});
-  // final CuacaProvider _cuacaProvider = CuacaProvider();
-
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -44,20 +40,14 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(
-          // fontFamily:GoogleFonts.poppins(),
-          primaryTextTheme: GoogleFonts.poppinsTextTheme(),
-          primarySwatch: Colors.green,
-          
-          textTheme: GoogleFonts.poppinsTextTheme(
-            
-            Theme.of(context).textTheme
-            
-          )
-        ),
+            // fontFamily:GoogleFonts.poppins(),
+            primaryTextTheme: GoogleFonts.poppinsTextTheme(),
+            primarySwatch: Colors.green,
+            textTheme:
+                GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme)),
         home: LoginPage(),
         routes: Routes.route,
       ),
     );
   }
 }
-

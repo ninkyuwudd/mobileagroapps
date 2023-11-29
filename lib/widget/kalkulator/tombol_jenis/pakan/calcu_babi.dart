@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobileagroapps/utils/images.dart';
 import 'package:mobileagroapps/widget/kalkulator/result_card.dart';
 import 'package:mobileagroapps/widget/kalkulator/single_field_params.dart';
 
@@ -63,7 +64,7 @@ class _KalkulatorBabiState extends State<KalkulatorBabi> {
         ResultCard(
             pupuk: hasil == null ? "-" : hasil!.toStringAsFixed(1),
             title: "Jumlah Pakan",
-            img: "pupuk kering@4x.png")
+            img: Images.pupuk_kering)
       ],
     );
   }

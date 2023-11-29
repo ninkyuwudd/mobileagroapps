@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobileagroapps/utils/images.dart';
 import 'package:mobileagroapps/widget/kalkulator/double_result.dart';
 import 'package:mobileagroapps/widget/kalkulator/result_card.dart';
 import 'package:mobileagroapps/widget/kalkulator/single_field_params.dart';
@@ -36,16 +37,17 @@ class _KalkulatorKudaState extends State<KalkulatorKuda> {
                   });
             } else {
               setState(() {
-              hijau = ((1.8 / 100) * berat) * (35 / 100);
-              jagung =
-                  ((1.8 / 100) * berat) * (65 / 100) * (20 / 100) * (78 / 100);
-              bukil = ((1.8 / 100) * berat) * (65 / 100) * (21.53 / 100);
-              tetes = ((1.8 / 100) * berat) *
-                  (65 / 100) *
-                  (80 / 100) *
-                  (78.47 / 100);
-              jmlhpakan = hijau + jagung + bukil + tetes;
-                
+                hijau = ((1.8 / 100) * berat) * (35 / 100);
+                jagung = ((1.8 / 100) * berat) *
+                    (65 / 100) *
+                    (20 / 100) *
+                    (78 / 100);
+                bukil = ((1.8 / 100) * berat) * (65 / 100) * (21.53 / 100);
+                tetes = ((1.8 / 100) * berat) *
+                    (65 / 100) *
+                    (80 / 100) *
+                    (78.47 / 100);
+                jmlhpakan = hijau + jagung + bukil + tetes;
               });
             }
           },
@@ -57,17 +59,17 @@ class _KalkulatorKudaState extends State<KalkulatorKuda> {
             value: hijau == 0 ? "-" : hijau.toStringAsFixed(1),
             value2: jagung == 0 ? "-" : jagung.toStringAsFixed(1),
             judul: "Hijau",
-            gambar: "iconpakan/Rumput@4x.png",
+            gambar: Images.rumput4x,
             judul2: "Jagung",
-            gambar2: "iconpakan/jaggung@4x.png",
+            gambar2: Images.jagung,
             kategori: "Komposisi"),
         ResultDouble(
             value: bukil == 0 ? "-" : bukil.toStringAsFixed(1),
             value2: tetes == 0 ? "-" : tetes.toStringAsFixed(1),
             judul: "Bukil",
-            gambar: "iconpakan/bukil.png",
+            gambar: Images.bukit,
             judul2: "Tetes",
-            gambar2: "iconpakan/tetees2.png",
+            gambar2: Images.tetees2,
             kategori: " "),
         SizedBox(
           height: 15,
@@ -75,7 +77,7 @@ class _KalkulatorKudaState extends State<KalkulatorKuda> {
         ResultCard(
             pupuk: jmlhpakan == 0 ? "-" : "${jmlhpakan.toStringAsFixed(1)} Kg",
             title: "Jumlah Pakan",
-            img: "bekatul@4x.png")
+            img: Images.bekatul)
       ],
     );
   }

@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:mobileagroapps/widget/kalkulator/card.dart';
 
@@ -127,8 +125,6 @@ class _TipsPageState extends State<TipsPage> {
                 },
                 child: Container(
                   padding: EdgeInsets.all(10),
-
-                  // gradient:Gradient.linear(, Alignment.bottomRight,color)),
                   decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
@@ -142,12 +138,7 @@ class _TipsPageState extends State<TipsPage> {
                       ),
                     ],
                     color: Colors.white,
-                    // gradient: LinearGradient(colors: [
-                    //   Colors.white,
-                    //   Colors.green
-                    // ],begin: Alignment.topRight,end: Alignment.bottomRight),
                     borderRadius: BorderRadius.circular(10),
-                    // border: Border.all(width: 1)
                   ),
                   child: Row(
                     children: [

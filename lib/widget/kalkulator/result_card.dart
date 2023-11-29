@@ -4,7 +4,7 @@ class ResultCard extends StatelessWidget {
   final String pupuk;
   final String title;
   final String img;
-  ResultCard({required this.pupuk, required this.title,required this.img});
+  ResultCard({required this.pupuk, required this.title, required this.img});
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +25,15 @@ class ResultCard extends StatelessWidget {
               ),
             ]),
         child: ListTile(
-          title: Text(title,overflow: TextOverflow.ellipsis,),
+          title: Text(
+            title,
+            overflow: TextOverflow.ellipsis,
+          ),
           subtitle: Text(pupuk),
-          trailing: Image(image: AssetImage("images/$img"),width: 40,),
+          trailing: Image(
+            image: AssetImage(img),
+            width: 40,
+          ),
         ));
   }
 }
